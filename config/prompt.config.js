@@ -5,13 +5,13 @@ const prompt = require('prompt');
 const fs = require('fs-extra');
 // 开始写入
 prompt.start();
-prompt.get(['port'],  (err, result) =>  {
+prompt.get(['port'], (err, result) => {
 	let contents = '';
 	// 对用户输入的信息处理
 	// to do ....
-	let strObj = JSON.stringify(result || {});
+	const strObj = JSON.stringify(result || {});
 
 	// 输出
-	contents = `let obj = ${strObj};module.exports = obj;`;
+	contents = `const obj = ${strObj};module.exports = obj;`;
 	fs.outputFileSync('./config/user.config.js', contents);
 });

@@ -4,15 +4,11 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.config.common');
 
-let webpackConfig = {
+const webpackConfig = {
 	mode: 'development',
 	plugins: [
 		/**
@@ -39,12 +35,11 @@ let webpackConfig = {
 				messages: [`Dev Server: http://${localIp}:${localPort}`],
 				notes: [`Success!`]
 			},
-			onErrors: function (severity, errors) {
-			},
+			onErrors: () => {},
 			clearConsole: true,
 			additionalFormatters: [],
 			additionalTransformers: []
-		}),
+		})
 		/**
 		 * StyleLint
 		 */

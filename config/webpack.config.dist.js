@@ -3,16 +3,13 @@ const path = require('path');
 
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 
-const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.config.common');
+const { APP_ROOT, commonConfig } = require('./webpack.config.common');
 
-let webpackConfig = {
+const webpackConfig = {
 	mode: "production",
 	plugins: [
 		/**
@@ -22,15 +19,17 @@ let webpackConfig = {
 		new AssetsPlugin({
 			path: path.resolve(APP_ROOT, 'dist/js/'),
 			filename: 'webpack-assets.js',
-			processOutput: function(assets) {
-				return 'window.WEBPACK_ASSETS = ' + JSON.stringify(assets);
-			}
+			processOutput: assets => `${window.WEBPACK_ASSETS}=${JSON.stringify(assets)}`
 		}),
 		/**
 		 * 压缩同时转移静态文件
 		 */
 		new CopyWebpackPlugin([
-			{ from: path.resolve(APP_ROOT, 'src/static'), to: '[name].[ext]', toType: 'template' },
+			{
+				from: path.resolve(APP_ROOT, 'src/static'),
+				to: '[name].[ext]',
+				toType: 'template'
+			}
 		]),
 		/**
 		 * 生产环境
@@ -50,7 +49,7 @@ let webpackConfig = {
 			// statsFilename: 'stats.json',
 			// statsOptions: null,
 			logLevel: 'info'
-		}),
+		})
 	],
 };
 

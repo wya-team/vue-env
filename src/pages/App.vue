@@ -1,16 +1,175 @@
 <template>
-	<div id="pages">
-		Hello World!
+	<div>
+		<h1>appName: {{ appName }}</h1>
+		<div id="pages" @click="handleMsg">
+			msg: {{ msg }} <button>(点我)</button>
+		</div>
+		<h5>计算属性 - computed: {{ computedMsg }}</h5>
+		<h5>
+			计算属性 - computed - getter/setter: {{ computedDiyMsg }} 
+			<button @click="handleDiyMsg">(点我)</button>
+		</h5>
+		<h5>监视属性 - watch: {{ watchMsg }}</h5>
+		<!-- # 8. class & style-->
+		<br>
+		<br>
+		<br>
+		<div style="color: red">style</div>
+		<!-- 后者无效 -->
+		<div :style="[defaultStyle, overrideStyle, { color: 'yellow' }]" style="color: gray">style</div>
+		<div class="default">class</div>
+		<div :class="{ default: defaultClass, active: activeClass }" class="bg">class</div>
+
+		<!-- # 9. v-if & v-show & v-for -->
+		<br>
+		<br>
+		<br>
+		<!-- 使用key, 避免输入框数据不清空 -->
+		<template v-if="typeIf === 'A'">
+			<label>A</label>
+			<input key="A" placeholder="v-if" >
+		</template>
+		<template v-else-if="typeIf === 'B'">
+			<label>Email</label>
+			<input key="B" placeholder="v-if">
+		</template>
+		<template v-else>
+			<label>Email</label>
+			<input key="C" placeholder="v-if">
+		</template>
+		<h1 v-show="isShow">v-show</h1>
+
+		<!-- # 10. v-for -->
+		<div v-for="(item, index) in listFor" v-if="String(index)" :key="index">
+			{{ index }} - {{ item }}
+		</div>
+		<button @click="handleAddItem">(添加)</button>
 	</div>
 </template>
 
 <script>
 export default {
+	// # 1. 组件名称
 	name: 'App',
+	// # 2. 父层传递参数 -> react - props + props-type
+	props: {
+		appName: String,
+	},
+	// # 3. 当前组件参数 -> react - state
+	data() {
+		return {
+			msg: 'Hello World!',
+			watchMsg: '',
+
+			// style
+			defaultStyle: {
+				color: 'red'
+			},
+			overrideStyle: {
+				color: 'blue'
+			},
+
+			defaultClass: true,
+			activeClass: true,
+
+			// if/show/for
+			typeIf: 'A',
+			isShow: true,
+			listFor: ['v-for', 'v-for', 'v-for']
+		};
+	},
+	// # 4. 计算属性
+	computed: {
+		/**
+		 * 只要使用到this.msg, msg一改变，函数会被调起;
+		 * 说明：第一次执行this.computedMsg，因为我们使用了this.msg, 相当于给 msg 的 setter, 再订阅一个事件，当msg改变时，这个事件回调会被触发
+		 * 优点：this.msg不改变，this.computedMsg不会进行重复计算
+		 */
+		computedMsg() {
+			console.log(this.msg, `\n请注释我\n测试改变msg, computedMsg 是否被调起`);
+			return new Date();
+		},
+		/**
+		 * 计算属性默认为只有getter，但您也可以在需要时提供setter;
+		 * 少用
+		 */
+		computedDiyMsg: {
+			// getter
+			get() {
+				return `diy - ${this.msg}`;
+			},
+			// setter
+			set(value) {
+				this.msg = value;
+			}
+		}
+	},
+	// # 5. 监视属性
+	watch: {
+		/**
+		 * 相当于给 msg 的 setter, 再订阅一个事件，当msg改变时，这个事件回调会被触发
+		 * 假如msg连续被set, 可以使用防抖 + 异步形式减少频率
+		 */
+		msg(value) {
+			this.watchMsg = `watchMsg: ${value}`;
+		}
+	},
+	// # 6. 生命周期 
+	created() {
+		console.log('?');
+	},
+	// # 7. 事件或其他方法
+	methods: {
+		handleMsg() {
+			this.msg = Math.random();
+		},
+		handleDiyMsg() {
+			this.computedDiyMsg = `computedDiyMsg - 测试`;
+		},
+		// # 10. v-for
+		handleAddItem() {
+			/**
+			 * Vue包装观察数组的变异方法: push() pop() shift() unshift() splice() sort() reverse()
+			 * 变异方法会改变它们被调用的原始数组
+			 */
+			this.listFor.push(`↑↑↑↑${Math.random()}↑↑↑↑`);
+
+			/**
+			 * Vue非诱变方法: filter()，concat()，slice()
+			 * 不发生变异原数组，但总是返回一个新的数组
+			 */
+			this.listFor = this.listFor.filter((item, index) => {
+				// 去除第一个
+				return !!index;
+			});
+
+			/**
+			 * Vue 无法检测到对数组的以下更改
+			 * 前提：先注释掉前面两个，因为渲染是异步的
+			 */
+			// 1. 用索引直接设置一个项目
+			this.listFor[0] = `无法改变哦`;
+			// 解决方案：
+			this.$set(this.listFor, 0, '可以改变');
+
+			// 2. 修改数组的长度
+			this.listFor.length = 4;
+			// 解决方案：
+			this.listFor.splice(4);
+
+
+			/**
+			 * 过滤的三种形式
+			 */
+			// 1. 使用computed, 使用新的字段
+			// 2. 设计一个方法，如模版中 v-for="(item, index) in toFilter(listFor)"
+			// 3. 使用v-if
+		}
+	},
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #test {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	text-align: center;
@@ -22,5 +181,15 @@ export default {
 	a {
 		color: red;
 	}
+}
+.default {
+	color: gray;
+}
+.active {
+	font-weight: bold;
+	font-size: 20px
+}
+.bg {
+	background: white
 }
 </style>

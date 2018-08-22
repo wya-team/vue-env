@@ -4,26 +4,23 @@ const ENV_IS_DEV = process.env.NODE_ENV === 'development';
 
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const userConfig = require('./user.config.js') || {};
-
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const userConfig = require('./user.config.js');
 
-const localPort = ((addPath) => {
+const localPort = (() => {
 	if (ENV_IS_DEV) {
 		return userConfig.port || 8088;
-	} else {
-		return 9098;
 	}
+	return 9098;
 })();
 const localIp = (() => {
-	let ips = [];
-	let os = require('os');
-	let ntwk = os.networkInterfaces();
-	for (let k in ntwk) {
+	const ips = [];
+	const os = require('os');
+	const ntwk = os.networkInterfaces();
+	for (const k in ntwk) {
 		for (let i = 0; i < ntwk[k].length; i++) {
-			let _add = ntwk[k][i].address;
+			const _add = ntwk[k][i].address;
 			if (_add && _add.split('.').length == 4 && !ntwk[k][i].internal && ntwk[k][i].family == 'IPv4') {
 				ips.push(ntwk[k][i].address);
 			}
@@ -62,8 +59,8 @@ const webpackConfig = {
 	},
 	output: {
 		path: path.resolve(APP_ROOT, 'dist'),
-		filename: 'js/[name].[hash:8].bundle.js',  // 每个页面对应的主js的生成配置
-		chunkFilename: 'js/[name].[hash:8].chunk.js',  // chunk生成的配置
+		filename: 'js/[name].[hash:8].bundle.js', // 每个页面对应的主js的生成配置
+		chunkFilename: 'js/[name].[hash:8].chunk.js', // chunk生成的配置
 		sourceMapFilename: 'js/[name].[hash:8].bundle.map',
 		/**
 		 * html引用路径
@@ -79,7 +76,7 @@ const webpackConfig = {
 					/**
 					 * 在node_modules的文件不被babel理会
 					 */
-					path.resolve(APP_ROOT, 'node_modules'),
+					path.resolve(APP_ROOT, 'node_modules')
 				],
 				use: [
 					{
@@ -96,7 +93,7 @@ const webpackConfig = {
 					/**
 					 * 在node_modules的文件不被babel理会
 					 */
-					path.resolve(APP_ROOT, 'node_modules'),
+					path.resolve(APP_ROOT, 'node_modules')
 				],
 				use: [
 					{
@@ -149,14 +146,14 @@ const webpackConfig = {
 			name: true,
 			cacheGroups: {
 				commons: {
-					test: chunk => {
+					test: (chunk) => {
 						const modules = [
 							'babel-polyfill',
 							'vue',
-							'lodash', // 这个用的地方偏多
+							'lodash' // 这个用的地方偏多
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
-						let isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
+						const isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
 						return chunk.resource
 							&& /\.js$/.test(chunk.resource)
 							&& isInModules;

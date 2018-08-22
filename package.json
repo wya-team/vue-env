@@ -12,7 +12,7 @@
     "build:dev": "cross-env UGLIFY_JS=false npm run dist && npm run copy",
     "remove:dist": "rm -rf ./dist",
     "copy": "echo 'end'",
-    "lint": "esw ./config/*.config.* ./src/pages",
+    "lint": "esw ./config/*.config.* ./src/pages/**/*.{js,vue}",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "lint:style": "stylelint --fix --syntax scss src",
@@ -48,8 +48,11 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-babel": "^5.0.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
+    "eslint-plugin-vue": "^4.7.1",
     "eslint-watch": "^3.1.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
@@ -87,7 +90,7 @@
     "webpack-merge": "^4.1.2"
   },
   "lint-staged": {
-    "{src,config}/**/*.{js,jsx}": [
+    "{src,config}/**/*.{js,jsx,vue}": [
       "esw --fix",
       "git add"
     ],

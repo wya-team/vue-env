@@ -1,1 +1,1 @@
-let obj = { "port": "" }; module.exports = obj;
+const obj = { "port": "" }; module.exports = obj;
