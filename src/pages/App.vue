@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>appName: {{ appName }}</h1>
+		<h1>appName: {{ appName }} user: {{ name }}</h1>
 		<div id="pages" @click="handleMsg">
 			msg: {{ msg }} <button>(点我)</button>
 		</div>
@@ -44,6 +44,14 @@
 			{{ index }} - {{ item }}
 		</div>
 		<button @click="handleAddItem">(添加)</button>
+
+		<!-- # 11. v-model -->
+		<input v-model="msg" placeholder="编辑我">
+		<p>msg is: {{ msg }}</p>
+
+		<!-- # 12. component/嵌套/全局组件/ 待处理，多个子组件，组件作为参数传递，实例组件传递 -->
+		<slot />
+		<MyComponent @diyEvent="() => this.$emit('diyEvent')"/>
 	</div>
 </template>
 
@@ -51,11 +59,25 @@
 export default {
 	// # 1. 组件名称
 	name: 'App',
-	// # 2. 父层传递参数 -> react - props + props-type
+	// # 2. 父层传递参数 -> react - props + props-type 
 	props: {
+		// String、Number、Boolean、Function、Object、Array、Symbol、自定义的构造函数
 		appName: String,
+		name: String,
+		dev: Boolean,
+		diy: {
+			type: Object,
+			default() {
+				return { value: 9 };
+			},
+			validator(it) {
+				return it.value < 10;
+			}
+		},
+		// 无效声明, 因为使用的是v-on
+		// diyEvent: Function
 	},
-	// # 3. 当前组件参数 -> react - state
+	// # 3. 当前组件参数 -> react - state， 和根配置不同（new Vue），data必须是函数
 	data() {
 		return {
 			msg: 'Hello World!',
@@ -122,6 +144,9 @@ export default {
 	methods: {
 		handleMsg() {
 			this.msg = Math.random();
+
+			// 触发父组件方法
+			this.$emit("diyEvent");
 		},
 		handleDiyMsg() {
 			this.computedDiyMsg = `computedDiyMsg - 测试`;
