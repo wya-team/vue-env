@@ -10184,9 +10184,17 @@ ws@^5.2.0:
   dependencies:
     async-limiter "~1.0.0"
 
+wya-fetch@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/wya-fetch/-/wya-fetch-0.3.1.tgz#41917f1ace47d7418cf60eb44a5a62ee23ffff68"
+
 wya-sass@^0.2.9:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/wya-sass/-/wya-sass-0.2.9.tgz#08ced0fd102cafed60af4e644067cce215baa461"
+
+wya-utils@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/wya-utils/-/wya-utils-0.1.19.tgz#4b87fb3c397084cf1fb8ba975eadfc6995db97f9"
 
 x-is-string@^0.1.0:
   version "0.1.0"
