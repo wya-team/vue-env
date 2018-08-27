@@ -54,7 +54,11 @@
  		"global-require": 0,
  		"eqeqeq": 0,
  		"no-plusplus": 0,
+ 		"no-unused-expressions": 0,
+ 		"no-undef": 0,
+ 		"no-unused-vars": 0,
  		"import/no-extraneous-dependencies": 0,
+ 		"import/prefer-default-export": 0,
  		// tab缩进
  		"indent": ["warn", "tab",
  		{
