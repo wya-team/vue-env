@@ -1,8 +1,9 @@
-import login from './modules/login.vue';
-// import { redirectUserToLogin, redirectUserToHome } from '@router/auth';
+import tpl from './modules/login.vue';
+
 export const loginConfig = [
 	{ 
-		path: '/login', 
-		component: login 
+		path: '/login',
+		name: 'login',
+		component: () => import('./modules/login.vue') 
 	}
 ];
