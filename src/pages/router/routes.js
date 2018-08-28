@@ -1,4 +1,4 @@
-import { tplConfig } from '../containers/__tpl__/app';
+import { tplConfig, tplOtherConfig } from '../containers/__tpl__/app';
 import { loginConfig } from '../containers/login/app';
 import layout from '../components/layout/layout.vue';
 
@@ -6,8 +6,9 @@ export const routeConfig = {
 	mode: 'history',
 	routes: [
 		...loginConfig,
+		...tplOtherConfig,
 		{
-			path: '/',
+			path: '',
 			component: layout,
 			children: [
 				{
