@@ -1,4 +1,4 @@
-import tpl from './modules/login.vue';
+import tpl from './modules/login';
 
 export const loginConfig = [
 	{ 

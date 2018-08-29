@@ -1,6 +1,6 @@
 import { tplConfig, tplOtherConfig } from '../containers/__tpl__/app';
 import { loginConfig } from '../containers/login/app';
-import layout from '../components/layout/layout.vue';
+import layout from '../components/layout/layout';
 
 export const routeConfig = {
 	mode: 'history',
