@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
 	setupFiles: [
-		path.resolve(APP_ROOT, 'tests/setup.js'),
+		path.resolve(APP_ROOT, 'tests/setup.js')
 	],
 	/**
 	 * 匹配相关
@@ -56,7 +56,7 @@ module.exports = {
 	},
 	transformIgnorePatterns: [
 		'/dist/',
-		'/node_modules/',
+		'/node_modules/'
 		// Ignore modules without es dir
 		// 'node_modules\/[^/]+?\/(?!(es|node_modules)\/)',
 	],
@@ -65,6 +65,6 @@ module.exports = {
 	 * https://github.com/adriantoine/enzyme-to-json
 	 */
 	snapshotSerializers: [
-		'enzyme-to-json/serializer',
+		'enzyme-to-json/serializer'
 	]
 };

@@ -1,11 +1,12 @@
 /* eslint-disable global-require */
-import { JSDOM } from 'jsdom';
+const { JSDOM } = require('jsdom');
+const Enzyme = require('enzyme');
+
 // fixed jsdom miss
-if (typeof window !== 'undefined') {
+if (typeof window === 'undefined') {
 	const documentHTML = '<!doctype html><html><body><div id="root"></div></body></html>';
 	global.document = new JSDOM(documentHTML);
-	global.window = document.parentWindow;
-
+	global.window = document.window;
 	global.window.resizeTo = (width, height) => {
 		global.window.innerWidth = width || global.window.innerWidth;
 		global.window.innerHeight = height || global.window.innerHeight;
@@ -13,13 +14,6 @@ if (typeof window !== 'undefined') {
 	};
 }
 
-global.requestAnimationFrame = global.requestAnimationFrame || function (cb) {
-	return setTimeout(cb, 0);
-};
+global.requestAnimationFrame = global.requestAnimationFrame || (cb => setTimeout(cb, 0));
 
-const Enzyme = require('enzyme');
-
-let Adapter;
-Adapter = require('enzyme-adapter-react-16');
-
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({});
