@@ -10508,9 +10508,17 @@ wya-fetch@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/wya-fetch/-/wya-fetch-0.3.1.tgz#41917f1ace47d7418cf60eb44a5a62ee23ffff68"
 
-wya-sass@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/wya-sass/-/wya-sass-0.2.9.tgz#08ced0fd102cafed60af4e644067cce215baa461"
+wya-qrcode@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/wya-qrcode/-/wya-qrcode-0.1.3.tgz#6c6c2bc65ab6a5779e5fb132667ca18fcf328f18"
+
+wya-sass@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/wya-sass/-/wya-sass-0.4.0.tgz#2bb3ee5d4044bfb6d6ccecbe419c987493f265b0"
+
+wya-socket@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/wya-socket/-/wya-socket-0.1.7.tgz#8a52bcd3acd0e107ff8af7bd4fabdeb7f425d448"
 
 wya-utils@^0.1.19:
   version "0.1.19"
