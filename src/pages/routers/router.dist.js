@@ -2,43 +2,67 @@
  * dist 未来用于服务端渲染
  */
 import 'babel-polyfill';
+
+/**
+ * Vue
+ */
 import Vue from 'vue';
 import Router from 'vue-router';
+import Vuex from 'vuex';
+import { sync } from 'vuex-router-sync';
+
+/**
+ * 全局变量 _global
+ */
+import './_global';
+
+/**
+ * 配置
+ */
 import SetTitle from '@common/set-title/set-title';
 import emitter from '@extends/mixins/emitter';
 import ajax from '@extends/plugins/ajax';
+
+/**
+ * vue-router Config
+ */
 import { routeConfig } from './routes';
 import { beforeEach, afterEach } from './hooks';
-import { PRE_ROUTER_URL } from '../constants/constants';
 
-// 全局变量 _global
-import './_global';
+/**
+ * Vuex Config
+ */
+import { storeConfig } from '../stores/root';
 
 Vue.config.productionTip = false;
 
-// 全局组件
+// - 全局组件
 Vue.component(SetTitle.name, SetTitle);
-// --end
 
-// 全局mixins
+// - 全局mixins
 Vue.mixin(emitter);
-// --end
 
-// 全局plugins
+// - 全局plugins
 Vue.use(ajax);
-// --end
 
-// -- 路由
+// - 路由
 Vue.use(Router);
 const router = new Router(routeConfig);
 router.beforeEach(beforeEach);
 router.afterEach(afterEach);
-// -- end
 
-// 视图
+// - Vuex
+Vue.use(Vuex);
+const store = new Vuex.Store(storeConfig);
+
+// - 同步
+sync(store, router);
+
+// - 实例
 const app = new Vue({
 	el: "#pages",
 	router,
+	store,
 	template: "<div id='pages'><router-view></router-view></div>"
 });
 
@@ -48,4 +72,3 @@ router.onReady(() => {
 });
 
 window.app = app;
-

@@ -1,7 +1,7 @@
 <template>
-	<set-title title="login">
-		<contents />
-	</set-title>
+	<div @click="$router.push('/tpl')">
+		login
+	</div>
 </template>
 
 <script>
@@ -17,7 +17,6 @@ export default {
 		};
 	},
 	created() {
-		console.log('?');
 	},
 	methods: {
 	},

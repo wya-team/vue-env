@@ -1,14 +1,14 @@
 <template>
-	<set-title title="login">
+	<set-title title="tpl-one">
 		<contents />
 	</set-title>
 </template>
 
 <script>
-import Contents from '@components/login/contents';
+import Contents from '@components/__tpl__/one/contents';
 
 export default {
-	name: 'login',
+	name: 'tpl-one',
 	components: {
 		Contents
 	},
@@ -17,7 +17,6 @@ export default {
 		};
 	},
 	created() {
-		console.log('?');
 	},
 	methods: {
 	},
