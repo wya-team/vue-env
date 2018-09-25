@@ -63,12 +63,18 @@ const app = new Vue({
 	el: "#pages",
 	router,
 	store,
-	template: "<div id='pages'><router-view></router-view></div>"
+	render(h) {
+		return (
+			<div id="pages">
+				<router-view></router-view>
+			</div>
+		);
+	}
 });
 
 // 先不考虑服务端渲染情况
 router.onReady(() => {
-	app.$mount('#pages');
+	app.$mount();
 });
 
 window.app = app;
