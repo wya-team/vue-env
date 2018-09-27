@@ -173,5 +173,6 @@
 			}
 		],
 		"jsx-quotes": 1,
+		"class-methods-use-this": 0
 	}
 }
