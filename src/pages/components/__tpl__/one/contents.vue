@@ -21,7 +21,7 @@ export default {
 		// ajax2.cancel();
 	},
 	methods: {
-		...mapActions(['ajax'])
+		...mapActions(['ajax']),
 	},
 };
 </script>

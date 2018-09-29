@@ -1,0 +1,1 @@
+export const LOGIN_MAIN_POST = 'LOGIN_MAIN_POST';

@@ -165,7 +165,7 @@ export default {
 	},
 	// # 6. 生命周期 
 	created() {
-		console.log('?');
+		console.log(this.$global);
 	},
 	// # 7. 事件或其他方法
 	methods: {

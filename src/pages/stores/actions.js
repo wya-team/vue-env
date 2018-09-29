@@ -1,17 +1,33 @@
+import API_ROOT from './apis/root';
 /**
  * 根级别actions
  */
 import net from '../utils/net';
 
 export const actions = {
-	ajax(store, opts) {
-		store.commit(`API_REQUEST_ON`, { });
+	request(store, opts = {}) {
+		const {
+			url: mutation,
+			param,
+			...rest
+		} = opts;
+
+		// store.commit(`${mutation}_ON`, { });
 		return net.ajax({
-			url: `http://localhost:3000/${opts}`
+			url: API_ROOT[mutation],
+			param,
+			...rest
 		}).then((res) => {
-			store.commit(`API_REQUEST_SUCCESS`, { });
+			const { data } = res;
+			store.commit(`${mutation}_SUCCESS`, {
+				data,
+				param,
+				// ...rest
+			});
+			return res;
 		}).catch((res) => {
-			
+			// store.commit(`${mutation}_ERROR`, { });
+			return res;
 		});
 	}
 };

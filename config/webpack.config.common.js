@@ -56,8 +56,10 @@ const webpackConfig = {
 			'@constants': path.resolve(APP_ROOT, './src/pages/constants'),
 			'@extends': path.resolve(APP_ROOT, './src/pages/extends'),
 			'@containers': path.resolve(APP_ROOT, './src/pages/containers'),
-			'@router': path.resolve(APP_ROOT, './src/pages/router'),
+			'@routers': path.resolve(APP_ROOT, './src/pages/routers'),
 			'@utils': path.resolve(APP_ROOT, './src/pages/utils'),
+			'@stores': path.resolve(APP_ROOT, './src/pages/stores'),
+			'@mutations': path.resolve(APP_ROOT, './src/pages/stores/mutations'),
 			'@common': path.resolve(APP_ROOT, './src/pages/components/_common'),
 		}
 	},

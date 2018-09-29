@@ -12,16 +12,16 @@ import Vuex from 'vuex';
 import { sync } from 'vuex-router-sync';
 
 /**
- * 全局变量 _global
- */
-import './_global';
-
-/**
  * 配置
  */
 import SetTitle from '@common/set-title/set-title';
 import emitter from '@extends/mixins/emitter';
-import ajax from '@extends/plugins/ajax';
+import request from '@extends/plugins/request';
+
+/**
+ * 全局变量 _global
+ */
+import _global from './_global';
 
 /**
  * vue-router Config
@@ -43,7 +43,10 @@ Vue.component(SetTitle.name, SetTitle);
 Vue.mixin(emitter);
 
 // - 全局plugins
-Vue.use(ajax);
+Vue.use(request);
+
+// - 全局global对象
+Vue.use(_global);
 
 // - 路由
 Vue.use(Router);
