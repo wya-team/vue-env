@@ -9,6 +9,7 @@ import { mapState } from 'vuex';
 
 import Contents from '@components/login/contents';
 import * as types from '@mutations/login';
+import { setItem } from '@utils/utils';
 
 export default {
 	name: 'login',
@@ -37,7 +38,10 @@ export default {
 					}
 				}
 			}).then((res) => {
-				console.log(res);
+				setTimeout(() => {
+					setItem(`user_${this.$global.version}`, res);
+					this.$router.replace('/tpl');
+				}, 3000);
 			}).catch((res) => {
 				console.log(res);
 			});
