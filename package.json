@@ -12,7 +12,7 @@
     "build:dev": "cross-env UGLIFY_JS=false npm run dist && npm run copy",
     "remove:dist": "rm -rf ./dist",
     "copy": "echo 'end'",
-    "lint": "esw ./config/*.config.* ./src/pages/**/*.{js,vue}",
+    "lint": "esw config ./src/pages --ext .vue,.js",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "lint:style": "stylelint --fix --syntax scss src",
