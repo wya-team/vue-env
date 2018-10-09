@@ -17,7 +17,6 @@ import { sync } from 'vuex-router-sync';
 import SetTitle from '@common/set-title/set-title';
 import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
-import Fv from '@extends/plugins/fv';
 
 /**
  * 全局变量 _global
