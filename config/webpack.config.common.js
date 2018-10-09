@@ -37,6 +37,7 @@ const postcssLoader = {
 	}
 };
 const loaderPath = [
+	path.resolve(APP_ROOT, "node_modules/wya-vc"),
 	path.resolve(APP_ROOT, "node_modules/iview"),
 	path.resolve(APP_ROOT, "src")
 ];
@@ -107,20 +108,21 @@ const webpackConfig = {
 			{
 				test: /\.(css|scss)$/,
 				use: ['vue-style-loader', 'css-loader', postcssLoader, 'sass-loader'],
+				// 组件内的样式
 				include: [
-					// 需要引入antd-mobile，后续可以等它支持2.x做修改
-					path.resolve(APP_ROOT, "node_modules"),
-					path.resolve(APP_ROOT, "")
+					path.resolve(APP_ROOT, "src/pages")
 				]
 			},
 			{
 				test: /\.scss$/,
-				include: [path.resolve(APP_ROOT, "src/css")],
-				exclude: [path.resolve(APP_ROOT, "node_modules"), path.resolve(APP_ROOT, "src/pages")],
 				use: ExtractTextPlugin.extract({
 					fallback: 'vue-style-loader',
 					use: ['css-loader', postcssLoader, 'sass-loader']
-				})
+				}),
+				// 全局的样式
+				include: [
+					path.resolve(APP_ROOT, "src/css")
+				]
 			},
 			{
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
@@ -153,6 +155,8 @@ const webpackConfig = {
 						const modules = [
 							'babel-polyfill',
 							'vue',
+							'vue-router',
+							'vuex',
 							'lodash' // 这个用的地方偏多
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/

@@ -16,6 +16,10 @@
 				{
 					"libraryName": "wya-vc",
 					"libraryDirectory": "lib/"
+				},
+				{
+					"libraryName": "iview",
+					"libraryDirectory": "src/components"
 				}
 			]
 		]
