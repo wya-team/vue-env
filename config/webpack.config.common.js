@@ -36,6 +36,10 @@ const postcssLoader = {
 		}
 	}
 };
+const loaderPath = [
+	path.resolve(APP_ROOT, "node_modules/iview"),
+	path.resolve(APP_ROOT, "src")
+];
 const webpackConfig = {
 	target: "web", // <=== 默认是 'web'，可省略
 	resolve: {// 重定向路径
@@ -81,12 +85,7 @@ const webpackConfig = {
 		rules: [
 			{
 				test: /\.jsx?$/,
-				exclude: [
-					/**
-					 * 在node_modules的文件不被babel理会
-					 */
-					path.resolve(APP_ROOT, 'node_modules')
-				],
+				include: loaderPath,
 				use: [
 					{
 						loader: 'babel-loader',
@@ -98,12 +97,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.vue/,
-				exclude: [
-					/**
-					 * 在node_modules的文件不被babel理会
-					 */
-					path.resolve(APP_ROOT, 'node_modules')
-				],
+				include: loaderPath,
 				use: [
 					{
 						loader: 'vue-loader',
