@@ -1,20 +1,19 @@
 <template>
-	<set-title title="链接">
-		<links />
+	<set-title title="tpl-form">
+		<contents />
 	</set-title>
 </template>
 
 <script>
-import Links from '@components/__tpl__/links';
+import Contents from '@components/__tpl__/form/contents';
 
 export default {
-	name: 'tpl',
+	name: 'tpl-form',
 	components: {
-		Links
+		Contents
 	},
 	data() {
 		return {
-			
 		};
 	},
 	created() {

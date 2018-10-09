@@ -1,14 +1,14 @@
 <template>
-	<set-title title="tpl-one">
+	<set-title title="tpl-request">
 		<contents />
 	</set-title>
 </template>
 
 <script>
-import Contents from '@components/__tpl__/one/contents';
+import Contents from '@components/__tpl__/request/contents';
 
 export default {
-	name: 'tpl-one',
+	name: 'tpl-request',
 	components: {
 		Contents
 	},

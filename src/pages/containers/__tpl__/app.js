@@ -5,11 +5,22 @@ export const tplConfig = [
 		component: () => import('./modules/tpl.vue') 
 	},
 	{ 
-		path: '/tpl/one', 
-		name: 'tpl-one',
-		component: () => import('./modules/tpl-one.vue') 
-	}
+		path: '/tpl/basic', 
+		name: 'tpl-basic',
+		component: () => import('./modules/tpl-basic.vue') 
+	},
 
+	{ 
+		path: '/tpl/request', 
+		name: 'tpl-request',
+		component: () => import('./modules/tpl-request.vue') 
+	},
+	// 表单
+	{ 
+		path: '/tpl/form', 
+		name: 'tpl-form',
+		component: () => import('./modules/tpl-form.vue') 
+	}
 ];
 
 export const tplOtherConfig = [

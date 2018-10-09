@@ -1,5 +1,5 @@
-import { tplOne } from './one';
+import { tplRequest } from './request';
 
 export default {
-	tplOne
+	tplRequest
 };
