@@ -49,9 +49,6 @@ Vue.use(request);
 // - 全局global对象
 Vue.use(_global);
 
-// 
-Vue.use(new Fv());
-
 // - 路由
 Vue.use(Router);
 const router = new Router(routeConfig);

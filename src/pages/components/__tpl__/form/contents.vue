@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<input v-fv-check="{rules: ['required']}" id="user-name" >
-		<span v-fv-msg="'user-name'" />
 		<div @click="handleClick">Button </div>
 	</div>
 </template>
@@ -17,9 +15,6 @@ export default {
 	},
 	methods: {
 		handleClick() {
-			this.$fv.checkAll('', (errors) => {
-				console.log(errors);
-			});
 		}
 	},
 };
