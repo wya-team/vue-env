@@ -1,12 +1,17 @@
 class Fv {
-	// 构造函数，初始化类名
-	constructor(conf = {
-		inputFailedClass: 'fv-input-fail',
-		msgFailedClass: 'fv-msg-fail',
-	}) {
+	/**
+	 * 构造函数，初始化类名
+	 * @param  {Object} conf 配置项
+	 * {
+	 * 	inputFailedClass,
+	 * 	msgFailedClass
+	 * }
+	 */
+	constructor(conf = {}) {
+
 		this.class = {
-			inputFailed: conf.inputFailedClass,
-			msgFailed: conf.msgFailedClass,
+			inputFailed: conf.inputFailedClass || 'fv-input-fail',
+			msgFailed: conf.msgFailedClass || 'fv-msg-fai',
 		};
 	}
 
