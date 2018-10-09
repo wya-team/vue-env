@@ -1,17 +1,27 @@
 /**
  * 强化项目的读写能力
  */
-const prompt = require('prompt');
+const { prompt, Separator } = require('inquirer');
 const fs = require('fs-extra');
-// 开始写入
-prompt.start();
-prompt.get(['port'], (err, result) => {
+
+const question = [
+	{
+		type: 'input',
+		name: 'port',
+		message: 'port:',
+		default: '8082'
+	}
+];
+
+prompt(question).then((result = {}) => {
 	let contents = '';
-	// 对用户输入的信息处理
-	// to do ....
+	
 	const strObj = JSON.stringify(result || {});
 
 	// 输出
 	contents = `const obj = ${strObj};module.exports = obj;`;
 	fs.outputFileSync('./config/user.config.js', contents);
+
+}).catch((res) => {
+	console.log(res);
 });
