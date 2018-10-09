@@ -157,6 +157,8 @@ const webpackConfig = {
 							'vue',
 							'vue-router',
 							'vuex',
+							'babel-polyfill',
+							'core-js',
 							'lodash' // 这个用的地方偏多
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
