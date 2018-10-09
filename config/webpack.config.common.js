@@ -111,17 +111,19 @@ const webpackConfig = {
 				// 组件内的样式
 				include: [
 					path.resolve(APP_ROOT, "src/pages")
+					// path.resolve(APP_ROOT, "node_modules/iview")
 				]
 			},
 			{
-				test: /\.scss$/,
+				test: /\.(css|scss)$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'vue-style-loader',
 					use: ['css-loader', postcssLoader, 'sass-loader']
 				}),
 				// 全局的样式
 				include: [
-					path.resolve(APP_ROOT, "src/css")
+					path.resolve(APP_ROOT, "src/css"),
+					path.resolve(APP_ROOT, "node_modules/iview")
 				]
 			},
 			{
@@ -129,7 +131,12 @@ const webpackConfig = {
 				loader: 'url-loader',
 				options: {
 					limit: 10000
-				}
+				},
+				// 全局的样式
+				include: [
+					path.resolve(APP_ROOT, "src/css"),
+					path.resolve(APP_ROOT, "node_modules/iview")
+				]
 			},
 			{
 				test: /\.html$/i,

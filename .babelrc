@@ -15,7 +15,7 @@
 			[
 				{
 					"libraryName": "wya-vc",
-					"libraryDirectory": "lib/"
+					"libraryDirectory": "lib"
 				},
 				{
 					"libraryName": "iview",
