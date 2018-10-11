@@ -110,8 +110,8 @@ const webpackConfig = {
 				use: ['vue-style-loader', 'css-loader', postcssLoader, 'sass-loader'],
 				// 组件内的样式
 				include: [
-					path.resolve(APP_ROOT, "src/pages")
-					// path.resolve(APP_ROOT, "node_modules/iview")
+					path.resolve(APP_ROOT, "src/pages"),
+					path.resolve(APP_ROOT, "node_modules/wya-vc")
 				]
 			},
 			{
