@@ -1,6 +1,6 @@
 <template>
 	<i-form 
-		ref="formValidate" 
+		ref="form" 
 		:model="formValidate" 
 		:rules="ruleValidate" 
 		:label-width="120"
@@ -86,7 +86,7 @@
 				<i-cascader 
 					:data="payType" 
 					v-model="item.pay_type" 
-					style="margin-top: 20px"
+					class="g-m-t-24"
 					placeholder="选择付款方式"
 				/>
 			</i-form-item>
@@ -102,10 +102,16 @@
 					placeholder="请输入付款金额"
 				/>
 			</i-form-item>
+			<i-form-item
+				:prop="'items.' + index + '.imgs'" 
+				:rules="{required: true, message: '请选择图片'}"
+			>
+				<vc-imgs-picker v-model="item.imgs" class="g-m-t-24" />
+			</i-form-item>
 			
 			<span
 				class="_del" 
-				click="handleDel(item.index)"
+				@click="handleDel(item.index)"
 			>
 				删除
 			</span>
@@ -129,8 +135,7 @@ import {
 } from 'iview';
 // utils
 import { dataValidity } from '@utils/utils';
-import { Print } from 'wya-vc';
-
+import { ImgsPicker } from 'wya-vc';
 
 const data = [
 	{
@@ -193,7 +198,7 @@ export default {
 		'i-option': Option,
 		'i-date-picker': DatePicker,
 		'i-cascader': Cascader,
-		'vc-print': Print
+		'vc-imgs-picker': ImgsPicker
 	},
 	data() {
 		return {
@@ -214,7 +219,8 @@ export default {
 						index: 1,
 						date: '',
 						pay_type: [],
-						amount: null
+						amount: null,
+						imgs: []
 					}
 				]
 			},
@@ -247,6 +253,8 @@ export default {
 			}
 		};
 	},
+	mounted() {
+	},
 	methods: {
 		handleAdd() {
 			this.index++;
@@ -262,8 +270,15 @@ export default {
 				return item.index !== index;
 			});
 		},
-		handleSubmit() {
-		}
+		handleSubmit(name) {
+			this.$refs.form.validate((valid) => {
+				if (valid) {
+					this.$Message.success('Success!');
+				} else {
+					this.$Message.error('Fail!');
+				}
+			});
+		},
 	},
 };
 </script>
@@ -283,7 +298,7 @@ export default {
 	._del {
 		@extend .btn;
 		display: block;
-		margin-top: 20px;
+		margin-top: 24px;
 	}
 }
 </style>

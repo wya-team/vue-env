@@ -9,6 +9,7 @@ import 'babel-polyfill';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
+import { Vc } from 'wya-vc';
 import { sync } from 'vuex-router-sync';
 import { locale } from 'iview';
 import lang from 'iview/dist/locale/zh-CN';
@@ -22,6 +23,7 @@ locale(lang);
 import SetTitle from '@common/set-title/set-title';
 import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
+import VcConfig from './vc.config';
 
 /**
  * 全局变量 _global
@@ -52,6 +54,9 @@ Vue.use(request);
 
 // - 全局global对象
 Vue.use(_global);
+
+// - 全局wya-vc实例
+Vue.use(Vc, VcConfig);
 
 // - 路由
 Vue.use(Router);
