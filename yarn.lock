@@ -2890,10 +2890,6 @@ element-resize-detector@^1.1.14:
   dependencies:
     batch-processor "^1.0.0"
 
-element-resize-event@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/element-resize-event/-/element-resize-event-2.0.9.tgz#2f5e1581a296eb5275210c141bc56342e218f876"
-
 elliptic@^6.0.0:
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.4.1.tgz#c2d0b7776911b86722c632c3c06c60f2f819939a"
@@ -8087,6 +8083,10 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
+resize-detector@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/resize-detector/-/resize-detector-0.1.9.tgz#69c4222e9c0d3740c995522b4a1cf2656a6526aa"
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -9866,13 +9866,13 @@ wya-utils@^0.1.19:
   version "0.1.19"
   resolved "https://registry.yarnpkg.com/wya-utils/-/wya-utils-0.1.19.tgz#4b87fb3c397084cf1fb8ba975eadfc6995db97f9"
 
-wya-vc@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/wya-vc/-/wya-vc-0.0.4.tgz#0c83f5cf9295d45602b9f7b282c936b444d56c9d"
+wya-vc@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/wya-vc/-/wya-vc-0.0.9.tgz#74544e52575c008957caf5120937bf52d1e027f2"
   dependencies:
-    element-resize-event "^2.0.9"
     html2canvas "^1.0.0-alpha.12"
     photoswipe "^4.1.2"
+    resize-detector "^0.1.9"
 
 x-is-string@^0.1.0:
   version "0.1.0"

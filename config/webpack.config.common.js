@@ -112,8 +112,7 @@ const webpackConfig = {
 				// 组件内的样式
 				include: [
 					path.resolve(APP_ROOT, "src/pages"),
-					path.resolve(APP_ROOT, "node_modules/wya-vc"),
-					path.resolve(APP_ROOT, "node_modules/photoswipe")
+					path.resolve(APP_ROOT, "node_modules")
 				]
 			},
 			{
@@ -125,8 +124,7 @@ const webpackConfig = {
 				// 全局的样式
 				include: [
 					path.resolve(APP_ROOT, "src/css"),
-					path.resolve(APP_ROOT, "node_modules/iview"),
-					path.resolve(APP_ROOT, "node_modules/photoswipe")
+					path.resolve(APP_ROOT, "node_modules/iview")
 				]
 			},
 			{
