@@ -1,1 +1,2 @@
 export const TPL_REQUEST_POST = 'TPL_REQUEST_POST';
+export const TPL_LIST_GET = 'TPL_LIST_GET';

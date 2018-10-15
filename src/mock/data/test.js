@@ -16,7 +16,7 @@ for (let i = 0; i < 30; i++) {
 
 	data.push({
 		id: i + '_' + i,
-		// title: Random.cword(8, 20),
+		title: Random.cword(8, 20),
 		// desc: content.substr(0, 40),
 		// tag: Random.cword(2, 6),
 		// views: Random.integer(100, 5000),
@@ -29,5 +29,6 @@ for (let i = 0; i < 30; i++) {
 module.exports = {
 	currentPage: 1,
 	totalPage: 10,
-	list: data
+	list: data,
+	totalCount: 100
 };

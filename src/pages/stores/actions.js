@@ -9,10 +9,16 @@ export const actions = {
 		const {
 			url: mutation,
 			param,
+			noLoading,
 			...rest
 		} = opts;
+		if (!API_ROOT[mutation]) {
+			console.error('请求地址不存在');
+			return !1;
+		}
 
-		// store.commit(`${mutation}_ON`, { });
+		// noLoading 为 false，则必须要写_ON的mutation
+		!noLoading && store.commit(`${mutation}_ON`, { param });
 		return net.ajax({
 			url: API_ROOT[mutation],
 			param,
@@ -25,9 +31,9 @@ export const actions = {
 				// ...rest
 			});
 			return res;
-		}).catch((res) => {
-			// store.commit(`${mutation}_ERROR`, { });
-			return res;
+		}).catch((error) => {
+			store.commit(`${mutation}_ERROR`, { param });
+			return error;
 		});
 	}
 };

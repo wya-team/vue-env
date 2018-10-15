@@ -16,7 +16,7 @@ let baseUrl;
 if (__DEV__) {
 	// 开发环境
 	if (!DEV_WITH_SERVER) { // 开发环境-前端自模拟
-		baseUrl = 'http://localhost:3000/api';
+		baseUrl = 'http://localhost:3000';
 	} else { // 开发环境-后端数据
 		baseUrl = 'https://wyaoa-new.ruishan666.com';
 	}

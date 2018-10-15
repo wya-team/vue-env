@@ -12,5 +12,6 @@ const api = {
 	'TPL_TABLE_ITEM_DELETE': '/test.json',
 	'TPL_TABLE_ITEM_POST': '/test.json',
 	'TPL_TABLE_ITEM_PUT': '/test.json',
+	'TPL_LIST_GET': '/list.json',
 };
 export default api;
