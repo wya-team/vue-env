@@ -73,7 +73,7 @@ export default {
 							},
 							on: {
 								click: () => {
-									this.$store.commit('TPL_CURRENT_PAGE_REFRESH', { status: this.status });
+									this.$store.commit('TPL_LIST_GET_REFRESH', { status: this.status });
 								}
 							}
 						}, '当前页刷新');
@@ -97,7 +97,7 @@ export default {
 			let pageData = list[page] || [];
 
 			if (pageData.length > 0) {
-				this.$store.commit('TPL_CHANGE_PAGE', { page, status });
+				this.$store.commit('TPL_LIST_GET_SETPAGE', { page, status });
 				return false;
 			}
 			this.request({

@@ -33,7 +33,7 @@ export const actions = {
 			return res;
 		}).catch((error) => {
 			store.commit(`${mutation}_ERROR`, { param });
-			return error;
+			return Promise.reject(error);
 		});
 	}
 };

@@ -65,8 +65,8 @@ const mutations = {
 			}
 		};
 	},
-	TPL_CHANGE_PAGE(state, { page, status }) {
-		state = {
+	TPL_LIST_GET_SETPAGE(state, { page, status }) {
+		state.listInfo = {
 			...state.listInfo,
 			[status]: {
 				...state.listInfo[status],
@@ -75,14 +75,14 @@ const mutations = {
 			}
 		};
 	},
-	TPL_CURRENT_PAGE_REFRESH(state, { status }) {
+	TPL_LIST_GET_REFRESH(state, { status }) {
 		state.listInfo = {
 			...state.listInfo,
 			[status]: {
 				...state.listInfo[status],
 				loading: false,
 				curPage: 1, 
-				resetPage: state.listInfo[status].curPage,
+				resetPage: state.listInfo[status].resetPage,
 				totalCount: 0,
 				list: {}
 			}
