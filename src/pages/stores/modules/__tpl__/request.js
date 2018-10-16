@@ -65,6 +65,16 @@ const mutations = {
 			}
 		};
 	},
+	TPL_CHANGE_PAGE(state, { page, status }) {
+		state = {
+			...state.listInfo,
+			[status]: {
+				...state.listInfo[status],
+				curPage: page,
+				resetPage: page
+			}
+		};
+	},
 	TPL_CURRENT_PAGE_REFRESH(state, { status }) {
 		state.listInfo = {
 			...state.listInfo,

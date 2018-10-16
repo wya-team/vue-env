@@ -97,6 +97,7 @@ export default {
 			let pageData = list[page] || [];
 
 			if (pageData.length > 0) {
+				this.$store.commit('TPL_CHANGE_PAGE', { page, status });
 				return false;
 			}
 			this.request({
