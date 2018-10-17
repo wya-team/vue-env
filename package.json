@@ -37,7 +37,7 @@
     "wya-sass": "^0.4.1",
     "wya-socket": "^0.1.7",
     "wya-utils": "^0.1.19",
-    "wya-vc": "0.0.10"
+    "wya-vc": "0.0.12"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",

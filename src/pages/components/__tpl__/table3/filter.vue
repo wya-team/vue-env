@@ -1,0 +1,57 @@
+<template>
+	<div>
+		<i-input
+			v-model="keyword" 
+			size="large" 
+			placeholder="请输入关键字搜索" 
+			style="width: 320px" 
+		/>
+		<i-button 
+			type="primary"
+			@click="handleSearch"
+		>
+			搜索
+		</i-button>
+	</div>
+</template>
+
+<script>
+/*
+ * @Description: Filter
+ * @Company: WYA
+ * @Author: Jiangdong
+ * @Date: 2018-10-17 14:22:34
+ * @LastEditors: NO Body
+ * @LastEditTime: 2018-10-17 14:42:42
+ */
+import { Input, Button } from 'iview';
+import { getParseUrl, getHashUrl } from '@utils/utils';
+
+export default {
+	name: 'tpl-filter3',
+	components: {
+		'i-input': Input,
+		'i-button': Button,
+	},
+	data() {
+		const { query = {} } = this.$route;
+		return {
+			keyword: String(query.keyword || ''),
+		};
+	},
+	methods: {
+		handleSearch(event) {
+			this.$router.replace(getHashUrl(
+				`/tpl/table3`, 
+				{ ...this.$route.query, keyword: this.keyword }
+			));
+			this.$store.commit('TPL_TABLE3_SEARCH_INIT');
+		}
+	}
+};
+
+</script>
+
+<style lang="scss" scoped>
+
+</style>

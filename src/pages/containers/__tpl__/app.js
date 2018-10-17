@@ -20,6 +20,21 @@ export const tplConfig = [
 		path: '/tpl/form', 
 		name: 'tpl-form',
 		component: () => import('./modules/tpl-form.vue') 
+	},
+	{ 
+		path: '/tpl/table1', 
+		name: 'tpl-table1',
+		component: () => import('./modules/tpl-table1.vue') 
+	},
+	{ 
+		path: '/tpl/table2', 
+		name: 'tpl-table2',
+		component: () => import('./modules/tpl-table2.vue') 
+	},
+	{ 
+		path: '/tpl/table3', 
+		name: 'tpl-table3',
+		component: () => import('./modules/tpl-table3.vue') 
 	}
 ];
 

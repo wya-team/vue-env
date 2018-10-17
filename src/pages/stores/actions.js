@@ -9,7 +9,7 @@ export const actions = {
 		const {
 			url: mutation,
 			param,
-			noLoading,
+			noLoading = true,
 			...rest
 		} = opts;
 		if (!API_ROOT[mutation]) {
