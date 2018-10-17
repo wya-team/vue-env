@@ -8,6 +8,7 @@
 <script>
 import Table from '@components/__tpl__/table1/table';
 import Filter from '@components/__tpl__/table1/filter';
+import navigator from '@extends/mixins/navigator';
 
 export default {
 	name: 'tpl-request',
@@ -15,6 +16,7 @@ export default {
 		"tpl-table": Table,
 		"tpl-filter": Filter,
 	},
+	mixins: [navigator('TPL_TABLE1')],
 	data() {
 		return {
 		};

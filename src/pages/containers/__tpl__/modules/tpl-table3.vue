@@ -8,6 +8,7 @@
 <script>
 import ListTabs from '@components/__tpl__/table3/list-tabs';
 import Filter from '@components/__tpl__/table3/filter';
+import navigator from '@extends/mixins/navigator';
 
 export default {
 	name: 'tpl-request',
@@ -15,14 +16,12 @@ export default {
 		"tpl-list-tabs": ListTabs,
 		"tpl-filter": Filter,
 	},
+	mixins: [navigator('TPL_TABLE3')],
 	data() {
 		return {
 		};
 	},
 	created() {
-	},
-	destroyed() {
-		this.$store.commit('ROUTE_CHANGED');
 	},
 	methods: {
 	},

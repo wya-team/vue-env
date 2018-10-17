@@ -28,7 +28,7 @@ const mutations = {
 			...initPage
 		};
 	},
-	ROUTE_CHANGED(state) {
+	TPL_TABLE1_ROUTE_CHANGE(state) {
 		state.listInfo = {
 			...initPage
 		};

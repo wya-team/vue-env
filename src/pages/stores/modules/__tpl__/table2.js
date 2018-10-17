@@ -42,7 +42,7 @@ const mutations = {
 			...initialState.listInfo
 		};
 	},
-	ROUTE_CHANGED(state) {
+	TPL_TABLE2_ROUTE_CHANGE(state) {
 		state.listInfo = {
 			...initialState.listInfo
 		};

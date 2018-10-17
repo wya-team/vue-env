@@ -53,7 +53,7 @@ const mutations = {
 			...initialListInfo
 		};
 	},
-	ROUTE_CHANGED(state) {
+	TPL_TABLE3_ROUTE_CHANGE(state) {
 		state.listInfo = {};
 		state.tabs = [];
 	}
