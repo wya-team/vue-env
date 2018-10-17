@@ -21,6 +21,9 @@ export default {
 	},
 	created() {
 	},
+	destroyed() {
+		this.$store.commit('ROUTE_CHANGED');
+	},
 	methods: {
 	},
 };

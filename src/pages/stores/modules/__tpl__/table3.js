@@ -52,6 +52,10 @@ const mutations = {
 		state.listInfo = {
 			...initialListInfo
 		};
+	},
+	ROUTE_CHANGED(state) {
+		state.listInfo = {};
+		state.tabs = [];
 	}
 };
 

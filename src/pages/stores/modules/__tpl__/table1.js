@@ -27,6 +27,11 @@ const mutations = {
 		state.listInfo = {
 			...initPage
 		};
+	},
+	ROUTE_CHANGED(state) {
+		state.listInfo = {
+			...initPage
+		};
 	}
 };
 

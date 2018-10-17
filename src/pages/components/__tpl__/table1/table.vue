@@ -18,7 +18,7 @@
  * @Author: Jiangdong
  * @Date: 2018-10-17 14:22:34
  * @LastEditors: NO Body
- * @LastEditTime: 2018-10-17 16:40:47
+ * @LastEditTime: 2018-10-17 17:56:45
  */
 import { Paging } from 'wya-vc';
 import { getParseUrl } from '@utils/utils';
@@ -63,6 +63,20 @@ export default {
 							}
 						}, '当前页刷新');
 					}
+				},
+				{
+					title: 'Link',
+					key: 'link',
+					render: (h, params) => {
+						return h('div', {
+							style: {
+								marginRight: '5px'
+							},
+							on: {
+								click: this.handleLinkTo
+							}
+						}, '跳转到table2');
+					}
 				}
 			],
 		};
@@ -93,7 +107,10 @@ export default {
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_TABLE1_LIST_RESET');
-		}
+		},
+		handleLinkTo() {
+			this.$router.push('/tpl/table2');
+		},
 	}
 };
 

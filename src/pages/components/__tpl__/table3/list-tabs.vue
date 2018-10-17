@@ -89,7 +89,7 @@ export default {
 							on: {
 								click: this.handleLinkTo
 							}
-						}, '跳转到table2');
+						}, '跳转到table1');
 					}
 				}
 			],
@@ -138,9 +138,6 @@ export default {
 				console.log(error, 'error');
 			});
 		},
-		handleLinkTo() {
-			this.$router.push('/tpl/table2');
-		},
 		handleChange(type) {
 			this.type = type;
 
@@ -156,7 +153,10 @@ export default {
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_TABLE3_LIST_RESET', { type: this.type });
-		}
+		},
+		handleLinkTo() {
+			this.$router.push('/tpl/table1');
+		},
 	}
 };
 </script>

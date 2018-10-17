@@ -81,6 +81,20 @@ export default {
 							}
 						}, '当前页刷新');
 					}
+				},
+				{
+					title: 'Link',
+					key: 'link',
+					render: (h, params) => {
+						return h('div', {
+							style: {
+								marginRight: '5px'
+							},
+							on: {
+								click: this.handleLinkTo
+							}
+						}, '跳转到table3');
+					}
 				}
 			],
 		};
@@ -122,7 +136,10 @@ export default {
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_TABLE2_LIST_RESET', { type: this.type });
-		}
+		},
+		handleLinkTo() {
+			this.$router.push('/tpl/table3');
+		},
 	}
 };
 </script>
