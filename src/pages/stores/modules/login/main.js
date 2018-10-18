@@ -11,6 +11,6 @@ const mutations = {
 };
 
 export const loginMain = {
-	state: initialState,
+	state: { ...initialState },
 	mutations,
 };

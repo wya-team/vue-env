@@ -9,7 +9,7 @@ export const actions = {
 		const {
 			url: mutation,
 			redirectMutation, // 重定向Mutation
-			param,
+			param = {},
 			pending,
 			fail,
 			loading = true,
@@ -19,11 +19,11 @@ export const actions = {
 		let _mutation = redirectMutation || mutation;
 
 		if (!API_ROOT[mutation]) {
-			console.error('请求地址不存在');
+			console.error('[rootActions/request], mutation需要对应的url');
 			return !1;
 		}
 		
-		// pending 为 false，则必须要写_ON的mutation
+		// pending 为 false，则必须要写_PENDING的mutation
 		pending && store.commit(`${_mutation}_PENDING`, { param });
 		return net.ajax({
 			url: API_ROOT[mutation],

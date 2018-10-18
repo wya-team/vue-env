@@ -105,7 +105,6 @@ export default {
 		}
 	},
 	created() {
-		console.log(1);
 		setTimeout(() => {
 			this.request({
 				url: types.TPL_TABLE3_TABS_GET,
