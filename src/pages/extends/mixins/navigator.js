@@ -1,12 +1,6 @@
-/*
- * @Description: 路由变换触发
- * @Company: WYA
- * @Author: Jiangdong
- * @Date: 2018-10-17 19:40:56
- * @LastEditors: NO Body
- * @LastEditTime: 2018-10-17 19:48:12
+/**
+ * 路由变换触发
  */
-
 export default (page) => {
 	return {
 		destroyed() {
