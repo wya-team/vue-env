@@ -16,14 +16,6 @@
 </template>
 
 <script>
-/*
- * @Description: Filter
- * @Company: WYA
- * @Author: Jiangdong
- * @Date: 2018-10-17 14:22:34
- * @LastEditors: NO Body
- * @LastEditTime: 2018-10-17 14:42:42
- */
 import { Input, Button } from 'iview';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 
