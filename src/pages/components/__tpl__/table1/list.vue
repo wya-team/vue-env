@@ -12,14 +12,6 @@
 </template>
 
 <script>
-/*
- * @Description: 常规Table TPL
- * @Company: WYA
- * @Author: Jiangdong
- * @Date: 2018-10-17 14:22:34
- * @LastEditors: NO Body
- * @LastEditTime: 2018-10-17 17:56:45
- */
 import { Paging } from 'wya-vc';
 import { getParseUrl } from '@utils/utils';
 import * as types from '@stores/mutations/__tpl__';

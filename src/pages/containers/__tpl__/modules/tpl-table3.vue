@@ -1,19 +1,19 @@
 <template>
 	<set-title title="tpl-request" style="padding: 20px">
 		<tpl-filter />
-		<tpl-list-tabs />
+		<tpl-tabs-list />
 	</set-title>
 </template>
 
 <script>
-import ListTabs from '@components/__tpl__/table3/list-tabs';
+import TabsList from '@components/__tpl__/table3/tabs-list';
 import Filter from '@components/__tpl__/table3/filter';
 import navigator from '@extends/mixins/navigator';
 
 export default {
 	name: 'tpl-request',
 	components: {
-		"tpl-list-tabs": ListTabs,
+		"tpl-tabs-list": TabsList,
 		"tpl-filter": Filter,
 	},
 	mixins: [navigator('TPL_TABLE3')],
