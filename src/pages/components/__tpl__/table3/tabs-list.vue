@@ -11,13 +11,13 @@
 			:name="item.value"
 		>
 			<vc-paging
-				:ref="item.value"
 				:show="item.value == type" 
 				:type="item.value"
 				:columns="columns" 
 				:data-source="listInfo[item.value].data"
 				:total="listInfo[item.value].total"
 				:reset="listInfo[item.value].reset"
+				:current.sync="current[item.value]"
 				:history="true"
 				:load-data="loadData"
 			/>
@@ -45,6 +45,7 @@ export default {
 
 		return {
 			type: String(query.type || "1"), // 同tabs下的value
+			current: {},
 			columns: [
 				{
 					title: 'Title',
@@ -144,7 +145,7 @@ export default {
 			let query = {
 				...this.$route.query,
 				type,
-				page: this.$refs[type][0].currentPage
+				page: this.current[type]
 			};
 			this.$router.replace(getHashUrl(`/tpl/table3`, { ...query }));
 		},
