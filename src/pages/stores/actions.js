@@ -12,7 +12,7 @@ export const actions = {
 			param,
 			pending,
 			fail,
-			noLoading,
+			loading = true,
 			...rest
 		} = opts;
 
@@ -28,7 +28,7 @@ export const actions = {
 		return net.ajax({
 			url: API_ROOT[mutation],
 			param,
-			noLoading: param.page === undefined ? noLoading : true,
+			loading: param.page === undefined ? loading : false,
 			...rest
 		}).then((res) => {
 			const { data } = res;

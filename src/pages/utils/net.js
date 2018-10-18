@@ -7,12 +7,14 @@
  *
  */
 import { ajaxFn } from 'wya-fetch';
+import { Message } from 'iview';
 
 const loadingFn = (msg) => {
-	// ...
+	Message.destroy();
+	Message.loading(msg || '加载中...', 0);
 };
 const loadedFn = () => {
-	// ...
+	Message.destroy();
 };
 
 const otherFn = (res, resolve, reject) => {
