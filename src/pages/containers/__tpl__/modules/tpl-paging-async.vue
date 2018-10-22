@@ -1,22 +1,22 @@
 <template>
-	<set-title title="tpl-request" style="padding: 20px">
+	<set-title title="tpl-paging-async" style="padding: 20px">
 		<tpl-filter />
 		<tpl-tabs-list />
 	</set-title>
 </template>
 
 <script>
-import TabsList from '@components/__tpl__/table2/tabs-list';
-import Filter from '@components/__tpl__/table2/filter';
+import TabsList from '@components/__tpl__/paging-async/tabs-list';
+import Filter from '@components/__tpl__/paging-async/filter';
 import navigator from '@extends/mixins/navigator';
 
 export default {
-	name: 'tpl-request',
+	name: 'tpl-paging-async',
 	components: {
-		"tpl-filter": Filter,
 		"tpl-tabs-list": TabsList,
+		"tpl-filter": Filter,
 	},
-	mixins: [navigator('TPL_TABLE2')],
+	mixins: [navigator('TPL_PAGING_ASYNC')],
 	data() {
 		return {
 		};

@@ -8,7 +8,7 @@
 						Item 1
 					</template>
 					<i-menu-item name="1-1">
-						<router-link to="/tpl/table2">Option 1</router-link>
+						<router-link to="/tpl/paging/tabs">Option 1</router-link>
 					</i-menu-item>
 					<i-menu-item name="1-2">Option 2</i-menu-item>
 					<i-menu-item name="1-3">Option 3</i-menu-item>

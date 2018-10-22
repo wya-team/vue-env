@@ -12,18 +12,16 @@ export const routeConfig = {
 			path: '/',
 			component: layout,
 			children: [
-				{
-					path: '/',
-					redirect: { name: 'tpl' }
-				},
 				...tplConfig
 			]
 		},
 		{
 			path: '*',
 			redirect: (to) => {
-				return '/tpl';
+				console.log(to);
+				return '/tpl-main';
 			}
 		}
 	]
 };
+

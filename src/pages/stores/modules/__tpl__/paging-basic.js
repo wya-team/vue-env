@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const mutations = {
-	TPL_TABLE1_LIST_GET_SUCCESS(state, { data, param: { page } }) {
+	TPL_PAGING_BASIC_LIST_GET_SUCCESS(state, { data, param: { page } }) {
 		state.listInfo = {
 			...state.listInfo,
 			total: data.totalCount,
@@ -17,25 +17,25 @@ const mutations = {
 			}
 		};
 	},
-	TPL_TABLE1_LIST_RESET(state, payload) {
+	TPL_PAGING_BASIC_LIST_RESET(state, payload) {
 		state.listInfo = {
 			...initPage,
 			reset: true
 		};
 	},
-	TPL_TABLE1_SEARCH_INIT(state, payload) {
+	TPL_PAGING_BASIC_SEARCH_INIT(state, payload) {
 		state.listInfo = {
 			...initPage
 		};
 	},
-	TPL_TABLE1_ROUTE_CHANGE(state) {
+	TPL_PAGING_BASIC_ROUTE_CHANGE(state) {
 		state.listInfo = {
 			...initPage
 		};
 	}
 };
 
-export const tplTable1 = {
+export const tplPagingBasic = {
 	state: { ...initialState },
 	mutations,
 };

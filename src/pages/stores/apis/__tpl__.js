@@ -13,9 +13,9 @@ const api = {
 	'TPL_TABLE_ITEM_POST': '/test.json',
 	'TPL_TABLE_ITEM_PUT': '/test.json',
 	'TPL_LIST_GET': '/list.json',
-	'TPL_TABLE1_LIST_GET': '/list.json',
-	'TPL_TABLE2_LIST_GET': '/list.json',
-	'TPL_TABLE3_LIST_GET': '/list.json',
-	'TPL_TABLE3_TABS_GET': '/tabs.json',
+	'TPL_PAGING_BASIC_LIST_GET': '/list.json',
+	'TPL_PAGING_TABS_LIST_GET': '/list.json',
+	'TPL_PAGING_ASYNC_LIST_GET': '/list.json',
+	'TPL_PAGING_ASYNC_TABS_GET': '/tabs.json',
 };
 export default api;

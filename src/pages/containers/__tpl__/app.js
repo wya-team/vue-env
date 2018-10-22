@@ -1,8 +1,12 @@
 export const tplConfig = [
+	{
+		path: '/tpl/',
+		redirect: { name: 'tpl-main' }
+	},
 	{ 
-		path: '/tpl', 
-		name: 'tpl',
-		component: () => import('./modules/tpl.vue') 
+		path: '/tpl/main', 
+		name: 'tpl-main',
+		component: () => import('./modules/tpl-main.vue') 
 	},
 	{ 
 		path: '/tpl/basic', 
@@ -22,19 +26,19 @@ export const tplConfig = [
 		component: () => import('./modules/tpl-form.vue') 
 	},
 	{ 
-		path: '/tpl/table1', 
-		name: 'tpl-table1',
-		component: () => import('./modules/tpl-table1.vue') 
+		path: '/tpl/paging/basic', 
+		name: 'tpl-paging-basic',
+		component: () => import('./modules/tpl-paging-basic.vue') 
 	},
 	{ 
-		path: '/tpl/table2', 
-		name: 'tpl-table2',
-		component: () => import('./modules/tpl-table2.vue') 
+		path: '/tpl/paging/tabs', 
+		name: 'tpl-paging-tabs',
+		component: () => import('./modules/tpl-paging-tabs.vue') 
 	},
 	{ 
-		path: '/tpl/table3', 
-		name: 'tpl-table3',
-		component: () => import('./modules/tpl-table3.vue') 
+		path: '/tpl/paging/async', 
+		name: 'tpl-paging-async',
+		component: () => import('./modules/tpl-paging-async.vue') 
 	}
 ];
 

@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const mutations = {
-	TPL_TABLE3_TABS_GET_SUCCESS(state, data, param) {
+	TPL_PAGING_ASYNC_TABS_GET_SUCCESS(state, data, param) {
 		state.tabs = [
 			{ label: '标签一', value: '1' }, 
 			{ label: '标签二', value: '2' }, 
@@ -26,7 +26,7 @@ const mutations = {
 			...initialListInfo
 		};
 	},
-	TPL_TABLE3_LIST_GET_SUCCESS(state, { data, param: { type, page } }) {
+	TPL_PAGING_ASYNC_LIST_GET_SUCCESS(state, { data, param: { type, page } }) {
 		state.listInfo = {
 			...state.listInfo,
 			[type]: {
@@ -39,7 +39,7 @@ const mutations = {
 			}
 		};
 	},
-	TPL_TABLE3_LIST_RESET(state, { type }) {
+	TPL_PAGING_ASYNC_LIST_RESET(state, { type }) {
 		state.listInfo = {
 			...initialListInfo,
 			[type]: {
@@ -48,18 +48,18 @@ const mutations = {
 			}
 		};
 	},
-	TPL_TABLE3_SEARCH_INIT(state, payload) {
+	TPL_PAGING_ASYNC_SEARCH_INIT(state, payload) {
 		state.listInfo = {
 			...initialListInfo
 		};
 	},
-	TPL_TABLE3_ROUTE_CHANGE(state) {
+	TPL_PAGING_ASYNC_ROUTE_CHANGE(state) {
 		state.listInfo = {};
 		state.tabs = [];
 	}
 };
 
-export const tplTable3 = {
+export const tplPagingAsync = {
 	state: { ...initialState },
 	mutations,
 };

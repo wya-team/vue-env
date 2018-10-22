@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import Links from '@components/__tpl__/links';
+import Links from '@components/__tpl__/main/links';
 
 export default {
-	name: 'tpl',
+	name: 'tpl-main',
 	components: {
 		Links
 	},

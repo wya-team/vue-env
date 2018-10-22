@@ -20,7 +20,7 @@ import { Input, Button } from 'iview';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 
 export default {
-	name: 'tpl-filter2',
+	name: 'tpl-filter1',
 	components: {
 		'i-input': Input,
 		'i-button': Button,
@@ -34,10 +34,10 @@ export default {
 	methods: {
 		handleSearch(event) {
 			this.$router.replace(getHashUrl(
-				`/tpl/table2`, 
+				`/tpl/table1`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_TABLE2_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_BASIC_SEARCH_INIT');
 		}
 	}
 };

@@ -1,27 +1,10 @@
-<template>
-	<vc-paging
-		ref="tableTarget"
-		:columns="columns"
-		:data-source="listInfo.data" 
-		:total="listInfo.total"
-		:reset="listInfo.reset"
-		:history="true"
-		:load-data="loadData"
-		class="g-m-t-20"
-	/>
-</template>
-
-<script>
-import { Paging } from 'wya-vc';
-import { getParseUrl } from '@utils/utils';
+import { getParseUrl, getHashUrl } from '@utils/utils';
 import * as types from '@stores/mutations/__tpl__';
 
 export default {
-	name: 'tpl-table1',
-	components: {
-		'vc-paging': Paging,
-	},
 	data() {
+		const { query } = this.$route;
+
 		return {
 			columns: [
 				{
@@ -67,47 +50,21 @@ export default {
 							on: {
 								click: this.handleLinkTo
 							}
-						}, '跳转到table2');
+						}, '跳转到paging-async');
 					}
 				}
 			],
 		};
 	},
-	computed: {
-		listInfo() {
-			return this.$store.state.tplTable1.listInfo;
-		}
-	},
 	methods: {
-		loadData(page) {
-			const { query = {} } = this.$route;
-			return this.request({
-				url: types.TPL_TABLE1_LIST_GET,
-				type: 'GET',
-				param: {
-					...query,
-					page,
-				},
-			}).then((res) => {
-				console.log(res, 'res');
-			}).catch((error) => {
-				console.log(error, 'error');
-			});
-		},
 		handleResetFirst() {
-			this.$store.commit('TPL_TABLE1_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_ASYNC_SEARCH_INIT');
 		},
 		handleResetCur() {
-			this.$store.commit('TPL_TABLE1_LIST_RESET');
+			this.$store.commit('TPL_PAGING_ASYNC_LIST_RESET', { type: this.type });
 		},
 		handleLinkTo() {
-			this.$router.push('/tpl/table2');
+			this.$router.push('/tpl/paging/async');
 		},
 	}
 };
-
-</script>
-
-<style lang="scss" scoped>
-
-</style>

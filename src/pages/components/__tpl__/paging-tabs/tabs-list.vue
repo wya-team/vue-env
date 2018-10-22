@@ -30,15 +30,18 @@ import { Tabs, TabPane, Input } from 'iview';
 import { Paging } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 import * as types from '@stores/mutations/__tpl__';
+// item
+import item from './item';
 
 export default {
-	name: 'tpl-table2',
+	name: 'tpl-paging-tabs-list',
 	components: {
 		'vc-paging': Paging,
 		'i-tabs': Tabs,
 		'i-tab-pane': TabPane,
 		'i-input': Input
 	},
+	mixins: [item],
 	data() {
 		const { query } = this.$route;
 
@@ -49,67 +52,20 @@ export default {
 				{ label: '标签二', value: '2' }, 
 				{ label: '标签三', value: '3' }
 			],
-			current: {},
-			columns: [
-				{
-					title: 'Title',
-					key: 'title'
-				},
-				{
-					title: 'Status',
-					key: 'status',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleResetFirst
-							}
-						}, '回到首页刷新');
-					}
-				},
-				{
-					title: 'Opt',
-					key: 'opt',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleResetCur
-							}
-						}, '当前页刷新');
-					}
-				},
-				{
-					title: 'Link',
-					key: 'link',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleLinkTo
-							}
-						}, '跳转到table3');
-					}
-				}
-			],
+			current: {}
 		};
 	},
 	computed: {
 		listInfo() {
-			return this.$store.state.tplTable2.listInfo;
+			return this.$store.state.tplPagingTabs.listInfo;
 		}
 	},
 	methods: {
 		loadData(page) {
+			console.log(this.$router);
 			const { query = {} } = this.$route;
 			return this.request({
-				url: types.TPL_TABLE2_LIST_GET,
+				url: types.TPL_PAGING_TABS_LIST_GET,
 				type: 'GET',
 				param: {
 					...query,
@@ -130,17 +86,8 @@ export default {
 				type,
 				page: this.current[type]
 			};
-			this.$router.replace(getHashUrl(`/tpl/table2`, { ...query }));
-		},
-		handleResetFirst() {
-			this.$store.commit('TPL_TABLE2_SEARCH_INIT');
-		},
-		handleResetCur() {
-			this.$store.commit('TPL_TABLE2_LIST_RESET', { type: this.type });
-		},
-		handleLinkTo() {
-			this.$router.push('/tpl/table3');
-		},
+			this.$router.replace(getHashUrl(`/tpl/paging-tabs`, { ...query }));
+		}
 	}
 };
 </script>

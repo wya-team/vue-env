@@ -31,83 +31,38 @@ import { Paging } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 import * as types from '@stores/mutations/__tpl__';
 import { setTimeout } from 'timers';
+// item
+import item from './item';
 
 export default {
-	name: 'tpl-table2',
+	name: 'tpl-paging-tabs-list',
 	components: {
 		'vc-paging': Paging,
 		'i-tabs': Tabs,
 		'i-tab-pane': TabPane,
 		'i-input': Input
 	},
+	mixins: [item],
 	data() {
 		const { query } = this.$route;
 
 		return {
 			type: String(query.type || "1"), // 同tabs下的value
-			current: {},
-			columns: [
-				{
-					title: 'Title',
-					key: 'title'
-				},
-				{
-					title: 'Status',
-					key: 'status',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleResetFirst
-							}
-						}, '回到首页刷新');
-					}
-				},
-				{
-					title: 'Opt',
-					key: 'opt',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleResetCur
-							}
-						}, '当前页刷新');
-					}
-				},
-				{
-					title: 'Link',
-					key: 'link',
-					render: (h, params) => {
-						return h('div', {
-							style: {
-								marginRight: '5px'
-							},
-							on: {
-								click: this.handleLinkTo
-							}
-						}, '跳转到table1');
-					}
-				}
-			],
+			current: {}
 		};
 	},
 	computed: {
 		tabs() {
-			return this.$store.state.tplTable3.tabs;
+			return this.$store.state.tplPagingAsync.tabs;
 		},
 		listInfo() {
-			return this.$store.state.tplTable3.listInfo;
+			return this.$store.state.tplPagingAsync.listInfo;
 		}
 	},
 	created() {
 		setTimeout(() => {
 			this.request({
-				url: types.TPL_TABLE3_TABS_GET,
+				url: types.TPL_PAGING_ASYNC_TABS_GET,
 				type: 'GET',
 				localData: {
 					data: [],
@@ -125,7 +80,7 @@ export default {
 		loadData(page) {
 			const { query = {} } = this.$route;
 			return this.request({
-				url: types.TPL_TABLE3_LIST_GET,
+				url: types.TPL_PAGING_ASYNC_LIST_GET,
 				type: 'GET',
 				param: {
 					...query,
@@ -147,16 +102,7 @@ export default {
 				page: this.current[type]
 			};
 			this.$router.replace(getHashUrl(`/tpl/table3`, { ...query }));
-		},
-		handleResetFirst() {
-			this.$store.commit('TPL_TABLE3_SEARCH_INIT');
-		},
-		handleResetCur() {
-			this.$store.commit('TPL_TABLE3_LIST_RESET', { type: this.type });
-		},
-		handleLinkTo() {
-			this.$router.push('/tpl/table1');
-		},
+		}
 	}
 };
 </script>

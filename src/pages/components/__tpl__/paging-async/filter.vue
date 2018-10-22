@@ -34,10 +34,10 @@ export default {
 	methods: {
 		handleSearch(event) {
 			this.$router.replace(getHashUrl(
-				`/tpl/table3`, 
+				`/tpl/paging/async`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_TABLE3_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_ASYNC_SEARCH_INIT');
 		}
 	}
 };

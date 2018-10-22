@@ -1,22 +1,22 @@
 <template>
-	<set-title title="tpl-request" style="padding: 20px">
+	<set-title title="tpl-paging-basic" style="padding: 20px">
 		<tpl-filter />
 		<tpl-list />
 	</set-title>
 </template>
 
 <script>
-import List from '@components/__tpl__/table1/list';
-import Filter from '@components/__tpl__/table1/filter';
+import List from '@components/__tpl__/paging-basic/list';
+import Filter from '@components/__tpl__/paging-basic/filter';
 import navigator from '@extends/mixins/navigator';
 
 export default {
-	name: 'tpl-request',
+	name: 'tpl-paging-basic',
 	components: {
 		"tpl-list": List,
 		"tpl-filter": Filter,
 	},
-	mixins: [navigator('TPL_TABLE1')],
+	mixins: [navigator('TPL_PAGING_BASIC')],
 	data() {
 		return {
 		};
