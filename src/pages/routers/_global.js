@@ -47,5 +47,6 @@ _global.device = getDevice();
 export default {
 	install(Vue) {
 		Vue.prototype.$global = _global;
+		Vue.prototype.$auth = _global.auth;
 	}
 };
