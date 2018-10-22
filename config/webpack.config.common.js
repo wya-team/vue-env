@@ -39,7 +39,6 @@ const postcssLoader = {
 const loaderPath = [
 	path.resolve(APP_ROOT, "node_modules/wya-vc"),
 	path.resolve(APP_ROOT, "node_modules/iview"),
-	path.resolve(APP_ROOT, "node_modules/photoswipe"),
 	path.resolve(APP_ROOT, "src")
 ];
 const webpackConfig = {
@@ -132,13 +131,7 @@ const webpackConfig = {
 				loader: 'url-loader',
 				options: {
 					limit: 10000
-				},
-				// 全局的样式
-				include: [
-					path.resolve(APP_ROOT, "src/css"),
-					path.resolve(APP_ROOT, "node_modules/iview"),
-					path.resolve(APP_ROOT, "node_modules/photoswipe")
-				]
+				}
 			},
 			{
 				test: /\.html$/i,
