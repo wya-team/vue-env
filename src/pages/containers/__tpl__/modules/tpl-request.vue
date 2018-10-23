@@ -1,6 +1,6 @@
 <template>
 	<set-title title="tpl-request">
-		<contents />
+		<tpl-contents />
 	</set-title>
 </template>
 
@@ -10,7 +10,7 @@ import Contents from '@components/__tpl__/request/contents';
 export default {
 	name: 'tpl-request',
 	components: {
-		Contents
+		'tpl-contents': Contents
 	},
 	data() {
 		return {

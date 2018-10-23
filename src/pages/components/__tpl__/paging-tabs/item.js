@@ -49,7 +49,7 @@ export default {
 							on: {
 								click: this.handleLinkTo
 							}
-						}, '/tpl/paging/tabs');
+						}, '/tpl/paging/async');
 					}
 				}
 			],
@@ -68,7 +68,7 @@ export default {
 			this.$store.commit('TPL_PAGING_TABS_LIST_RESET', { type: this.type });
 		},
 		handleLinkTo() {
-			this.$router.push('/tpl/paging/tabs');
+			this.$router.push('/tpl/paging/async');
 		},
 	}
 };

@@ -34,10 +34,10 @@ export default {
 	methods: {
 		handleSearch(event) {
 			this.$router.replace(getHashUrl(
-				`/tpl/paging/basic`, 
+				`/tpl/paging/native`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_PAGING_BASIC_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_NATIVE_SEARCH_INIT');
 		}
 	}
 };

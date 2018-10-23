@@ -50,7 +50,7 @@ export default {
 							on: {
 								click: this.handleLinkTo
 							}
-						}, '跳转到paging-async');
+						}, '跳转到paging-piece');
 					}
 				}
 			],
@@ -64,7 +64,7 @@ export default {
 			this.$store.commit('TPL_PAGING_ASYNC_LIST_RESET', { type: this.type });
 		},
 		handleLinkTo() {
-			this.$router.push('/tpl/paging/async');
+			this.$router.push('/tpl/paging/piece');
 		},
 	}
 };

@@ -39,6 +39,16 @@ export const tplConfig = [
 		path: '/tpl/paging/async', 
 		name: 'tpl-paging-async',
 		component: () => import('./modules/tpl-paging-async.vue') 
+	},
+	{ 
+		path: '/tpl/paging/piece', 
+		name: 'tpl-paging-piece',
+		component: () => import('./modules/tpl-paging-piece.vue') 
+	},
+	{ 
+		path: '/tpl/paging/native', 
+		name: 'tpl-paging-native',
+		component: () => import('./modules/tpl-paging-native.vue') 
 	}
 ];
 

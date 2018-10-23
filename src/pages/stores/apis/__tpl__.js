@@ -17,5 +17,7 @@ const api = {
 	'TPL_PAGING_TABS_LIST_GET': '/list.json',
 	'TPL_PAGING_ASYNC_LIST_GET': '/list.json',
 	'TPL_PAGING_ASYNC_TABS_GET': '/tabs.json',
+	'TPL_PAGING_PIECE_LIST_GET': '/list.json',
+	'TPL_PAGING_NATIVE_LIST_GET': '/list.json',
 };
 export default api;

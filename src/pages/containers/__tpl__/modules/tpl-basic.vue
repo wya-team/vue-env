@@ -1,6 +1,6 @@
 <template>
 	<set-title title="Basic">
-		<contents
+		<tpl-contents
 			:app-name="appName" 
 			v-bind="user" 
 			@diyEvent="handleDiyEvent"
@@ -11,7 +11,7 @@
 			<template slot="second">
 				<div>second</div>
 			</template>
-		</contents>
+		</tpl-contents>
 	</set-title>
 </template>
 
@@ -21,7 +21,7 @@ import Contents from '@components/__tpl__/basic/contents';
 export default {
 	name: 'tpl-basic',
 	components: {
-		Contents
+		'tpl-contents': Contents
 	},
 	data() {
 		return {
