@@ -4,9 +4,9 @@
 		<div 
 			v-for="(menu, index) in menus" 
 			:key="index"
-			:class="$route.path.indexOf(formatRoute(menu.route)) > -1 ? '_menu-item-active' : '_menu-item-unactive'" 
+			:class="$route.path.indexOf(menu.route) > -1 ? '_menu-item-active' : '_menu-item-unactive'" 
 			class="_menu-item"
-			@click="handleLinkTo(menu.route)"
+			@click="handleLinkTo(menu)"
 		>
 			<i class="iconfont icon-add g-m-r-10" />
 			{{ menu.name }}
@@ -34,15 +34,16 @@ export default {
 		console.log(this.menus);
 	},
 	methods: {
-		handleLinkTo(route) {
-			console.log(route, this.$router);
-			this.$emit('click', this.formatRoute(route));
-			this.$router.push(route);
+		handleLinkTo(menu) {
+			this.$emit('click', menu);
+			this.$router.push(this.getIndexRoute(menu));
 		},
-		formatRoute(route) {
-			let array = route.split('/');
-			array.length = 3;
-			return array.join('/');
+		getIndexRoute(menu) {
+			if (!menu.children) {
+				return menu.route;
+			} else {
+				return menu.children.filter((item) => item.show)[0].route;
+			}
 		}
 	}
 };

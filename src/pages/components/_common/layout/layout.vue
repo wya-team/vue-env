@@ -7,7 +7,6 @@
 		<div class="g-flex">
 			<left-menu 
 				:menus="leftMenus"
-				@click="handleClick"
 			>
 				<div slot="avatar">avatar</div>
 			</left-menu>
@@ -24,8 +23,8 @@
 <script>
 import LeftMenu from './left';
 import TopMenu from './top';
-import modules from './modules';
-import menus from './left/root';
+import modules from './config/modules';
+import menus from './config/left/root';
 
 export default {
 	components: {
@@ -33,9 +32,7 @@ export default {
 		"top-menu": TopMenu
 	},
 	data() {
-		return {
-			topMenus: []
-		};
+		return {};
 	},
 	computed: {
 		modules() { // 用户可进入的模块
@@ -44,12 +41,18 @@ export default {
 		leftMenus() { // 当前模块下的菜单
 			let curMenu = menus[this.modules[0].value];
 			return curMenu.filter((item) => item.show);
+		},
+		topMenus() {
+			let leftIndex = this.leftMenus.findIndex((item) => this.$route.path.indexOf(item.route) > -1);
+			if (leftIndex === -1) return [];
+			return this.leftMenus[leftIndex].children || [];
 		}
 	},
+	watch: {
+
+	},
 	methods: {
-		handleClick(route) {
-			this.topMenus = this.leftMenus.filter((item) => item.route.indexOf(route) > -1)[0].children || [];
-		}
+		
 	}
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-top-bar g-flex-cc">
+	<div v-if="menus.length > 0" class="layout-top-bar g-flex-cc">
 		<div 
 			v-for="(menu, index) in menus"
 			:key="index"
@@ -23,11 +23,10 @@ export default {
 	},
 	methods: {
 		handleLinkTo(route) {
-			console.log(route, this.$router);
 			this.$emit('click', this.formatRoute(route));
 			this.$router.push(route);
 		},
-		formatRoute(route) {
+		formatRoute(route = '') {
 			let array = route.split('/');
 			array.length = 4;
 			return array.join('/');
