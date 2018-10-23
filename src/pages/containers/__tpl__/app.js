@@ -1,7 +1,7 @@
 export const tplConfig = [
 	{
-		path: '/tpl/',
-		redirect: { name: 'tpl-main' }
+		path: '/tpl',
+		redirect: '/tpl/main'
 	},
 	{ 
 		path: '/tpl/main', 

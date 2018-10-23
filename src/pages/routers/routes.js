@@ -19,7 +19,7 @@ export const routeConfig = {
 			path: '*',
 			redirect: (to) => {
 				console.log(to);
-				return '/tpl-main';
+				return '/tpl/main';
 			}
 		}
 	]
