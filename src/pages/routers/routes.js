@@ -1,4 +1,4 @@
-import layout from '@common/layout/layout';
+import layout from '@components/layout/layout';
 import { PRE_ROUTER_URL } from '../constants/constants';
 import { loginConfig } from '../containers/login/app';
 import { tplConfig } from '../containers/__tpl__/app';

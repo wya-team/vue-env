@@ -1,5 +1,3 @@
-import Vue from 'vue';
-
 export default [
 	{
 		name: '首页',
