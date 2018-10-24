@@ -37,8 +37,14 @@ export default {
 
 <style lang="scss" scoped>
 .layout-top-bar {
+	position: fixed;
+	top: 56px;
+	left: 180px;
 	height: 60px;
 	line-height: 60px;
+	width: 100%;
+	z-index: 10;
+	background-color: #ffffff;
 	border-bottom: 1px solid #e1e3e5;
 	._menu-item {
 		height: 60px;

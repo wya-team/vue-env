@@ -10,7 +10,7 @@
 			>
 				<div slot="avatar">avatar</div>
 			</left-menu>
-			<div class="g-col layout-content">
+			<div class="g-col layout-content g-relative">
 				<top-menu 
 					:menus="topMenus"
 				/>
@@ -77,7 +77,7 @@ export default {
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
 	.layout-content {
-		padding-top: 56px;
+		padding-top: 112px;
 		padding-left: 180px;
 	}
 	

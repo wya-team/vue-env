@@ -38,6 +38,12 @@ export default [
 				route: '/tpl/paging/basic'
 			},
 			{
+				name: 'Piece',
+				icon: '',
+				show: true,
+				route: '/tpl/paging/piece'
+			},
+			{
 				name: 'Tabs',
 				icon: '',
 				show: true,
