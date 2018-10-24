@@ -2,7 +2,7 @@ export default [
 	{
 		name: '首页',
 		icon: '',
-		show: true,
+		show: false,
 		route: '/tpl/main'
 	},
 	{

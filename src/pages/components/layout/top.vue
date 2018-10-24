@@ -43,7 +43,7 @@ export default {
 	height: 60px;
 	line-height: 60px;
 	width: 100%;
-	z-index: 10;
+	z-index: 1;
 	background-color: #ffffff;
 	border-bottom: 1px solid #e1e3e5;
 	._menu-item {

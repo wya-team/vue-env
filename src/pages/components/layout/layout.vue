@@ -1,8 +1,21 @@
 <template>
 	<div class="c-layout">
-		<div class="c-layout-header-bar g-flex-ac">
+		<div class="_header-bar g-flex-ac">
 			<img >
 			<span class="g-fs-20">后台管理中心</span>
+			<i-select 
+				v-model="curModule" 
+				style="width:200px"
+				@on-change="handleChangeModule"
+			>
+				<i-option 
+					v-for="item in modules" 
+					:value="item.value" 
+					:key="item.value"
+				>
+					{{ item.name }}
+				</i-option>
+			</i-select>
 		</div>
 		<div class="g-flex">
 			<left-menu 
@@ -10,7 +23,7 @@
 			>
 				<div slot="avatar">avatar</div>
 			</left-menu>
-			<div class="g-col c-layout-content g-relative">
+			<div class="g-col _content g-relative">
 				<top-menu 
 					:menus="topMenus"
 				/>
@@ -21,6 +34,7 @@
 </template>
 
 <script>
+import { Select, Option } from 'iview';
 import LeftMenu from './left';
 import TopMenu from './top';
 import modules from './config/modules';
@@ -28,18 +42,22 @@ import menus from './config/left/root';
 
 export default {
 	components: {
+		"i-select": Select,
+		"i-option": Option,
 		"left-menu": LeftMenu,
 		"top-menu": TopMenu
 	},
 	data() {
-		return {};
+		return {
+			curModule: this.$route.path.split('/')[1]
+		};
 	},
 	computed: {
 		modules() { // 用户可进入的模块
 			return modules.filter((item) => item.show);
 		},
 		leftMenus() { // 当前模块下的菜单
-			let curMenu = menus[this.modules[0].value];
+			let curMenu = menus[this.curModule] || [];
 			return curMenu.filter((item) => item.show);
 		},
 		topMenus() {
@@ -52,7 +70,10 @@ export default {
 
 	},
 	methods: {
-		
+		handleChangeModule(value) {
+			this.curModule = value;
+			this.$router.push(`${this.leftMenus[0].route}`);
+		}
 	}
 };
 </script>
@@ -65,7 +86,7 @@ export default {
         /* border-radius: 4px; */
         overflow: hidden;
     }
-    .c-layout-header-bar{
+    ._header-bar{
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -76,7 +97,7 @@ export default {
 		color: #ffffff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
-	.c-layout-content {
+	._content {
 		padding-top: 112px;
 		padding-left: 180px;
 	}
