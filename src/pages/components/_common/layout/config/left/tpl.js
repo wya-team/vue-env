@@ -32,22 +32,28 @@ export default [
 		route: '/tpl/paging',
 		children: [
 			{
-				name: 'Table1',
+				name: 'Basic',
 				icon: '',
 				show: true,
 				route: '/tpl/paging/basic'
 			},
 			{
-				name: 'Table2',
+				name: 'Tabs',
 				icon: '',
 				show: true,
 				route: '/tpl/paging/tabs'
 			},
 			{
-				name: 'Table3',
+				name: 'Async',
 				icon: '',
 				show: true,
 				route: '/tpl/paging/async'
+			},
+			{
+				name: 'Native',
+				icon: '',
+				show: true,
+				route: '/tpl/paging/native'
 			}
 		]
 	}

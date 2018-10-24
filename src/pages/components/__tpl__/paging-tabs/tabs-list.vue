@@ -86,7 +86,7 @@ export default {
 				type,
 				page: this.current[type]
 			};
-			this.$router.replace(getHashUrl(`/tpl/paging-tabs`, { ...query }));
+			this.$router.replace(getHashUrl(`/tpl/paging/tabs`, { ...query }));
 		}
 	}
 };
