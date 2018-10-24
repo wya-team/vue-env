@@ -54,7 +54,7 @@ export default {
 	position: fixed;
 	top: 56px;
 	left: 0;
-	z-index: 1;
+	z-index: 4;
 	background-color: #f5f5f7;
 	width: 180px;
 	height: calc(100vh - 56px);
