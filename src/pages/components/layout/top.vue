@@ -1,5 +1,5 @@
 <template>
-	<div v-if="menus.length > 0" class="layout-top-bar g-flex-cc">
+	<div v-if="menus.length > 0" class="c-layout-top-bar g-flex-cc">
 		<div 
 			v-for="(menu, index) in menus"
 			:key="index"
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout-top-bar {
+.c-layout-top-bar {
 	position: fixed;
 	top: 56px;
 	left: 180px;

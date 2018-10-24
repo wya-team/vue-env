@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-left-menu">
+	<div class="c-layout-left-menu">
 		<slot name="avatar" />
 		<div 
 			v-for="(menu, index) in menus" 
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layout-left-menu {
+.c-layout-left-menu {
 	position: fixed;
 	top: 56px;
 	left: 0;

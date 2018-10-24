@@ -1,6 +1,6 @@
 <template>
-	<div class="layout">
-		<div class="layout-header-bar g-flex-ac">
+	<div class="c-layout">
+		<div class="c-layout-header-bar g-flex-ac">
 			<img >
 			<span class="g-fs-20">后台管理中心</span>
 		</div>
@@ -10,7 +10,7 @@
 			>
 				<div slot="avatar">avatar</div>
 			</left-menu>
-			<div class="g-col layout-content g-relative">
+			<div class="g-col c-layout-content g-relative">
 				<top-menu 
 					:menus="topMenus"
 				/>
@@ -58,14 +58,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .layout{
+    .c-layout{
         /* border: 1px solid #d7dde4; */
         /* background: #f5f7f9; */
         position: relative;
         /* border-radius: 4px; */
         overflow: hidden;
     }
-    .layout-header-bar{
+    .c-layout-header-bar{
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -76,7 +76,7 @@ export default {
 		color: #ffffff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
-	.layout-content {
+	.c-layout-content {
 		padding-top: 112px;
 		padding-left: 180px;
 	}
