@@ -101,7 +101,7 @@ export default {
 				type,
 				page: this.current[type]
 			};
-			this.$router.replace(getHashUrl(`/tpl/table3`, { ...query }));
+			this.$router.replace(getHashUrl(`/tpl/paging/async`, { ...query }));
 		}
 	}
 };
