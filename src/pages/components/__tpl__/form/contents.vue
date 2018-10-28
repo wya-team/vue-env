@@ -6,7 +6,8 @@
 		:label-width="120"
 		class="v-form"
 		style="width: 500px" 
-		position="left">
+		position="left"
+	>
 		<i-form-item label="客户公司名称:" prop="name">
 			<i-input v-model="formValidate.name" disabled placeholder="请输入客户公司名称" />
 		</i-form-item>
@@ -131,7 +132,7 @@
 import * as types from '@mutations/__tpl__';
 import { 
 	Form, FormItem, Input, InputNumber, 
-	Select, Option, DatePicker, Cascader
+	Select, Option, DatePicker, Cascader, Message
 } from 'iview';
 // utils
 import { dataValidity } from '@utils/utils';
@@ -249,7 +250,7 @@ export default {
 				],
 				amount: [
 					{ required: true, type: 'number', message: '请输入合同金额' }
-				],
+				]
 			}
 		};
 	},
@@ -271,11 +272,11 @@ export default {
 			});
 		},
 		handleSubmit(name) {
-			this.$refs.form.validate((valid) => {
-				if (valid) {
-					this.$Message.success('Success!');
+			this.$refs.form.validate((isValid) => {
+				if (isValid) {
+					Message.success('Success!');
 				} else {
-					this.$Message.error('Fail!');
+					Message.error('Fail!');
 				}
 			});
 		},
