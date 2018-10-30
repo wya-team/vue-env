@@ -2,7 +2,7 @@ export default [
 	{
 		name: '首页',
 		icon: '',
-		show: false,
+		show: true,
 		route: '/tpl/main'
 	},
 	{
@@ -57,7 +57,21 @@ export default [
 				name: 'Native',
 				icon: '',
 				show: true,
-				route: '/tpl/paging/native'
+				route: '/tpl/paging/native',
+				children: [
+					{
+						name: 'Child Native',
+						icon: '',
+						show: true,
+						route: '/tpl/paging/native/demo1',
+					},
+					{
+						name: 'Child Native2',
+						icon: '',
+						show: true,
+						route: '/tpl/paging/native/demo2',
+					}
+				]
 			}
 		]
 	}

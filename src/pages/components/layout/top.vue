@@ -1,13 +1,26 @@
 <template>
-	<div v-if="menus.length > 0" class="c-layout-top-bar g-flex-cc">
-		<div 
-			v-for="(menu, index) in menus"
-			:key="index"
-			:class="$route.path.indexOf(formatRoute(menu.route)) > -1 ? '_menu-item-active' : '_menu-item-unactive'" 
-			class="_menu-item"
-			@click="handleLinkTo(menu.route)"
-		>
-			{{ menu.name }}
+	<div class="c-layout-top-bar">
+		<div v-if="menus.length > 0" class="_bar g-flex-cc g-fw-w">
+			<div 
+				v-for="(menu) in menus"
+				:key="menu.route"
+				:class="$route.path.indexOf(formatRoute(menu.route)) > -1 ? '__menu-item-active' : '__menu-item-unactive'" 
+				class="__menu-item"
+				@click="handleLinkTo(menu.route, menu.children)"
+			>
+				{{ menu.name }}
+			</div>
+		</div>
+		<div v-if="childRoute.length > 0" class="_child-bar g-flex-ac g-fw-w" >
+			<div
+				v-for="(child) in childRoute"
+				:key="child.route"
+				:class="$route.path.indexOf(formatRoute(child.route, true)) > -1 ? '__child-item-active' : '__child-item-unactive'" 
+				class="__child-item"
+				@click="handleLinkTo(child.route)"
+			>
+				{{ child.name }}
+			</div>
 		</div>
 	</div>
 </template>
@@ -19,17 +32,54 @@ export default {
 		menus: {
 			type: Array,
 			default() { return []; }
+		},
+		onMounted: {
+			type: Function,
+			default: () => {}
 		}
 	},
-	methods: {
-		handleLinkTo(route) {
-			this.$emit('click', this.formatRoute(route));
-			this.$router.push(route);
+	computed: {
+		curRoute() {
+			return this.$route.path;
 		},
-		formatRoute(route = '') {
+		childRoute() {
+			let routes = this.menus.filter((item) => {
+				return item.route === this.formatRoute(this.curRoute);
+			});
+
+			if (routes[0] && routes[0].children) {
+				return routes[0].children.filter((item) => {
+					return item.show;
+				}); 
+			}
+			return [];
+		}
+	},
+	mounted() {
+		this.getTopBarHeight();
+	},
+	updated() {
+		this.getTopBarHeight();
+	},
+	methods: {
+		handleLinkTo(route, children) {
+			if (children) {
+				let routes = children.filter((item) => item.show);
+				this.$emit('click', routes[0].route);
+				this.$router.push(routes[0].route);
+			} else {
+				this.$emit('click', route);
+				this.$router.push(route);
+			}
+		},
+		formatRoute(route = '', child) {
 			let array = route.split('/');
-			array.length = 4;
+			array.length = child ? 5 : 4;
 			return array.join('/');
+		},
+		getTopBarHeight() {
+			const { onMounted } = this;
+			onMounted && onMounted(this.$el.clientHeight);
 		}
 	}
 };
@@ -40,32 +90,58 @@ export default {
 	position: fixed;
 	top: 56px;
 	left: 180px;
-	height: 60px;
-	line-height: 60px;
-	width: 100%;
+	right: 0;
 	z-index: 4;
 	background-color: #ffffff;
-	border-bottom: 1px solid #e1e3e5;
-	._menu-item {
-		height: 60px;
-		line-height: 60px;
-		font-size: 16px;
-		margin-right: 40px;
-		cursor: pointer;
-	}
-	._menu-item-unactive {
-		color: #8e9096;
-		opacity: 0.8;
-		&:hover {
-			opacity: 1;			
-			will-change: opacity;
-			transition: opacity 0.2s ease-in-out;
+	._bar {
+		border-bottom: 1px solid #e1e3e5;
+		.__menu-item {
+			height: 60px;
+			line-height: 60px;
+			font-size: 16px;
+			margin-right: 40px;
+			cursor: pointer;
+		}
+		.__menu-item-unactive {
+			color: #8e9096;
+			opacity: 0.8;
+			&:hover {
+				opacity: 1;			
+				will-change: opacity;
+				transition: opacity 0.2s ease-in-out;
+			}
+		}
+		.__menu-item-active {
+			color: #f14b5f;
+			border-bottom: 3px solid #f14b5f;
+			box-sizing: border-box
 		}
 	}
-	._menu-item-active {
-		color: #f14b5f;
-		border-bottom: 3px solid #f14b5f;
-		box-sizing: border-box
+	
+	._child-bar {
+		padding: 0 30px;
+		box-shadow: 0 5px 12px -3px rgba(221, 222, 225, 0.5);
+		.__child-item {
+			height: 42px;
+			line-height: 42px;
+			font-size: 14px;
+			margin-right: 40px;
+			cursor: pointer;
+		}
+		.__child-item-unactive {
+			color: #333333;
+			opacity: 0.8;
+			&:hover {
+				opacity: 1;	
+				color: #f14b5edd;		
+				will-change: opacity;
+				transition: all 0.2s ease-in-out;
+			}
+		}
+		.__child-item-active {
+			color: #f14b5f;
+			box-sizing: border-box
+		}
 	}
 }
 </style>

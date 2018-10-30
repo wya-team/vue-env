@@ -64,6 +64,7 @@ export default {
 		padding-left: 20px;
 		font-size: 14px;
 		cursor: pointer;
+		margin-bottom: 8px;
 	}
 	._menu-item-unactive {
 		color: #717274;

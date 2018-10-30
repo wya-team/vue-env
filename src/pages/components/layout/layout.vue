@@ -23,9 +23,11 @@
 			>
 				<div slot="avatar">avatar</div>
 			</left-menu>
-			<div class="g-col _content g-relative">
+			<div :style="{'padding-top': paddingTop}" class="g-col _content g-relative">
 				<top-menu 
+					ref="topBar"
 					:menus="topMenus"
+					:on-mounted="handeSetPaddingTop"
 				/>
 				<router-view class="v-router" />
 			</div>
@@ -40,6 +42,8 @@ import TopMenu from './top';
 import modules from './config/modules';
 import menus from './config/left/root';
 
+const TOP_BAR_HEIGHT = 56;
+
 export default {
 	components: {
 		"i-select": Select,
@@ -49,7 +53,8 @@ export default {
 	},
 	data() {
 		return {
-			curModule: this.$route.path.split('/')[1]
+			curModule: this.$route.path.split('/')[1],
+			paddingTop: '0px'
 		};
 	},
 	computed: {
@@ -64,12 +69,12 @@ export default {
 			let leftIndex = this.leftMenus.findIndex((item) => this.$route.path.indexOf(item.route) > -1);
 			if (leftIndex === -1) return [];
 			return this.leftMenus[leftIndex].children || [];
-		}
-	},
-	watch: {
-
+		},
 	},
 	methods: {
+		handeSetPaddingTop(top) {
+			this.paddingTop = top + TOP_BAR_HEIGHT + 'px';
+		},
 		handleChangeModule(value) {
 			this.curModule = value;
 			this.$router.push(`${this.leftMenus[0].route}`);
@@ -80,10 +85,7 @@ export default {
 
 <style lang="scss" scoped>
     .c-layout{
-        /* border: 1px solid #d7dde4; */
-        /* background: #f5f7f9; */
         position: relative;
-        /* border-radius: 4px; */
         overflow: hidden;
     }
     ._header-bar{
@@ -98,7 +100,6 @@ export default {
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
 	._content {
-		padding-top: 112px;
 		padding-left: 180px;
 	}
 	
