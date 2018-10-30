@@ -2,6 +2,6 @@ import tpl from './tpl';
 import setting from './setting';
 
 export default {
-	'tpl': tpl,
-	'setting': setting
+	tpl, // key值跟chunks中的value值对应
+	setting
 };
