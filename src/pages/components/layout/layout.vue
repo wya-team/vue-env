@@ -39,8 +39,8 @@
 import { Select, Option } from 'iview';
 import LeftMenu from './left';
 import TopMenu from './top';
-import modules from './config/modules';
-import menus from './config/left/root';
+import modules from './chunks';
+import menus from './left/root';
 
 const TOP_BAR_HEIGHT = 56;
 
@@ -70,6 +70,9 @@ export default {
 			if (leftIndex === -1) return [];
 			return this.leftMenus[leftIndex].children || [];
 		},
+	},
+	updated() {
+		console.log(this.$route.matched, 11);
 	},
 	methods: {
 		handeSetPaddingTop(top) {
