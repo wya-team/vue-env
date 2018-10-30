@@ -71,9 +71,6 @@ export default {
 			return this.leftMenus[leftIndex].children || [];
 		},
 	},
-	updated() {
-		console.log(this.$route.matched, 11);
-	},
 	methods: {
 		handeSetPaddingTop(top) {
 			this.paddingTop = top + TOP_BAR_HEIGHT + 'px';

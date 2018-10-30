@@ -1,3 +1,38 @@
 /**
  * 
  */
+.ivu-tabs-nav-container {
+	margin-bottom: 0;
+}
+.ivu-tabs-tab-active, .ivu-tabs-tab-focused {
+	color: #e84854 !important;
+	border-color: #e84854 !important;
+	border-bottom: 1px solid #e84854 !important;
+	z-index: 2;
+}
+.ivu-tabs-tab {
+	background-color: #fff !important;
+	transition: none !important;
+	-webkit-transition: none !important;
+	&:hover {
+		color: #e84854 !important;
+	}
+	&:active {
+		color: #e84854 !important;
+	}
+	&:focus {
+		color: #e84854 !important;
+	}
+}
+.ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab {
+	border-radius: 0 0 0 0 !important;
+	&:last-child {
+		border-radius: 0 4px 0 0 !important;
+	}
+	&:nth-child(2) {
+		border-radius: 4px 0 0 0 !important;
+	}
+}
+.ivu-tabs-bar .ivu-tabs-nav-container .ivu-tabs-nav .ivu-tabs-tab-focused {
+	border-color: #e84854 !important;
+}

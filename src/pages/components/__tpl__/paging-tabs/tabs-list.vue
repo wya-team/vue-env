@@ -1,7 +1,9 @@
 <template>
 	<i-tabs 
 		:value="type" 
-		:animated="false" 
+		:animated="false"
+		type="card" 
+		style="margin-top: 20px"
 		@on-click="handleChange"
 	>
 		<i-tab-pane 

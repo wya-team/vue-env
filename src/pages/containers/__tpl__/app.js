@@ -7,7 +7,6 @@ export const tplConfig = [
 		path: '/tpl/main', 
 		name: 'tpl-main',
 		component: () => import('./modules/tpl-main.vue'),
-		meta: { auth: true }
 	},
 	{ 
 		path: '/tpl/basic', 
