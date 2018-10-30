@@ -1,6 +1,6 @@
 <template>
 	<set-title title="链接">
-		<links />
+		<tpl-links />
 	</set-title>
 </template>
 
@@ -10,7 +10,7 @@ import Links from '@components/__tpl__/main/links';
 export default {
 	name: 'tpl-main',
 	components: {
-		Links
+		'tpl-links': Links
 	},
 	data() {
 		return {
