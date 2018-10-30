@@ -1,13 +1,15 @@
+@import "color.scss";
+
 /**
- * 
+ * tabs
  */
 .ivu-tabs-nav-container {
 	margin-bottom: 0;
 }
 .ivu-tabs-tab-active, .ivu-tabs-tab-focused {
-	color: #e84854 !important;
-	border-color: #e84854 !important;
-	border-bottom: 1px solid #e84854 !important;
+	color: $main !important;
+	border-color: $main !important;
+	border-bottom: 1px solid $main !important;
 	z-index: 2;
 }
 .ivu-tabs-tab {
@@ -16,13 +18,13 @@
 	-webkit-transition: none !important;
 	margin-right: -1px !important;
 	&:hover {
-		color: #e84854 !important;
+		color: $main !important;
 	}
 	&:active {
-		color: #e84854 !important;
+		color: $main !important;
 	}
 	&:focus {
-		color: #e84854 !important;
+		color: $main !important;
 	}
 }
 .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab {
@@ -35,5 +37,18 @@
 	}
 }
 .ivu-tabs-bar .ivu-tabs-nav-container .ivu-tabs-nav .ivu-tabs-tab-focused {
-	border-color: #e84854 !important;
+	border-color: $main !important;
+}
+
+/**
+ * button
+ */
+.ivu-btn-primary {
+	color: #fff;
+	background-color: $main !important;
+	border-color: $main !important;
+}
+.ivu-btn-primary:focus, .ivu-btn:focus {
+	-webkit-box-shadow: 0 0 0 2px rgba(232, 72, 84, 0.2) !important;
+	box-shadow: 0 0 0 2px rgba(232, 72, 84, 0.2) !important;
 }
