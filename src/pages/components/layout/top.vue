@@ -133,7 +133,7 @@ export default {
 			opacity: 0.8;
 			&:hover {
 				opacity: 1;	
-				color: #f14b5edd;		
+				color: #f14b5eb1;		
 				will-change: opacity;
 				transition: all 0.2s ease-in-out;
 			}
