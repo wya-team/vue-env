@@ -8,6 +8,7 @@
 		:history="true"
 		:load-data="loadData"
 		class="g-m-t-20"
+		@page-size-change="handleChangePageSize"
 	/>
 </template>
 
@@ -33,7 +34,7 @@ export default {
 		}
 	},
 	methods: {
-		loadData(page) {
+		loadData(page, pageSize) {
 			const { query = {} } = this.$route;
 			return this.request({
 				url: types.TPL_PAGING_BASIC_LIST_GET,
@@ -41,12 +42,16 @@ export default {
 				param: {
 					...query,
 					page,
+					pageSize
 				},
 			}).then((res) => {
 				console.log(res, 'res');
 			}).catch((error) => {
 				console.log(error, 'error');
 			});
+		},
+		handleChangePageSize() {
+			this.$store.commit('TPL_PAGING_BASIC_LIST_INIT');
 		}
 	}
 };

@@ -9,6 +9,7 @@
 		:load-data="loadData"
 		class="g-m-t-20 v-tpl-paging-native"
 		mode="native"
+		@page-size-change="handleChangePageSize"
 	>
 		<tpl-item slot-scope="it" v-bind="it" />
 	</vc-paging>
@@ -37,7 +38,7 @@ export default {
 		}
 	},
 	methods: {
-		loadData(page) {
+		loadData(page, pageSize) {
 			const { query = {} } = this.$route;
 			return this.request({
 				url: types.TPL_PAGING_NATIVE_LIST_GET,
@@ -45,12 +46,16 @@ export default {
 				param: {
 					...query,
 					page,
+					pageSize,
 				},
 			}).then((res) => {
 				console.log(res, 'res');
 			}).catch((error) => {
 				console.log(error, 'error');
 			});
+		},
+		handleChangePageSize() {
+			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		}
 	}
 };

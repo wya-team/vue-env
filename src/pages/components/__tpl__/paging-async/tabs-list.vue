@@ -1,7 +1,8 @@
 <template>
 	<i-tabs 
 		:value="type" 
-		:animated="false" 
+		:animated="false"
+		type="card"
 		@on-click="handleChange"
 	>
 		<i-tab-pane 
@@ -20,6 +21,7 @@
 				:current.sync="current[item.value]"
 				:history="true"
 				:load-data="loadData"
+				@page-size-change="handleChangePageSize"
 			/>
 		</i-tab-pane>
 	</i-tabs>
@@ -77,7 +79,7 @@ export default {
 		}, 300);
 	},
 	methods: {
-		loadData(page) {
+		loadData(page, pageSize) {
 			const { query = {} } = this.$route;
 			return this.request({
 				url: types.TPL_PAGING_ASYNC_LIST_GET,
@@ -85,6 +87,7 @@ export default {
 				param: {
 					...query,
 					page,
+					pageSize,
 					type: this.type
 				},
 			}).then((res) => {
@@ -102,7 +105,10 @@ export default {
 				page: this.current[type]
 			};
 			this.$router.replace(getHashUrl(`/tpl/paging/async`, { ...query }));
-		}
+		},
+		handleChangePageSize() {
+			this.$store.commit('TPL_PAGING_ASYNC_LIST_INIT');
+		},
 	}
 };
 </script>

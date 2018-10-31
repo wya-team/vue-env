@@ -22,6 +22,7 @@
 				:current.sync="current[item.value]"
 				:history="true"
 				:load-data="loadData"
+				@page-size-change="handleChangePageSize"
 			/>
 		</i-tab-pane>
 	</i-tabs>
@@ -63,7 +64,7 @@ export default {
 		}
 	},
 	methods: {
-		loadData(page) {
+		loadData(page, pageSize) {
 			console.log(this.$router);
 			const { query = {} } = this.$route;
 			return this.request({
@@ -72,6 +73,7 @@ export default {
 				param: {
 					...query,
 					page,
+					pageSize,
 					type: this.type
 				},
 			}).then((res) => {
@@ -89,6 +91,9 @@ export default {
 				page: this.current[type]
 			};
 			this.$router.replace(getHashUrl(`/tpl/paging/tabs`, { ...query }));
+		},
+		handleChangePageSize() {
+			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		}
 	}
 };
