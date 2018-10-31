@@ -37,7 +37,7 @@ export default {
 				`/tpl/paging/native`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_PAGING_NATIVE_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		}
 	}
 };

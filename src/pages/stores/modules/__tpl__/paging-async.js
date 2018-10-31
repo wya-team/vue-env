@@ -48,7 +48,7 @@ const mutations = {
 			}
 		};
 	},
-	TPL_PAGING_ASYNC_SEARCH_INIT(state, payload) {
+	TPL_PAGING_ASYNC_LIST_INIT(state, payload) {
 		state.listInfo = {
 			...initialListInfo
 		};

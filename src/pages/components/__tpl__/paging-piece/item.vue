@@ -15,7 +15,7 @@ export default {
 	},
 	methods: {
 		handleResetFirst() {
-			this.$store.commit('TPL_PAGING_PIECE_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_PIECE_LIST_INIT');
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_PAGING_PIECE_LIST_RESET');

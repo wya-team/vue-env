@@ -37,7 +37,7 @@ export default {
 				`/tpl/paging-tabs`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_PAGING_TABS_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_TABS_LIST_INIT');
 		}
 	}
 };

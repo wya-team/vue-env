@@ -37,7 +37,7 @@ export default {
 				`/tpl/paging/piece`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_PAGING_PIECE_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_PIECE_LIST_INIT');
 		}
 	}
 };

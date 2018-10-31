@@ -23,7 +23,7 @@ const mutations = {
 			reset: true
 		};
 	},
-	TPL_PAGING_BASIC_SEARCH_INIT(state, payload) {
+	TPL_PAGING_BASIC_LIST_INIT(state, payload) {
 		state.listInfo = {
 			...initPage
 		};

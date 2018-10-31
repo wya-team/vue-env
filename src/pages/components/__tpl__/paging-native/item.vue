@@ -1,3 +1,4 @@
+
 <template>
 	<tbody>
 		<template v-for="item in data">
@@ -64,7 +65,7 @@ export default {
 	},
 	methods: {
 		handleResetFirst() {
-			this.$store.commit('TPL_PAGING_NATIVE_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_PAGING_NATIVE_LIST_RESET');

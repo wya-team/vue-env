@@ -37,7 +37,7 @@ export default {
 				`/tpl/paging/basic`, 
 				{ ...this.$route.query, keyword: this.keyword }
 			));
-			this.$store.commit('TPL_PAGING_BASIC_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_BASIC_LIST_INIT');
 		}
 	}
 };

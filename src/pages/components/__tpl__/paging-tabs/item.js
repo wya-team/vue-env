@@ -62,7 +62,7 @@ export default {
 	},
 	methods: {
 		handleResetFirst() {
-			this.$store.commit('TPL_PAGING_TABS_SEARCH_INIT');
+			this.$store.commit('TPL_PAGING_TABS_LIST_INIT');
 		},
 		handleResetCur() {
 			this.$store.commit('TPL_PAGING_TABS_LIST_RESET', { type: this.type });
