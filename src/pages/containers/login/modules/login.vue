@@ -1,16 +1,16 @@
 <template>
 	<set-title title="login">
-		<contents />
+		<tpl-content />
 	</set-title>
 </template>
 
 <script>
-import Contents from '@components/login/contents';
+import Content from '@components/login/content';
 
 export default {
 	name: 'login',
 	components: {
-		Contents
+		'tpl-content': Content
 	},
 	data() {
 		return {

@@ -1,16 +1,16 @@
 <template>
 	<set-title title="链接">
-		<tpl-contents />
+		<tpl-content />
 	</set-title>
 </template>
 
 <script>
-import Contents from '@components/setting/main/contents';
+import Content from '@components/setting/main/content';
 
 export default {
 	name: 'setting-main',
 	components: {
-		'tpl-contents': Contents
+		'tpl-content': Content
 	},
 	data() {
 		return {
