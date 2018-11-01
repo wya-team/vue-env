@@ -3,7 +3,6 @@ import __tpl__ from './__tpl__';
 import _common from './_common';
 import login from './login';
 
-
 const API = {
 	...__tpl__,
 	..._common,
