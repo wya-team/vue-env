@@ -66,6 +66,7 @@ const webpackConfig = {
 			'@stores': path.resolve(APP_ROOT, './src/pages/stores'),
 			'@mutations': path.resolve(APP_ROOT, './src/pages/stores/mutations'),
 			'@common': path.resolve(APP_ROOT, './src/pages/components/_common'),
+			'node_modules/echarts': path.resolve(APP_ROOT, './node_modules/echarts'),
 		}
 	},
 	entry: {
