@@ -4,7 +4,7 @@
 		:model="formValidate" 
 		:rules="ruleValidate" 
 		:label-width="120"
-		class="v-form"
+		class="v-tpl-form"
 		style="width: 500px" 
 		position="left"
 	>
@@ -285,7 +285,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-form {
+.v-tpl-form {
 	.btn {
 		color: #0085ff;
 		cursor: pointer;
