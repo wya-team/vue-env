@@ -1,16 +1,16 @@
 <template>
 	<set-title title="tpl-form">
-		<tpl-contents />
+		<tpl-content />
 	</set-title>
 </template>
 
 <script>
-import Contents from '@components/__tpl__/form/contents';
+import Content from '@components/__tpl__/form/content';
 
 export default {
 	name: 'tpl-form',
 	components: {
-		'tpl-contents': Contents
+		'tpl-content': Content
 	},
 	data() {
 		return {

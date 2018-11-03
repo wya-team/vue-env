@@ -189,7 +189,7 @@ const data = [
 	}];
 
 export default {
-	name: 'tpl-form-contents',
+	name: 'tpl-form-content',
 	components: {
 		'i-form': Form,
 		'i-form-item': FormItem,

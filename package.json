@@ -17,6 +17,7 @@
     "lint:watch": "npm run lint -- --fix --watch",
     "lint:style": "stylelint --fix --syntax scss src",
     "mock": "cd ./src/mock && npm run start",
+    "mock:win": "cd ./src/mock && npm run start:win",
     "prompt": "node ./config/prompt.config.js",
     "all": "npm-run-all --parallel --race --continue-on-error lint:watch serve",
     "lint-staged": "lint-staged",

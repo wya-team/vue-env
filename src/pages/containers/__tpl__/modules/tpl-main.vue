@@ -1,16 +1,16 @@
 <template>
 	<set-title title="链接">
-		<tpl-links />
+		<tpl-link />
 	</set-title>
 </template>
 
 <script>
-import Links from '@components/__tpl__/main/links';
+import Link from '@components/__tpl__/main/link';
 
 export default {
 	name: 'tpl-main',
 	components: {
-		'tpl-links': Links
+		'tpl-link': Link
 	},
 	data() {
 		return {
