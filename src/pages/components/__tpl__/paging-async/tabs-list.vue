@@ -80,7 +80,7 @@ export default {
 	},
 	methods: {
 		loadData(page, pageSize) {
-			const { query = {} } = this.$route;
+			const { query = {} } = getParseUrl();
 			return this.request({
 				url: types.TPL_PAGING_ASYNC_LIST_GET,
 				type: 'GET',
@@ -99,8 +99,9 @@ export default {
 		handleChange(type) {
 			this.type = type;
 
-			let query = {
-				...this.$route.query,
+			let { query = {} } = getParseUrl();
+			query = {
+				...query,
 				type,
 				page: this.current[type]
 			};

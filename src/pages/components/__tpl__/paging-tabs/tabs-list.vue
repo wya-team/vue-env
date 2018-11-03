@@ -65,8 +65,7 @@ export default {
 	},
 	methods: {
 		loadData(page, pageSize) {
-			console.log(this.$router);
-			const { query = {} } = this.$route;
+			const { query = {} } = getParseUrl();
 			return this.request({
 				url: types.TPL_PAGING_TABS_LIST_GET,
 				type: 'GET',
@@ -84,16 +83,17 @@ export default {
 		},
 		handleChange(type) {
 			this.type = type;
-
-			let query = {
-				...this.$route.query,
+			
+			let { query = {} } = getParseUrl();
+			query = {
+				...query,
 				type,
 				page: this.current[type]
 			};
 			this.$router.replace(getHashUrl(`/tpl/paging/tabs`, { ...query }));
 		},
 		handleChangePageSize() {
-			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
+			this.$store.commit('TPL_PAGING_TABS_LIST_INIT');
 		}
 	}
 };

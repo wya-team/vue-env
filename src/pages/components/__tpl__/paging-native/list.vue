@@ -39,7 +39,7 @@ export default {
 	},
 	methods: {
 		loadData(page, pageSize) {
-			const { query = {} } = this.$route;
+			const { query = {} } = getParseUrl();
 			return this.request({
 				url: types.TPL_PAGING_NATIVE_LIST_GET,
 				type: 'GET',
