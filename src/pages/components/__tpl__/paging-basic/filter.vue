@@ -25,7 +25,7 @@
 				/>
 			</span>
 		</div>
-		<tpl-expand 
+		<vc-expand 
 			ref="expand"
 			v-model="show"
 		>
@@ -37,13 +37,13 @@
 					style="width: 220px" 
 				/>
 			</div>
-		</tpl-expand>
+		</vc-expand>
 	</div>
 </template>
 
 <script>
 import { Input, Button } from 'iview';
-import { Expand } from '@common/root';
+import { Expand } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 
 export default {
@@ -51,7 +51,7 @@ export default {
 	components: {
 		'i-input': Input,
 		'i-button': Button,
-		'tpl-expand': Expand
+		'vc-expand': Expand
 	},
 	data() {
 		const { query = {} } = this.$route;
