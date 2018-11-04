@@ -25,9 +25,9 @@
 				/>
 			</span>
 		</div>
-		<oa-expand 
+		<tpl-expand 
 			ref="expand"
-			@change="handleChange"
+			v-model="show"
 		>
 			<div class="g-m-t-10 g-bg-gray-mid g-pd-20">
 				<i-input
@@ -37,13 +37,13 @@
 					style="width: 220px" 
 				/>
 			</div>
-		</oa-expand>
+		</tpl-expand>
 	</div>
 </template>
 
 <script>
 import { Input, Button } from 'iview';
-import Expand from '@components/_common/expand/expand';
+import { Expand } from '@common/root';
 import { getParseUrl, getHashUrl } from '@utils/utils';
 
 export default {
@@ -51,7 +51,7 @@ export default {
 	components: {
 		'i-input': Input,
 		'i-button': Button,
-		'oa-expand': Expand
+		'tpl-expand': Expand
 	},
 	data() {
 		const { query = {} } = this.$route;
@@ -74,10 +74,7 @@ export default {
 			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		},
 		handleToggle() {
-			this.$refs.expand.handleToggle();
-		},
-		handleChange(isActive) {
-			this.show = isActive;
+			this.$refs.expand.toggle();
 		}
 	}
 };

@@ -1,2 +1,2 @@
 export SetTitle from './set-title/set-title';
-export Layout from './layout/layout';
+export Expand from './expand/expand';

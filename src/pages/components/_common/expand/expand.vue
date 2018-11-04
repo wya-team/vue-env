@@ -18,14 +18,18 @@
 export default {
 	name: "c-expand",
 	components: {
-		expand: {
+		show: {
 			type: Boolean,
 			default: false
 		}
 	},
+	model: {
+		prop: 'show',
+		event: 'change'
+	},
 	data() {
 		return {
-			isActive: this.expand
+			isActive: this.show
 		};
 	},
 	computed: {
@@ -72,7 +76,10 @@ export default {
 			el.style.overflow = el.dataset.oldOverflow;
 		},
 
-		handleToggle() {
+		/**
+		 * 外部调用
+		 */
+		toggle() {
 			this.isActive = !this.isActive;
 			this.$emit('change', this.isActive);
 		}
