@@ -1,5 +1,4 @@
 import { getParseUrl, getHashUrl } from '@utils/utils';
-import * as types from '@stores/mutations/__tpl__';
 
 export default {
 	data() {

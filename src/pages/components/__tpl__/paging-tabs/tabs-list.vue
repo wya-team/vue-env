@@ -32,7 +32,6 @@
 import { Tabs, TabPane, Input } from 'iview';
 import { Paging } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
-import * as types from '@stores/mutations/__tpl__';
 // item
 import item from './item';
 
@@ -67,7 +66,7 @@ export default {
 		loadData(page, pageSize) {
 			const { query = {} } = getParseUrl();
 			return this.request({
-				url: types.TPL_PAGING_TABS_LIST_GET,
+				url: 'TPL_PAGING_TABS_LIST_GET',
 				type: 'GET',
 				param: {
 					...query,

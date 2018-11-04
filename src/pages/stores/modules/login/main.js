@@ -1,5 +1,3 @@
-// import * as types from '@mutations/login';
-
 const initialState = {
 	user: ''
 };

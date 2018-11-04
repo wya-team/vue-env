@@ -31,7 +31,6 @@
 import { Tabs, TabPane, Input } from 'iview';
 import { Paging } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
-import * as types from '@stores/mutations/__tpl__';
 import { setTimeout } from 'timers';
 // item
 import item from './item';
@@ -64,7 +63,7 @@ export default {
 	created() {
 		setTimeout(() => {
 			this.request({
-				url: types.TPL_PAGING_ASYNC_TABS_GET,
+				url: 'TPL_PAGING_ASYNC_TABS_GET',
 				type: 'GET',
 				localData: {
 					data: [],
@@ -82,7 +81,7 @@ export default {
 		loadData(page, pageSize) {
 			const { query = {} } = getParseUrl();
 			return this.request({
-				url: types.TPL_PAGING_ASYNC_LIST_GET,
+				url: 'TPL_PAGING_ASYNC_LIST_GET',
 				type: 'GET',
 				param: {
 					...query,

@@ -129,7 +129,6 @@
 </template>
 
 <script>
-import * as types from '@mutations/__tpl__';
 import { 
 	Form, FormItem, Input, InputNumber, 
 	Select, Option, DatePicker, Cascader, Message

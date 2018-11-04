@@ -1,5 +1,3 @@
-// import * as types from '@mutations/__tpl__';
-
 const initialState = {
 	user: '',
 };

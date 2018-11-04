@@ -23,7 +23,6 @@
 <script>
 import { mapState } from 'vuex';
 import { Form, FormItem, Input, InputNumber, Message } from 'iview';
-import * as types from '@mutations/login';
 import { setItem } from '@utils/utils';
 
 export default {
@@ -61,7 +60,7 @@ export default {
 			this.$refs.form.validate((isValid) => {
 				if (!isValid) return;
 				this.request({
-					url: types.LOGIN_MAIN_POST,
+					url: 'LOGIN_MAIN_POST',
 					type: 'POST',
 					localData: {
 						status: 1,
