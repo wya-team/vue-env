@@ -52,3 +52,18 @@
 	-webkit-box-shadow: 0 0 0 2px rgba(232, 72, 84, 0.2) !important;
 	box-shadow: 0 0 0 2px rgba(232, 72, 84, 0.2) !important;
 }
+
+/**
+ * drawer
+ */
+.ivu-drawer-mask {
+	background: transparent !important;
+}
+
+.ivu-drawer-content {
+	box-shadow: 0 7px 100px rgba(0, 0, 0, 0.15) !important;
+
+}
+.ivu-drawer.ivu-drawer-right {
+	width: 768px !important;
+}
