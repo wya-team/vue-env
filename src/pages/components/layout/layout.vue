@@ -71,6 +71,16 @@ export default {
 			return this.leftMenus[leftIndex].children || [];
 		},
 	},
+	beforeRouteEnter(to, from, next) {
+		next();
+	},
+	beforeRouteUpdate(to, from, next) {
+		this.$vc.clean();
+		next();
+	},
+	beforeRouteLeave(to, from, next) {
+		next();
+	},
 	methods: {
 		handeSetPaddingTop(top) {
 			this.paddingTop = top + TOP_BAR_HEIGHT + 'px';
@@ -84,23 +94,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .c-layout{
-        position: relative;
-        overflow: hidden;
-    }
-    ._header-bar{
+.c-layout{
+	position: relative;
+	overflow: hidden;
+
+	._header-bar{
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 56px;
 		z-index: 10;
-        background: #e84854;
+		background: #e84854;
 		color: #ffffff;
-        box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    }
+		box-shadow: 0 1px 1px rgba(0,0,0,.1);
+	}
 	._content {
 		padding-left: 180px;
 	}
-	
+
+}
 </style>
