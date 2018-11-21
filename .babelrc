@@ -1,44 +1,27 @@
 {
 	"presets": [
-		"@babel/preset-env"
+		"env",
+		"stage-0"
 	],
 	"plugins": [
-		[
-			"@babel/plugin-proposal-decorators", 
-			{ 
-				"legacy": true 
-			}
-		],
-		[
-			"@babel/plugin-proposal-export-default-from"
-		],
-		[
-			"@babel/plugin-proposal-function-bind"
-		],
-		[
-			"@babel/plugin-syntax-dynamic-import"
-		],
-		[
-			"@babel/plugin-syntax-jsx"
-		],
 		[
 			"transform-vue-jsx"
 		],
 		[
-			"import",
-			{
-				"libraryName": "wya-vc",
-				"libraryDirectory": "lib"
-			},
-			"wya-vc"
+			"transform-decorators-legacy"
 		],
 		[
 			"import",
-			{
-				"libraryName": "iview",
-				"libraryDirectory": "src/components"
-			},
-			"iview"
+			[
+				{
+					"libraryName": "wya-vc",
+					"libraryDirectory": "lib"
+				},
+				{
+					"libraryName": "iview",
+					"libraryDirectory": "src/components"
+				}
+			]
 		]
 	]
 }
