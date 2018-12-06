@@ -2,7 +2,6 @@
 export * from 'wya-utils';
 
 import { changeObjRegex } from 'wya-utils';
-import { isEqualWith } from 'lodash';
 
 // -- end --
 /**
@@ -229,17 +228,4 @@ export const loadCssCode = (code) => {
 	}
 	const head = document.getElementsByTagName('head')[0];
 	head.appendChild(style);
-};
-
-/**
- * for Service Compare
- */
-export const serviceObj = {
-	param: {},
-	data: undefined
-};
-export const serviceCompare = (newParam, localObj) => {
-	return isEqualWith(newParam, localObj.param)
-		? localObj.data
-		: undefined;
 };

@@ -1,6 +1,3 @@
-/**
- * dist 未来用于服务端渲染
- */
 import 'babel-polyfill';
 
 /**
@@ -33,7 +30,12 @@ import _global from './_global';
 /**
  * vue-router Config
  */
-import { routeConfig } from './routes';
+let routeConfig;
+if (process.env.NODE_ENV !== "production") {
+	routeConfig = require('./routes.dev').default;
+} else {
+	routeConfig = require('./routes.dist').default;
+}
 import { beforeEach, afterEach } from './hooks';
 
 /**
@@ -55,9 +57,6 @@ Vue.use(request);
 // - 全局global对象
 Vue.use(_global);
 
-// - 全局wya-vc实例
-Vue.use(Vc, VcConfig);
-
 // - 路由
 Vue.use(Router);
 const router = new Router(routeConfig);
@@ -67,6 +66,9 @@ router.afterEach(afterEach);
 // - Vuex
 Vue.use(Vuex);
 const store = new Vuex.Store(storeConfig);
+
+// - 全局wya-vc实例
+Vue.use(Vc, VcConfig({ store, router }));
 
 // - 同步
 sync(store, router);
@@ -91,4 +93,3 @@ router.onReady(() => {
 });
 
 window.app = app;
-
