@@ -1,4 +1,5 @@
 import { isEqualWith } from 'lodash';
+import { getItem, setItem } from '@utils/utils';
 import API_ROOT from '@stores/apis/root';
 
 export const serviceObj = {
@@ -18,20 +19,22 @@ export const createService = (defaultOptions = {}) => {
 		cache = false, 
 		param: defaultParam = {}
 	} = defaultOptions;
-	let store = { ...serviceObj };
+	let store;
+	cache && (store = getItem(`${key}_${_global.version}`));
+	store = store || { ...serviceObj };
 	return { 
 		[key]: (userOptions = {}) => {
 			const { autoLoad = true } = userOptions;
 			// 方法首字母大写
-			const Capitalize = key.charAt(0).toUpperCase() + key.slice(1);
+			const strFn = key.charAt(0).toUpperCase() + key.slice(1);
 
-			const loadKey = `load${Capitalize}`;
-			const clearKey = `clear${Capitalize}`;
+			const loadKey = `load${strFn}`;
+			const clearKey = `clear${strFn}`;
 
 			return {
 				data() {
 					return {
-						[key]: (store.res || {}).data
+						[key]: (store.res || {}).data || []
 					};
 				},
 				created() {
@@ -57,6 +60,7 @@ export const createService = (defaultOptions = {}) => {
 								res
 							};
 							this[key] = store.res.data;
+							cache && setItem(`${key}_${_global.version}`, store);
 							return res;
 						}).catch((res) => {
 							this.$Message.error(res.msg);
