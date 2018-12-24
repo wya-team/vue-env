@@ -1,3 +1,5 @@
+import { Socket } from 'wya-socket';
+import { URL_WEBSOCKET } from '@constants/constants';
 import { isEqualWith } from 'lodash';
 import { getItem, setItem } from '@utils/utils';
 import API_ROOT from '@stores/apis/root';
@@ -11,6 +13,7 @@ export const serviceCompare = (newParam, localObj) => {
 		? localObj.res
 		: undefined;
 };
+
 export const createService = (defaultOptions = {}) => {
 	const {
 		key, 
@@ -72,6 +75,73 @@ export const createService = (defaultOptions = {}) => {
 					[clearKey]() {
 						store = { ...serviceObj };
 					}
+				}
+			};
+		}
+	};
+};
+
+/**
+ * 创建socket
+ * @param {*} defaultOptions 
+ */
+export const createSocket = (defaultOptions = {}) => {
+	const { 
+		key, 
+		url = URL_WEBSOCKET,
+		bindUrl,
+		param = {},
+		getParam = (props) => ({}),
+		isNeedDestroy = true,
+		parser
+	} = defaultOptions;
+
+	let socket;
+	console.log('url------>', url);
+	return {
+		[key]: (userOptions = {}) => {
+			return {
+				data() {
+					return {
+						socket
+					};
+				},
+				created() {
+					this.socket = socket || this.initWebSocket();
+				},
+				methods: {
+					initWebSocket() {
+						socket = new Socket({ parser });
+						socket.connect(url);
+						// 链接成功后获取client_id
+						bindUrl && socket.on('connect', (res) => {
+							const { data = {} } = res.data || {};
+							this.$request({
+								url: API_ROOT[bindUrl],
+								type: 'GET',
+								param: {
+									...data,
+									...param,
+									...getParam()
+								},
+							}).then((res) => { // eslint-disable-line
+								console.log('socket-socket', res);
+							}).catch((error) => {
+								this.$Message.error(error.msg);
+							});
+							// 绑定id，后端要求
+						});
+						socket.on('error', (res) => {
+							this.$Message.error('服务器连接失败,请刷新页面');
+						});
+
+						// 存储
+						return socket;
+					}
+				},
+				beforeDestroy() {
+					isNeedDestroy && socket && socket.close();
+					isNeedDestroy && (socket = undefined);
 				}
 			};
 		}

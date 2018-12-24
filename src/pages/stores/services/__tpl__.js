@@ -3,7 +3,7 @@
  * 具体开发模式 ~ 待定
  */
 import { initTreeData } from '@utils/utils';
-import { createService, serviceObj, serviceCompare } from './utils';
+import { createService, serviceObj, serviceCompare, createSocket } from './utils';
 
 export const services = {
 	...createService({
@@ -13,5 +13,13 @@ export const services = {
 	...createService({
 		key: "xxx",
 		url: "XXXXX",
+	})
+};
+
+export const sockets = {
+	...createSocket({
+		key: "xxx",
+		param: { bind_type: 1 },
+		bindUrl: 'xxx'
 	})
 };
