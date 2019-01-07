@@ -13,13 +13,13 @@ export const serviceCompare = (newParam, localObj) => {
 		? localObj.res
 		: undefined;
 };
-
 export const createService = (defaultOptions = {}) => {
 	const {
 		key, 
 		url, 
 		parser = null, 
 		cache = false, 
+		vuex = false,
 		param: defaultParam = {}
 	} = defaultOptions;
 	let store;
@@ -33,11 +33,13 @@ export const createService = (defaultOptions = {}) => {
 
 			const loadKey = `load${strFn}`;
 			const clearKey = `clear${strFn}`;
+			const loadingKey = `loading${strFn}`;
 
 			return {
 				data() {
 					return {
-						[key]: (store.res || {}).data || []
+						[key]: (store.res || {}).data || [],
+						[loadingKey]: false
 					};
 				},
 				created() {
@@ -45,9 +47,10 @@ export const createService = (defaultOptions = {}) => {
 				},
 				methods: {
 					[loadKey](param, opts = {}) { // eslint-disable-line
-						this.loading = false;
-						return this.$request({
-							url: API_ROOT[url],
+						this[loadingKey] = true;
+						let ajax = vuex ? this.request : this.$request;
+						return ajax({
+							url, // 必须是mutationType
 							type: 'GET',
 							localData: serviceCompare(param, store),
 							loading: false,
@@ -69,7 +72,7 @@ export const createService = (defaultOptions = {}) => {
 							this.$Message.error(res.msg);
 							return Promise.reject(res);
 						}).finally(() => {
-							this.loading = true;
+							this[loadingKey] = false;
 						});
 					},
 					[clearKey]() {
