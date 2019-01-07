@@ -1,81 +1,53 @@
-<template>
-	<div>
-		<div>
-			<i-input
-				v-model="keyword" 
-				size="large" 
-				placeholder="请输入关键字搜索" 
-				style="width: 320px" 
-			/>
-			<i-button 
-				type="primary"
-				class="g-m-l-10"
-				@click="handleSearch"
-			>
-				搜索
-			</i-button>
-			<span 
-				class="g-m-l-20 g-c-black-dark g-fs-12 g-pointer"
-				@click="handleToggle" 
-			>
-				更多搜索条件
-				<i 
-					:class="show ? 'icon-triangle-up' : 'icon-triangle-down'" 
-					class="iconfont g-fs-12 g-c-black-dark"
-				/>
-			</span>
-		</div>
-		<vc-expand 
-			ref="expand"
-			v-model="show"
-		>
-			<div class="g-m-t-10 g-bg-gray-mid g-pd-20">
-				<i-input
-					v-model="name" 
-					size="large" 
-					placeholder="请输入公司名称" 
-					style="width: 220px" 
-				/>
-			</div>
-		</vc-expand>
-	</div>
-</template>
-
 <script>
-import { Input, Button } from 'iview';
+import { Input, Button, DatePicker } from 'iview';
 import { Expand } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
+import { debounce } from 'lodash';
 
 export default {
-	name: 'tpl-filter3',
+	name: 'tpl-filter2',
 	components: {
 		'i-input': Input,
 		'i-button': Button,
-		'vc-expand': Expand
+		'i-date-picker': DatePicker,
+		'vc-expand': Expand,
 	},
 	data() {
 		const { query = {} } = this.$route;
 		return {
-			keyword: String(query.keyword || ''),
-			name: String(query.name || ''),
+			keywords: {
+				search: String(query.search || ''),
+				name: String(query.name || ''),
+			},
 			show: false
 		};
 	},
 	methods: {
-		handleSearch(event) {
+		handleSearch: debounce(function (value) {
+			let params = {
+				...this.$route.query,
+				...this.keywords,
+			};
 			this.$router.replace(getHashUrl(
 				`/tpl/paging/async`, 
-				{ 
-					...this.$route.query, 
-					keyword: this.keyword,
-					name: this.name
-				}
+				params
 			));
 			this.$store.commit('TPL_PAGING_ASYNC_LIST_INIT');
-		},
+		}, 300),
 		handleToggle() {
 			this.$refs.expand.toggle();
-		}
+		},
+		handleChange(obj) {
+			let type = Object.keys(obj)[0];
+			let value = obj[type];
+			this.keywords[type] = value;
+			this.handleSearch();
+		},
+		handleInputChange(e) {
+			if (!e.target.value) {
+				this.handleSearch();
+			}
+		},
 	}
 };
 
@@ -84,3 +56,4 @@ export default {
 <style lang="scss" scoped>
 
 </style>
+
