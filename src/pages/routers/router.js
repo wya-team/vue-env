@@ -18,6 +18,7 @@ locale(lang);
  * 配置
  */
 import SetTitle from '@common/set-title/set-title';
+import Loading from '@common/loading/loading';
 import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
@@ -47,6 +48,7 @@ Vue.config.productionTip = false;
 
 // - 全局组件
 Vue.component(SetTitle.name, SetTitle);
+Vue.component(Loading.name, Loading);
 
 // - 全局mixins
 Vue.mixin(emitter);
