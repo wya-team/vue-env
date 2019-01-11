@@ -20,7 +20,8 @@ export const createService = (defaultOptions = {}) => {
 		parser = null, 
 		cache = false, 
 		vuex = false,
-		param: defaultParam = {}
+		param: defaultParam = {},
+		getParam = (instance) => ({}),
 	} = defaultOptions;
 	let store;
 	cache && (store = getItem(`${key}_${_global.version}`));
@@ -44,7 +45,7 @@ export const createService = (defaultOptions = {}) => {
 					};
 				},
 				created() {
-					autoLoad && (this[loadKey])(defaultParam);
+					autoLoad && (this[loadKey])({ ...defaultParam, ...getParam(this) });
 				},
 				methods: {
 					[loadKey](param, opts = {}) { // eslint-disable-line
@@ -95,7 +96,7 @@ export const createSocket = (defaultOptions = {}) => {
 		url = URL_WEBSOCKET,
 		bindUrl,
 		param = {},
-		getParam = (props) => ({}),
+		getParam = (instance) => ({}),
 		isNeedDestroy = true,
 		parser
 	} = defaultOptions;
@@ -126,7 +127,7 @@ export const createSocket = (defaultOptions = {}) => {
 								param: {
 									...data,
 									...param,
-									...getParam()
+									...getParam(this)
 								},
 							}).then((res) => { // eslint-disable-line
 								console.log('socket-socket', res);
