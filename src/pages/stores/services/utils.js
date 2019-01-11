@@ -116,7 +116,7 @@ export const createSocket = (defaultOptions = {}) => {
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
-						socket.connect(objRegex.validURLScheme.regex ? url : API_ROOT[url]);
+						socket.connect(objRegex.validURLScheme.regex.test(url) ? url : API_ROOT[url]);
 						// 链接成功后获取client_id
 						bindUrl && socket.on('connect', (res) => {
 							const { data = {} } = res.data || {};
