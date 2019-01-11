@@ -27,7 +27,8 @@ export const createService = (defaultOptions = {}) => {
 	store = store || { ...serviceObj };
 	return { 
 		[key]: (userOptions = {}) => {
-			const { autoLoad = true } = userOptions;
+			const options = { ...defaultOptions, ...userOptions };
+			const { autoLoad = true } = options;
 			// 方法首字母大写
 			const strFn = key.charAt(0).toUpperCase() + key.slice(1);
 
