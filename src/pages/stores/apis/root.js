@@ -1,3 +1,4 @@
+import { objRegex } from '@utils/utils';
 import { DEV_WITH_SERVER } from '../../constants/constants';
 import __tpl__ from './__tpl__';
 import _common from './_common';
@@ -24,7 +25,7 @@ if (__DEV__) {
 	baseUrl = `${location.origin}`;
 }
 for (let i in API) {
-	if (/[a-zA-z]+:\/\/[^\s]*/.test(API[i])) {
+	if (objRegex.validURLScheme.regex.test(API[i])) {
 		API[i] = API[i];
 	} else {
 		API[i] = baseUrl + API[i];

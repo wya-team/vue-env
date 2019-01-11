@@ -1,7 +1,7 @@
 import { Socket } from 'wya-socket';
 import { URL_WEBSOCKET } from '@constants/constants';
 import { isEqualWith } from 'lodash';
-import { getItem, setItem } from '@utils/utils';
+import { getItem, setItem, objRegex } from '@utils/utils';
 import API_ROOT from '@stores/apis/root';
 
 export const serviceObj = {
@@ -116,12 +116,12 @@ export const createSocket = (defaultOptions = {}) => {
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
-						socket.connect(url);
+						socket.connect(objRegex.validURLScheme.regex ? url : API_ROOT[url]);
 						// 链接成功后获取client_id
 						bindUrl && socket.on('connect', (res) => {
 							const { data = {} } = res.data || {};
 							this.$request({
-								url: API_ROOT[bindUrl],
+								url: bindUrl,
 								type: 'GET',
 								param: {
 									...data,

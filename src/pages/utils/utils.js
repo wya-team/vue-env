@@ -8,6 +8,10 @@ import { changeObjRegex } from 'wya-utils';
  * 改写wya-utils里表单验证的正则
  */
 changeObjRegex({
+	validURLScheme: {
+		regex: /[a-zA-z]+:\/\/[^\s]*/,
+		error: "请填写正确网页地址协议"
+	},
 	validLetterAndNumber: {
 		regex: /^[A-Za-z0-9]{1,}$/,
 		error: "请不要输入特殊字符"
