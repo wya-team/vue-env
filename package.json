@@ -11,6 +11,7 @@
     "build": "cross-env UGLIFY_JS=true npm run dist -- -p && npm run copy",
     "build:dev": "cross-env UGLIFY_JS=false npm run dist && npm run copy",
     "remove:dist": "rm -rf ./dist",
+    "clear": "rm -rf ./node_modules/.cache",
     "copy": "echo 'end'",
     "lint": "esw config ./src/pages --ext .vue,.js",
     "lint:fix": "npm run lint -- --fix",
