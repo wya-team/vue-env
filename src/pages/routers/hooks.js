@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { getItem, setItem, delItem } from '@utils/utils';
-
+import { Vc } from 'wya-vc';
+import { stores } from '@stores/services/utils';
 /**
  * 是否已经登录
  */
@@ -23,3 +24,50 @@ export const beforeEach = ((to, from, next) => {
 
 export const afterEach = (route => {
 });
+
+
+/**
+ * 设置登录状态
+ * 
+ * @param {*} data 
+ * @param {*} opts 
+ */
+export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
+
+	_global.auth = data.auth || {};
+	// 同步
+	Vue.prototype.$global = _global;
+	Vue.prototype.$auth = _global.auth;
+
+	// todo	
+
+};
+
+/**
+ * 清除登录状态
+ * @param {*} opts 
+ */
+export const clearLoginAuth = (opts = {}) => {
+	// 同步
+	Vue.prototype.$global = _global;
+	Vue.prototype.$auth = _global.auth;
+
+	Vc.instance.cleanAll();
+	stores.clear();
+
+	// todo
+
+};
+
+/**
+ * 清除之前所有版本的缓存
+ */
+export const clearLocalStorage = (version) => {
+	let keys = Object.keys(localStorage);
+	for (let i = 0; i < keys.length; i++) {
+		// wya-vc 为vc组件库缓存，不清除
+		if (!keys[i].includes(version) && !keys[i].includes('wya-vc')) {
+			delItem(keys[i]); 
+		}
+	}
+};

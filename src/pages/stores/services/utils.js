@@ -8,11 +8,24 @@ export const serviceObj = {
 	param: {},
 	res: undefined
 };
+
 export const serviceCompare = (newParam, localObj) => {
 	return isEqualWith(newParam, localObj.param)
 		? localObj.res
 		: undefined;
 };
+
+export const stores = {
+	data: [],
+	add(cb) {
+		this.data.push(cb);
+	},
+	clear() {
+		this.data.forEach(cb => cb());
+		this.data = [];
+	}
+};
+
 export const createService = (defaultOptions = {}) => {
 	const {
 		key, 
@@ -26,6 +39,11 @@ export const createService = (defaultOptions = {}) => {
 	let store;
 	cache && (store = getItem(`${key}_${_global.version}`));
 	store = store || { ...serviceObj };
+
+	!cache && stores.add(() => {
+		store = { ...serviceObj };
+	});
+	
 	return { 
 		[key]: (userOptions = {}) => {
 			const options = { ...defaultOptions, ...userOptions };

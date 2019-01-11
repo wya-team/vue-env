@@ -1,6 +1,7 @@
 /**
  * 全部变量初始化及使用
  */
+import { createLoginAuth, clearLocalStorage } from './hooks';
 import { getItem, setItem, delItem, getCookie, getDevice, getParseUrl, getUrlParam, defineProperty, loadCssCode } from '../utils/utils';
 
 /**
@@ -11,6 +12,7 @@ typeof window === "object" ? window._global = {} : this._global = {};
 
 // 版本号
 _global.version = '1.0';
+// clearLocalStorage(_global.version);
 
 // GUID
 _global.GUID = location.host.split(".")[0];
