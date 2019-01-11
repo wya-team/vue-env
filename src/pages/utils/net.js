@@ -9,7 +9,7 @@ import { ajaxFn } from 'wya-fetch';
 import { Message } from 'iview';
 import API_ROOT from '@stores/apis/root';
 
-const loadingFn = (msg) => {
+const loadingFn = (options = {}) => {
 	const { tipMsg } = options;
 	Message.destroy();
 	Message.loading(tipMsg || '加载中...', 0);
