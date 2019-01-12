@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { getItem, setItem, delItem } from '@utils/utils';
 import { Vc } from 'wya-vc';
-import { stores } from '@stores/services/utils';
+import { serviceManager } from '@stores/services/utils';
 /**
  * 是否已经登录
  */
@@ -53,7 +53,7 @@ export const clearLoginAuth = (opts = {}) => {
 	Vue.prototype.$auth = _global.auth;
 
 	Vc.instance.cleanAll();
-	stores.clear();
+	serviceManager.clear();
 
 	// todo
 

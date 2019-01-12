@@ -15,14 +15,14 @@ export const serviceCompare = (newParam, localObj) => {
 		: undefined;
 };
 
-export const stores = {
-	data: [],
+export const serviceManager = {
+	cbs: [],
 	add(cb) {
-		this.data.push(cb);
+		this.cbs.push(cb);
 	},
 	clear() {
-		this.data.forEach(cb => cb());
-		this.data = [];
+		this.cbs.forEach(cb => cb());
+		this.cbs = [];
 	}
 };
 
@@ -40,9 +40,11 @@ export const createService = (defaultOptions = {}) => {
 	cache && (store = getItem(`${key}_${_global.version}`));
 	store = store || { ...serviceObj };
 
-	!cache && stores.add(() => {
+	// clear
+	!cache && serviceManager.add(() => {
 		store = { ...serviceObj };
 	});
+
 	
 	return { 
 		[key]: (userOptions = {}) => {
@@ -120,7 +122,13 @@ export const createSocket = (defaultOptions = {}) => {
 	} = defaultOptions;
 
 	let socket;
-	console.log('url------>', url);
+	
+	// clear
+	serviceManager.add(() => {
+		socket && socket.close();
+		socket = undefined;
+	});
+
 	return {
 		[key]: (userOptions = {}) => {
 			return {
@@ -148,7 +156,7 @@ export const createSocket = (defaultOptions = {}) => {
 									...getParam(this)
 								},
 							}).then((res) => { // eslint-disable-line
-								console.log('socket-socket', res);
+								// todo
 							}).catch((error) => {
 								this.$Message.error(error.msg);
 							});
