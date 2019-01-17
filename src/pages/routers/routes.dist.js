@@ -4,7 +4,7 @@ import { loginConfig } from '../containers/login/app';
 import { tplConfig } from '../containers/__tpl__/app';
 import { settingConfig } from '../containers/setting/app';
 
-export const routeConfig = {
+export default {
 	base: PRE_ROUTER_URL,
 	mode: 'history',
 	routes: [
