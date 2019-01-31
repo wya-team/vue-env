@@ -79,15 +79,11 @@ export const createService = (defaultOptions = {}) => {
 							param,
 							...opts
 						}).then((res) => {
-							res = {
-								...res,
-								data: parser ? parser(res.data) : res.data
-							};
 							store = {
 								param,
 								res
 							};
-							this[key] = store.res.data;
+							this[key] = parser ? parser(store.res.data) : store.res.data;
 							cache && setItem(`${key}_${_global.version}`, store);
 							return res;
 						}).catch((res) => {
@@ -133,12 +129,10 @@ export const createSocket = (defaultOptions = {}) => {
 		[key]: (userOptions = {}) => {
 			return {
 				data() {
-					return {
-						socket
-					};
+					return {};
 				},
 				created() {
-					this.socket = socket || this.initWebSocket();
+					this[key] = socket || this.initWebSocket();
 				},
 				methods: {
 					initWebSocket() {
