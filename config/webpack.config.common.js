@@ -3,7 +3,7 @@ const APP_ROOT = process.cwd();
 const ENV_IS_DEV = process.env.NODE_ENV === 'development';
 
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpackMerge = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const userConfig = require('./user.config.js');
@@ -115,10 +115,12 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(css|scss)$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'vue-style-loader',
-					use: ['css-loader', postcssLoader, 'sass-loader']
-				}),
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					postcssLoader,
+					'sass-loader'
+				],
 				// 全局的样式
 				include: [
 					path.resolve(APP_ROOT, "src/css"),
@@ -175,9 +177,8 @@ const webpackConfig = {
 		},
 	},
 	plugins: [
-		new ExtractTextPlugin({
-			filename: 'css/initial.[name].[hash:8].css',
-			allChunks: true
+		new MiniCssExtractPlugin({
+			filename: 'css/initial.[name].[hash:8].css'
 		}),
 		new VueLoaderPlugin()
 	]
