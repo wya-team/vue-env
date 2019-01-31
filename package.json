@@ -28,9 +28,12 @@
   "author": "wya-team",
   "license": "MIT",
   "dependencies": {
+    "ali-oss": "^6.1.0",
     "babel-polyfill": "^6.26.0",
+    "fast-xml-parser": "^3.12.12",
     "iview": "^3.2.0",
     "js-md5": "^0.7.3",
+    "moment": "^2.24.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1",
@@ -41,7 +44,8 @@
     "wya-sass": "^0.4.3",
     "wya-socket": "^0.1.7",
     "wya-utils": "^0.1.20",
-    "wya-vc": "0.0.57"
+    "wya-vc": "0.0.57",
+    "wya-vm": "^0.1.0"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.1",
