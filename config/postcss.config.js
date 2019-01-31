@@ -1,16 +1,9 @@
 module.exports = {
 	plugins: [
-		require('postcss-smart-import')({
-			/* ...options */
-		}),
-		require('postcss-flexbugs-fixes')({
-
-		}),
-		require('precss')({
-			/* ...options */ 
-		}),
+		require('postcss-smart-import')({}),
+		require('postcss-flexbugs-fixes')({}),
+		require('precss')({}),
 		require('autoprefixer')({
-			/* ...options */
 			// 不删除老式写法
 			remove: false,
 			// 样式前缀添加
