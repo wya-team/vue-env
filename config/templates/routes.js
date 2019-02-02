@@ -1,3 +1,12 @@
+const { resolve } = require('path');
+const fs = require('fs-extra');
+
+const hasOther = (module) => {
+	let fullpath = resolve(__dirname, `../../src/pages/containers/${module}/app.js`);
+
+	return (fs.existsSync(fullpath) ? fs.readFileSync(fullpath, 'utf-8') : '').includes('OtherConfig');
+};
+
 const routes = (opts = {}) => {
 	const { modules } = opts;
 	let contents = '';
@@ -7,7 +16,9 @@ const routes = (opts = {}) => {
 	contents += `import { loginConfig } from '../containers/login/app';\n`;
 	modules.forEach((item) => {
 		let _item = item === '__tpl__' ? 'tpl' : item;
-		contents += `import { ${_item}Config, ${_item}OtherConfig } from '../containers/${item}/app';\n`;
+		hasOther(_item) 
+			? contents += `import { ${_item}Config, ${_item}OtherConfig } from '../containers/${item}/app';\n`
+			: contents += `import { ${_item}Config } from '../containers/${item}/app';\n`;
 	});
 	contents += `\n`;
 	contents += `export default {\n`;
@@ -17,7 +28,7 @@ const routes = (opts = {}) => {
 	contents += `		...loginConfig,\n`;
 	modules.forEach((item) => {
 		let _item = item === '__tpl__' ? 'tpl' : item;
-		contents += `		...(${_item}OtherConfig || {}),\n`;
+		hasOther(_item) && (contents += `		...(${_item}OtherConfig || {}),\n`);
 	});
 	contents += `		{\n`;
 	contents += `			path: '/',\n`;
