@@ -29,7 +29,14 @@ npm install wya-toolkit -g
 wya add
 ```
 
-## 待开发
+
+## Babel6 -> Babel7
+
+- 根据提示修改内容
+- `import { xxx } from 'wya'`, 其中`xxx`必须存在
+- `CreatePortal`中不使用`module.exports.default`
+
+## TODO
 
 - `webpack.config.common.js` PWA
 - `webpack.config.server.js` SSR

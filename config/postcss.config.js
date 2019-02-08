@@ -1,6 +1,6 @@
 module.exports = {
 	plugins: [
-		require('postcss-smart-import')({}),
+		require('postcss-import')({}),
 		require('postcss-flexbugs-fixes')({}),
 		require('precss')({}),
 		require('autoprefixer')({

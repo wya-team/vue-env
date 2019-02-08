@@ -39,6 +39,7 @@ const postcssLoader = {
 const loaderPath = [
 	path.resolve(APP_ROOT, "node_modules/wya-vc"),
 	path.resolve(APP_ROOT, "node_modules/iview"),
+	path.resolve(APP_ROOT, "node_modules/fast-xml-parser"), // 第三方库未编译，导致iOS8不兼容
 	path.resolve(APP_ROOT, "src")
 ];
 const webpackConfig = {
@@ -67,6 +68,10 @@ const webpackConfig = {
 			'@mutations': path.resolve(APP_ROOT, './src/pages/stores/mutations'),
 			'@common': path.resolve(APP_ROOT, './src/pages/components/_common'),
 			'node_modules/echarts': path.resolve(APP_ROOT, './node_modules/echarts'),
+			// 强制使用babel7
+			'babel-runtime': '@babel/runtime',
+			'babel-core': '@babel/core'
+
 		}
 	},
 	entry: {
@@ -90,8 +95,7 @@ const webpackConfig = {
 				include: loaderPath,
 				use: [
 					{
-						loader: 'babel-loader',
-						options: require('../.babelrc.js')
+						loader: 'babel-loader'
 					}
 				]
 			},
@@ -156,11 +160,10 @@ const webpackConfig = {
 				commons: {
 					test: (chunk) => {
 						const modules = [
-							'babel-polyfill',
+							'@babel/polyfill',
 							'vue',
 							'vue-router',
 							'vuex',
-							'babel-polyfill',
 							'core-js',
 							'lodash' // 这个用的地方偏多
 						];
