@@ -14,11 +14,8 @@ git clone **
 ## 数据模拟
 
 ```
-npm run mock
-
-# win下, 有些兼容问题
 npm install json-server -g 
-npm run mock:win
+npm run mock
 ```
 ## 快速开发
 
