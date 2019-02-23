@@ -103,7 +103,7 @@
     "vc-loader": "0.0.3",
     "vue-loader": "^15.6.2",
     "vue-style-loader": "^4.1.1",
-    "vue-template-compiler": "^2.5.17",
+    "vue-template-compiler": "^2.6.3",
     "webpack": "~4.27.0",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1",
