@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { Copy } from 'wya-vc';
 import { settingConfig } from '@containers/setting/app';
 
 export default {

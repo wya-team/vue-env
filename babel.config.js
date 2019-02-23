@@ -30,15 +30,7 @@ module.exports = (api) => {
 					"libraryDirectory": "lib"
 				},
 				"wya-vc"
-			],
-			[
-				"import",
-				{
-					"libraryName": "iview",
-					"libraryDirectory": "src/components"
-				},
-				"iview"
 			]
 		]
-	}
+	};
 };

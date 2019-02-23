@@ -47,7 +47,6 @@
 	</tbody>
 </template>
 <script>
-import { Fragment } from 'wya-vc';
 
 export default {
 	name: 'vc-fragment-item',

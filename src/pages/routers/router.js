@@ -8,11 +8,6 @@ import Router from 'vue-router';
 import Vuex from 'vuex';
 import { Vc } from 'wya-vc';
 import { sync } from 'vuex-router-sync';
-import { locale } from 'iview';
-import lang from 'iview/dist/locale/zh-CN';
-
-// configure language
-locale(lang);
 
 /**
  * 配置

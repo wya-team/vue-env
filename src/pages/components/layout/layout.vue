@@ -3,19 +3,19 @@
 		<div class="_header-bar g-flex-ac">
 			<img >
 			<span class="g-fs-20">后台管理中心</span>
-			<i-select 
+			<vc-select 
 				v-model="curModule" 
 				style="width:200px"
 				@on-change="handleChangeModule"
 			>
-				<i-option 
+				<vc-option 
 					v-for="item in modules" 
 					:value="item.value" 
 					:key="item.value"
 				>
 					{{ item.name }}
-				</i-option>
-			</i-select>
+				</vc-option>
+			</vc-select>
 		</div>
 		<div class="g-flex">
 			<left-menu 
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { Select, Option } from 'iview';
 import LeftMenu from './left';
 import TopMenu from './top';
 import modules from './chunks';
@@ -46,8 +45,6 @@ const TOP_BAR_HEIGHT = 56;
 
 export default {
 	components: {
-		"i-select": Select,
-		"i-option": Option,
 		"left-menu": LeftMenu,
 		"top-menu": TopMenu
 	},

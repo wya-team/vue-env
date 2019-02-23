@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { Paging } from 'wya-vc';
 import { getParseUrl } from '@utils/utils';
 // item
 import Item from './item';

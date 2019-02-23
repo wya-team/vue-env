@@ -6,7 +6,7 @@
  * @param  {Object} options 扩展
  */
 import { ajaxFn } from 'wya-fetch';
-import { Message } from 'iview';
+import { Message } from 'wya-vc';
 import API_ROOT from '@stores/apis/root';
 
 const loadingFn = (options = {}) => {

@@ -1,5 +1,5 @@
 <template>
-	<i-form 
+	<vc-form 
 		ref="form" 
 		:model="formValidate" 
 		:rules="ruleValidate" 
@@ -8,30 +8,26 @@
 		position="left"
 		class="g-flex-cc g-fd-c"
 	>
-		<i-form-item label="用户名:" prop="user">
-			<i-input v-model="formValidate.user" placeholder="请输入用户名" />
-		</i-form-item>
-		<i-form-item label="密码:" prop="password">
-			<i-input v-model="formValidate.password" placeholder="请输入密码" />
-		</i-form-item>
+		<vc-form-item label="用户名:" prop="user">
+			<vc-input v-model="formValidate.user" placeholder="请输入用户名" />
+		</vc-form-item>
+		<vc-form-item label="密码:" prop="password">
+			<vc-input v-model="formValidate.password" placeholder="请输入密码" />
+		</vc-form-item>
 		<div @click="handleLogin">
 			登录
 		</div> 	
-	</i-form>
+	</vc-form>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import { Form, FormItem, Input, InputNumber, Message } from 'iview';
+import { Message } from 'wya-vc';
 import { setItem } from '@utils/utils';
 
 export default {
 	name: 'login',
 	components: {
-		'i-form': Form,
-		'i-form-item': FormItem,
-		'i-input': Input,
-		'i-input-number': InputNumber,
 	},
 	data() {
 		return {

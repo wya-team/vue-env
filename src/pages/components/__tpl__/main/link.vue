@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { Copy } from 'wya-vc';
 import { tplConfig, tplOtherConfig } from '@containers/__tpl__/app';
 
 export default {

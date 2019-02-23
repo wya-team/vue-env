@@ -1,11 +1,11 @@
 <template>
-	<i-tabs 
+	<vc-tabs 
 		:value="type" 
 		:animated="false"
 		type="card"
 		@on-click="handleChange"
 	>
-		<i-tab-pane 
+		<vc-tabs-pane 
 			v-for="(item) in tabs"
 			:key="item.value"
 			:label="item.label" 
@@ -23,25 +23,18 @@
 				:load-data="loadData"
 				@page-size-change="handleChangePageSize"
 			/>
-		</i-tab-pane>
-	</i-tabs>
+		</vc-tabs-pane>
+	</vc-tabs>
 </template>
 
 <script>
-import { Tabs, TabPane, Input } from 'iview';
-import { Paging } from 'wya-vc';
 import { getParseUrl, getHashUrl } from '@utils/utils';
-import { setTimeout } from 'timers';
 // item
 import item from './item';
 
 export default {
 	name: 'tpl-paging-tabs-list',
 	components: {
-		'vc-paging': Paging,
-		'i-tabs': Tabs,
-		'i-tab-pane': TabPane,
-		'i-input': Input
 	},
 	mixins: [item],
 	data() {

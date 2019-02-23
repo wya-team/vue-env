@@ -105,6 +105,9 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'vue-loader',
+					},
+					{
+						loader: 'vc-loader',
 					}
 				]
 			},

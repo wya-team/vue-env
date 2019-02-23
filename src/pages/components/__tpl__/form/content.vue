@@ -1,5 +1,5 @@
 <template>
-	<i-form 
+	<vc-form 
 		ref="form" 
 		:model="formValidate" 
 		:rules="ruleValidate" 
@@ -8,107 +8,107 @@
 		style="width: 500px" 
 		position="left"
 	>
-		<i-form-item label="客户公司名称:" prop="name">
-			<i-input v-model="formValidate.name" disabled placeholder="请输入客户公司名称" />
-		</i-form-item>
-		<i-form-item label="客户姓名:" prop="customer_name">
-			<i-input v-model="formValidate.customer_name" placeholder="请输入客户姓名" />
-		</i-form-item>
-		<i-form-item label="客户合同公司:" prop="contact">
-			<i-input v-model="formValidate.contact" placeholder="请填写合同签订公司" />
-		</i-form-item>
-		<i-form-item label="我方合同公司:" prop="my_company">
-			<i-select 
+		<vc-form-item label="客户公司名称:" prop="name">
+			<vc-input v-model="formValidate.name" disabled placeholder="请输入客户公司名称" />
+		</vc-form-item>
+		<vc-form-item label="客户姓名:" prop="customer_name">
+			<vc-input v-model="formValidate.customer_name" placeholder="请输入客户姓名" />
+		</vc-form-item>
+		<vc-form-item label="客户合同公司:" prop="contact">
+			<vc-input v-model="formValidate.contact" placeholder="请填写合同签订公司" />
+		</vc-form-item>
+		<vc-form-item label="我方合同公司:" prop="my_company">
+			<vc-select 
 				v-model="formValidate.my_company"
 				clearable 
 				placeholder="请选择我方合同公司"
 			>
-				<i-option 
+				<vc-option 
 					v-for="(item, index) in company" 
 					:key="index" 
 					value="item"
 				>
 					{{ item }}
-				</i-option>
-			</i-select>
+				</vc-option>
+			</vc-select>
 			<span class="_right">添加</span>
-		</i-form-item>
-		<i-form-item label="成交时间" prop="deal_time">
-			<i-date-picker 
+		</vc-form-item>
+		<vc-form-item label="成交时间" prop="deal_time">
+			<vc-date-picker 
 				v-model="formValidate.deal_time" 
 				style="width: 100%"
 				type="datetime" 
 				placeholder="请选择成交时间"
 			/>
-		</i-form-item>
-		<i-form-item label="客户手机号" prop="mobile">
-			<i-input 
+		</vc-form-item>
+		<vc-form-item label="客户手机号" prop="mobile">
+			<vc-input 
 				v-model="formValidate.mobile" 
 				:maxlength="11"
 				placeholder="请输入客户手机号"
 			/>
-		</i-form-item>
-		<i-form-item label="不分单认证" prop="permit">
-			<i-input 
+		</vc-form-item>
+		<vc-form-item label="不分单认证" prop="permit">
+			<vc-input 
 				v-model="formValidate.permit" 
 				placeholder="请输入认证验证码"
 			/>
-		</i-form-item>
-		<i-form-item label="合同金额" prop="amount">
-			<i-input-number
+		</vc-form-item>
+		<vc-form-item label="合同金额" prop="amount">
+			<vc-input-number
 				v-model="formValidate.amount" 
 				:min="0"
 				:precision="2"
 				style="width: 100%"
 				placeholder="请输入合同金额"
 			/>
-		</i-form-item>
-		<i-form-item 
+		</vc-form-item>
+		<vc-form-item 
 			v-for="(item, index) in formValidate.items"
 			:key="item.index"
 			
 			:label="index === 0 ? '缴款方式' : ''"
 		>
-			<i-form-item
+			<vc-form-item
 				:prop="'items.' + index + '.date'" 
 				:rules="{required: true, message: '请选择成交时间'}"
 			>
-				<i-date-picker 
+				<vc-date-picker 
 					v-model="item.date" 
 					style="width: 100%" 
 					type="datetime"
 					placeholder="请选择成交时间" 
 				/>
-			</i-form-item>
-			<i-form-item 
+			</vc-form-item>
+			<vc-form-item 
 				:prop="'items.' + index + '.pay_type'" 
 				:rules="{required: true, message: '选择付款方式'}"
 			>
-				<i-cascader 
+				<vc-cascader 
 					:data="payType" 
 					v-model="item.pay_type" 
 					class="g-m-t-24"
 					placeholder="选择付款方式"
 				/>
-			</i-form-item>
-			<i-form-item 
+			</vc-form-item>
+			<vc-form-item 
 				:prop="'items.' + index + '.amount'" 
 				:rules="{required: true, message: '请输入付款金额'}"
 			>
-				<i-input-number
+				<vc-input-number
 					v-model="item.amount" 
 					:min="0"
 					:precision="2"
 					style="width: 100%; margin-top: 20px"
 					placeholder="请输入付款金额"
 				/>
-			</i-form-item>
-			<i-form-item
+			</vc-form-item>
+			<vc-form-item
 				:prop="'items.' + index + '.imgs'" 
 				:rules="{required: true, message: '请选择图片'}"
 			>
 				<vc-imgs-picker v-model="item.imgs" class="g-m-t-24" />
-			</i-form-item>
+			</vc-form-item>
 			
 			<span
 				class="_del" 
@@ -116,7 +116,7 @@
 			>
 				删除
 			</span>
-		</i-form-item>
+		</vc-form-item>
 		<div class="g-flex-ac">
 			<div style="width: 120px"/>
 			<div class="btn" @click="handleAdd">Add Item</div>
@@ -125,17 +125,12 @@
 			<div style="width: 120px"/>
 			<div class="btn g-m-t-20" @click="handleSubmit">提交</div>
 		</div>
-	</i-form>
+	</vc-form>
 </template>
 
 <script>
-import { 
-	Form, FormItem, Input, InputNumber, 
-	Select, Option, DatePicker, Cascader, Message
-} from 'iview';
 // utils
 import { dataValidity } from '@utils/utils';
-import { ImgsPicker } from 'wya-vc';
 
 const data = [
 	{
@@ -190,15 +185,7 @@ const data = [
 export default {
 	name: 'tpl-form-content',
 	components: {
-		'i-form': Form,
-		'i-form-item': FormItem,
-		'i-input': Input,
-		'i-input-number': InputNumber,
-		'i-select': Select,
-		'i-option': Option,
-		'i-date-picker': DatePicker,
-		'i-cascader': Cascader,
-		'vc-imgs-picker': ImgsPicker
+		
 	},
 	data() {
 		return {

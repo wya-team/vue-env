@@ -1,3 +1,7 @@
 import '../css/global.scss';
-import 'iview/dist/styles/iview.css';
 import './routers/router';
+
+/**
+ * 组件库设计完毕，此css会被移除
+ */
+import 'iview/dist/styles/iview.css';
