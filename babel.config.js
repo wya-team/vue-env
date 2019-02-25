@@ -24,6 +24,12 @@ module.exports = (api) => {
 				}
 			],
 			[
+				"@babel/plugin-proposal-class-properties",
+				{
+					"loose": true
+				}
+			],
+			[
 				"import",
 				{
 					"libraryName": "wya-vc",
