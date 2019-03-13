@@ -1,7 +1,7 @@
-import { Socket } from 'wya-socket';
+import { Socket } from '@wya/socket';
 import { URL_WEBSOCKET } from '@constants/constants';
 import { isEqualWith } from 'lodash';
-import { getItem, setItem, objRegex } from '@utils/utils';
+import { Storage, ReGex } from '@utils/utils';
 import API_ROOT from '@stores/apis/root';
 
 export const serviceObj = {
@@ -37,7 +37,7 @@ export const createService = (defaultOptions = {}) => {
 		getParam = (instance) => ({}),
 	} = defaultOptions;
 	let store;
-	cache && (store = getItem(`${key}_${_global.version}`));
+	cache && (store = Storage.get(`${key}_${_global.version}`));
 	store = store || { ...serviceObj };
 
 	// clear
@@ -84,7 +84,7 @@ export const createService = (defaultOptions = {}) => {
 								res
 							};
 							this[key] = parser ? parser(store.res.data) : store.res.data;
-							cache && setItem(`${key}_${_global.version}`, store);
+							cache && Storage.set(`${key}_${_global.version}`, store);
 							return res;
 						}).catch((res) => {
 							this.$Message.error(res.msg);
@@ -137,7 +137,7 @@ export const createSocket = (defaultOptions = {}) => {
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
-						socket.connect(objRegex.validURLScheme.regex.test(url) ? url : API_ROOT[url]);
+						socket.connect(ReGex.URLScheme.test(url) ? url : API_ROOT[url]);
 						// 链接成功后获取client_id
 						bindUrl && socket.on('connect', (res) => {
 							const { data = {} } = res.data || {};

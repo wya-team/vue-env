@@ -32,10 +32,10 @@ module.exports = (api) => {
 			[
 				"import",
 				{
-					"libraryName": "wya-vc",
+					"libraryName": "@wya/vc",
 					"libraryDirectory": "lib"
 				},
-				"wya-vc"
+				"@wya/vc"
 			]
 		]
 	};

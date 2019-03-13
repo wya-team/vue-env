@@ -37,7 +37,7 @@ const postcssLoader = {
 	}
 };
 const loaderPath = [
-	path.resolve(APP_ROOT, "node_modules/wya-vc"),
+	path.resolve(APP_ROOT, "node_modules/@wya/vc"),
 	path.resolve(APP_ROOT, "node_modules/iview"),
 	path.resolve(APP_ROOT, "node_modules/fast-xml-parser"), // 第三方库未编译，导致iOS8不兼容
 	path.resolve(APP_ROOT, "src")
@@ -107,7 +107,7 @@ const webpackConfig = {
 						loader: 'vue-loader',
 					},
 					{
-						loader: 'vc-loader',
+						loader: '@wya/vc-loader',
 					}
 				]
 			},

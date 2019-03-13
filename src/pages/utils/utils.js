@@ -1,24 +1,24 @@
 // -- 微一案工具库 --
-export * from 'wya-utils';
+export * from '@wya/utils';
 
-import { changeObjRegex } from 'wya-utils';
+import { RegEx } from '@wya/utils';
 
 // -- end --
 /**
- * 改写wya-utils里表单验证的正则
+ * 改写@wya/utils里表单验证的正则
  */
-changeObjRegex({
-	validURLScheme: {
-		regex: /[a-zA-z]+:\/\/[^\s]*/,
-		error: "请填写正确网页地址协议"
+RegEx.set({
+	URLScheme: {
+		value: /[a-zA-z]+:\/\/[^\s]*/,
+		msg: "请填写正确网页地址协议"
 	},
-	validLetterAndNumber: {
-		regex: /^[A-Za-z0-9]{1,}$/,
-		error: "请不要输入特殊字符"
+	letterAndNumber: {
+		value: /^[A-Za-z0-9]{1,}$/,
+		msg: "请不要输入特殊字符"
 	},
-	validPhone: {
-		regex: /^0[1-9][0-9]{1,2}-[2-8][0-9]{6,7}$/,
-		error: "请填写正确的电话号码"
+	phone: {
+		value: /^0[1-9][0-9]{1,2}-[2-8][0-9]{6,7}$/,
+		msg: "请填写正确的电话号码"
 	}
 });
 

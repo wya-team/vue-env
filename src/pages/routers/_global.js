@@ -2,7 +2,7 @@
  * 全部变量初始化及使用
  */
 import { createLoginAuth, clearLocalStorage } from './hooks';
-import { getItem, setItem, delItem, getCookie, getDevice, getParseUrl, getUrlParam, defineProperty, loadCssCode } from '../utils/utils';
+import { Device } from '../utils/utils';
 
 /**
  * 组件内遵守使用this.$global
@@ -44,7 +44,7 @@ _global.env = process.env.NODE_ENV;
 _global.scale = 1;
 
 // 设备信息状态
-_global.device = getDevice();
+_global.device = Device;
 
 export default {
 	install(Vue) {

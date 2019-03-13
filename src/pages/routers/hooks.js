@@ -1,13 +1,14 @@
 import Vue from 'vue';
-import { getItem, setItem, delItem } from '@utils/utils';
-import { Vc } from 'wya-vc';
+import { Storage } from '@utils/utils';
+import { Vc } from '@wya/vc';
 import { serviceManager } from '@stores/services/utils';
+
 /**
  * 是否已经登录
  */
 const isLoggedIn = (nextState) => {
 	let state = false; // 未登录
-	let user = getItem(`user_${_global.version}`);
+	let user = Storage.get(`user_${_global.version}`);
 	if (user) {
 		state = true;
 	}
@@ -65,9 +66,9 @@ export const clearLoginAuth = (opts = {}) => {
 export const clearLocalStorage = (version) => {
 	let keys = Object.keys(localStorage);
 	for (let i = 0; i < keys.length; i++) {
-		// wya-vc 为vc组件库缓存，不清除
-		if (!keys[i].includes(version) && !keys[i].includes('wya-vc')) {
-			delItem(keys[i]); 
+		// @wya/vc 为vc组件库缓存，不清除
+		if (!keys[i].includes(version) && !keys[i].includes('@wya/vc')) {
+			Storage.remove(keys[i]); 
 		}
 	}
 };

@@ -22,8 +22,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Message } from 'wya-vc';
-import { setItem } from '@utils/utils';
+import { Message } from '@wya/vc';
+import { Storage } from '@utils/utils';
 
 export default {
 	name: 'login',
@@ -65,9 +65,9 @@ export default {
 						}
 					}
 				}).then((res) => {
-
+					console.log(res);
 					Message.success(`登录成功 - userName: ${this.loginMain.user}`);
-					setItem(`user_${this.$global.version}`, res);
+					Storage.set(`user_${this.$global.version}`, res);
 					this.$router.replace('/tpl/main');
 
 				}).catch((res) => {

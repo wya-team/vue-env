@@ -5,8 +5,8 @@
  * @param  {[type]} body    请求的参数
  * @param  {Object} options 扩展
  */
-import { ajaxFn } from 'wya-fetch';
-import { Message } from 'wya-vc';
+import createHttpClient from '@wya/http';
+import { Message } from '@wya/vc';
 import API_ROOT from '@stores/apis/root';
 
 const loadingFn = (options = {}) => {
@@ -18,8 +18,8 @@ const loadedFn = () => {
 	Message.destroy();
 };
 
-const otherFn = (res, resolve, reject) => {
-	switch (res.status) {
+const otherFn = ({ response }) => {
+	switch (response.status) {
 		case -1:
 			// clearLoginAuth();
 			break;
@@ -28,18 +28,18 @@ const otherFn = (res, resolve, reject) => {
 	}
 };
 
-const beforeFn = (options) => {
+const beforeFn = ({ options }) => {
 	// 可以是promise，不要随便写return
 };
-const afterFn = (res, options = {}) => {
+const afterFn = ({ options, response }) => {
 	const { autoTip = false, errorMsg, successMsg } = options;
 	// 可以是promise，不要随便写return
-	switch (res.status) {
+	switch (response.status) {
 		case 0:
-			autoTip && Message.error(errorMsg || res.msg);
+			autoTip && Message.error(errorMsg || response.msg);
 			break;
 		case 1:
-			autoTip && Message.success(successMsg || res.msg);
+			autoTip && Message.success(successMsg || response.msg);
 			break;
 		default:
 			break;
@@ -56,8 +56,6 @@ const defaultOptions = {
 	// requestType: 'form-data:json'
 };
 
-const ajax = ajaxFn(defaultOptions);
-const net = {
-	ajax
-};
+const net = createHttpClient(defaultOptions);
+
 export default net;

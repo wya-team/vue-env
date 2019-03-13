@@ -6,7 +6,7 @@ import '@babel/polyfill';
 import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
-import { Vc } from 'wya-vc';
+import { Vc } from '@wya/vc';
 import { sync } from 'vuex-router-sync';
 
 /**
@@ -64,7 +64,7 @@ router.afterEach(afterEach);
 Vue.use(Vuex);
 const store = new Vuex.Store(storeConfig);
 
-// - 全局wya-vc实例
+// - 全局@wya/vc实例
 Vue.use(Vc, VcConfig({ store, router }));
 
 // - 同步

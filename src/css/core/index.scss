@@ -2,13 +2,13 @@
 @import "../mixins/index";
 
 // 基础样式
-@import "~wya-sass/lib/core/basic/index.scss";
+@import "~@wya/sass/lib/core/basic/index.scss";
 
 // pc
-// @import "~wya-sass/lib/core/pc/index.scss";
+// @import "~@wya/sass/lib/core/pc/index.scss";
 
 // mobile
-// @import "~wya-sass/lib/core/mobile/index.scss";
+// @import "~@wya/sass/lib/core/mobile/index.scss";
 
 // vc
 @import "vc-reset.scss";
