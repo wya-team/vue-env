@@ -8,7 +8,7 @@ import { serviceManager } from '@stores/services/utils';
  */
 const isLoggedIn = (nextState) => {
 	let state = false; // 未登录
-	let user = Storage.get(`user_${_global.version}`);
+	let user = Storage.get(`user`);
 	if (user) {
 		state = true;
 	}

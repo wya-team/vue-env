@@ -46,16 +46,15 @@ const afterFn = ({ options, response }) => {
 	}
 };
 
-const defaultOptions = {
+const globalOptions = {
 	onLoading: loadingFn,
 	onLoaded: loadedFn,
 	onOther: otherFn,
 	onBefore: beforeFn,
 	onAfter: afterFn,
 	apis: API_ROOT,
+	debug: process.env.NODE_ENV !== 'production'
 	// requestType: 'form-data:json'
 };
 
-const net = createHttpClient(defaultOptions);
-
-export default net;
+export default createHttpClient(globalOptions);

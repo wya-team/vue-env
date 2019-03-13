@@ -1,7 +1,7 @@
 // -- 微一案工具库 --
 export * from '@wya/utils';
 
-import { RegEx } from '@wya/utils';
+import { RegEx, Storage, Cookie } from '@wya/utils';
 
 // -- end --
 /**

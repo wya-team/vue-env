@@ -37,7 +37,7 @@ export const createService = (defaultOptions = {}) => {
 		getParam = (instance) => ({}),
 	} = defaultOptions;
 	let store;
-	cache && (store = Storage.get(`${key}_${_global.version}`));
+	cache && (store = Storage.get(`${key}`));
 	store = store || { ...serviceObj };
 
 	// clear
@@ -84,7 +84,7 @@ export const createService = (defaultOptions = {}) => {
 								res
 							};
 							this[key] = parser ? parser(store.res.data) : store.res.data;
-							cache && Storage.set(`${key}_${_global.version}`, store);
+							cache && Storage.set(`${key}`, store);
 							return res;
 						}).catch((res) => {
 							this.$Message.error(res.msg);

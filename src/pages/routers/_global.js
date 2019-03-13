@@ -2,7 +2,7 @@
  * 全部变量初始化及使用
  */
 import { createLoginAuth, clearLocalStorage } from './hooks';
-import { Device } from '../utils/utils';
+import { Device, Storage, Cookie } from '../utils/utils';
 
 /**
  * 组件内遵守使用this.$global
@@ -12,6 +12,10 @@ typeof window === "object" ? window._global = {} : this._global = {};
 
 // 版本号
 _global.version = '1.0';
+
+Storage.setVersion(_global.version);
+Cookie.setVersion(_global.version);
+
 // clearLocalStorage(_global.version);
 
 // GUID
