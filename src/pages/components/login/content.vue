@@ -67,7 +67,7 @@ export default {
 				}).then((res) => {
 					console.log(res);
 					Message.success(`登录成功 - userName: ${this.loginMain.user}`);
-					Storage.set(`user_${this.$global.version}`, res);
+					Storage.set(`user`, res);
 					this.$router.replace('/tpl/main');
 
 				}).catch((res) => {
