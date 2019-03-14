@@ -3,7 +3,6 @@
 		:data-source="listInfo.data"
 		:total="listInfo.page.total"
 		:reset="listInfo.reset"
-		:current.sync="current"
 		:load-data="loadData"
 		history
 		show
