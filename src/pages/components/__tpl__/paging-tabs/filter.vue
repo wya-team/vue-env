@@ -43,7 +43,7 @@
 				class="g-search-form g-lh-50 g-bg-f4 g-m-b-24"
 				style="padding-top: 5px; padding-bottom: 5px"
 			>
-				<div class="g-flex g-fw-w" style="min-width: 800px">
+				<div class="g-flex g-fw-w" style="min-width: 796px">
 					<div>
 						<span class="g-c-333 g-w-100">退款方式：</span>
 						<vc-input

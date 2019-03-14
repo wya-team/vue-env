@@ -1,26 +1,34 @@
 <template>
 	<div class="js-filter">
-		<div>
+		<vc-button 
+			type="primary"
+			class="g-m-b-16"
+			@click="handleExport"
+		>
+			导出
+		</vc-button>
+		<div class="g-m-b-16">
+			<span>退款信息：</span>
 			<vc-input
 				v-model="keywords.search" 
 				placeholder="请输入关键字搜索" 
-				style="width: 300px" 
+				style="width: 240px" 
 				clearable
 				@enter="handleSearch"
 				@change="handleInputChange"
 			/>
 			<vc-button 
 				type="primary"
-				class="g-m-l-10"
+				class="g-m-l-24"
 				@click="handleSearch"
 			>
 				搜索
 			</vc-button>
 			<span
-				class="g-m-l-20 g-c-black-dark g-fs-12 g-pointer"
+				class="g-m-l-12 g-c-black-dark g-fs-12 g-pointer g-no-select"
 				@click="handleToggle"
 			>
-				更多搜索条件
+				{{ show ? '收起' : '展开' }}
 				<i
 					:class="show ? 'icon-triangle-up' : 'icon-triangle-down'"
 					class="iconfont g-fs-12 g-c-black-dark"
@@ -31,26 +39,32 @@
 			ref="expand"
 			v-model="show"
 		>
-			<div 
-				class="g-m-t-10 g-pd-lr-10 g-lh-42 g-bg-gray-mid"
-				style="padding-top: 3px;padding-bottom: 7px;"
+			<div
+				class="g-search-form g-lh-50 g-bg-f4 g-m-b-24"
+				style="padding-top: 5px; padding-bottom: 5px"
 			>
-				<vc-input
-					v-model="keywords.name" 
-					class="g-m-r-5"
-					style="width: 220px" 
-					placeholder="请输入公司名称" 
-					@enter="handleSearch"
-					@change="handleInputChange"
-				/>
-				<vc-date-picker
-					:value="keywords.create_time"
-					type="date"
-					class="g-m-r-5"
-					style="width: 220px;"
-					placeholder="请选择录入时间"
-					@change="handleChange({create_time: arguments[0]})"
-				/>
+				<div class="g-flex g-fw-w" style="min-width: 796px">
+					<div>
+						<span class="g-c-333 g-w-100">退款方式：</span>
+						<vc-input
+							v-model="keywords.name" 
+							style="width: 160px" 
+							placeholder="请输入公司名称" 
+							@enter="handleSearch"
+							@change="handleInputChange"
+						/>
+					</div>
+					<div>
+						<span class="g-c-333 g-w-100">退款传方式：</span>
+						<vc-input
+							v-model="keywords.name" 
+							style="width: 220px" 
+							placeholder="请输入公司名称" 
+							@enter="handleSearch"
+							@change="handleInputChange"
+						/>
+					</div>
+				</div>
 			</div>
 		</vc-expand>
 	</div>
@@ -71,7 +85,7 @@ export default {
 				search: String(query.search || ''),
 				name: String(query.name || ''),
 			},
-			show: false
+			show: false,
 		};
 	},
 	methods: {
@@ -100,6 +114,7 @@ export default {
 				this.handleSearch();
 			}
 		},
+		handleExport() {}
 	}
 };
 

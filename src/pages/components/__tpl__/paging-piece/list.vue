@@ -7,7 +7,7 @@
 		:history="true"
 		:load-data="loadData"
 		mode="piece"
-		class="g-m-t-20 v-tpl-paging-piece"
+		class="v-tpl-paging-piece"
 		@page-size-change="handleChangePageSize"
 	>
 		<tpl-item 

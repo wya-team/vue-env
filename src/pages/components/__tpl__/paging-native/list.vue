@@ -7,7 +7,7 @@
 		:reset="listInfo.reset"
 		:history="true"
 		:load-data="loadData"
-		class="g-m-t-20 v-tpl-paging-native"
+		class="v-tpl-paging-native"
 		mode="native"
 		@page-size-change="handleChangePageSize"
 	>
