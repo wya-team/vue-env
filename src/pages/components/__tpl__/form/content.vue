@@ -1,206 +1,150 @@
 <template>
-	<vc-form 
-		ref="form" 
-		:model="formValidate" 
-		:rules="ruleValidate" 
-		:label-width="120"
-		class="v-tpl-form"
-		style="width: 500px" 
-		position="left"
-	>
-		<vc-form-item label="客户公司名称:" prop="name">
-			<vc-input v-model="formValidate.name" disabled placeholder="请输入客户公司名称" />
-		</vc-form-item>
-		<vc-form-item label="客户姓名:" prop="customer_name">
-			<vc-input v-model="formValidate.customer_name" placeholder="请输入客户姓名" />
-		</vc-form-item>
-		<vc-form-item label="客户合同公司:" prop="contact">
-			<vc-input v-model="formValidate.contact" placeholder="请填写合同签订公司" />
-		</vc-form-item>
-		<vc-form-item label="我方合同公司:" prop="my_company">
-			<vc-select 
-				v-model="formValidate.my_company"
-				clearable 
-				placeholder="请选择我方合同公司"
-			>
-				<vc-option 
-					v-for="(item, index) in company" 
-					:key="index" 
-					value="item"
-				>
-					{{ item }}
-				</vc-option>
-			</vc-select>
-			<span class="_right">添加</span>
-		</vc-form-item>
-		<vc-form-item label="成交时间" prop="deal_time">
-			<vc-date-picker 
-				v-model="formValidate.deal_time" 
-				style="width: 100%"
-				type="datetime" 
-				placeholder="请选择成交时间"
-			/>
-		</vc-form-item>
-		<vc-form-item label="客户手机号" prop="mobile">
-			<vc-input 
-				v-model="formValidate.mobile" 
-				:maxlength="11"
-				placeholder="请输入客户手机号"
-			/>
-		</vc-form-item>
-		<vc-form-item label="不分单认证" prop="permit">
-			<vc-input 
-				v-model="formValidate.permit" 
-				placeholder="请输入认证验证码"
-			/>
-		</vc-form-item>
-		<vc-form-item label="合同金额" prop="amount">
-			<vc-input-number
-				v-model="formValidate.amount" 
-				:min="0"
-				:precision="2"
-				style="width: 100%"
-				placeholder="请输入合同金额"
-			/>
-		</vc-form-item>
-		<vc-form-item 
-			v-for="(item, index) in formValidate.items"
-			:key="item.index"
-			
-			:label="index === 0 ? '缴款方式' : ''"
-		>
-			<vc-form-item
-				:prop="'items.' + index + '.date'" 
-				:rules="{required: true, message: '请选择成交时间'}"
-			>
-				<vc-date-picker 
-					v-model="item.date" 
-					style="width: 100%" 
-					type="datetime"
-					placeholder="请选择成交时间" 
-				/>
-			</vc-form-item>
-			<vc-form-item 
-				:prop="'items.' + index + '.pay_type'" 
-				:rules="{required: true, message: '选择付款方式'}"
-			>
-				<vc-cascader 
-					:data="payType" 
-					v-model="item.pay_type" 
-					class="g-m-t-24"
-					placeholder="选择付款方式"
-				/>
-			</vc-form-item>
-			<vc-form-item 
-				:prop="'items.' + index + '.amount'" 
-				:rules="{required: true, message: '请输入付款金额'}"
-			>
-				<vc-input-number
-					v-model="item.amount" 
-					:min="0"
-					:precision="2"
-					style="width: 100%; margin-top: 20px"
-					placeholder="请输入付款金额"
-				/>
-			</vc-form-item>
-			<vc-form-item
-				:prop="'items.' + index + '.imgs'" 
-				:rules="{required: true, message: '请选择图片'}"
-			>
-				<vc-imgs-picker v-model="item.imgs" class="g-m-t-24" />
-			</vc-form-item>
-			
-			<span
-				class="_del" 
-				@click="handleDel(item.index)"
-			>
-				删除
-			</span>
-		</vc-form-item>
-		<div class="g-flex-ac">
-			<div style="width: 120px"/>
-			<div class="btn" @click="handleAdd">Add Item</div>
+	<div class="g-pd-lr-24 g-pd-t-24" style="padding-bottom: 70px">
+		<!-- 表单 -->
+		<div class="g-m-b-32">
+			<xls-section-title title="表单样式" class="g-m-b-24" />
+			<!-- 96位所有label中最宽的长度 -->
+			<vc-form 
+				ref="form" 
+				:model="formValidate" 
+				:rules="ruleValidate" 
+				:label-width="96"
+				class="v-tpl-form g-m-t-21"
+				position="left"
+			>	
+				<vc-form-item label="商品名称：" prop="product_name">
+					<vc-input 
+						v-model="formValidate.product_name"
+						class="v-input" 
+						placeholder="请输入" 
+						style="width: 300px"
+					/>
+				</vc-form-item>
+				<div class="g-flex g-m-b-26">
+					<div class="g-c-333 g-tr" style="width: 96px">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+				<vc-form-item label="商品主图：" prop="original_img" >
+					<vc-imgs-picker class="g-m-t-26" />
+				</vc-form-item>
+				<vc-form-item label="商品货号：" prop="product_sn">
+					<vc-input 
+						v-model="formValidate.product_sn" 
+						placeholder="请输入"
+						style="width: 300px" 
+					/>
+				</vc-form-item>
+				<vc-form-item label="商品实际价格：" prop="contact">
+					<vc-input 
+						v-model="formValidate.contact" 
+						placeholder="请填写合同签订公司" 
+						style="width: 300px"
+					/>
+				</vc-form-item>
+				<vc-form-item label="商品市场价格：" prop="market_price">
+					<vc-input 
+						v-model="formValidate.market_price" 
+						placeholder="请填写合同签订公司"
+						style="width: 300px"
+					/>
+				</vc-form-item>
+				<vc-form-item label="商品重量：" prop="weight">
+					<vc-input 
+						v-model="formValidate.weight" 
+						placeholder="请填写合同签订公司"
+						style="width: 300px"
+					/>
+				</vc-form-item>
+				<vc-form-item label="商品分类：" prop="my_company">
+					<vc-select 
+						v-model="formValidate.my_company"
+						clearable 
+						transfer
+						placeholder="请选择我方合同公司"
+					>
+						<vc-option 
+							v-for="(item, index) in company" 
+							:key="index" 
+							value="item"
+						>
+							{{ item }}
+						</vc-option>
+					</vc-select>
+				</vc-form-item>
+				<vc-form-item label="商品属性组：" prop="my_company">
+					<vc-select 
+						v-model="formValidate.my_company"
+						clearable 
+						transfer
+						placeholder="请选择我方合同公司"
+					>
+						<vc-option 
+							v-for="(item, index) in company" 
+							:key="index" 
+							value="item"
+						>
+							{{ item }}
+						</vc-option>
+					</vc-select>
+				</vc-form-item>
+				<vc-form-item label="">
+					<vc-button type="primary">
+						+新建
+					</vc-button>
+				</vc-form-item>
+			</vc-form>
 		</div>
-		<div class="g-flex-ac">
-			<div style="width: 120px"/>
-			<div class="btn g-m-t-20" @click="handleSubmit">提交</div>
+		<!-- 展示 -->
+		<div class="g-m-b-32">
+			<xls-section-title title="弹框内上下边距16px" class="g-m-b-24" />
+			<!-- 小弹框居中 |  中弹框距离左侧120 | 大弹框24，有进度条的距离左侧24-->
+			<div class="v-tpl-form">
+				<div class="g-flex g-m-b-16">
+					<div class="g-c-333">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+				<div class="g-flex g-m-b-16">
+					<div class="g-c-333">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+				<div class="g-flex g-m-b-16">
+					<div class="g-c-333">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+				<div class="g-flex g-m-b-16">
+					<div class="g-c-333">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+				<div class="g-flex g-m-b-16">
+					<div class="g-c-333">商品名称：</div>
+					<div class="g-c-999">安徽省电话费</div>
+				</div>
+			</div>
 		</div>
-	</vc-form>
+		<xls-footer />
+	</div>
 </template>
 
 <script>
-// utils
-import { dataValidity } from '@utils/utils';
-
-const data = [
-	{
-		value: 'beijing',
-		label: '北京',
-		children: [
-			{
-				value: 'gugong',
-				label: '故宫'
-			},
-			{
-				value: 'tiantan',
-				label: '天坛'
-			},
-			{
-				value: 'wangfujing',
-				label: '王府井'
-			}
-		]
-	}, 
-	{
-		value: 'jiangsu',
-		label: '江苏',
-		children: [
-			{
-				value: 'nanjing',
-				label: '南京',
-				children: [
-					{
-						value: 'fuzimiao',
-						label: '夫子庙',
-					}
-				]
-			},
-			{
-				value: 'suzhou',
-				label: '苏州',
-				children: [
-					{
-						value: 'zhuozhengyuan',
-						label: '拙政园',
-					},
-					{
-						value: 'shizilin',
-						label: '狮子林',
-					}
-				]
-			}
-		],
-	}];
+import SectionTitle from '@components/_common/section-title/section-title';
+import Footer from '@components/_common/footer/footer';
 
 export default {
-	name: 'tpl-form-content',
+	name: 'v-tpl-form',
 	components: {
-		
+		'xls-section-title': SectionTitle,
+		'xls-footer': Footer,
 	},
 	data() {
 		return {
 			company: ['阿里', '有赞', '网易', '滴滴'],
-			payType: data,
 			index: 1,
+			setShow: false,
 			formValidate: {
-				name: 'xxxxx',
-				customer_name: '',
-				contact: '',
-				my_company: '',
-				deal_time: '',
-				mobile: '',
-				permit: '',
-				amount: null,
+				product_name: 'xxxxx',
+				product_sn: '',
+				original_img: '',
+				weight: '',
 				items: [
 					{
 						index: 1,
@@ -212,35 +156,24 @@ export default {
 				]
 			},
 			ruleValidate: {
-				name: [
-					{ required: true, message: '请输入客户公司名称' }
+				product_name: [
+					{ required: true, message: '商品名称必须填写，最多100个字' }
 				],
-				customer_name: [
-					{ required: true, message: '请输入客户姓名' }
+				product_sn: [
+					{ required: true, message: '商品货号必须填写，且不能超过64个字符' }
+				],
+				original_img: [
+					{ required: true, message: '最少添加一张商品图片' }
 				],
 				contact: [
-					{ required: true, message: '请填写合同签订公司' }
+					{ required: true, message: '商品价格为不能超过7个字符的正数，且不能超过小数点后两位' }
 				],
-				my_company: [
-					{ required: true, message: '请选择我方合同公司', trigger: 'change' }
+				weight: [
+					{ required: true, message: '商品重量为不能超过9个字符的正整数', trigger: 'change' }
 				],
-				deal_time: [
-					{ required: true, type: "date", message: '请选择成交时间', trigger: 'change' }
-				],
-				mobile: [
-					{ required: true, message: '请输入客户手机号', trigger: 'blur' }, 
-					{ type: 'validMobile', message: '手机号格式不正确', validator: dataValidity }
-				],
-				permit: [
-					{ required: true, message: '请输入认证验证码' }
-				],
-				amount: [
-					{ required: true, type: 'number', message: '请输入合同金额' }
-				]
+				
 			}
 		};
-	},
-	mounted() {
 	},
 	methods: {
 		handleAdd() {
@@ -266,26 +199,16 @@ export default {
 				}
 			});
 		},
+		handleSet() {
+			this.setShow = !this.setShow;
+			return this.setShow;
+		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
 .v-tpl-form {
-	.btn {
-		color: #0085ff;
-		cursor: pointer;
-	}
-	._right {
-		@extend .btn;
-		position: absolute; 
-		right: -30px; 
-		top: 0;
-	}
-	._del {
-		@extend .btn;
-		display: block;
-		margin-top: 24px;
-	}
+	padding-left: 56px; // 距离侧边56px  56 + 24 = 80
 }
 </style>

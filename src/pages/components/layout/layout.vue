@@ -94,7 +94,7 @@ export default {
 .c-layout{
 	position: relative;
 	overflow: hidden;
-
+	background: #f2f2f2;
 	._header-bar{
 		position: fixed;
 		top: 0;
@@ -109,6 +109,9 @@ export default {
 	._content {
 		padding-left: 180px;
 	}
-
+	.v-router {
+		margin: 12px 12px 0 16px;
+		background: #ffffff;
+	}
 }
 </style>
