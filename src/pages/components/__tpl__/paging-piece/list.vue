@@ -19,14 +19,13 @@
 </template>
 
 <script>
-import { getParseUrl } from '@utils/utils';
+import { URL } from '@utils/utils';
 // item
 import Item from './item';
 
 export default {
 	name: 'tpl-table1',
 	components: {
-		'vc-paging': Paging,
 		'tpl-item': Item,
 	},
 	data() {
@@ -39,7 +38,7 @@ export default {
 	},
 	methods: {
 		loadData(page, pageSize) {
-			const { query = {} } = getParseUrl();
+			const { query = {} } = URL.parse();
 			return this.request({
 				url: 'TPL_PAGING_PIECE_LIST_GET',
 				type: 'GET',

@@ -108,8 +108,10 @@ export const initObj = {
  * for pc
  */
 export const initPage = {
-	total: 0,
 	reset: false,
+	page: {
+		total: 0
+	},
 	data: {}
 };
 /**

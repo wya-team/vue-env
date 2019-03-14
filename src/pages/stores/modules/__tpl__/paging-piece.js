@@ -10,7 +10,10 @@ const mutations = {
 	TPL_PAGING_PIECE_LIST_GET_SUCCESS(state, { data, param: { page } }) {
 		state.listInfo = {
 			...state.listInfo,
-			total: data.totalCount,
+			page: {
+				...state.listInfo.page,
+				...data.page
+			},
 			data: {
 				...state.listInfo.data,
 				[page]: data.list

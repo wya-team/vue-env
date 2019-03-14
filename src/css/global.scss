@@ -1,13 +1,60 @@
 @import "core/index";
 body {
-	font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	font-family: "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", Arial, sans-serif;
 	font-size: 12px;
 	line-height: 1.5;
-	color: #515a6e;
+	color: #333;
 	background-color: #fff;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 .g-m-t-24 {
 	margin-top: 24px;
+}
+.g-m-t-16 {
+	margin-top: 16px;
+}
+.g-m-b-16 {
+	margin-bottom: 16px;
+}
+.g-m-b-24 {
+	margin-bottom: 24px;
+}
+.g-m-l-24 {
+	margin-left: 24px;
+}
+.g-m-l-12 {
+	margin-left: 12px;
+}
+.g-bg-f4 {
+	background-color: #f4f4f4;
+}
+.g-no-select {
+	user-select: none;
+}
+
+.g-lh-50 {
+	line-height: 45px;
+}
+.g-c-333 {
+	color: #333 !important;
+}
+
+.g-search-form {
+	.ivu-form-item {
+		margin-bottom: 0 !important;
+	}
+	.ivu-form-inline .ivu-form-item {
+		margin-right: 0 !important;
+	}
+}
+
+.ivu-input-wrapper .ivu-input {
+	height: 28px !important;
+}
+
+.g-w-100 {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
 }

@@ -3,7 +3,6 @@
 		:value="type" 
 		:animated="false"
 		type="card" 
-		style="margin-top: 20px"
 		@on-click="handleChange"
 	>
 		<vc-tabs-pane 
@@ -15,29 +14,43 @@
 			<vc-paging
 				:show="item.value == type" 
 				:type="item.value"
-				:columns="columns" 
 				:data-source="listInfo[item.value].data"
-				:total="listInfo[item.value].total"
+				:total="listInfo[item.value].page.total"
 				:reset="listInfo[item.value].reset"
 				:current.sync="current[item.value]"
 				:history="true"
 				:load-data="loadData"
-				@page-size-change="handleChangePageSize"
-			/>
+				@page-size-change="handleResetFirst"
+			>
+				<vc-table-column
+					prop="date"
+					label="日期"
+					width="180"
+				/>
+				<vc-table-column
+					prop="name"
+					label="姓名"
+					width="180"
+				/>
+				<vc-table-column
+					prop="address"
+					label="地址"
+				>
+					<div @click="handleResetFirst">回到首页刷新</div>
+					<div @click="handleResetCur">当前页刷新</div>
+				</vc-table-column>
+			</vc-paging>
 		</vc-tabs-pane>
 	</vc-tabs>
 </template>
 
 <script>
-import { getParseUrl, getHashUrl } from '@utils/utils';
-// item
-import item from './item';
+import { URL } from '@utils/utils';
 
 export default {
 	name: 'tpl-paging-tabs-list',
 	components: {
 	},
-	mixins: [item],
 	data() {
 		const { query } = this.$route;
 
@@ -58,14 +71,14 @@ export default {
 	},
 	methods: {
 		loadData(page, pageSize) {
-			const { query = {} } = getParseUrl();
+			const { query = {} } = URL.parse();
 			return this.request({
 				url: 'TPL_PAGING_TABS_LIST_GET',
 				type: 'GET',
 				param: {
 					...query,
-					page,
-					pageSize,
+					page: page || 1,
+					pageSize: pageSize || 10,
 					type: this.type
 				},
 			}).then((res) => {
@@ -77,17 +90,23 @@ export default {
 		handleChange(type) {
 			this.type = type;
 			
-			let { query = {} } = getParseUrl();
+			let { query = {} } = URL.parse();
 			query = {
 				...query,
 				type,
 				page: this.current[type]
 			};
-			this.$router.replace(getHashUrl(`/tpl/paging/tabs`, { ...query }));
+			this.$router.replace(URL.merge(`/tpl/paging/tabs`, { ...query }));
 		},
 		handleChangePageSize() {
 			this.$store.commit('TPL_PAGING_TABS_LIST_INIT');
-		}
+		},
+		handleResetFirst() {
+			this.$store.commit('TPL_PAGING_TABS_LIST_INIT');
+		},
+		handleResetCur() {
+			this.$store.commit('TPL_PAGING_TABS_LIST_RESET');
+		},
 	}
 };
 </script>

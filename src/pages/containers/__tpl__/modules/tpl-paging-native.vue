@@ -1,5 +1,5 @@
 <template>
-	<set-title title="tpl-paging-native" style="padding: 20px">
+	<set-title title="tpl-paging-native" style="padding: 16px 24px 24px">
 		<tpl-filter />
 		<tpl-list />
 	</set-title>

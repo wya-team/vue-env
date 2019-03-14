@@ -6,8 +6,8 @@
 				placeholder="请输入关键字搜索" 
 				style="width: 300px" 
 				clearable
-				@on-enter="handleSearch"
-				@on-change="handleInputChange"
+				@enter="handleSearch"
+				@change="handleInputChange"
 			/>
 			<vc-button 
 				type="primary"
@@ -40,8 +40,8 @@
 					class="g-m-r-5"
 					style="width: 220px" 
 					placeholder="请输入公司名称" 
-					@on-enter="handleSearch"
-					@on-change="handleInputChange"
+					@enter="handleSearch"
+					@change="handleInputChange"
 				/>
 				<vc-date-picker
 					:value="keywords.create_time"
@@ -49,7 +49,7 @@
 					class="g-m-r-5"
 					style="width: 220px;"
 					placeholder="请选择录入时间"
-					@on-change="handleChange({create_time: arguments[0]})"
+					@change="handleChange({create_time: arguments[0]})"
 				/>
 			</div>
 		</vc-expand>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { getParseUrl, getHashUrl } from '@utils/utils';
+import { URL } from '@utils/utils';
 import { debounce } from 'lodash';
 
 export default {
@@ -76,14 +76,14 @@ export default {
 	},
 	methods: {
 		handleSearch: debounce(function (value) {
-			let params = {
+			let query = {
 				...this.$route.query,
 				...this.keywords,
 			};
-			this.$router.replace(getHashUrl(
-				`/tpl/paging/native`, 
-				params
-			));
+			this.$router.replace(URL.merge({
+				path: `/tpl/paging/native`, 
+				query
+			}));
 			this.$store.commit('TPL_PAGING_NATIVE_LIST_INIT');
 		}, 300),
 		handleToggle() {

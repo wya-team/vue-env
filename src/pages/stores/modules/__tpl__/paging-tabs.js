@@ -20,7 +20,10 @@ const mutations = {
 			...state.listInfo,
 			[type]: {
 				...state.listInfo[type],
-				total: data.totalCount,
+				page: {
+					...state.listInfo.page,
+					...data.page
+				},
 				data: {
 					...state.listInfo[type].data,
 					[page]: data.list
