@@ -31,7 +31,7 @@
     "@wya/http": "^1.0.2",
     "@wya/ps": "^1.0.2",
     "@wya/qrcode": "^1.0.0",
-    "@wya/sass": "^1.0.0",
+    "@wya/sass": "^1.0.2",
     "@wya/socket": "^1.0.0",
     "@wya/utils": "^1.0.3",
     "@wya/vc": "^1.0.6",

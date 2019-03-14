@@ -1,5 +1,5 @@
 <template>
-	<div class="g-pd-lr-24 g-pd-t-24" style="padding-bottom: 70px">
+	<div class="v-tpl-form g-pd-lr-24 g-pd-t-24" style="padding-bottom: 70px">
 		<!-- 表单 -->
 		<div class="g-m-b-32">
 			<xls-section-title title="表单样式" class="g-m-b-24" />
@@ -9,7 +9,7 @@
 				:model="formValidate" 
 				:rules="ruleValidate" 
 				:label-width="96"
-				class="v-tpl-form g-m-t-21"
+				class="g-pd-l-56 g-m-t-21"
 				position="left"
 			>	
 				<vc-form-item label="商品名称：" prop="product_name">
@@ -98,7 +98,7 @@
 		<div class="g-m-b-32">
 			<xls-section-title title="弹框内上下边距16px" class="g-m-b-24" />
 			<!-- 小弹框居中 |  中弹框距离左侧120 | 大弹框24，有进度条的距离左侧24-->
-			<div class="v-tpl-form">
+			<div class="g-pd-l-56">
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
 					<div class="g-c-999">安徽省电话费</div>
@@ -157,19 +157,35 @@ export default {
 			},
 			ruleValidate: {
 				product_name: [
-					{ required: true, message: '商品名称必须填写，最多100个字' }
+					{ 
+						required: true, 
+						message: '商品名称必须填写，最多100个字' 
+					}
 				],
 				product_sn: [
-					{ required: true, message: '商品货号必须填写，且不能超过64个字符' }
+					{ 
+						required: true,
+						message: '商品货号必须填写，且不能超过64个字符' 
+					}
 				],
 				original_img: [
-					{ required: true, message: '最少添加一张商品图片' }
+					{ 
+						required: true, 
+						message: '最少添加一张商品图片' 
+					}
 				],
 				contact: [
-					{ required: true, message: '商品价格为不能超过7个字符的正数，且不能超过小数点后两位' }
+					{ 
+						required: true, 
+						message: '商品价格为不能超过7个字符的正数，且不能超过小数点后两位' 
+					}
 				],
 				weight: [
-					{ required: true, message: '商品重量为不能超过9个字符的正整数', trigger: 'change' }
+					{ 
+						required: true, 
+						message: '商品重量为不能超过9个字符的正整数', 
+						trigger: 'change' 
+					}
 				],
 				
 			}
@@ -208,7 +224,4 @@ export default {
 </script>
 
 <style lang="scss">
-.v-tpl-form {
-	padding-left: 56px; // 距离侧边56px  56 + 24 = 80
-}
 </style>
