@@ -26,7 +26,6 @@ export default {
 	},
 	computed: {
 		listInfo() {
-			console.log(this.$store.state.tplPagingBasic.listInfo);
 			return this.$store.state.tplPagingBasic.listInfo;
 		}
 	},
