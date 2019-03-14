@@ -7,7 +7,7 @@
 		:history="true"
 		:load-data="loadData"
 		mode="piece"
-		class="v-tpl-paging-piece"
+		class="v-tpl-paging-piece g-m-t-24"
 		@page-size-change="handleChangePageSize"
 	>
 		<tpl-item 
@@ -66,7 +66,6 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin: 20px 0;
 	._item {
 		border: 1px solid #d4d4d4;
 		padding: 20px;

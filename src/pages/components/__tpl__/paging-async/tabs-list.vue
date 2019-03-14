@@ -3,6 +3,7 @@
 		:value="type" 
 		:animated="false"
 		type="card"
+		class="g-m-t-24"
 		@on-click="handleChange"
 	>
 		<vc-tabs-pane 

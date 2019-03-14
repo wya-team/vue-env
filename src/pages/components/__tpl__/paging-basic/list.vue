@@ -4,6 +4,7 @@
 		:total="listInfo.page.total"
 		:reset="listInfo.reset"
 		:load-data="loadData"
+		class="g-m-t-24"
 		history
 		show
 		@page-size-change="handleResetFirst"

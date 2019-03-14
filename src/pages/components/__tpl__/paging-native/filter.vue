@@ -7,7 +7,7 @@
 		>
 			导出
 		</vc-button>
-		<div class="g-m-b-16">
+		<div>
 			<span>退款信息：</span>
 			<vc-input
 				v-model="keywords.search" 
@@ -39,30 +39,32 @@
 			ref="expand"
 			v-model="show"
 		>
-			<div
-				class="g-search-form g-lh-50 g-bg-f4 g-m-b-24"
-				style="padding-top: 5px; padding-bottom: 5px"
-			>
-				<div class="g-flex g-fw-w" style="min-width: 796px">
-					<div>
-						<span class="g-c-333 g-w-100">退款方式：</span>
-						<vc-input
-							v-model="keywords.name" 
-							style="width: 160px" 
-							placeholder="请输入公司名称" 
-							@enter="handleSearch"
-							@change="handleInputChange"
-						/>
-					</div>
-					<div>
-						<span class="g-c-333 g-w-100">退款传方式：</span>
-						<vc-input
-							v-model="keywords.name" 
-							style="width: 220px" 
-							placeholder="请输入公司名称" 
-							@enter="handleSearch"
-							@change="handleInputChange"
-						/>
+			<div class="g-pd-t-16">
+				<div
+					class="g-search-form g-lh-50 g-bg-f4"
+					style="padding-top: 5px; padding-bottom: 5px"
+				>
+					<div class="g-flex g-fw-w" style="min-width: 796px">
+						<div>
+							<span class="g-c-333 g-w-100">退款方式：</span>
+							<vc-input
+								v-model="keywords.name" 
+								style="width: 160px" 
+								placeholder="请输入公司名称" 
+								@enter="handleSearch"
+								@change="handleInputChange"
+							/>
+						</div>
+						<div>
+							<span class="g-c-333 g-w-100">退款传方式：</span>
+							<vc-input
+								v-model="keywords.name" 
+								style="width: 220px" 
+								placeholder="请输入公司名称" 
+								@enter="handleSearch"
+								@change="handleInputChange"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
