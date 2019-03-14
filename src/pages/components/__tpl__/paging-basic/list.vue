@@ -1,34 +1,26 @@
 <template>
-	
-	<vc-table 
-		:data="listInfo.data[1]"
+	<vc-paging
+		:data-source="listInfo.data"
+		:total="listInfo.page.total"
+		:reset="listInfo.reset"
+		:current.sync="current"
+		:load-data="loadData"
+		history
+		show
+		@page-size-change="handleResetFirst"
 	>
-		<vc-table-column
-			prop="id"
-			label="ID"
-			width="180"
-		/>
-		<vc-table-column
-			prop="msg"
-			label="信息"
-			width="180"
-		/>
-		<vc-table-column
-			prop="address"
-			label="地址"
-		>
-			<div @click="handleResetFirst">回到首页刷新</div>
-			<div @click="handleResetCur">当前页刷新</div>
-		</vc-table-column>
-	</vc-table>
+		<tpl-item />
+	</vc-paging>
 </template>
 
 <script>
 import { URL } from '@utils/utils';
+import Item from './item';
 
 export default {
 	name: 'tpl-table1',
 	components: {
+		'tpl-item': Item
 	},
 	data() {
 		return {};

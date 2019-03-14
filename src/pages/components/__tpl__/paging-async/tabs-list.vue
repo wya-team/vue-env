@@ -22,23 +22,7 @@
 				:load-data="loadData"
 				@page-size-change="handleResetFirst"
 			>
-				<vc-table-column
-					prop="date"
-					label="日期"
-					width="180"
-				/>
-				<vc-table-column
-					prop="name"
-					label="姓名"
-					width="180"
-				/>
-				<vc-table-column
-					prop="address"
-					label="地址"
-				>
-					<div @click="handleResetFirst">回到首页刷新</div>
-					<div @click="handleResetCur">当前页刷新</div>
-				</vc-table-column>
+				<tpl-item />
 			</vc-paging>
 		</vc-tabs-pane>
 	</vc-tabs>
@@ -46,10 +30,12 @@
 
 <script>
 import { URL } from '@utils/utils';
+import Item from './item';
 
 export default {
 	name: 'tpl-paging-tabs-list',
 	components: {
+		'tpl-item': Item
 	},
 	data() {
 		const { query } = this.$route;
