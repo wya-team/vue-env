@@ -1,5 +1,5 @@
 <template>
-	<section class="g-dd">
+	<section>
 		<vc-table-column
 			prop="orders_id"
 			label="ID"
