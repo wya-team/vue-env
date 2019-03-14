@@ -95,13 +95,11 @@ export const initItem = (res, str, count, initObj, initArr) => {
  * 作为分页初始数据
  * for mobile
  */
-export const initObj = {
-	currentPage: 0, // 当前页数
-	totalPage: 1, // 总页数
-	isEnd: 0, // 是否正在加载 0 上拉加载，1为加载中，2为已全部加载,3数据异常
-	itemArr: [],
-	itemObj: {},
-
+export const initScroll = {
+	current: 0,
+	total: 0,
+	count: 0,
+	data: []
 };
 /**
  * 作为分页初始数据
@@ -109,9 +107,9 @@ export const initObj = {
  */
 export const initPage = {
 	reset: false,
-	page: {
-		total: 0
-	},
+	current: 0,
+	total: 0,
+	count: 0,
 	data: {}
 };
 /**

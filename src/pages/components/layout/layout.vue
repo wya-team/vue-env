@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .c-layout{
 	position: relative;
 	overflow: hidden;

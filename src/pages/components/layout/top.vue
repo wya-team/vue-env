@@ -85,7 +85,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .c-layout-top-bar {
 	position: fixed;
 	top: 56px;

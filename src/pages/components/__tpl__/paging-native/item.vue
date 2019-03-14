@@ -1,4 +1,3 @@
-
 <template>
 	<tbody>
 		<template v-for="item in data">

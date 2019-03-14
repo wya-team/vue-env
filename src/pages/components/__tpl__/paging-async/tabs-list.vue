@@ -4,7 +4,7 @@
 		:animated="false"
 		type="card"
 		class="g-m-t-24"
-		@on-click="handleChange"
+		@click="handleChange"
 	>
 		<vc-tabs-pane 
 			v-for="(item) in tabs"
@@ -16,7 +16,8 @@
 				:show="item.value == type" 
 				:type="item.value"
 				:data-source="listInfo[item.value].data"
-				:total="listInfo[item.value].page.total"
+				:total="listInfo[item.value].total"
+				:count="listInfo[item.value].count"
 				:reset="listInfo[item.value].reset"
 				:current.sync="current[item.value]"
 				:history="true"
@@ -98,7 +99,7 @@ export default {
 				type,
 				page: this.current[type]
 			};
-			this.$router.replace(URL.merge(`/tpl/paging/async`, { ...query }));
+			this.$router.replace(URL.merge({ path: `/tpl/paging/async`, query }));
 		},
 		handleChangePageSize() {
 			this.$store.commit('TPL_PAGING_ASYNC_LIST_INIT');
@@ -113,6 +114,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

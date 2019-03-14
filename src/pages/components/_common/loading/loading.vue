@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .c-loading {
 	.slide-fade-enter-active, .slide-fade-leave-active {
 		transition: all 1.5s linear;

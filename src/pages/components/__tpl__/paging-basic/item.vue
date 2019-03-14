@@ -1,12 +1,12 @@
 <template>
-	<div class="g-dd">
+	<section>
 		<vc-table-column
-			prop="id"
+			prop="orders_id"
 			label="ID"
 			width="180"
 		/>
 		<vc-table-column
-			prop="msg"
+			prop="orders_sn"
 			label="信息"
 			width="180"
 		/>
@@ -17,7 +17,7 @@
 			<div @click="handleResetFirst">回到首页刷新</div>
 			<div @click="handleResetCur">当前页刷新</div>
 		</vc-table-column>
-	</div>
+	</section>
 </template>
 
 <script>

@@ -224,7 +224,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #test {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	text-align: center;

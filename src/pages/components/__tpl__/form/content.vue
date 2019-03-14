@@ -207,7 +207,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-tpl-form {
 	padding-left: 56px; // 距离侧边56px  56 + 24 = 80
 }

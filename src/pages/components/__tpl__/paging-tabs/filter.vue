@@ -1,5 +1,5 @@
 <template>
-	<div class="js-filter">
+	<div>
 		<vc-button 
 			type="primary"
 			class="g-m-b-16"
@@ -124,7 +124,7 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>
 

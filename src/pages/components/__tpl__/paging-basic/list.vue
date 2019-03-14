@@ -1,7 +1,8 @@
 <template>
 	<vc-paging
 		:data-source="listInfo.data"
-		:total="listInfo.page.total"
+		:count="listInfo.count"
+		:total="listInfo.total"
 		:reset="listInfo.reset"
 		:load-data="loadData"
 		class="g-m-t-24"
@@ -31,7 +32,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.loadData(1, 10);
+		
 	},
 	methods: {
 		loadData(page, pageSize) {
@@ -64,6 +65,6 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

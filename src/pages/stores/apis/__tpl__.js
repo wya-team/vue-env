@@ -13,11 +13,11 @@ const api = {
 	'TPL_TABLE_ITEM_POST': '/test.json',
 	'TPL_TABLE_ITEM_PUT': '/test.json',
 	'TPL_LIST_GET': '/list.json',
-	'TPL_PAGING_BASIC_LIST_GET': '/jpush',
-	'TPL_PAGING_TABS_LIST_GET': '/jpush',
-	'TPL_PAGING_ASYNC_LIST_GET': '/jpush',
+	'TPL_PAGING_BASIC_LIST_GET': '/orders/orders/list.json',
+	'TPL_PAGING_TABS_LIST_GET': '/orders/orders/list.json',
+	'TPL_PAGING_ASYNC_LIST_GET': '/orders/orders/list.json',
 	'TPL_PAGING_ASYNC_TABS_GET': '/tabs.json',
-	'TPL_PAGING_PIECE_LIST_GET': '/jpush',
-	'TPL_PAGING_NATIVE_LIST_GET': '/jpush',
+	'TPL_PAGING_PIECE_LIST_GET': '/orders/orders/list.json',
+	'TPL_PAGING_NATIVE_LIST_GET': '/orders/orders/list.json',
 };
 export default api;

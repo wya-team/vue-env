@@ -18,7 +18,7 @@ if (__DEV__) {
 	if (!DEV_WITH_SERVER) { // 开发环境-前端自模拟
 		baseUrl = 'http://localhost:3000';
 	} else { // 开发环境-后端数据
-		baseUrl = 'http://47.52.228.255:8011';
+		baseUrl = 'https://gateway.wyawds.com';
 	}
 } else {
 	// 生产环境

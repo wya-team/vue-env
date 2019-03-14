@@ -3,6 +3,7 @@
 		ref="tableTarget"
 		:columns="columns"
 		:data-source="listInfo.data" 
+		:count="listInfo.count"
 		:total="listInfo.total"
 		:reset="listInfo.reset"
 		:history="true"
