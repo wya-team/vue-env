@@ -23,6 +23,9 @@ body {
 .g-m-b-24 {
 	margin-bottom: 24px;
 }
+.g-m-b-32 {
+	margin-bottom: 32px;
+}
 .g-m-l-24 {
 	margin-left: 24px;
 }
@@ -52,12 +55,21 @@ body {
 	}
 }
 
-.ivu-input-wrapper .ivu-input {
-	height: 28px !important;
-}
-
 .g-w-100 {
 	display: inline-block;
 	width: 100px;
 	text-align: right;
+}
+.g-bg-f9 {
+	background-color: #f9f9f9;
+}
+.g-pd-lr-24 {
+	padding-left: 24px;
+	padding-right: 24px;
+}
+.g-pd-t-24 {
+	padding-top: 24px;
+}
+.g-m-b-26 {
+	margin-bottom: 26px;
 }
