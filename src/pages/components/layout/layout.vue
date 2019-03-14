@@ -94,7 +94,6 @@ export default {
 .c-layout{
 	position: relative;
 	overflow: hidden;
-	background: #f2f2f2;
 	._header-bar{
 		position: fixed;
 		top: 0;
