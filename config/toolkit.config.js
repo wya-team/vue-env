@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const routes = require('./modules/root');
 
 module.exports = {
-	dir: resolve(process.cwd(), './src/pages/'), 
+	dir: `${process.cwd()}/src/pages/`, 
 	type: 'routeForVue',
 	project: 'xls',
 	routes
