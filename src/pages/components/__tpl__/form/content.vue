@@ -11,6 +11,7 @@
 				:label-width="96"
 				class="g-pd-l-56 g-m-t-21"
 				position="left"
+				@submit.native.prevent
 			>	
 				<vc-form-item label="商品名称：" prop="product_name">
 					<vc-input 
@@ -61,6 +62,7 @@
 						clearable 
 						transfer
 						placeholder="请选择我方合同公司"
+						style="width: 300px"
 					>
 						<vc-option 
 							v-for="(item, index) in company" 
@@ -77,6 +79,7 @@
 						clearable 
 						transfer
 						placeholder="请选择我方合同公司"
+						style="width: 300px"
 					>
 						<vc-option 
 							v-for="(item, index) in company" 
@@ -87,8 +90,55 @@
 						</vc-option>
 					</vc-select>
 				</vc-form-item>
+				<vc-form-item 
+					v-for="(item, index) in formValidate.items"
+					:key="item.index"
+					:label="index === 0 ? '缴款方式：' : ''"
+				>
+					<div class="g-form-block">
+						<vc-form-item
+							:prop="'items.' + index + '.date'" 
+							:rules="{required: true, message: '请选择成交时间'}"
+						>
+							<vc-date-picker 
+								v-model="item.date" 
+								style="width: 300px"
+								type="datetime"
+								placeholder="请选择成交时间" 
+							/>
+						</vc-form-item>
+						<vc-form-item 
+							:prop="'items.' + index + '.amount'" 
+							:rules="{required: true, message: '请输入付款金额'}"
+						>
+							<vc-input-number
+								v-model="item.amount" 
+								:min="0"
+								:precision="2"
+								style="width: 300px"
+								placeholder="请输入付款金额"
+							/>
+						</vc-form-item>
+						<vc-form-item
+							:prop="'items.' + index + '.imgs'" 
+							:rules="{required: true, message: '请选择图片'}"
+							style="margin-bottom: 0px !important"
+						>
+							<vc-imgs-picker 
+								v-model="item.imgs" 
+								style="width: 300px"
+							/>
+							<span
+								class="g-m-t-5 g-inline-block" 
+								@click="handleDel(item.index)"
+							>
+								删除
+							</span>
+						</vc-form-item>
+					</div>
+				</vc-form-item>
 				<vc-form-item label="">
-					<vc-button type="primary">
+					<vc-button type="primary" @click="handleAdd">
 						+新建
 					</vc-button>
 				</vc-form-item>
@@ -121,7 +171,10 @@
 				</div>
 			</div>
 		</div>
-		<xls-footer />
+		<xls-footer 
+			@cancel="$router.back()"
+			@ok="handleSubmit" 
+		/>
 	</div>
 </template>
 

@@ -53,12 +53,14 @@
 }
 
 .ivu-select {
-	// width: 300px !important;
 	height: 28px !important;
 }
 .ivu-input, .ivu-select-selection {
 	height: 28px !important;
 	border: 1px solid #d9d9d9;
+}
+.ivu-input-number {
+	height: 28px !important;
 }
 .ivu-select-placeholder {
 	height: 26px !important;
@@ -82,4 +84,14 @@
 .ivu-date-picker .ivu-input-icon {
 	height: 28px !important;
 	line-height: 28px !important;
+}
+
+// 表单块，调整上下边距问题
+.g-form-block {
+	.ivu-form-item {
+		margin-bottom: 16px !important;
+	}
+	.ivu-form-item-error-tip {
+		padding-top: 2px !important;
+	}
 }
