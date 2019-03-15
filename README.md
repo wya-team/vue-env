@@ -22,7 +22,7 @@ npm run mock
 > 创建业务所需模版，包括基本的，分页/选项卡, 表单
 
 ```shell
-npm install wya-toolkit -g 
+npm install @wya/toolkit -g 
 wya add
 ```
 
