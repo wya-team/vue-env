@@ -29,10 +29,7 @@
 				@click="handleToggle"
 			>
 				{{ show ? '收起' : '展开' }}
-				<i
-					:class="show ? 'icon-triangle-up' : 'icon-triangle-down'"
-					class="iconfont g-fs-12 g-c-black-dark"
-				/>
+				<vc-icon :type="show ? 'triangle-up' : 'triangle-down'" class="g-fs-12" />
 			</span>
 		</div>
 		<vc-expand 
