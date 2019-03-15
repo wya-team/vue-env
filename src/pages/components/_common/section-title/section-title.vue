@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-	name: 'xls-section-title',
+	name: 'common-section-title',
 	components: {
 
 	},
