@@ -151,23 +151,23 @@
 			<div class="g-pd-l-56">
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-51">安徽省电话费</div>
 				</div>
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-51">安徽省电话费</div>
 				</div>
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-51">安徽省电话费</div>
 				</div>
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-51">安徽省电话费</div>
 				</div>
 				<div class="g-flex g-m-b-16">
 					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-51">安徽省电话费</div>
 				</div>
 			</div>
 		</div>
