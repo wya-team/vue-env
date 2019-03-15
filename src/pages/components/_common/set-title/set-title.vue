@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-	name: "common-set-title",
+	name: "set-title",
 	props: {
 		title: String,
 		isShowBack: {
