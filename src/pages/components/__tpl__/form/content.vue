@@ -171,16 +171,17 @@
 				</div>
 			</div>
 		</div>
-		<vc-button @click="$router.back()">取消</vc-button>
-		<vc-button type="primary" @click="handleSubmit">确定</vc-button>
+		<tpl-footer />
 	</div>
 </template>
 
 <script>
+import Footer from '@common/footer/footer';
 
 export default {
 	name: 'v-tpl-form',
 	components: {
+		'tpl-footer': Footer
 	},
 	data() {
 		return {

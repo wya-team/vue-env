@@ -1,34 +1,26 @@
 <template>
 	<div class="c-layout">
-		<div class="_header-bar g-flex-ac">
-			<img >
-			<span class="g-fs-20">后台管理中心</span>
-			<vc-select 
-				v-model="curModule" 
-				style="width:200px"
-				@on-change="handleChangeModule"
-			>
-				<vc-option 
-					v-for="item in modules" 
-					:value="item.value" 
-					:key="item.value"
-				>
-					{{ item.name }}
-				</vc-option>
-			</vc-select>
-		</div>
 		<div class="g-flex">
 			<left-menu 
-				:menus="leftMenus"
+				:menus="menus"
+				:chunks="chunks"
 			>
-				<div slot="avatar">avatar</div>
+				<div slot="logo">logo</div>
 			</left-menu>
-			<div :style="{'padding-top': paddingTop}" class="g-col _content g-relative">
+			<div 
+				:style="{
+					'padding-top': paddingTop, 
+					'padding-left': secondStatus ? '232px' : '102px'
+				}" 
+				class="g-col g-relative">
 				<top-menu 
 					ref="topBar"
-					:menus="topMenus"
+					:menus="menus"
+					:chunks="chunks"
 					:on-mounted="handeSetPaddingTop"
-				/>
+				>
+					<div>头像</div>
+				</top-menu>
 				<router-view class="v-router" />
 			</div>
 		</div>
@@ -37,11 +29,9 @@
 
 <script>
 import LeftMenu from './left';
-import TopMenu from './top';
-import modules from './chunks';
+import TopMenu from './top'; 
 import menus from './left/root';
-
-const TOP_BAR_HEIGHT = 56;
+import chunks from './chunks';
 
 export default {
 	components: {
@@ -51,22 +41,15 @@ export default {
 	data() {
 		return {
 			curModule: this.$route.path.split('/')[1],
-			paddingTop: '0px'
+			paddingTop: '0px',
+			menus,
+			chunks: chunks.filter((chunk) => chunk.show),
 		};
 	},
 	computed: {
-		modules() { // 用户可进入的模块
-			return modules.filter((item) => item.show);
-		},
-		leftMenus() { // 当前模块下的菜单
-			let curMenu = menus[this.curModule] || [];
-			return curMenu.filter((item) => item.show);
-		},
-		topMenus() {
-			let leftIndex = this.leftMenus.findIndex((item) => this.$route.path.indexOf(item.route) > -1);
-			if (leftIndex === -1) return [];
-			return this.leftMenus[leftIndex].children || [];
-		},
+		secondStatus() {
+			return this.$store.state.layoutMain.secondStatus;
+		}
 	},
 	beforeRouteEnter(to, from, next) {
 		next();
@@ -80,12 +63,8 @@ export default {
 	},
 	methods: {
 		handeSetPaddingTop(top) {
-			this.paddingTop = top + TOP_BAR_HEIGHT + 'px';
+			this.paddingTop = top + 'px';
 		},
-		handleChangeModule(value) {
-			this.curModule = value;
-			this.$router.push(`${this.leftMenus[0].route}`);
-		}
 	}
 };
 </script>
@@ -106,7 +85,7 @@ export default {
 		box-shadow: 0 1px 1px rgba(0,0,0,.1);
 	}
 	._content {
-		padding-left: 180px;
+		padding-left: 232px;
 	}
 	.v-router {
 		margin: 12px 12px 0 16px;

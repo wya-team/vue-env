@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<vc-table-item>
 		<vc-table-column
 			prop="orders_id"
 			label="ID"
@@ -17,7 +17,7 @@
 			<div @click="handleResetFirst">回到首页刷新</div>
 			<div @click="handleResetCur">当前页刷新</div>
 		</vc-table-column>
-	</section>
+	</vc-table-item>
 </template>
 
 <script>

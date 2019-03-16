@@ -1,7 +1,4 @@
-/**
- * 模块
- */
-const modules = [
+export default [
 	{
 		value: 'tpl',
 		name: '模板',
@@ -12,8 +9,7 @@ const modules = [
 		value: 'setting',
 		name: '设置',
 		show: true,
-		route: '/setting'
+		route: '/setting',
+		stair: true,
 	}
 ];
-
-export default modules;
