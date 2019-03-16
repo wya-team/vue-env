@@ -2,7 +2,7 @@
 	<div class="v-tpl-form g-pd-lr-24 g-pd-t-24" style="padding-bottom: 70px">
 		<!-- 表单 -->
 		<div class="g-m-b-32">
-			<xls-section-title title="表单样式" class="g-m-b-24" />
+			<h3 class="g-m-b-24">表单样式</h3>
 			<!-- 96位所有label中最宽的长度 -->
 			<vc-form 
 				ref="form" 
@@ -146,7 +146,7 @@
 		</div>
 		<!-- 展示 -->
 		<div class="g-m-b-32">
-			<xls-section-title title="弹框内上下边距16px" class="g-m-b-24" />
+			<h3 class="g-m-b-24">弹框内上下边距16px</h3>
 			<!-- 小弹框居中 |  中弹框距离左侧120 | 大弹框24，有进度条的距离左侧24-->
 			<div class="g-pd-l-56">
 				<div class="g-flex g-m-b-16">
@@ -171,22 +171,16 @@
 				</div>
 			</div>
 		</div>
-		<xls-footer 
-			@cancel="$router.back()"
-			@ok="handleSubmit" 
-		/>
+		<vc-button @click="$router.back()">取消</vc-button>
+		<vc-button type="primary" @click="handleSubmit">确定</vc-button>
 	</div>
 </template>
 
 <script>
-import SectionTitle from '@components/_common/section-title/section-title';
-import Footer from '@components/_common/footer/footer';
 
 export default {
 	name: 'v-tpl-form',
 	components: {
-		'xls-section-title': SectionTitle,
-		'xls-footer': Footer,
 	},
 	data() {
 		return {
