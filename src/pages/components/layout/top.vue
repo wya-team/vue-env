@@ -8,7 +8,7 @@
 		<div v-if="typeof topMenus === 'string'" class="_name">
 			{{ topMenus }}
 		</div>
-		<div v-else-if="topMenus.constructor === Array" class="g-flex-ac g-fw-w">
+		<div v-else-if="(topMenus instanceof Array)" class="g-flex-ac g-fw-w">
 			<div 
 				v-for="(menu) in topMenus"
 				:key="menu.route"
