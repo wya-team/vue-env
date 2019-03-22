@@ -69,18 +69,18 @@ export default {
 			height: 40px;
 			white-space: nowrap;
 			overflow: hidden;
-			background-color: #f8f8f9;
+			background-color: $cf8;
 
 		}
 	}
 	tbody {
-		background-color: #ffffff;
+		background-color: $white;
 		td {
 			text-align: left;
 			height: 40px;
 			white-space: nowrap;
 			overflow: hidden;
-			border: 1px solid #ccc!important
+			border: 1px solid $cd9!important
 		}
 		tr {
 			border: 1px solid red!important

@@ -101,7 +101,7 @@ export default {
 	user-select: none;
 	._one-level {
 		width: 102px;
-		background-color: #444444;
+		background-color: $c444;
 		.__chunk-item {
 			height: 42px;
 			line-height: 42px;
@@ -110,27 +110,27 @@ export default {
 			cursor: pointer;
 		}
 		.__chunk-item-unactive {
-			color: #BDBDBD;
+			color: $cbd;
 			&:hover {
-				background-color: #676767;
+				background-color: $c67;
 				transition: background-color 0.2s linear;
 			}
 		}
 		.__chunk-item-active {
-			background-color: #F8F8F8;
-			color: #000000;
+			background-color: $cf8;
+			color: $c000;
 		}
 	}
 	._two-level {
 		width: 130px;
-		background-color: #ffffff;
+		background-color: $white;
 		.__name {
 			height: 56px; 
 			line-height: 56px;
 			font-size: 14px;
-			color: #000000;
-			border-bottom: 1px solid #DBDBDB;
-			border-right: 1px solid #DBDBDB;
+			color: $c000;
+			border-bottom: 1px solid $cbd;
+			border-right: 1px solid $cbd;
 			text-align: center
 		}
 		.__menu-item {
@@ -143,15 +143,15 @@ export default {
 
 		}
 		.__menu-item-unactive {
-			color: #676767;
+			color: $c67;
 			&:hover {
 				color: $main;
 				transition: color 0.2s linear;
 			}
 		}
 		.__menu-item-active {
-			color: #000000;
-			background:#efefef;
+			color: $c000;
+			background: $cef;
 			border-radius:4px;
 		}
 	}

@@ -80,8 +80,8 @@ export default {
 		width: 100%;
 		height: 56px;
 		z-index: 10;
-		background: #e84854;
-		color: #ffffff;
+		background: $orange-dark;
+		color: $white;
 		box-shadow: 0 1px 1px rgba(0,0,0,.1);
 	}
 	._content {
@@ -89,7 +89,7 @@ export default {
 	}
 	.v-router {
 		margin: 12px 12px 0 16px;
-		background: #ffffff;
+		background: $white;
 	}
 }
 </style>

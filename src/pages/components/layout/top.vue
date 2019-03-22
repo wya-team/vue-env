@@ -102,20 +102,18 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../css/core/color.scss';
-
 .c-layout-top-bar {
 	position: fixed;
 	top: 0px;
 	right: 0;
 	z-index: 999;
-	background-color: #ffffff;
+	background-color: $white;
 	padding: 0 15px;
-	border-bottom: 1px solid #e1e3e5;
+	border-bottom: 1px solid $ce8;
 	height: 56px;
 	._name {
 		font-size:14px;
-		color:#000000;
+		color:$c000;
 		height: 56px;
 		line-height: 56px;
 		padding-left: 21px;
@@ -128,7 +126,7 @@ export default {
 		cursor: pointer;
 	}
 	._menu-item-unactive {
-		color: #000000;
+		color: $c000;
 		opacity: 0.8;
 		&:hover {
 			opacity: 1;			

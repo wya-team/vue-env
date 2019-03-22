@@ -113,7 +113,20 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(css|scss)$/,
-				use: ['vue-style-loader', 'css-loader', postcssLoader, 'sass-loader'],
+				use: [
+					'vue-style-loader', 
+					'css-loader', 
+					postcssLoader, 
+					'sass-loader',
+					{
+						loader: 'sass-resources-loader',
+						options: {
+							resources: [
+								path.resolve(APP_ROOT, "src/css/core/index.scss")
+							]
+						}
+					}
+				],
 				// 组件内的样式
 				include: [
 					path.resolve(APP_ROOT, "src/pages"),

@@ -68,7 +68,7 @@ export default {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	._item {
-		border: 1px solid #d4d4d4;
+		border: 1px solid $cd9;
 		padding: 20px;
 		margin-bottom: 20px;
 		width: calc(50% - 10px);

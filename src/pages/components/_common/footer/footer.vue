@@ -57,7 +57,7 @@ export default {
 	bottom: 0;
 	
 	height: 56px;
-	background-color: #FFF;
+	background-color: $white;
 	box-shadow: 0px -2px 10px 0px rgba(0, 0, 0, 0.08);
 	._cancel {
 		margin-right: 12px;
