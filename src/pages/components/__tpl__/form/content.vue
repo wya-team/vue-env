@@ -25,9 +25,9 @@
 					<div class="g-c-333 g-tr" style="width: 96px">商品名称：</div>
 					<div class="g-c-999">安徽省电话费</div>
 				</div>
-				<vc-form-item label="商品主图：" prop="original_img" >
+				<!-- <vc-form-item label="商品主图：" prop="original_img" >
 					<vc-imgs-picker class="g-m-t-26" />
-				</vc-form-item>
+				</vc-form-item> -->
 				<vc-form-item label="商品货号：" prop="product_sn">
 					<vc-input 
 						v-model="formValidate.product_sn" 
@@ -171,7 +171,10 @@
 				</div>
 			</div>
 		</div>
-		<tpl-footer />
+		<tpl-footer 
+			@cancel="$router.back()"
+			@ok="handleSubmit" 
+		/>
 	</div>
 </template>
 
@@ -255,13 +258,7 @@ export default {
 			});
 		},
 		handleSubmit(name) {
-			this.$refs.form.validate((isValid) => {
-				if (isValid) {
-					Message.success('Success!');
-				} else {
-					Message.error('Fail!');
-				}
-			});
+			this.$refs.form.validate().then(() => {}).catch((err) => { console.log(err); });
 		},
 		handleSet() {
 			this.setShow = !this.setShow;

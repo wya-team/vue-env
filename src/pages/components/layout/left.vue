@@ -91,8 +91,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../css/core/color.scss';
-
 .c-layout-left-menu {
 	position: fixed;
 	left: 0;

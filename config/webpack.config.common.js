@@ -122,7 +122,7 @@ const webpackConfig = {
 						loader: 'sass-resources-loader',
 						options: {
 							resources: [
-								path.resolve(APP_ROOT, "src/css/core/index.scss")
+								path.resolve(APP_ROOT, "src/css/themes/index.scss")
 							]
 						}
 					}
