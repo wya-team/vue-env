@@ -3,10 +3,15 @@ const APP_ROOT = process.cwd();
 const ENV_IS_DEV = process.env.NODE_ENV === 'development';
 
 const path = require('path');
+const fs = require('fs-extra');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpackMerge = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const userConfig = require('./user.config.js');
+
+const userConfig = fs.existsSync(path.resolve(__dirname, './user.config.js')) 
+	? require('./user.config.js')
+	: {};
 
 const localPort = (() => {
 	if (ENV_IS_DEV) {
