@@ -53,7 +53,7 @@ export const clearLoginAuth = (opts = {}) => {
 	Vue.prototype.$global = _global;
 	Vue.prototype.$auth = _global.auth;
 
-	Vc.instance.cleanAll();
+	Vc.instance.clearAll();
 	serviceManager.clear();
 
 	// todo

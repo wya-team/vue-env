@@ -55,7 +55,7 @@ export default {
 		next();
 	},
 	beforeRouteUpdate(to, from, next) {
-		this.$vc.clean();
+		this.$vc.clear();
 		next();
 	},
 	beforeRouteLeave(to, from, next) {
