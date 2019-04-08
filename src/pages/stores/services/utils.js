@@ -48,6 +48,7 @@ export const createService = (defaultOptions = {}) => {
 	
 	return { 
 		[key]: (userOptions = {}) => {
+			const { param: userParam = {} } = userOptions;
 			const options = { ...defaultOptions, ...userOptions };
 			const { autoLoad = true } = options;
 			// 方法首字母大写
@@ -65,7 +66,11 @@ export const createService = (defaultOptions = {}) => {
 					};
 				},
 				created() {
-					autoLoad && (this[loadKey])({ ...defaultParam, ...getParam(this) });
+					autoLoad && (this[loadKey])({ 
+						...defaultParam, 
+						...userParam, 
+						...getParam(this) 
+					});
 				},
 				methods: {
 					[loadKey](param, opts = {}) { // eslint-disable-line
