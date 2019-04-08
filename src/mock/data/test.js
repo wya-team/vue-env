@@ -27,10 +27,13 @@ for (let i = 0; i < 10; i++) {
 
 
 module.exports = (req, res) => ({
-	page: {
-		current: req.query.page || 1,
-		total: 10,
-		count: 100
-	},
-	list: data,
+	status: 1,
+	data: {
+		page: {
+			current: req.query.page || 1,
+			total: 10,
+			count: 100
+		},
+		list: data,
+	}
 });
