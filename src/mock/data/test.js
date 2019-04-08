@@ -10,7 +10,7 @@ let size = [
 ];
 let images = [1, 2, 3].map(x => Random.image('200x100', Random.color(), Random.word(2, 6)));
 data = [];
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 10; i++) {
 
 	let content = Random.cparagraph(0, 10);
 
@@ -26,9 +26,11 @@ for (let i = 0; i < 30; i++) {
 }
 
 
-module.exports = {
-	currentPage: 1,
-	totalPage: 10,
+module.exports = (req, res) => ({
+	page: {
+		current: req.query.page || 1,
+		total: 10,
+		count: 100
+	},
 	list: data,
-	totalCount: 100
-};
+});

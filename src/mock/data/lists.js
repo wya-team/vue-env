@@ -13,7 +13,7 @@ for (let i = 1; i <= 30; i++) {
 }
 
 
-module.exports = {
+module.exports = (req, res) => ({
 	"_items": items,
 	"_links": {
 		"self": {
@@ -32,4 +32,4 @@ module.exports = {
 		"currentPage": 1,
 		"perPage": 20
 	}
-};
+});
