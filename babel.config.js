@@ -33,7 +33,13 @@ module.exports = (api) => {
 				"import",
 				{
 					"libraryName": "@wya/vc",
-					"libraryDirectory": "lib"
+					"libraryDirectory": "lib",
+					"customName": (name) => {
+						if (/^m-/.test(name)) {
+							return `@wya/vc/lib/${name.replace(/^m-/, '')}/index.m`;
+						}
+						return `@wya/vc/lib/${name}`;
+					}
 				},
 				"@wya/vc"
 			]
