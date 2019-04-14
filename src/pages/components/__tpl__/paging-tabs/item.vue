@@ -1,17 +1,17 @@
 <template>
 	<vc-table-item>
 		<vc-table-column
-			prop="orders_id"
+			prop="id"
 			label="ID"
 			width="180"
 		/>
 		<vc-table-column
-			prop="orders_sn"
+			prop="title"
 			label="信息"
 			width="180"
 		/>
 		<vc-table-column
-			prop="address"
+			prop="img"
 			label="地址"
 		>
 			<div @click="handleResetFirst">回到首页刷新</div>
