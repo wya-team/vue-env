@@ -12,6 +12,7 @@ export const actions = {
 			param = {},
 			pending,
 			fail,
+			refresh,
 			loading = true,
 			...rest
 		} = opts;
@@ -30,7 +31,7 @@ export const actions = {
 			...rest
 		}).then((res) => {
 			const { data } = res;
-			store.commit(redirect || `${mutation}_SUCCESS`, {
+			store.commit(redirect || `${mutation}_${refresh ? 'REFRESH' : 'SUCCESS'}`, {
 				data,
 				param,
 				// ...rest

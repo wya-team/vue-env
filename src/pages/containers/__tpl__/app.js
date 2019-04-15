@@ -54,6 +54,16 @@ export const tplConfig = [
 		path: '/tpl/paging/native/demo2', 
 		name: 'tpl-paging-native-demo2',
 		component: () => import('./modules/tpl-paging-piece.vue') 
+	},
+	{ 
+		path: '/tpl/scroll/basic', 
+		name: 'tpl-scroll-basic',
+		component: () => import('./modules/tpl-scroll-basic.vue') 
+	},
+	{ 
+		path: '/tpl/scroll/tabs', 
+		name: 'tpl-scroll-tabs',
+		component: () => import('./modules/tpl-scroll-tabs.vue') 
 	}
 ];
 

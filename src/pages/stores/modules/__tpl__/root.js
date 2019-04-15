@@ -4,6 +4,8 @@ import { tplPagingTabs } from './paging-tabs';
 import { tplPagingAsync } from './paging-async';
 import { tplPagingNative } from './paging-native';
 import { tplPagingPiece } from './paging-piece';
+import { tplScrollBasic } from './scroll-basic';
+import { tplScrollTabs } from './scroll-tabs';
 
 export default {
 	tplRequest,
@@ -11,5 +13,7 @@ export default {
 	tplPagingTabs,
 	tplPagingAsync,
 	tplPagingNative,
-	tplPagingPiece
+	tplPagingPiece,
+	tplScrollBasic,
+	tplScrollTabs
 };

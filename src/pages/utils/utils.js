@@ -96,7 +96,7 @@ export const initItem = (res, str, count, initObj, initArr) => {
  * for mobile
  */
 export const initScroll = {
-	current: 0,
+	// current: 0,
 	total: 0,
 	count: 0,
 	data: []
