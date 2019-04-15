@@ -79,16 +79,7 @@ export default {
 				type
 			};
 			this.$router.replace(URL.merge({ path: `/tpl/scroll/tabs`, query }));
-		},
-		handleChangePageSize() {
-			this.$store.commit('TPL_SCROLL_TABS_LIST_INIT');
-		},
-		handleResetFirst() {
-			this.$store.commit('TPL_SCROLL_TABS_LIST_INIT');
-		},
-		handleResetCur() {
-			this.$store.commit('TPL_SCROLL_TABS_LIST_RESET');
-		},
+		}
 	}
 };
 </script>
