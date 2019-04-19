@@ -1,6 +1,6 @@
 <template>
-	<div :key="id">
-		<div>{{ name }}</div>
+	<div :key="it.id">
+		<div>{{ it.title }}</div>
 		<div @click="handleResetFirst">回到首页刷新</div>
 		<div @click="handleResetCur">当前页刷新</div>
 	</div>
@@ -10,8 +10,7 @@
 export default {
 	name: "tpl-paging-piece-item",
 	props: {
-		id: [String, Number],
-		name: String
+		it: Object
 	},
 	methods: {
 		handleResetFirst() {

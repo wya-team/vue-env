@@ -12,7 +12,9 @@
 		mode="native"
 		@page-size-change="handleChangePageSize"
 	>
-		<tpl-item slot-scope="it" v-bind="it" />
+		<template #default="{ dataSource }">
+			<tpl-item :data-source="dataSource" />
+		</template>
 	</vc-paging>
 </template>
 

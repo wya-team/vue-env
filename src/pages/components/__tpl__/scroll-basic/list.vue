@@ -5,7 +5,9 @@
 		:total="listInfo.total"
 		:load-data="loadData"
 	>
-		<tpl-item />
+		<template #default="it">
+			<tpl-item :it="it" />
+		</template>
 	</vcm-pull-scroll>
 </template>
 <script>

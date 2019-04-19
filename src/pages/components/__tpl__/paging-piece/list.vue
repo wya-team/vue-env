@@ -11,11 +11,13 @@
 		class="v-tpl-paging-piece g-m-t-24"
 		@page-size-change="handleChangePageSize"
 	>
-		<tpl-item 
-			slot-scope="it"
-			v-bind="it"
-			class="_item"
-		/> 
+		<template #default="{ it }">
+			<tpl-item 
+				:it="it"
+				class="_item"
+			/> 
+		</template>
+		
 	</vc-paging>
 </template>
 

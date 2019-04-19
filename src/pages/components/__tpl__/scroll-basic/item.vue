@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>占位</p>
+		<p>{{ it }}</p>
 		<p>占位</p>
 		<p>占位</p>
 		<p>占位</p>
@@ -24,7 +24,7 @@ export default {
 
 	},
 	props: {
-
+		it: Object
 	},
 	data() {
 		return {
@@ -36,8 +36,7 @@ export default {
 	watch: {
 		
 	},
-	created() {
-		
+	updated() {
 	},
 	methods: {
 		handleResetFirst() {

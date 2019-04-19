@@ -19,7 +19,9 @@
 				:count="listInfo[item.value].count"
 				:load-data="loadData"
 			>
-				<tpl-item />
+				<template #default="it">
+					<tpl-item :it="it" />
+				</template>
 			</vcm-pull-scroll>
 		</vcm-tabs-pane>
 	</vcm-tabs>
