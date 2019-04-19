@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :key="it.id">
 		<p>{{ it }}</p>
 		<p>占位</p>
 		<p>占位</p>

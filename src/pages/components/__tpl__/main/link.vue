@@ -14,7 +14,6 @@ import { tplConfig, tplOtherConfig } from '@containers/__tpl__/app';
 export default {
 	name: 'tpl-links',
 	components: {
-		'vc-copy': Copy
 	},
 	data() {
 		return {
