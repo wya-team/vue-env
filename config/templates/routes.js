@@ -7,6 +7,16 @@ const hasOther = (module) => {
 	return (fs.existsSync(fullpath) ? fs.readFileSync(fullpath, 'utf-8') : '').includes('OtherConfig');
 };
 
+const h2c = (value) => {
+	return value
+		.split('-')
+		.map((item, index) => {
+			return index > 0 
+				? `${item[0].toUpperCase()}${item.slice(1)}` 
+				: item;
+		})
+		.join('');
+};
 const routes = (opts = {}) => {
 	const { modules } = opts;
 	let contents = '';
@@ -15,7 +25,7 @@ const routes = (opts = {}) => {
 	contents += `import { PRE_ROUTER_URL } from '../constants/constants';\n`;
 	contents += `import { loginConfig } from '../containers/login/app';\n`;
 	modules.forEach((item) => {
-		let _item = item === '__tpl__' ? 'tpl' : item;
+		let _item = h2c(item === '__tpl__' ? 'tpl' : item);
 		hasOther(_item) 
 			? contents += `import { ${_item}Config, ${_item}OtherConfig } from '../containers/${item}/app';\n`
 			: contents += `import { ${_item}Config } from '../containers/${item}/app';\n`;
@@ -27,7 +37,7 @@ const routes = (opts = {}) => {
 	contents += `	routes: [\n`;
 	contents += `		...loginConfig,\n`;
 	modules.forEach((item) => {
-		let _item = item === '__tpl__' ? 'tpl' : item;
+		let _item = h2c(item === '__tpl__' ? 'tpl' : item);
 		hasOther(_item) && (contents += `		...(${_item}OtherConfig || {}),\n`);
 	});
 	contents += `		{\n`;
@@ -36,7 +46,7 @@ const routes = (opts = {}) => {
 	contents += `			redirect: '/${modules[0] || 'login'}',\n`;
 	contents += `			children: [\n`;
 	modules.forEach((item, index) => {
-		let _item = item === '__tpl__' ? 'tpl' : item;
+		let _item = h2c(item === '__tpl__' ? 'tpl' : item);
 		contents += `				...${_item}Config${index === modules.length - 1 ? '' : ','}\n`;
 	});
 	contents += `			]\n`;
