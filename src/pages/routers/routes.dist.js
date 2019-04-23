@@ -3,7 +3,6 @@ import { PRE_ROUTER_URL } from '../constants/constants';
 import { loginConfig } from '../containers/login/app';
 import { tplConfig } from '../containers/__tpl__/app';
 import { settingConfig } from '../containers/setting/app';
-import { homeConfig } from '../containers/home/app';
 
 export default {
 	base: PRE_ROUTER_URL,
@@ -19,8 +18,7 @@ export default {
 					redirect: { name: 'tpl-main' }
 				},
 				...tplConfig,
-				...settingConfig,
-				...homeConfig
+				...settingConfig
 			]
 		},
 		{
