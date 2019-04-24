@@ -60,6 +60,12 @@ const router = new Router(routeConfig);
 router.beforeEach(beforeEach);
 router.afterEach(afterEach);
 
+router.onError((error) => {
+	if (error.message.match(/Loading chunk (\d)+ failed/g)) {
+		location.reload();
+	}
+});
+
 // - Vuex
 Vue.use(Vuex);
 const store = new Vuex.Store(storeConfig);
