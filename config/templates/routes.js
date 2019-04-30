@@ -22,7 +22,6 @@ const routes = (opts = {}) => {
 	const { modules } = opts;
 	let contents = '';
 	contents += `import Vue from 'vue';\n`;
-	contents += `import layout from '@components/layout/layout';\n`;
 	contents += `import { PRE_ROUTER_URL } from '../constants/constants';\n`;
 	contents += `import { loginConfig } from '../containers/login/app';\n`;
 	modules.forEach((item) => {
