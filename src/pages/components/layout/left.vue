@@ -4,105 +4,137 @@
 			<div style="height: 56px">
 				<slot name="logo" />
 			</div>
-			<div 
-				v-for="(chunk, index) in chunks" 
-				v-if="chunk.show"
-				:key="index"
-				:class="$route.path.indexOf(chunk.route) > -1 ? '__chunk-item-active' : '__chunk-item-unactive'" 
-				class="__chunk-item"
-				@click="handleLinkTo(chunk, 'one')"
-			>
-				<i class="iconfont icon-add g-m-r-10" />
-				{{ chunk.name }}
-			</div>
+			<template v-for="(chunk, index) in chunks" >
+				<router-link 
+					v-if="chunk.show"
+					:key="index"
+					:to="chunk.route"
+					:class="currentChunk.value === chunk.value ? '__chunk-item-active' : '__chunk-item-unactive'" 
+					class="__chunk-item"
+				>
+					<i class="iconfont icon-add g-m-r-10" />
+					{{ chunk.name }}
+				</router-link>
+			</template>
 		</div>
-		<div v-if="secondStatus" class="_two-level">
+		<div v-if="childMenus.length" class="_two-level" >
 			<div class="__name">
-				{{ chunkInfo.name }}
+				{{ currentChunk.name }}
 			</div>
 			<div style="padding: 12px">
-				<div 
-					v-for="(menu, index) in childrenMenus" 
-					v-if="menu.show"
-					:key="index"
-					:class="$route.path.indexOf(menu.route) > -1 ? '__menu-item-active' : '__menu-item-unactive'" 
-					class="__menu-item"
-					@click="handleLinkTo(menu, 'two')"
-				>
-					{{ menu.name }}
-				</div>
+				<template v-for="(menu, index) in childMenus" >
+					<div 
+						v-if="menu.show"
+						:key="index"
+						:class="currentChildRoute === menu.route ? '__menu-item-active' : '__menu-item-unactive'" 
+						class="__menu-item"
+						@click="handleLinkTo(menu.route)"
+					>
+						{{ menu.name }}
+					</div>
+				</template>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { getChunks } from './menu/chunks';
+import { getChildMenus } from './menu/left/root';
+import { getTopMenus } from "./menu/top/root";
+
 export default {
-	name: 'layout-left-menus',
+	name: 'xls-layout-left',
+	components: {
+
+	},
 	props: {
-		menus: {
-			type: Object,
-			default() {
-				return {};
-			}
-		},
-		chunks: {
-			type: Array,
-			default() {
-				return [];
-			}
-		}
+
 	},
 	data() {
 		return {
-			
 		};
 	},
 	computed: {
-		chunkInfo() {
-			let chunk = this.$route.path.split('/')[1];
-			return this.chunks.find((it) => it.value === chunk) || {};
+		chunks() {
+			let array = getChunks(this.$global.auth);
+			return array.filter((it) => it.show);
 		},
-		childrenMenus() {
-			// 一级路由不用再left中配置导航文件，一级路由的menus为空
-			let menus = this.menus[this.chunkInfo.value] || [];
-			this.$store.commit('TOGGLE_SECOND_STATUS', menus.length > 0);
-			return menus;
+		/**
+		 * 每个路由都一个name，格式：tpl-xxx-xxx，
+		 * 不取route.path是因为正式环境下前面会加一级路由，不好判断
+		 */
+		currentChunk() {
+			let routeName = this.$route.path.split('/');
+			return this.chunks.filter(chunk => chunk.value === routeName[1])[0] || {};
 		},
-		secondStatus() {
-			return this.$store.state.layoutMain.secondStatus;
+		/**
+		 * 获取二级导航菜单
+		 */
+		childMenus() {
+			let children = getChildMenus(this.$global.auth)[this.currentChunk.value] || [];
+			return children.filter((child) => child.show);
+		},
+		/**
+		 * 获取当前二级导航路由，避免出现相近的路由情况而导致判断不正确
+		 */
+		currentChildRoute() {
+			let path = this.$route.path.split('/');
+			return path.splice(0, 3).join('/');
 		}
 	},
-	methods: {
-		handleLinkTo(menu, level) {
-			this.$emit('click', menu);
-			this.$router.push(this.getIndexRoute(menu));
-			this.$store.commit('TOGGLE_SECOND_STATUS', this.childrenMenus.length > 0);
-		},
-		getIndexRoute(menu) {
-			if (!menu.children) {
-				return menu.route;
-			} else {
-				return menu.children.filter((item) => item.show)[0].route;
+	watch: {
+		childMenus(newVal, oldVal) {
+			if (newVal.length !== oldVal.length) {
+				this.emitLeftMenuWidth();
 			}
 		}
-	}
+	},
+	mounted() {
+		this.emitLeftMenuWidth();
+		// 防止其他组件在其发射时还没渲染
+		this.$vc.on('layout-left-menu-emit-again', this.emitLeftMenuWidth);
+	},
+	destroyed() {
+		this.$vc.emit('layout-left-menu', { distance: 0 });
+		this.$vc.on('layout-left-menu-emit-again', this.emitLeftMenuWidth);
+	},
+	methods: {
+		emitLeftMenuWidth() {
+			this.$vc.emit('layout-left-menu', { distance: this.childMenus.length ? 232 : 102 });
+		},
+		getIndexRoute(route) {
+			// 如果top内有对应的menu.route，则获取第一个有权限的路由，进行跳转
+			let routes = getTopMenus(this.$global.auth)[route] || [];
+			if (typeof routes === 'string') {
+				return route;
+			}
+			let authRoutes = routes.filter((it) => it.show);
+			return authRoutes.length ? authRoutes[0].route : route;
+		},
+		handleLinkTo(route) {
+			this.$router.push(this.getIndexRoute(route));
+		},
+	},
 };
 </script>
 
 <style lang="scss">
 .c-layout-left-menu {
 	position: fixed;
+	top: 0;
 	left: 0;
 	z-index: 4;
 	height: 100vh;
 	user-select: none;
 	._one-level {
+		height: 100%;
 		width: 102px;
 		background-color: $c444;
 		.__chunk-item {
 			height: 42px;
 			line-height: 42px;
+			display: block;
 			padding-left: 23px;
 			font-size: 15px;
 			cursor: pointer;
@@ -127,8 +159,8 @@ export default {
 			line-height: 56px;
 			font-size: 14px;
 			color: $c000;
-			border-bottom: 1px solid $cbd;
-			border-right: 1px solid $cbd;
+			border-bottom: 1px solid $cd9;
+			border-right: 1px solid $cd9;
 			text-align: center
 		}
 		.__menu-item {
@@ -141,7 +173,7 @@ export default {
 
 		}
 		.__menu-item-unactive {
-			color: $c67;
+			color: #676767;
 			&:hover {
 				color: $main;
 				transition: color 0.2s linear;
@@ -149,11 +181,9 @@ export default {
 		}
 		.__menu-item-active {
 			color: $c000;
-			background: $cef;
+			background:$cef;
 			border-radius:4px;
 		}
 	}
 }
 </style>
-
-

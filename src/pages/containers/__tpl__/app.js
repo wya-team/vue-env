@@ -1,69 +1,110 @@
 export const tplConfig = [
-	{
-		path: '/tpl',
-		redirect: '/tpl/main'
-	},
 	{ 
 		path: '/tpl/main', 
 		name: 'tpl-main',
-		component: () => import('./modules/tpl-main.vue'),
+		components: [
+			() => import('./modules/tpl-main.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/basic', 
 		name: 'tpl-basic',
-		component: () => import('./modules/tpl-basic.vue') 
+		components: [
+			() => import('./modules/tpl-basic.vue'),
+			'left',
+			'top'
+		]
 	},
 
 	{ 
 		path: '/tpl/request', 
 		name: 'tpl-request',
-		component: () => import('./modules/tpl-request.vue') 
+		components: [
+			() => import('./modules/tpl-request.vue'),
+			'left',
+			'top'
+		]
 	},
 	// 表单
 	{ 
 		path: '/tpl/form', 
 		name: 'tpl-form',
-		component: () => import('./modules/tpl-form.vue') 
+		components: [
+			() => import('./modules/tpl-form.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/paging/basic', 
 		name: 'tpl-paging-basic',
-		component: () => import('./modules/tpl-paging-basic.vue') 
+		components: [
+			() => import('./modules/tpl-paging-basic.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/paging/tabs', 
 		name: 'tpl-paging-tabs',
-		component: () => import('./modules/tpl-paging-tabs.vue') 
+		components: [
+			() => import('./modules/tpl-paging-tabs.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/paging/async', 
 		name: 'tpl-paging-async',
-		component: () => import('./modules/tpl-paging-async.vue') 
+		components: [
+			() => import('./modules/tpl-paging-async.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/paging/piece', 
 		name: 'tpl-paging-piece',
-		component: () => import('./modules/tpl-paging-piece.vue') 
+		components: [
+			() => import('./modules/tpl-paging-piece.vue'),
+			'left',
+			'top'
+		]
 	},
 	{ 
 		path: '/tpl/paging/native/demo1', 
 		name: 'tpl-paging-native-demo1',
-		component: () => import('./modules/tpl-paging-native.vue') 
+		components: [
+			() => import('./modules/tpl-paging-native.vue'),
+			'left'
+		]
 	},
 	{ 
 		path: '/tpl/paging/native/demo2', 
 		name: 'tpl-paging-native-demo2',
-		component: () => import('./modules/tpl-paging-piece.vue') 
+		components: [
+			() => import('./modules/tpl-paging-native.vue'),
+			'left'
+		]
 	},
 	{ 
 		path: '/tpl/scroll/basic', 
 		name: 'tpl-scroll-basic',
-		component: () => import('./modules/tpl-scroll-basic.vue') 
+		components: [
+			() => import('./modules/tpl-scroll-basic.vue'),
+			'left'
+		]
 	},
 	{ 
 		path: '/tpl/scroll/tabs', 
 		name: 'tpl-scroll-tabs',
-		component: () => import('./modules/tpl-scroll-tabs.vue') 
+		components: [
+			() => import('./modules/tpl-scroll-tabs.vue'),
+			'left',
+			'top'
+		]
 	}
 ];
 
@@ -71,6 +112,8 @@ export const tplOtherConfig = [
 	{ 
 		path: '/tpl/nolayout', 
 		name: 'tpl-nolayout',
-		component: () => import('./modules/tpl-nolayout.vue') 
+		components: [
+			import('./modules/tpl-nolayout.vue')
+		]
 	}
 ];

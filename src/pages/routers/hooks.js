@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { Storage } from '@utils/utils';
 import { Vc } from '@wya/vc';
 import { serviceManager } from '@stores/services/utils';
+import { routesManager } from './routes.dynamic';
 
 /**
  * 是否已经登录
@@ -41,7 +42,8 @@ export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 	Vue.prototype.$auth = _global.auth;
 
 	// todo	
-
+	Storage.set('user', data);
+	routesManager.reset();
 };
 
 /**

@@ -24,6 +24,7 @@
 import { mapState } from 'vuex';
 import { Message } from '@wya/vc';
 import { Storage } from '@utils/utils';
+import { createLoginAuth } from '@routers/hooks';
 
 export default {
 	name: 'login',
@@ -65,11 +66,9 @@ export default {
 						}
 					}
 				}).then((res) => {
-					console.log(res);
 					Message.success(`登录成功 - userName: ${this.loginMain.user}`);
-					Storage.set(`user`, res);
-					this.$router.replace('/tpl/main');
-
+					createLoginAuth(res.data);
+					this.$router.replace('/');
 				}).catch((res) => {
 					console.log(res);
 				});

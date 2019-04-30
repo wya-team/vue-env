@@ -5,20 +5,15 @@ import { loginConfig } from '../containers/login/app';
 import { tplConfig } from '../containers/__tpl__/app';
 import { settingConfig } from '../containers/setting/app';
 
-export default {
+export const dynamicRoutes = {
+	tpl: tplConfig,
+	setting: settingConfig,
+};
+export const basicRoutes = {
 	base: PRE_ROUTER_URL,
 	mode: 'history',
 	routes: [
 		...loginConfig,
-		{
-			path: '/',
-			component: layout,
-			redirect: '/__tpl__',
-			children: [
-				...tplConfig,
-				...settingConfig
-			]
-		},
 		{
 			path: '*',
 			redirect: (to) => {

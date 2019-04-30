@@ -26,12 +26,7 @@ import _global from './_global';
 /**
  * vue-router Config
  */
-let routeConfig;
-if (process.env.NODE_ENV !== "production") {
-	routeConfig = require('./routes.dev').default;
-} else {
-	routeConfig = require('./routes.dist').default;
-}
+import { routesManager } from './routes.dynamic';
 import { beforeEach, afterEach } from './hooks';
 
 /**
@@ -56,9 +51,12 @@ Vue.use(_global);
 
 // - 路由
 Vue.use(Router);
-const router = new Router(routeConfig);
+const router = new Router(routesManager.config);
+
 router.beforeEach(beforeEach);
 router.afterEach(afterEach);
+
+routesManager.setRouter(router);
 
 router.onError((error) => {
 	if (error.message.match(/Loading chunk (\d)+ failed/g)) {

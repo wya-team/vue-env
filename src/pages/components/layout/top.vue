@@ -1,115 +1,84 @@
 <template>
-	<div 
-		:style="{
-			'left': secondStatus ? '232px' : '102px'
-		}"
-		class="c-layout-top-bar g-flex g-jc-sb" 
-	>
+	<div :style="{left: `${leftMenuWidth}px`}" class="v-layout-top">
 		<div v-if="typeof topMenus === 'string'" class="_name">
 			{{ topMenus }}
 		</div>
 		<div v-else-if="(topMenus instanceof Array)" class="g-flex-ac g-fw-w">
-			<div 
+			<router-link 
 				v-for="(menu) in topMenus"
 				:key="menu.route"
-				:class="$route.path.indexOf(formatRoute(menu.route)) > -1 ? '_menu-item-active' : '_menu-item-unactive'" 
+				:to="menu.route"
+				:class="$route.path.indexOf(menu.route) > -1 ? '_menu-item-active' : '_menu-item-unactive'" 
 				class="_menu-item"
-				@click="handleLinkTo(menu.route)"
 			>
 				{{ menu.name }}
-			</div>
+			</router-link>
 		</div>
-		<slot />
 	</div>
 </template>
 
 <script>
+import { getTopMenus } from "./menu/top/root";
+
 export default {
-	name: 'layout-top-nav',
+	name: 'xls-layout-top',
+	components: {
+
+	},
 	props: {
-		onMounted: {
-			type: Function,
-			default: () => {}
-		},
-		chunks: {
-			type: Array,
-			default() {
-				return [];
-			}
-		},
-		menus: {
-			type: Object,
-			default() {
-				return {};
-			}
-		}
+
 	},
 	data() {
-		return {};
+		return {
+			leftMenuWidth: 0
+		};
 	},
 	computed: {
-		chunkInfo() {
-			let chunk = this.$route.path.split('/')[1];
-			return this.chunks.find((it) => it.value === chunk) || {};
+		currentRoute() {
+			let path = this.$route.path.split('/');
+			let index = path.indexOf('xls');
+			if (index > -1) path.splice(index, 1);
+			path.length > 3 && path.splice(-1, 1);
+
+			return path.join('/');
 		},
 		topMenus() {
-			return this.getTopMenu();
-		},
-		secondStatus() {
-			return this.$store.state.layoutMain.secondStatus;
+			let routes = getTopMenus(this.$global.auth)[this.currentRoute];
+			return routes;
 		}
 	},
-	mounted() {
-		this.getTopBarHeight();
+	watch: {
+		
 	},
-	updated() {
-		this.getTopBarHeight();
+	created() {
+		this.$vc.on('layout-left-menu', this.setLeftDistance);
+	},
+	mounted() {
+		// 让left-menu 再次告知它自己当前的宽度
+		this.$vc.emit('layout-top-menu', { distance: 55 });
+		this.$vc.emit('layout-left-menu-emit-again', { emit: true });
+	},
+	destroyed() {
+		this.$vc.emit('layout-top-menu', { distance: 0 });
+		this.$vc.off('layout-left-menu', this.setLeftDistance);
 	},
 	methods: {
-		getTopBarHeight() {
-			const { onMounted } = this;
-			onMounted && onMounted(this.$el.clientHeight);
+		setLeftDistance({ distance }) {
+			this.leftMenuWidth !== distance && (this.leftMenuWidth = distance);
 		},
-		getRouteArr() {
-			let arr = this.$route.path.split('/');
-			arr.shift();
-			return arr;
-		},
-		getTopMenu() {
-			let routeArr = this.getRouteArr();
-			let menus = this.menus[this.chunkInfo.value] || []; // 模块内的菜单（二级）
-			let second = this.$route.path.split('/')[2];
-			let secondMenu = menus.find((it) => this.$route.path.indexOf(it.route) > -1);
-			switch (routeArr.length) {
-				case 1:
-					return this.chunkInfo.name;
-				case 2:
-					return secondMenu ? secondMenu.name : this.chunkInfo.name;
-				default:
-					return secondMenu ? secondMenu.children || [] : this.chunkInfo.name;
-			}
-		},
-		handleLinkTo(route) {
-			this.$router.push(route);
-		},
-		formatRoute(route = '', child) {
-			let array = route.split('/');
-			array.length = child ? 5 : 4;
-			return array.join('/');
-		},
-	}
+	},
 };
 </script>
 
 <style lang="scss">
-.c-layout-top-bar {
+.v-layout-top {
 	position: fixed;
 	top: 0px;
 	right: 0;
 	z-index: 999;
 	background-color: $white;
 	padding: 0 15px;
-	border-bottom: 1px solid $ce8;
+	border-bottom: 1px solid $cd9;
 	height: 56px;
 	._name {
 		font-size:14px;
@@ -141,5 +110,3 @@ export default {
 	}
 }
 </style>
-
-
