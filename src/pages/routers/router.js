@@ -53,11 +53,10 @@ Vue.use(_global);
 Vue.use(Router);
 const router = new Router(routesManager.config);
 
-router.beforeEach(beforeEach);
-router.afterEach(afterEach);
-
 routesManager.setRouter(router);
 
+router.beforeEach(beforeEach);
+router.afterEach(afterEach);
 router.onError((error) => {
 	if (error.message.match(/Loading chunk (\d)+ failed/g)) {
 		location.reload();
