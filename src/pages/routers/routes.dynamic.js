@@ -23,7 +23,7 @@ class Manager {
 	 * 后端给的字段为power
 	 */
 	isLoggedIn() {
-		return (Storage.get(`user`) || {}).auth;
+		return Storage.get(`user`);
 	}
 
 	/**
