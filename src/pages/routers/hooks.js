@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { Storage } from '@utils/utils';
 import { Vc } from '@wya/vc';
 import { serviceManager } from '@stores/services/utils';
-import { routesManager } from './routes.dynamic';
 
 /**
  * 是否已经登录
@@ -17,13 +16,27 @@ const isLoggedIn = (nextState) => {
 };
 
 export const beforeEach = ((to, from, next) => {
-	if (isLoggedIn() || to.path === '/login') {
-		next();
+	let logged = isLoggedIn();
+
+	/**
+	 * /login页面
+	 */
+	if (to.path === '/login') {
+		/**
+		 * 可能无限重定向, 需要设定根域名不能重定向到`/login`
+		 */
+		logged ? next('/') : next();
 		return;
 	}
-	next('/login');
-});
 
+	/**
+	 * 非/login页面
+	 */
+	if (logged) {
+		next && next();
+		return;
+	}
+});
 export const afterEach = (route => {
 });
 
@@ -43,7 +56,7 @@ export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 
 	// todo	
 	Storage.set('user', data);
-	routesManager.reset();
+	window.routesManager.reset();
 };
 
 /**

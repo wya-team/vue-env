@@ -4,9 +4,12 @@ import { Storage } from '@utils/utils';
 import Layout from '@components/layout/layout';
 import Left from '@components/layout/left';
 import Top from '@components/layout/top';
+/**
+ * 用于排序
+ */
 import { getChunks } from '@components/layout/menu/chunks';
 
-class Manager {
+class RoutesManager {
 	constructor(basicRoutes, dynamicRoutes) {
 		this.basicRoutes = basicRoutes;
 		this.dynamicRoutes = dynamicRoutes;
@@ -143,19 +146,4 @@ class Manager {
 		return redirect;
 	}
 }
-
-
-let dynamicRoutes;
-if (process.env.NODE_ENV !== "production") {
-	dynamicRoutes = require('./routes.dev').dynamicRoutes;
-} else {
-	dynamicRoutes = require('./routes.dist').dynamicRoutes;
-}
-let basicRoutes;
-if (process.env.NODE_ENV !== "production") {
-	basicRoutes = require('./routes.dev').basicRoutes;
-} else {
-	basicRoutes = require('./routes.dist').basicRoutes;
-}
-
-export const routesManager = new Manager(basicRoutes, dynamicRoutes);
+export default RoutesManager;

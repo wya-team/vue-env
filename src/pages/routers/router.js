@@ -26,13 +26,31 @@ import _global from './_global';
 /**
  * vue-router Config
  */
-import { routesManager } from './routes.dynamic';
 import { beforeEach, afterEach } from './hooks';
 
 /**
  * Vuex Config
  */
 import { storeConfig } from '../stores/root';
+
+import RoutesManager from './routes.dynamic';
+/**
+ * vue-router Config
+ */
+let dynamicRoutes;
+if (process.env.NODE_ENV !== "production") {
+	dynamicRoutes = require('./routes.dev').dynamicRoutes;
+} else {
+	dynamicRoutes = require('./routes.dist').dynamicRoutes;
+}
+let basicRoutes;
+if (process.env.NODE_ENV !== "production") {
+	basicRoutes = require('./routes.dev').basicRoutes;
+} else {
+	basicRoutes = require('./routes.dist').basicRoutes;
+}
+
+let routesManager = new RoutesManager(basicRoutes, dynamicRoutes);
 
 Vue.config.productionTip = false;
 
@@ -93,3 +111,4 @@ router.onReady(() => {
 });
 
 window.app = app;
+window.routesManager = routesManager;
