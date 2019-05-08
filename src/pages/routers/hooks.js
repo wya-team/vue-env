@@ -47,6 +47,7 @@ export const afterEach = (route => {
  * @param {*} data 
  * @param {*} opts 
  */
+let landPage = `${location.pathname}${location.search}`;
 export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 
 	_global.auth = data.auth || {};
@@ -57,6 +58,9 @@ export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 	// todo	
 	Storage.set('user', data);
 	window.routesManager.reset();
+
+	// 首页或者一开始记录的页面
+	window.app && window.app.$router.replace(landPage.replace(new RegExp(PRE_ROUTER_URL), '/'));
 };
 
 /**
@@ -69,9 +73,13 @@ export const clearLoginAuth = (opts = {}) => {
 	Vue.prototype.$auth = _global.auth;
 
 	Vc.instance.clearAll();
+	Storage.remove('user');
 	serviceManager.clear();
 
-	// todo
+	// 重置页面
+	landPage = `${location.pathname}${location.search}`;
+	// 无权限页面
+	window.app && window.app.$router.replace('/login');
 
 };
 

@@ -67,25 +67,11 @@ export default {
 					}
 				}).then((res) => {
 					Message.success(`登录成功 - userName: ${this.loginMain.user}`);
+
 					createLoginAuth(res.data);
-					this.$router.replace('/');
 				}).catch((res) => {
 					console.log(res);
 				});
-				// this.$request({
-				// 	url: 'https://wyaoa-new.ruishan666.com/human/login/login.json',
-				// 	type: 'POST',
-				// 	localData: {
-				// 		status: 1,
-				// 		data: {
-
-				// 		}
-				// 	}
-				// }).then((res) => {
-				// 	console.log(res);
-				// }).catch((res) => {
-				// 	console.log(res);
-				// });
 			});
 		}
 	},

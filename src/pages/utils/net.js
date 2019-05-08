@@ -6,22 +6,26 @@
  * @param  {Object} options 扩展
  */
 import createHttpClient from '@wya/http';
+import { Storage } from '@wya/utils';
 import { Message } from '@wya/vc';
+import { clearLoginAuth } from '@routers/hooks';
 import API_ROOT from '@stores/apis/root';
+
+let msgInstance = null;
 
 const loadingFn = (options = {}) => {
 	const { tipMsg } = options;
-	Message.destroy();
-	Message.loading(tipMsg || '加载中...', 0);
+	msgInstance && Message.destroy(msgInstance);
+	msgInstance = Message.loading(tipMsg || '加载中...', 0);
 };
 const loadedFn = () => {
-	Message.destroy();
+	msgInstance && Message.destroy(msgInstance);
 };
 
 const otherFn = ({ response }) => {
 	switch (response.status) {
 		case -1:
-			// clearLoginAuth();
+			clearLoginAuth();
 			break;
 		default:
 			break;
@@ -29,21 +33,38 @@ const otherFn = ({ response }) => {
 };
 
 const beforeFn = ({ options }) => {
-	// 可以是promise，不要随便写return
+	// return {
+	// 	...options,
+	// 	headers: {
+	// 		...options.headers,
+	// 		token: JSON.stringify(Storage.get('token'))
+	// 	}
+	// };
 };
 const afterFn = ({ options, response }) => {
-	const { autoTip = false, errorMsg, successMsg } = options;
+	let {
+		successTip = true, 
+		errorTip = true, 
+		errorMsg = response.msg, 
+		successMsg = response.msg,
+		method
+	} = options;
+
+	successTip = successTip && method !== 'GET';
+	errorTip = errorTip && !response.code;
+
 	// 可以是promise，不要随便写return
 	switch (response.status) {
 		case 0:
-			autoTip && Message.error(errorMsg || response.msg);
+			errorTip && errorMsg && Message.error(errorMsg);
 			break;
 		case 1:
-			autoTip && Message.success(successMsg || response.msg);
+			successTip && successMsg && Message.info(successMsg);
 			break;
 		default:
 			break;
 	}
+
 };
 
 const globalOptions = {
