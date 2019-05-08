@@ -10,6 +10,7 @@ import { Storage } from '@wya/utils';
 import { Message } from '@wya/vc';
 import { clearLoginAuth } from '@routers/hooks';
 import API_ROOT from '@stores/apis/root';
+import { TOKEN_KEY } from '../constants/constants';
 
 let msgInstance = null;
 
@@ -37,7 +38,7 @@ const beforeFn = ({ options }) => {
 	// 	...options,
 	// 	headers: {
 	// 		...options.headers,
-	// 		token: JSON.stringify(Storage.get('token'))
+	// 		token: JSON.stringify(Storage.get(TOKEN_KEY))
 	// 	}
 	// };
 };

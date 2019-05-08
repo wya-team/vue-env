@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { PRE_ROUTER_URL } from '../constants/constants';
-import { loginConfig } from '../containers/login/app';
 import { tplConfig } from '../containers/__tpl__/app';
+import { loginConfig } from '../containers/login/app';
 import { settingConfig } from '../containers/setting/app';
 
 export const dynamicRoutes = {

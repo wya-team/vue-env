@@ -19,3 +19,9 @@ export const PRE_ROUTER_URL = process.env.NODE_ENV === 'development'
 	: '/';
 
 export const URL_WEBSOCKET = '/wss';
+
+/**
+ * 用于判断登录token / user
+ */
+
+export const TOKEN_KEY = 'user';
