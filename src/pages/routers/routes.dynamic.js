@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 import Router from 'vue-router';
 import { Storage } from '@utils/utils';
+import { TOKEN_KEY } from '@constants/constants';
 import Layout from '@components/layout/layout';
 import Left from '@components/layout/left';
 import Top from '@components/layout/top';
@@ -26,7 +27,7 @@ class RoutesManager {
 	 * 后端给的字段为power
 	 */
 	isLoggedIn() {
-		return Storage.get(`user`);
+		return Storage.get(TOKEN_KEY);
 	}
 
 	/**

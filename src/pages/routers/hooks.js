@@ -80,7 +80,7 @@ export const clearLoginAuth = (opts = {}) => {
 	serviceManager.clear();
 
 	// 重置页面
-	landPage = `${location.pathname}${location.search}`;
+	landPage = `/`;
 	// 无权限页面
 	window.app && window.app.$router.replace('/login');
 

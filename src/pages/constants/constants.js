@@ -23,5 +23,4 @@ export const URL_WEBSOCKET = '/wss';
 /**
  * 用于判断登录token / user
  */
-
 export const TOKEN_KEY = 'user';

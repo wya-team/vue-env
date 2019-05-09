@@ -23,9 +23,6 @@ import VcConfig from './vc.config';
  */
 import _global from './_global';
 
-/**
- * vue-router Config
- */
 import { beforeEach, afterEach } from './hooks';
 
 /**
