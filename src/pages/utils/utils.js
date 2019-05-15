@@ -112,3 +112,33 @@ export const initPage = {
 	count: 0,
 	data: {}
 };
+
+
+const now = +(new Date());
+let index = 0;
+
+export const getUid = (comp) => {
+	return `wya-${now}-${++index}`;
+};
+
+/**
+ * 下一步，下一步设计
+ */
+export const createSession = (key, opts = {}) => {
+	let session = key || getUid();
+
+	if (session !== key) {
+		let { path, query } = URL.parse();
+		
+		let config = URL.merge({
+			path,
+			query: {
+				...query,
+				session
+			}
+		});
+		window.history.replaceState(null, null, config);
+	}
+	
+	return session;
+};
