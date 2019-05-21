@@ -89,13 +89,16 @@ class RoutesManager {
 
 		let temp = [];
 		let routes = authRoutes.reduce((pre, route) => {
-
+			// 一、二级路由url如果页面，则不做redirect
+			if (route.path.split('/').length < 4) {
+				temp.push(route.path);
+			}
 			let redirect = this.getRedirect(route.path);
-
+			
 			if (redirect) {
 				redirect.forEach((path) => {
 					if (!temp.includes(path)) {
-						temp.push(...redirect);
+						temp.push(path);
 						pre.push({
 							path,
 							redirect: route.path
