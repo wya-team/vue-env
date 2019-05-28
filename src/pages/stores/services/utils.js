@@ -1,7 +1,8 @@
 import { Socket } from '@wya/socket';
+import { Message } from '@wya/vc';
 import { URL_WEBSOCKET } from '@constants/constants';
 import { isEqualWith } from 'lodash';
-import { Storage, ReGex } from '@utils/utils';
+import { Storage, RegEx } from '@utils/utils';
 import API_ROOT from '@stores/apis/root';
 
 export const serviceObj = {
@@ -28,10 +29,10 @@ export const serviceManager = {
 
 export const createService = (defaultOptions = {}) => {
 	const {
-		key, 
-		url, 
-		parser = null, 
-		cache = false, 
+		key,
+		url,
+		parser = null,
+		cache = false,
 		vuex = false,
 		param: defaultParam = {},
 		getParam = (instance) => ({}),
@@ -45,12 +46,12 @@ export const createService = (defaultOptions = {}) => {
 		store = { ...serviceObj };
 	});
 
-	
-	return { 
+
+	return {
 		[key]: (userOptions = {}) => {
 			const { param: userParam = {} } = userOptions;
 			const options = { ...defaultOptions, ...userOptions };
-			const { autoLoad = true } = options;
+			const { autoLoad = true, autoClear = false } = options;
 			// 方法首字母大写
 			const strFn = key.charAt(0).toUpperCase() + key.slice(1);
 
@@ -66,11 +67,14 @@ export const createService = (defaultOptions = {}) => {
 					};
 				},
 				created() {
-					autoLoad && (this[loadKey])({ 
-						...defaultParam, 
-						...userParam, 
-						...getParam(this) 
+					autoLoad && (this[loadKey])({
+						...defaultParam,
+						...userParam,
+						...getParam(this)
 					});
+				},
+				beforeDestroy() {
+					autoClear && this[clearKey]();
 				},
 				methods: {
 					[loadKey](param, opts = {}) { // eslint-disable-line
@@ -92,7 +96,7 @@ export const createService = (defaultOptions = {}) => {
 							cache && Storage.set(`${key}`, store);
 							return res;
 						}).catch((res) => {
-							this.$Message.error(res.msg);
+							Message.error(res.msg);
 							return Promise.reject(res);
 						}).finally(() => {
 							this[loadingKey] = false;
@@ -109,21 +113,21 @@ export const createService = (defaultOptions = {}) => {
 
 /**
  * 创建socket
- * @param {*} defaultOptions 
+ * @param {*} defaultOptions
  */
 export const createSocket = (defaultOptions = {}) => {
-	const { 
-		key, 
+	const {
+		key,
 		url = URL_WEBSOCKET,
 		bindUrl,
 		param = {},
 		getParam = (instance) => ({}),
+		getConnect = (v, instance) => v,
 		isNeedDestroy = true,
 		parser
 	} = defaultOptions;
 
 	let socket;
-	
 	// clear
 	serviceManager.add(() => {
 		socket && socket.close();
@@ -142,7 +146,7 @@ export const createSocket = (defaultOptions = {}) => {
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
-						socket.connect(ReGex.URLScheme.test(url) ? url : API_ROOT[url]);
+						socket.connect(getConnect(RegEx.URLScheme.test(url) ? url : API_ROOT[url], this));
 						// 链接成功后获取client_id
 						bindUrl && socket.on('connect', (res) => {
 							const { data = {} } = res.data || {};
@@ -157,12 +161,12 @@ export const createSocket = (defaultOptions = {}) => {
 							}).then((res) => { // eslint-disable-line
 								// todo
 							}).catch((error) => {
-								this.$Message.error(error.msg);
+								Message.error(error.msg);
 							});
 							// 绑定id，后端要求
 						});
 						socket.on('error', (res) => {
-							this.$Message.error('服务器连接失败,请刷新页面');
+							Message.error('服务器连接失败,请刷新页面');
 						});
 
 						// 存储

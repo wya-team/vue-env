@@ -1,8 +1,7 @@
 /**
- * 全部变量初始化及使用
+ * 全部变量初始化及使用, 不要随意引用其他模块，保证_global是最高级别变量
  */
-import { createLoginAuth, clearLocalStorage } from './hooks';
-import { Device, Storage, Cookie } from '../utils/utils';
+import { Device, Storage, Cookie } from '@wya/utils';
 
 /**
  * 组件内遵守使用this.$global
@@ -15,8 +14,6 @@ _global.version = '1.0';
 
 Storage.setVersion(_global.version);
 Cookie.setVersion(_global.version);
-
-// clearLocalStorage(_global.version);
 
 // GUID
 _global.GUID = location.host.split(".")[0];

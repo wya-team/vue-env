@@ -10,6 +10,11 @@ import { Vc } from '@wya/vc';
 import { sync } from 'vuex-router-sync';
 
 /**
+ * 全局变量 _global, 不要动
+ */
+import _global from './_global'; // eslint-disable-line
+
+/**
  * 配置
  */
 import SetTitle from '@common/set-title/set-title';
@@ -18,12 +23,7 @@ import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
 
-/**
- * 全局变量 _global
- */
-import _global from './_global';
-
-import { beforeEach, afterEach } from './hooks';
+import { beforeEach, afterEach, clearLocalStorage } from './hooks';
 
 /**
  * Vuex Config
