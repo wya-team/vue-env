@@ -34,9 +34,8 @@ const routes = (opts = {}) => {
 	contents += `export const dynamicRoutes = {\n`;
 	modules.forEach((item) => {
 		let _item = h2c(item === '__tpl__' ? 'tpl' : item);
-		hasOther(_item) 
-			? contents += `	${_item}: [...${_item}Config, ...${_item}OtherConfig],\n`
-			: contents += `	${_item}: ${_item}Config,\n`;
+		// 动态路由不放other config
+		contents += `	${_item}: ${_item}Config,\n`;
 	});
 	contents += `};`;
 	contents += `\n`;
