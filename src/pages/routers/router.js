@@ -22,6 +22,7 @@ import Loading from '@common/loading/loading';
 import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
+import scrollBehavior from './scroll-behavior';
 
 import { beforeEach, afterEach, clearLocalStorage } from './hooks';
 
@@ -66,7 +67,8 @@ Vue.use(_global);
 
 // - 路由
 Vue.use(Router);
-const router = new Router(routesManager.config);
+
+const router = new Router({ ...routesManager.config, scrollBehavior });
 
 routesManager.setRouter(router);
 

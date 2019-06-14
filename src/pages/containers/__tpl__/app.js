@@ -3,9 +3,7 @@ export const tplConfig = [
 		path: '/tpl/main', 
 		name: 'tpl-main',
 		components: [
-			() => import('./modules/tpl-main.vue'),
-			'left',
-			'top'
+			() => import('./modules/tpl-main.vue')
 		]
 	},
 	{ 
@@ -93,17 +91,14 @@ export const tplConfig = [
 		path: '/tpl/scroll/basic', 
 		name: 'tpl-scroll-basic',
 		components: [
-			() => import('./modules/tpl-scroll-basic.vue'),
-			'left'
+			() => import('./modules/tpl-scroll-basic.vue')
 		]
 	},
 	{ 
 		path: '/tpl/scroll/tabs', 
 		name: 'tpl-scroll-tabs',
 		components: [
-			() => import('./modules/tpl-scroll-tabs.vue'),
-			'left',
-			'top'
+			() => import('./modules/tpl-scroll-tabs.vue')
 		]
 	}
 ];

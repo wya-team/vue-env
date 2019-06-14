@@ -43,6 +43,8 @@ _global.env = process.env.NODE_ENV;
 
 // 缩放比例
 _global.scale = 1;
+_global.height = window.innerHeight;
+_global.width = window.innerWidth;
 
 // 设备信息状态
 _global.device = Device;

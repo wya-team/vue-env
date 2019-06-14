@@ -3,7 +3,7 @@
 	<div class="v-layout-extra g-flex-ac">
 		<img :src="user.avatar" class="g-imgc-32 g-m-r-10">
 		<vc-dropdown 
-			placement="bottom-end"
+			placement="bottom"
 			trigger="click"
 			@click="handleOperate"
 		>

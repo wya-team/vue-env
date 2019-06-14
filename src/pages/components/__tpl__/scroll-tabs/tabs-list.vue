@@ -18,6 +18,8 @@
 				:total="listInfo[item.value].total"
 				:count="listInfo[item.value].count"
 				:load-data="loadData"
+				:height="$global.height - 53"
+				wrapper
 			>
 				<template #default="it">
 					<tpl-item :it="it" />
