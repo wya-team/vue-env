@@ -230,6 +230,8 @@ const defaultConfig = {
 		// proxy: {
 		// 	"/api": {
 		// 		target: "http://test.com",
+		// 		secure: false, // https接口
+		// 		changeOrigin: true, // 接口跨域
 		// 		pathRewrite: {"^/api" : ""}
 		// 	}
 		// },
