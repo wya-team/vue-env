@@ -50,10 +50,11 @@ export const afterEach = (route => {
 let landPage = `${location.pathname}${location.search}`;
 export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 
-	_global.auth = data.auth || {};
+	_global.user = data || {};
 	// 同步
 	Vue.prototype.$global = _global;
-	Vue.prototype.$auth = _global.auth;
+	Vue.prototype.$auth = _global.user.auth;
+	Vue.prototype.$config = _global.user.config;
 
 	// todo	
 	Storage.set(TOKEN_KEY, data);

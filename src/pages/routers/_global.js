@@ -35,8 +35,6 @@ _global.landingSharePage = `${location.origin}${location.pathname}${location.sea
 
 // 用户信息
 _global.user = {};
-_global.userType = '';
-_global.auth = {};
 
 // 环境
 _global.env = process.env.NODE_ENV;
@@ -52,6 +50,13 @@ _global.device = Device;
 export default {
 	install(Vue) {
 		Vue.prototype.$global = _global;
-		Vue.prototype.$auth = _global.auth;
+		/**
+		 * 总后台返回的权限
+		 */
+		Vue.prototype.$auth = _global.user.auth;
+		/**
+		 * 总后台返回的控制项
+		 */
+		Vue.prototype.$config = _global.user.config;
 	}
 };
