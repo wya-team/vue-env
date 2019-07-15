@@ -28,12 +28,16 @@ const mutations = {
 			}
 		};
 	},
-	TPL_SCROLL_TABS_LIST_REFRESH(state, { type }) {
+	TPL_SCROLL_TABS_LIST_GET_REFRESH(state, { data, param: { type, page } }) {
 		state.listInfo = {
 			...initialState.listInfo,
-			[type]: [
-				...initScroll
-			]
+			[type]: {
+				...state.listInfo[type],
+				...data.page,
+				data: [
+					...data.list
+				]
+			}
 		};
 	},
 	TPL_SCROLL_TABS_LIST_INIT(state, payload) {
