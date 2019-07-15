@@ -12,7 +12,7 @@ import { sync } from 'vuex-router-sync';
 /**
  * 全局变量 _global, 不要动
  */
-import _global from './_global'; // eslint-disable-line
+import globalHook from './_global'; // eslint-disable-line
 
 /**
  * 配置
@@ -51,6 +51,7 @@ if (process.env.NODE_ENV !== "production") {
 let routesManager = new RoutesManager(basicRoutes, dynamicRoutes);
 
 Vue.config.productionTip = false;
+// Vue.config.devtools = false;
 
 // - 全局组件
 Vue.component(SetTitle.name, SetTitle);
@@ -63,7 +64,7 @@ Vue.mixin(emitter);
 Vue.use(request);
 
 // - 全局global对象
-Vue.use(_global);
+Vue.use(globalHook);
 
 // - 路由
 Vue.use(Router);
