@@ -2,6 +2,7 @@
  * 全部变量初始化及使用, 不要随意引用其他模块，保证_global是最高级别变量
  */
 import { Device, Storage, Cookie } from '@wya/utils';
+import { DEBUG } from '../constants/constants';
 
 /**
  * 组件内遵守使用this.$global
@@ -38,6 +39,8 @@ _global.user = {};
 
 // 环境
 _global.env = process.env.NODE_ENV;
+
+_global.debug = DEBUG;
 
 // 缩放比例
 _global.scale = 1;
