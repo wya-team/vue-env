@@ -51,7 +51,7 @@ if (process.env.NODE_ENV !== "production") {
 let routesManager = new RoutesManager(basicRoutes, dynamicRoutes);
 
 Vue.config.productionTip = false;
-// Vue.config.devtools = false;
+Vue.config.devtools = _global.debug;
 
 // - 全局组件
 Vue.component(SetTitle.name, SetTitle);

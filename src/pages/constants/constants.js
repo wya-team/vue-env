@@ -1,9 +1,8 @@
 /**
- * 目前在开发环境可以使用Redux Devtools。
- * 可以在src/page/xxx/constatns/constants.js中的DEBUG里控制开关
+ * 目前在开发环境可以使用Vue Devtools 和其他
  * true开启，false关闭。
  */
-export const DEBUG = !0;
+export const DEBUG = __DEV__ || /github.com$/.test(window.location.origin);
 /**
  * 开发模式结合PHP后端
  * true开启，false关闭
