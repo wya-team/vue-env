@@ -14,8 +14,8 @@ import { TOKEN_KEY } from '../constants/constants';
 
 let msgInstance = null;
 
-const loadingFn = (options = {}) => {
-	const { tipMsg } = options;
+const loadingFn = ({ options }) => {
+	const { tipMsg } = options || {};
 	msgInstance && Message.destroy(msgInstance);
 	msgInstance = Message.loading(tipMsg || '加载中...', 0);
 };
