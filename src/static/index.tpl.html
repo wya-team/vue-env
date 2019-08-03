@@ -17,6 +17,13 @@
 
 <body>
     <div id="pages"></div>
+    <script>
+		window.onerror = function(msg, url, num) {
+            if (msg === "Uncaught SyntaxError: Unexpected token <" && num === 1) {
+                location.reload();
+            }
+        }
+	</script>
 </body>
 
 </html>

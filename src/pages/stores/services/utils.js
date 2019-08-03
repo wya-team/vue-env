@@ -143,6 +143,12 @@ export const createSocket = (defaultOptions = {}) => {
 				created() {
 					this[key] = socket || this.initWebSocket();
 				},
+				mounted() {
+					document.addEventListener('visibilitychange', this.handleVisibleChange);
+				},
+				destroyed() {
+					document.removeEventListener('visibilitychange', this.handleVisibleChange);
+				},
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
@@ -166,11 +172,18 @@ export const createSocket = (defaultOptions = {}) => {
 							// 绑定id，后端要求
 						});
 						socket.on('error', (res) => {
-							Message.error('服务器连接失败,请刷新页面');
+							!this.isHidden && Message.error('服务器连接失败,请刷新页面');
 						});
 
 						// 存储
 						return socket;
+					},
+					handleVisibleChange() {
+						if (document.hidden) {
+							this.isHidden = true;
+						} else {
+							this.isHidden = false;
+						}
 					}
 				},
 				beforeDestroy() {
