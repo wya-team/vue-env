@@ -122,4 +122,11 @@ export default (to, from, pos) => {
 		scrollManager.refresh();
 	});
 
+	/**
+	 * window页面滚动之后跳转到window页面下 滚动条会保留
+	 */
+	return {
+		x: 0,
+		y: 0
+	};
 };
