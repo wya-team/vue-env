@@ -7,16 +7,24 @@
 			trigger="click"
 			@click="handleOperate"
 		>
-			<p class="g-pointer">admin</p>
+			<p class="g-pointer">
+				admin
+			</p>
 			<vc-dropdown-menu slot="list">
 				<vc-dropdown-item name="set">
-					<div class="line">个人账户设置</div>	 
+					<div class="line">
+						个人账户设置
+					</div>	 
 				</vc-dropdown-item>
 				<vc-dropdown-item name="change">
-					<div class="line">修改密码</div>	 
+					<div class="line">
+						修改密码
+					</div>	 
 				</vc-dropdown-item>
 				<vc-dropdown-item name="logout">
-					<div class="line no-border">退出登录</div>	 
+					<div class="line no-border">
+						退出登录
+					</div>	 
 				</vc-dropdown-item>
 			</vc-dropdown-menu>
 		</vc-dropdown>

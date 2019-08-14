@@ -4,7 +4,8 @@
 			'left': secondStatus ? '248px' : '118px',
 			'width': secondStatus ? 'calc(100% - 260px)' : 'calc(100% - 130px)'
 		}"
-		class="c-footer g-flex-cc g-bs-t">
+		class="c-footer g-flex-cc g-bs-t"
+	>
 		<vc-button 
 			class="_cancel" 
 			type="default" 

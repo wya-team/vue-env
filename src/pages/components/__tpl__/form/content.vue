@@ -2,7 +2,9 @@
 	<div class="v-tpl-form g-pd-lr-24 g-pd-t-24" style="padding-bottom: 70px">
 		<!-- 表单 -->
 		<div class="g-m-b-32">
-			<h3 class="g-m-b-24">表单样式</h3>
+			<h3 class="g-m-b-24">
+				表单样式
+			</h3>
 			<!-- 96位所有label中最宽的长度 -->
 			<vc-form 
 				ref="form" 
@@ -22,8 +24,12 @@
 					/>
 				</vc-form-item>
 				<div class="g-flex g-m-b-26">
-					<div class="g-c-333 g-tr" style="width: 96px">商品名称：</div>
-					<div class="g-c-999">安徽省电话费</div>
+					<div class="g-c-333 g-tr" style="width: 96px">
+						商品名称：
+					</div>
+					<div class="g-c-999">
+						安徽省电话费
+					</div>
 				</div>
 				<!-- <vc-form-item label="商品主图：" prop="original_img" >
 					<vc-imgs-picker class="g-m-t-26" />
@@ -65,8 +71,8 @@
 						style="width: 300px"
 					>
 						<vc-option 
-							v-for="(item, index) in company" 
-							:key="index" 
+							v-for="(item, $index) in company" 
+							:key="$index" 
 							value="item"
 						>
 							{{ item }}
@@ -82,8 +88,8 @@
 						style="width: 300px"
 					>
 						<vc-option 
-							v-for="(item, index) in company" 
-							:key="index" 
+							v-for="(item, $index) in company" 
+							:key="$index" 
 							value="item"
 						>
 							{{ item }}
@@ -91,13 +97,13 @@
 					</vc-select>
 				</vc-form-item>
 				<vc-form-item 
-					v-for="(item, index) in formValidate.items"
+					v-for="(item, $index) in formValidate.items"
 					:key="item.index"
-					:label="index === 0 ? '缴款方式：' : ''"
+					:label="$index === 0 ? '缴款方式：' : ''"
 				>
 					<div class="g-form-block">
 						<vc-form-item
-							:prop="'items.' + index + '.date'" 
+							:prop="'items.' + $index + '.date'" 
 							:rules="{required: true, message: '请选择成交时间'}"
 						>
 							<vc-date-picker 
@@ -108,7 +114,7 @@
 							/>
 						</vc-form-item>
 						<vc-form-item 
-							:prop="'items.' + index + '.amount'" 
+							:prop="'items.' + $index + '.amount'" 
 							:rules="{required: true, message: '请输入付款金额'}"
 						>
 							<vc-input-number
@@ -120,7 +126,7 @@
 							/>
 						</vc-form-item>
 						<vc-form-item
-							:prop="'items.' + index + '.imgs'" 
+							:prop="'items.' + $index + '.imgs'" 
 							:rules="{required: true, message: '请选择图片'}"
 							style="margin-bottom: 0px !important"
 						>
@@ -146,28 +152,50 @@
 		</div>
 		<!-- 展示 -->
 		<div class="g-m-b-32">
-			<h3 class="g-m-b-24">弹框内上下边距16px</h3>
+			<h3 class="g-m-b-24">
+				弹框内上下边距16px
+			</h3>
 			<!-- 小弹框居中 |  中弹框距离左侧120 | 大弹框24，有进度条的距离左侧24-->
 			<div class="g-pd-l-56">
 				<div class="g-flex g-m-b-16">
-					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-51">安徽省电话费</div>
+					<div class="g-c-333">
+						商品名称：
+					</div>
+					<div class="g-c-51">
+						安徽省电话费
+					</div>
 				</div>
 				<div class="g-flex g-m-b-16">
-					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-51">安徽省电话费</div>
+					<div class="g-c-333">
+						商品名称：
+					</div>
+					<div class="g-c-51">
+						安徽省电话费
+					</div>
 				</div>
 				<div class="g-flex g-m-b-16">
-					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-51">安徽省电话费</div>
+					<div class="g-c-333">
+						商品名称：
+					</div>
+					<div class="g-c-51">
+						安徽省电话费
+					</div>
 				</div>
 				<div class="g-flex g-m-b-16">
-					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-51">安徽省电话费</div>
+					<div class="g-c-333">
+						商品名称：
+					</div>
+					<div class="g-c-51">
+						安徽省电话费
+					</div>
 				</div>
 				<div class="g-flex g-m-b-16">
-					<div class="g-c-333">商品名称：</div>
-					<div class="g-c-51">安徽省电话费</div>
+					<div class="g-c-333">
+						商品名称：
+					</div>
+					<div class="g-c-51">
+						安徽省电话费
+					</div>
 				</div>
 			</div>
 		</div>

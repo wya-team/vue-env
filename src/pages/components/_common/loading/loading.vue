@@ -1,6 +1,6 @@
 <template>
 	<div class="c-loading">
-		<div class="_mask"/>
+		<div class="_mask" />
 
 		<transition name="slide-fade">
 			<div class="_loading">

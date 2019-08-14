@@ -12,8 +12,12 @@
 		<p>占位</p>
 		<p>占位</p>
 		<p>占位</p>
-		<router-link to="/tpl/main">/tpl/main</router-link>
-		<div @click="handleResetFirst">刷新</div>
+		<router-link to="/tpl/main">
+			/tpl/main
+		</router-link>
+		<div @click="handleResetFirst">
+			刷新
+		</div>
 	</div>
 </template>
 

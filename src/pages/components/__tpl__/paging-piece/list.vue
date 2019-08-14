@@ -17,7 +17,6 @@
 				class="_item"
 			/> 
 		</template>
-		
 	</vc-paging>
 </template>
 

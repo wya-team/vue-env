@@ -10,7 +10,6 @@
 			:label="item.label" 
 			:name="item.value"
 		>
-
 			<vcm-pull-scroll
 				:show="item.value == type" 
 				:type="item.value"

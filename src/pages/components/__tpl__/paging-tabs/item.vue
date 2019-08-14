@@ -14,8 +14,12 @@
 			prop="img"
 			label="地址"
 		>
-			<div @click="handleResetFirst">回到首页刷新</div>
-			<div @click="handleResetCur">当前页刷新</div>
+			<div @click="handleResetFirst">
+				回到首页刷新
+			</div>
+			<div @click="handleResetCur">
+				当前页刷新
+			</div>
 		</vc-table-column>
 	</vc-table-item>
 </template>

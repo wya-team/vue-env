@@ -13,7 +13,9 @@
 		<p>占位</p>
 		<p>占位</p>
 		<p>占位</p>
-		<div @click="handleResetFirst">刷新</div>
+		<div @click="handleResetFirst">
+			刷新
+		</div>
 	</div>
 </template>
 

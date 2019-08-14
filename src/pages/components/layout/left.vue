@@ -4,7 +4,7 @@
 			<div style="height: 56px">
 				<slot name="logo" />
 			</div>
-			<template v-for="(chunk, index) in chunks" >
+			<template v-for="(chunk, index) in chunks">
 				<router-link 
 					v-if="chunk.show"
 					:key="index"
@@ -17,12 +17,12 @@
 				</router-link>
 			</template>
 		</div>
-		<div v-if="childMenus.length" class="_two-level" >
+		<div v-if="childMenus.length" class="_two-level">
 			<div class="__name">
 				{{ currentChunk.name }}
 			</div>
 			<div style="padding: 12px">
-				<template v-for="(menu, index) in childMenus" >
+				<template v-for="(menu, index) in childMenus">
 					<div 
 						v-if="menu.show"
 						:key="index"

@@ -7,18 +7,28 @@
 		<h5>计算属性 - computed: {{ computedMsg }}</h5>
 		<h5>
 			计算属性 - computed - getter/setter: {{ computedDiyMsg }} 
-			<button @click="handleDiyMsg">(点我)</button>
+			<button @click="handleDiyMsg">
+				(点我)
+			</button>
 		</h5>
 		<h5>监视属性 - watch: {{ watchMsg }}</h5>
 		<!-- # 8. class & style-->
 		<br>
 		<br>
 		<br>
-		<div style="color: red">style</div>
+		<div style="color: red">
+			style
+		</div>
 		<!-- 后者无效 -->
-		<div :style="[defaultStyle, overrideStyle, { color: 'yellow' }]" style="color: gray">style</div>
-		<div class="default">class</div>
-		<div :class="{ default: defaultClass, active: activeClass }" class="bg">class</div>
+		<div :style="[defaultStyle, overrideStyle, { color: 'yellow' }]" style="color: gray">
+			style
+		</div>
+		<div class="default">
+			class
+		</div>
+		<div :class="{ default: defaultClass, active: activeClass }" class="bg">
+			class
+		</div>
 
 		<!-- # 9. v-if & v-show & v-for -->
 		<br>
@@ -27,7 +37,7 @@
 		<!-- 使用key, 避免输入框数据不清空 -->
 		<template v-if="typeIf === 'A'">
 			<label>A</label>
-			<input key="A" placeholder="v-if" >
+			<input key="A" placeholder="v-if">
 		</template>
 		<template v-else-if="typeIf === 'B'">
 			<label>Email</label>
@@ -37,15 +47,21 @@
 			<label>Email</label>
 			<input key="C" placeholder="v-if">
 		</template>
-		<h1 v-show="isShow">v-show</h1>
+		<h1 v-show="isShow">
+			v-show
+		</h1>
 		<!-- # 10. v-for -->
 		<br>
 		<br>
 		<br>
-		<div v-for="(item, index) in listFor" v-if="String(index)" :key="index">
-			{{ index }} - {{ item }}
-		</div>
-		<button @click="handleAddItem">(添加)</button>
+		<template v-for="(item, index) in listFor">
+			<div v-if="String(index)" :key="index">
+				{{ index }} - {{ item }}
+			</div>
+		</template>
+		<button @click="handleAddItem">
+			(添加)
+		</button>
 
 		<!-- # 11. v-model -->
 		<br>
@@ -65,9 +81,11 @@
 		<br>
 		<br>
 		<br>
-		<div @click="handleChange(currentView)">切换组件</div>
+		<div @click="handleChange(currentView)">
+			切换组件
+		</div>
 		<keep-alive>
-			<component :is="currentView"/>
+			<component :is="currentView" />
 		</keep-alive>
 	</div>
 </template>

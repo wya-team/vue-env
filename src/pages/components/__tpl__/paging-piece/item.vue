@@ -1,8 +1,12 @@
 <template>
 	<div :key="it.id">
 		<div>{{ it.title }}</div>
-		<div @click="handleResetFirst">回到首页刷新</div>
-		<div @click="handleResetCur">当前页刷新</div>
+		<div @click="handleResetFirst">
+			回到首页刷新
+		</div>
+		<div @click="handleResetCur">
+			当前页刷新
+		</div>
 	</div>
 </template>
 
