@@ -96,7 +96,6 @@ export const createService = (defaultOptions = {}) => {
 							cache && Storage.set(`${key}`, store);
 							return res;
 						}).catch((res) => {
-							Message.error(res.msg);
 							return Promise.reject(res);
 						}).finally(() => {
 							this[loadingKey] = false;
@@ -143,16 +142,19 @@ export const createSocket = (defaultOptions = {}) => {
 				created() {
 					this[key] = socket || this.initWebSocket();
 				},
-				mounted() {
-					document.addEventListener('visibilitychange', this.handleVisibleChange);
-				},
-				destroyed() {
-					document.removeEventListener('visibilitychange', this.handleVisibleChange);
-				},
 				methods: {
 					initWebSocket() {
 						socket = new Socket({ parser });
-						socket.connect(getConnect(RegEx.URLScheme.test(url) ? url : API_ROOT[url], this));
+						socket.connect(
+							getConnect(RegEx.URLScheme.test(url) ? url : API_ROOT[url], this),
+							{ 
+								onError: (err) => { 
+									if (err.msg) {
+										Message.error(err.msg);
+									}
+								} 
+							}
+						);
 						// 链接成功后获取client_id
 						bindUrl && socket.on('connect', (res) => {
 							const { data = {} } = res.data || {};
@@ -167,24 +169,14 @@ export const createSocket = (defaultOptions = {}) => {
 							}).then((res) => { // eslint-disable-line
 								// todo
 							}).catch((error) => {
-								Message.error(error.msg);
+								// Message.error(error.msg);
 							});
 							// 绑定id，后端要求
-						});
-						socket.on('error', (res) => {
-							!this.isHidden && Message.error('服务器连接失败,请刷新页面');
 						});
 
 						// 存储
 						return socket;
 					},
-					handleVisibleChange() {
-						if (document.hidden) {
-							this.isHidden = true;
-						} else {
-							this.isHidden = false;
-						}
-					}
 				},
 				beforeDestroy() {
 					isNeedDestroy && socket && socket.close();
