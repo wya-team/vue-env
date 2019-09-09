@@ -97,7 +97,7 @@ export default {
 	},
 	destroyed() {
 		this.$vc.emit('layout-left-menu', { distance: 0 });
-		this.$vc.on('layout-left-menu-emit-again', this.emitLeftMenuWidth);
+		this.$vc.off('layout-left-menu-emit-again', this.emitLeftMenuWidth);
 	},
 	methods: {
 		emitLeftMenuWidth() {

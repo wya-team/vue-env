@@ -1,40 +1,43 @@
 <template>
 	<div class="c-layout">
 		<!-- top和left顺序不要动，关系到emit和on的监听问题 -->
-		<router-view name="top" />
-		<router-view name="left" />
-		<xls-layout-extra />
+		<router-view name="top"/>
+		<router-view name="left"/>
 		<div :style="{ paddingTop, paddingLeft }">
-			<router-view 
-				:style="{ 
-					minHeight, 
-					marginTop: !paddingTop ? '0px' : '12px', 
-					marginLeft: !paddingLeft ? '0px' : '16px',
-					marginRight: !paddingLeft ? '0px' : '12px' 
-				}" 
-				class="v-router" 
-			/>
-		</div>		
+			<div
+				:style="{
+					minHeight,
+					marginTop: !paddingTop ? '0px' : '12px',
+					marginLeft: !paddingLeft ? '0px' : '12px',
+					marginRight: !paddingLeft ? '0px' : '12px',
+				}"
+				class="v-router"
+			>
+				<router-view
+					:style="{
+						minWidth: `${minWidth}px`,
+						overflowX: 'auto'
+					}"
+				/>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
-import Extra from './extra';
-
 export default {
 	name: 'xls-layout',
 	components: {
-		'xls-layout-extra': Extra
 	},
 	data() {
 		return {
 			paddingTop: 0,
 			paddingLeft: 0,
-			minHeight: ''
+			minHeight: '',
+			minWidth: 1024,
 		};
 	},
 	computed: {
-		
 	},
 	beforeRouteEnter(to, from, next) {
 		next();
@@ -57,12 +60,13 @@ export default {
 	methods: {
 		// set
 		setContentPaddingTop({ distance }) {
-			console.log(distance);
-			this.paddingTop = `${distance}px`;
+			this.paddingTop = distance ? `${distance}px` : 0;
 			this.minHeight = `calc(100vh - ${distance + 12}px)`;
 		},
 		setContentPaddingLeft({ distance }) {
-			this.paddingLeft = `${distance}px`;
+			let marginLR = 24;
+			this.paddingLeft = distance ? `${distance}px` : 0;
+			this.minWidth = 1024 - distance - marginLR;
 		},
 	}
 };
@@ -76,8 +80,9 @@ export default {
 		padding-left: 232px;
 	}
 	.v-router {
+		overflow-x: auto;
 		margin: 12px 12px 0 16px;
-		background: $white;
+		background-color: $white;
 	}
 }
 </style>
