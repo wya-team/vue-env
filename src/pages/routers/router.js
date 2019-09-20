@@ -77,7 +77,7 @@ router.beforeEach(beforeEach);
 router.afterEach(afterEach);
 router.onError((error) => {
 	if (error.message.match(/Loading chunk (\d)+ failed/g)) {
-		location.reload();
+		location.reload(true);
 	}
 });
 
