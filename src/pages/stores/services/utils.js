@@ -31,6 +31,7 @@ export const createService = (defaultOptions = {}) => {
 	const {
 		key,
 		url,
+		compare = null,
 		parser = null,
 		cache = false,
 		vuex = false,
@@ -83,7 +84,7 @@ export const createService = (defaultOptions = {}) => {
 						return ajax({
 							url, // 必须是mutationType
 							type: 'GET',
-							localData: serviceCompare(param, store),
+							localData: compare ? compare(param, store) : serviceCompare(param, store),
 							loading: false,
 							param,
 							...opts
@@ -93,7 +94,7 @@ export const createService = (defaultOptions = {}) => {
 								res
 							};
 							this[key] = parser ? parser(store.res.data) : store.res.data;
-							cache && Storage.set(`${key}`, store);
+							typeof cache === 'function' ? cache(key, store) : cache && Storage.set(`${key}`, store);
 							return res;
 						}).catch((res) => {
 							return Promise.reject(res);
