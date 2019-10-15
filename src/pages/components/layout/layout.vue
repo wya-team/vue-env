@@ -1,8 +1,8 @@
 <template>
 	<div class="c-layout">
 		<!-- top和left顺序不要动，关系到emit和on的监听问题 -->
-		<router-view name="top"/>
-		<router-view name="left"/>
+		<router-view name="top" />
+		<router-view name="left" />
 		<div :style="{ paddingTop, paddingLeft }">
 			<div
 				:style="{
