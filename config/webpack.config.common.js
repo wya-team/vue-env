@@ -49,7 +49,7 @@ const loaderPath = [
 ];
 const webpackConfig = {
 	target: "web", // <=== 默认是 'web'，可省略
-	resolve: {// 重定向路径
+	resolve: { // 重定向路径
 		mainFiles: ['index'],
 		modules: [path.resolve(APP_ROOT, 'src'), 'node_modules'],
 		extensions: ['.js', '.vue', '.json', '.scss', '.css'],
