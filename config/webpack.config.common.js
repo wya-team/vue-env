@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpackMerge = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const userConfig = fs.existsSync(path.resolve(__dirname, './user.config.js')) 
 	? require('./user.config.js')
@@ -168,6 +169,15 @@ const webpackConfig = {
 	optimization: {
 		// 默认关闭压缩
 		minimize: ENV_IS_DEV ? false : JSON.parse(process.env.UGLIFY_JS),
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					mangle: {
+						safari10: true
+					}
+				},
+			})
+		],
 		// 原：NamedModulesPlugin()
 		namedModules: true,
 		// 原：NoEmitOnErrorsPlugin() - 异常继续执行
