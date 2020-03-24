@@ -3,6 +3,8 @@ import { Storage } from '@utils/utils';
 import { Vc } from '@wya/vc';
 import { serviceManager } from '@stores/services/utils';
 import { PRE_ROUTER_URL, TOKEN_KEY } from '../constants/constants';
+import { Global } from './_global';
+
 /**
  * 是否已经登录
  */
@@ -50,11 +52,11 @@ export const afterEach = (route => {
 let landPage = `${location.pathname}${location.search}`;
 export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
 
-	_global.user = data || {};
+	Global.user = data || {};
 	// 同步
-	Vue.prototype.$global = _global;
-	Vue.prototype.$auth = _global.user.auth;
-	Vue.prototype.$config = _global.user.config;
+	Vue.prototype.$global = Global;
+	Vue.prototype.$auth = Global.user.auth;
+	Vue.prototype.$config = Global.user.config;
 
 	// todo	
 	Storage.set(TOKEN_KEY, data);
@@ -73,8 +75,8 @@ export const createLoginAuth = (data = {}, replace = true, opts = {}) => {
  */
 export const clearLoginAuth = (opts = {}) => {
 	// 同步
-	Vue.prototype.$global = _global;
-	Vue.prototype.$auth = _global.auth;
+	Vue.prototype.$global = Global;
+	Vue.prototype.$auth = Global.auth;
 
 	Vc.instance.clearAll();
 	Storage.remove(TOKEN_KEY);
