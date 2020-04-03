@@ -1,0 +1,29 @@
+{
+  "name": "@wya/vue-eslint",
+  "version": "1.2.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "test": "mocha --require esm ./src/__tests__/*.test.js",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wya-team/vue-env"
+  },
+  "keywords": [],
+  "author": "wya-team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wya-team/vue-env/issues"
+  },
+  "homepage": "https://github.com/wya-team/vue-env#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^7.0.1"
+  }
+}

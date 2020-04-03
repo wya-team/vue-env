@@ -1,4 +1,6 @@
-node_modules/**
+dist/**
+templates/**
+packages/*/node_modules/**
+packages/*/dist/**
 **/*.css
 **/*.html
-**/*.min.js

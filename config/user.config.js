@@ -1,1 +1,0 @@
-const obj = { "install": false, "port": "8082" }; module.exports = obj;
