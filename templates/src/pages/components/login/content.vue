@@ -8,10 +8,10 @@
 		position="left"
 		class="g-flex-cc g-fd-c"
 	>
-		<vc-form-item label="用户名:" prop="user">
+		<vc-form-item label="用户名： " prop="user">
 			<vc-input v-model="formValidate.user" placeholder="请输入用户名" />
 		</vc-form-item>
-		<vc-form-item label="密码:" prop="password">
+		<vc-form-item label="密码： " prop="password">
 			<vc-input v-model="formValidate.password" placeholder="请输入密码" />
 		</vc-form-item>
 		<div @click="handleLogin">
@@ -53,9 +53,9 @@ export default {
 		
 	},
 	methods: {
-		handleLogin() {
-			this.$refs.form.validate((isValid) => {
-				if (!isValid) return;
+		async handleLogin() {
+			try {
+				await this.$refs.form.validate();
 				this.request({
 					url: 'LOGIN_MAIN_POST',
 					type: 'POST',
@@ -72,7 +72,9 @@ export default {
 				}).catch((res) => {
 					console.log(res);
 				});
-			});
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	},
 };
