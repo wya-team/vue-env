@@ -41,6 +41,7 @@ tests/coverage
 # error
 yarn-error.log
 npm-error.log
+lerna-debug.log
 
 # user config
 routes.dev.js

@@ -11,7 +11,6 @@
     "build": "cross-env NODE_ENV=production node --max_old_space_size=8192 ./scripts/build.js",
     "bootstrap": "./node_modules/.bin/lerna bootstrap --loglevel silly",
     "pub": "./node_modules/.bin/lerna publish",
-    "lint-staged": "lint-staged",
     "lint": "esw packages/ --ext .wya,.js --color",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch"
@@ -39,13 +38,19 @@
     "eslint-plugin-markdown": "^1.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "eslint-watch": "^6.0.1",
+    "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
-    "pre-commit": "^1.2.2",
     "regenerator-runtime": "0.11.1",
     "rollup": "^2.1.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-uglify": "^6.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "node ./scripts/commit-lint"
+    }
   },
   "lint-staged": {
     "{packages}/*/src/**/*.{js,jsx,wya}": [
@@ -56,8 +61,5 @@
       "esw --ext '.md' --fix",
       "git add"
     ]
-  },
-  "pre-commit": [
-    "lint-staged"
-  ]
+  }
 }
