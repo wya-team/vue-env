@@ -34,13 +34,7 @@ const otherFn = ({ response }) => {
 };
 
 const beforeFn = ({ options }) => {
-	// return {
-	// 	...options,
-	// 	headers: {
-	// 		...options.headers,
-	// 		token: JSON.stringify(Storage.get(TOKEN_KEY))
-	// 	}
-	// };
+	// TODO: 注入token
 };
 const afterFn = ({ options, response }) => {
 	let {

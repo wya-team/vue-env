@@ -16,7 +16,7 @@ class RoutesManager {
 		this.dynamicRoutes = dynamicRoutes;
 
 		this.router = null;
-		this.config = this.init();
+		this.config = this._init();
 	}
 
 	setRouter(router) {
@@ -26,17 +26,17 @@ class RoutesManager {
 	/**
 	 * 后端给的字段为power
 	 */
-	isLoggedIn() {
+	_isLoggedIn() {
 		return Storage.get(TOKEN_KEY);
 	}
 
 	/**
 	 * 初始化路由，如果已经登录过，则生成有权限的路由配置文件，给Router
 	 */
-	init() {
+	_init() {
 		let routes = cloneDeep(this.basicRoutes);
 
-		if (this.isLoggedIn()) {
+		if (this._isLoggedIn()) {
 			let children = this.getRoutes();
 			let redirect = (children[0] || {}).path || '/404';
 
@@ -79,7 +79,7 @@ class RoutesManager {
 		}, []);
 
 
-		let auth = this.isLoggedIn();
+		let auth = this._isLoggedIn();
 
 		// 筛选出有权限的路由
 		let authRoutes = allRoutes.filter((route) => {

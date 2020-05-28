@@ -1,8 +1,9 @@
 /**
  * 全部变量初始化及使用, 不要随意引用其他模块，保证_global是最高级别变量
  */
+import Vue from 'vue';
 import { Device, Storage, Cookie } from '@wya/utils';
-import { DEBUG } from '../constants/constants';
+import { DEBUG, TOKEN_KEY } from '../constants/constants';
 
 class GlobalManager {
 	constructor() {
@@ -49,6 +50,32 @@ class GlobalManager {
 		Storage.setVersion(this.version);
 		Cookie.setVersion(this.version);
 	}
+
+	updateUser(override = {}, opts = {}) {
+		this.user = {
+			...this.user,
+			...override,
+		};
+
+		Vue.prototype.$global = this;
+		Vue.prototype.$user = this.user;
+		Vue.prototype.$config = this.user.config;
+		Vue.prototype.$auth = this.user.auth;
+
+		Storage.set(TOKEN_KEY, this.user);
+	}
+
+	clearUser() {
+		this.user = {};
+		// 同步
+		Vue.prototype.$global = this;
+		Vue.prototype.$auth = {};
+		Vue.prototype.$user = {};
+		Vue.prototype.$config = {};
+
+		Storage.remove(TOKEN_KEY);
+	}
+	
 }
 
 
@@ -63,15 +90,15 @@ typeof window === "object"
 	: this._global = Global;
 
 export default {
-	install(Vue) {
-		Vue.prototype.$global = Global;
+	install($Vue) {
+		$Vue.prototype.$global = Global;
 		/**
 		 * 总后台返回的权限
 		 */
-		Vue.prototype.$auth = Global.user.auth;
+		$Vue.prototype.$auth = Global.user.auth;
 		/**
 		 * 总后台返回的控制项
 		 */
-		Vue.prototype.$config = Global.user.config;
+		$Vue.prototype.$config = Global.user.config;
 	}
 };
