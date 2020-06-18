@@ -47,6 +47,7 @@ const loaderPath = [
 	path.resolve(APP_ROOT, "node_modules/fast-xml-parser"), // 第三方库未编译，导致iOS8不兼容
 	path.resolve(APP_ROOT, "src")
 ];
+
 const webpackConfig = {
 	target: "web", // <=== 默认是 'web'，可省略
 	resolve: { // 重定向路径
@@ -135,7 +136,9 @@ const webpackConfig = {
 				// 组件内的样式
 				include: [
 					path.resolve(APP_ROOT, "src/pages"),
-					path.resolve(APP_ROOT, "node_modules")
+					path.resolve(APP_ROOT, "node_modules"),
+					// 兼容lerna的情况
+					path.resolve(APP_ROOT, "../node_modules")
 				]
 			},
 			{

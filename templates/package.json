@@ -1,13 +1,14 @@
 {
-  "name": "vue-env",
-  "version": "0.1.0",
+  "name": "@wya/v-scaffold",
+  "version": "1.0.0",
+  "private": true,
   "description": "basic env for vue",
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
     "dev": "npm run prompt && npm run all",
-    "serve": "node --max_old_space_size=8192 ./node_modules/webpack-dev-server/bin/webpack-dev-server --config  ./config/webpack.config.dev.js --hot",
-    "dist": "npm run remove:dist && npm run lint && node --max_old_space_size=8192 ./node_modules/webpack/bin/webpack --config ./config/webpack.config.dist.js",
+    "serve": "node --max_old_space_size=8192 ./node_modules/.bin/webpack-dev-server --config  ./config/webpack.config.dev.js --hot",
+    "dist": "npm run remove:dist && npm run lint && node --max_old_space_size=8192 ./node_modules/.bin/webpack --config ./config/webpack.config.dist.js",
     "build": "cross-env UGLIFY_JS=true npm run dist -- -p && npm run copy",
     "build:dev": "cross-env UGLIFY_JS=false npm run dist && npm run copy",
     "remove:dist": "rm -rf ./dist",

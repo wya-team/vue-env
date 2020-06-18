@@ -5,15 +5,19 @@
   "description": "",
   "main": "",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "templates"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production node --max_old_space_size=8192 ./scripts/build.js",
-    "bootstrap": "./node_modules/.bin/lerna bootstrap --loglevel silly",
-    "pub": "./node_modules/.bin/lerna publish",
+    "build:packages": "cross-env NODE_ENV=production node --max_old_space_size=8192 ./scripts/build.js",
+    "bootstrap": "npm run build:packages && lerna bootstrap --loglevel silly",
+    "pub": "lerna publish",
     "lint": "esw packages/ --ext .wya,.js --color",
     "lint:fix": "npm run lint -- --fix",
-    "lint:watch": "npm run lint -- --fix --watch"
+    "lint:watch": "npm run lint -- --fix --watch",
+    "test": "node scripts/unit-test.js",
+    "dev": "yarn workspace @wya/v-scaffold dev",
+    "build": "yarn workspace @wya/v-scaffold build"
   },
   "dependencies": {},
   "devDependencies": {
