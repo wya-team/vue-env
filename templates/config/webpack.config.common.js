@@ -101,7 +101,12 @@ const webpackConfig = {
 				include: loaderPath,
 				use: [
 					{
-						loader: 'babel-loader'
+						loader: 'babel-loader',
+
+						// node_modules/.cache/babel-loader 编译缓存，独立于babel.config.js
+						options: {
+							cacheDirectory: true
+						}
 					}
 				]
 			},
