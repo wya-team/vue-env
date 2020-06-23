@@ -131,7 +131,8 @@ module.exports = class AddManager {
 	 * 其中包含加载页面和插件、应用插件等。
 	 */
 	async process() {
-		return this.options.config
+		// TODO: 检查是否存在stages和未unstages的文件
+		this.options.config
 			? this._loopMake()
 			: prompt(this._getQuesion()).then(createProcess);
 	}
