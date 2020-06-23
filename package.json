@@ -1,6 +1,6 @@
 {
   "name": "@wya/vue-env",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "",
   "main": "",
@@ -16,8 +16,12 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "test": "node scripts/unit-test.js",
-    "dev": "yarn workspace @wya/v-scaffold dev",
-    "build": "yarn workspace @wya/v-scaffold build"
+    "link": "yarn workspace @wya/vue-cli link:wya-vue",
+    "unlink": "yarn workspace @wya/vue-cli unlink:wya-vue",
+    "add": "yarn workspace @wya/vue-scaffold add",
+    "create": "yarn workspace @wya/vue-scaffold create",
+    "dev": "yarn workspace @wya/vue-scaffold dev",
+    "build": "yarn workspace @wya/vue-scaffold build"
   },
   "dependencies": {},
   "devDependencies": {

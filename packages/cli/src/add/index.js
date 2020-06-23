@@ -1,5 +1,1 @@
-// TODO
-
-module.exports = () => {
-
-};
+module.exports = require('./add');

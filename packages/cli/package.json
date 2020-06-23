@@ -1,6 +1,6 @@
 {
-  "name": "@wya/v-cli",
-  "version": "1.2.1",
+  "name": "@wya/vue-cli",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "files": [
@@ -9,6 +9,8 @@
     "bin/**"
   ],
   "scripts": {
+    "link:wya-vue": "npm link",
+    "unlink:wya-vue": "npm unlink",
     "test": "mocha ./__tests__/*.test.js"
   },
   "repository": {
@@ -37,6 +39,6 @@
     "mocha": "^7.0.1"
   },
   "bin": {
-    "v-cli": "bin/v-cli"
+    "wya-vue": "bin/cli"
   }
 }
