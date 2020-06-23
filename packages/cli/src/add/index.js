@@ -91,7 +91,7 @@ module.exports = class AddManager {
 				name: 'dir',
 				message: 'Where to in the project:',
 				when: (answers) => answers.type !== 'none',
-				default: (answers) => upath.normalize(`${process.cwd()}/src/${answers.type !== 'routeForMp' ? 'pages/' : ''}`),
+				default: (answers) => upath.normalize(`${process.cwd()}/src/pages/`),
 				// default: upath.normalize(`${process.cwd()}/tmp/`),
 				// default: upath.normalize(`${process.cwd()}/tmp/src/pages/`),
 				validate(val) {
