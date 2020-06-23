@@ -23,7 +23,7 @@
     "all": "cross-env BB=development npm-run-all --parallel --race --continue-on-error lint:watch serve",
     "test": "jest --config ./tests/config/jest.config.js",
     "add": "wya-vue add",
-    "create": "wya-vue add --config ./config/toolkit.config.js"
+    "create": "wya-vue add --config ./config/modules.config.js"
   },
   "author": "wya-team",
   "license": "MIT",

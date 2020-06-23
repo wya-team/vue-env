@@ -16,12 +16,12 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "test": "node scripts/unit-test.js",
-    "link": "yarn workspace @wya/vue-cli link:wya-vue",
-    "unlink": "yarn workspace @wya/vue-cli unlink:wya-vue",
-    "add": "yarn workspace @wya/vue-scaffold add",
-    "create": "yarn workspace @wya/vue-scaffold create",
-    "dev": "yarn workspace @wya/vue-scaffold dev",
-    "build": "yarn workspace @wya/vue-scaffold build"
+    "link": "yarn workspace @wya/vue-cli run link:wya-vue",
+    "unlink": "yarn workspace @wya/vue-cli run unlink:wya-vue",
+    "add": "yarn workspace @wya/vue-scaffold run add",
+    "create": "yarn workspace @wya/vue-scaffold run create",
+    "dev": "yarn workspace @wya/vue-scaffold run dev",
+    "build": "yarn workspace @wya/vue-scaffold run build"
   },
   "dependencies": {},
   "devDependencies": {

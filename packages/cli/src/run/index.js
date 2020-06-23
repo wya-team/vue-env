@@ -7,7 +7,7 @@ module.exports = class RunManager {
 	constructor(options = {}) {
 		const defaultOptions = {
 			withI18n: false,
-			config: 'v-cli.config.js',
+			config: 'vue.config.js',
 		};
 		this.options = { ...defaultOptions, ...options };
 		this.sourceDir = this.options.sourceDir;

@@ -13,8 +13,19 @@ const scrollTpl = require('./templates/scroll/index');
 const log = console.log;
 const { writeFile } = fs;
 
-module.exports = (opts = {}, force) => {
-	let { env, path, dir, project, template, pagingMode, pagingType, extra = '', title = '', components } = opts;
+module.exports = (opts = {}) => {
+	let {
+		path,
+		dir,
+		project,
+		template,
+		pagingMode,
+		pagingType,
+		extra = '',
+		title = '',
+		components,
+		force
+	} = opts;
 	let pathArr = path.replace(/\({0,}\//g, '-')
 		.replace(/([a-z\dA-Z])([A-Z])/g, '$1-$2')
 		.toLowerCase()
@@ -210,7 +221,7 @@ module.exports = (opts = {}, force) => {
 						fullpath,
 						scrollTpl[key](
 							fs.existsSync(fullpath) ? fs.readFileSync(fullpath, 'utf-8') : '',
-							{ mutation, pathArr, project, module, pagingMode, pagingType, extra, title, route, env, components }
+							{ mutation, pathArr, project, module, pagingMode, pagingType, extra, title, route, components }
 						)
 					);
 					
@@ -231,7 +242,7 @@ module.exports = (opts = {}, force) => {
 						fullpath,
 						formTpl[key](
 							fs.existsSync(fullpath) ? fs.readFileSync(fullpath, 'utf-8') : '',
-							{ mutation, pathArr, project, module, extra, title, env, components  }
+							{ mutation, pathArr, project, module, extra, title, components }
 						)
 					);
 					
