@@ -10,8 +10,9 @@
   ],
   "scripts": {
     "build:packages": "cross-env NODE_ENV=production node --max_old_space_size=8192 ./scripts/build.js",
-    "bootstrap": "npm run build:packages && lerna bootstrap --loglevel silly",
-    "pub": "lerna publish --no-git-tag-version",
+    "bootstrap": "lerna clean --yes && lerna bootstrap --loglevel silly",
+    "pub": "npm run build:packages && lerna publish",
+    "pub:no-tag": "npm run pub -- --no-git-tag-version",
     "lint": "esw packages/ --ext .wya,.js --color",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
