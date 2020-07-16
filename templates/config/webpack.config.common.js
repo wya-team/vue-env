@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs-extra');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
@@ -270,7 +270,7 @@ module.exports = {
 	APP_ROOT,
 	localIp,
 	localPort,
-	commonConfig: webpackMerge(
+	commonConfig: merge(
 		webpackConfig,
 		defaultConfig
 	)

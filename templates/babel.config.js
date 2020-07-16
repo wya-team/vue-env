@@ -8,7 +8,15 @@ module.exports = (api) => {
 	return {
 		compact: false,
 		presets: [
-			"@babel/preset-env"
+			[
+				"@babel/preset-env",
+				{
+					useBuiltIns: "usage",
+					corejs: { 
+						version: 3
+					}
+				}
+			]
 		],
 		plugins: [
 			"@babel/plugin-proposal-optional-chaining",

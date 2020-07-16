@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'development';
 const path = require('path');
 
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -63,7 +63,7 @@ const webpackConfig = {
 	]
 };
 
-module.exports = webpackMerge(
+module.exports = merge(
 	commonConfig,
 	webpackConfig
 );

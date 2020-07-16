@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'production';
 const path = require('path');
 
 const webpack = require('webpack');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -27,13 +27,15 @@ const webpackConfig = {
 		/**
 		 * 压缩同时转移静态文件
 		 */
-		new CopyWebpackPlugin([
-			{
-				from: path.resolve(APP_ROOT, 'src/static'),
-				to: '[name].[ext]',
-				toType: 'template'
-			}
-		]),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(APP_ROOT, 'src/static'),
+					to: '[name].[ext]',
+					toType: 'template'
+				}
+			]
+		}),
 		/**
 		 * 生产环境
 		 * webpack 4 默认支持: 'process.env.NODE_ENV': JSON.stringify('production')
@@ -56,7 +58,7 @@ const webpackConfig = {
 	],
 };
 
-module.exports = webpackMerge(
+module.exports = merge(
 	commonConfig,
 	webpackConfig
 );
