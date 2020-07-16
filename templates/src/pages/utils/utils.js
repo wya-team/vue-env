@@ -130,7 +130,8 @@ export const createSession = (key, opts = {}) => {
 				session
 			}
 		});
-		window.history.replaceState(null, null, config);
+		typeof window !== 'undefined' 
+			&& window.history.replaceState(null, null, config);
 	}
 	
 	return session;

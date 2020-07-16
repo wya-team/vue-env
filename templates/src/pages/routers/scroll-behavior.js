@@ -1,3 +1,5 @@
+const IN_BROWSER = typeof window !== 'undefined';
+
 class ScrollManager {
 	constructor() {
 		/**
@@ -12,12 +14,14 @@ class ScrollManager {
 		 */
 		this.history = {};
 
+		if (!IN_BROWSER) return;
 		this._init();
 
 		__DEV__ && (window.HISTORY = this.history);
 	}
 
 	_init() {
+		if (!IN_BROWSER) return;
 		/**
 		 * 事件委托代理，目前仅涉及考虑移动端
 		 */
@@ -65,6 +69,7 @@ class ScrollManager {
 	 * 异步：未渲染标记：g-scroll-container
 	 */
 	refresh() {
+		if (!IN_BROWSER) return;
 		// TODO: 精确匹配
 		let state = false;
 
@@ -108,6 +113,7 @@ class ScrollManager {
 const scrollManager = new ScrollManager();
 
 export default (to, from, pos) => {
+	if (!IN_BROWSER) return;
 	// - start 容器下滚动
 	window.app && window.app.$vc.off('trigger-scroll');
 

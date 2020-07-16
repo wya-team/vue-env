@@ -3,7 +3,7 @@
  */
 import Vue from 'vue';
 import { Device, Storage, Cookie } from '@wya/utils';
-import { DEBUG, TOKEN_KEY } from '../constants/constants';
+import { DEBUG, TOKEN_KEY, IN_BROWSER } from '../constants/constants';
 
 class GlobalManager {
 	constructor() {
@@ -12,7 +12,7 @@ class GlobalManager {
 		this.setVersion();
 
 		// GUID
-		this.GUID = location.host.split(".")[0];
+		this.GUID = '';
 
 		// 程序打开时间
 		this.landingTime = new Date();
@@ -21,29 +21,31 @@ class GlobalManager {
 		 * ios中微信支付的坑
 		 * 获取第一次加载的页面pathname值
 		 */
-		this.landingPage = location.pathname;
-
-		/**
-		 * ios中微信分享的坑
-		 * 已修复，可以无视
-		 */
-		this.landingSharePage = `${location.origin}${location.pathname}${location.search}`;
+		this.landingPath = '';
+		this.landingPage = '';
 
 		// 用户信息
 		this.user = {};
 
 		// 环境
 		this.env = process.env.NODE_ENV;
-
 		this.debug = DEBUG;
 
 		// 缩放比例
 		this.scale = 1;
-		this.height = window.innerHeight;
-		this.width = window.innerWidth;
+		this.height = 0;
+		this.width = 0;
 
 		// 设备信息状态
 		this.device = Device;
+
+		if (IN_BROWSER) {
+			this.GUID = location.host.split(".")[0];
+			this.landingPath = location.pathname;
+			this.landingPage = `${location.origin}${location.pathname}${location.search}`;
+			this.height = window.innerHeight;
+			this.width = window.innerWidth;
+		}
 	}
 
 	setVersion() {
@@ -81,13 +83,7 @@ class GlobalManager {
 
 export const Global = new GlobalManager();
 
-/**
- * 组件内遵守使用this.$global
- * 组件外等特殊场景使用_global
- */
-typeof window === "object" 
-	? window._global = Global 
-	: this._global = Global;
+IN_BROWSER ? (window._global = Global) : (global._global = Global);
 
 export default {
 	install($Vue) {
