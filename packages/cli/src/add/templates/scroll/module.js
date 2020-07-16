@@ -28,7 +28,7 @@ exports.module = (content, opts = {}) => {
 				contents +=	`			...initScroll\n`;
 				contents +=	`		},\n`;
 				break;
-			default :
+			default:
 				contents += `		...initScroll\n`;
 				break;
 		}
@@ -49,7 +49,7 @@ exports.module = (content, opts = {}) => {
 				contents += `				]\n`;
 				contents += `			}\n`;
 				break;
-			default :
+			default:
 				contents += `			...data.page,\n`;
 				contents += `			data: [\n`;
 				contents += `				...state.listInfo.data,\n`;
@@ -72,7 +72,7 @@ exports.module = (content, opts = {}) => {
 				contents += `				]\n`;
 				contents += `			}\n`;
 				break;
-			default :
+			default:
 				contents += `			...data.page,\n`;
 				contents += `			data: [\n`;
 				contents += `				...data.list\n`;

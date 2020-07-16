@@ -204,6 +204,7 @@ exports.list = (content, opts = {}) => {
 				contents += `			};\n`;
 				contents += `			this.$router.replace(URL.merge({ path: '${route}', query }));\n`;
 				contents += `		},\n`;
+				break;
 			default:
 				
 		}

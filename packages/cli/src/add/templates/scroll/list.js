@@ -49,7 +49,7 @@ exports.list = (content, opts = {}) => {
 				contents += `	</vc${m}-tabs>\n`;
 				contents += `</template>\n`;
 				break;	
-			default :
+			default:
 				contents += `<template>\n`;
 				contents += `	<vc${m}-pull-scroll\n`;
 				contents += `		ref="tableTarget"\n`;
