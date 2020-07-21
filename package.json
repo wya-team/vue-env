@@ -13,7 +13,7 @@
     "bootstrap": "lerna clean --yes && lerna bootstrap --loglevel silly",
     "pub": "npm run build:packages && lerna publish",
     "pub:no-tag": "npm run pub -- --no-git-tag-version",
-    "lint": "esw packages/ --ext .wya,.js --color",
+    "lint": "esw packages/ --ext .vue,.js --color",
     "lint:fix": "npm run lint -- --fix",
     "lint:watch": "npm run lint -- --fix --watch",
     "test": "node scripts/unit-test.js",
@@ -52,7 +52,6 @@
     "husky": "^4.2.3",
     "lerna": "^3.20.2",
     "lint-staged": "^10.0.7",
-    "regenerator-runtime": "0.12.1",
     "rollup": "^2.17.1",
     "rollup-plugin-uglify": "^6.0.4"
   },
