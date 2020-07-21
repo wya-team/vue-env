@@ -41,9 +41,9 @@ module.exports = (api) => {
 			[
 				"import",
 				{
-					"libraryName": "@wya/vc",
-					"libraryDirectory": "lib",
-					"customName": (name) => {
+					libraryName: "@wya/vc",
+					libraryDirectory: "lib",
+					customName: (name) => {
 						if (/^m-/.test(name)) {
 							return `@wya/vc/lib/${name.replace(/^m-/, '')}/index.m`;
 						}
