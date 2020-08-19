@@ -15,13 +15,6 @@ class HooksManager {
 	}
 
 	/**
-	 * 是否已经登录
-	 */
-	_isLoggedIn(opts = {}) {
-		return !!Storage.get(TOKEN_KEY);
-	}
-
-	/**
 	 * @public
 	 * 设置登录状态, 开发模式下用的
 	 */
@@ -61,7 +54,7 @@ class HooksManager {
 	 * allow.regex: /^\/(login)$/
 	 */
 	beforeEach = async (to, from, next) => {
-		let logged = this._isLoggedIn();
+		let logged = Global.isLoggedIn();
 
 		/**
 		 * /login页面

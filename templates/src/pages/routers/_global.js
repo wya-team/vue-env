@@ -53,6 +53,13 @@ class GlobalManager {
 		Cookie.setVersion(this.version);
 	}
 
+	/**
+	 * 是否已经登录
+	 */
+	isLoggedIn(opts = {}) {
+		return !!Storage.get(TOKEN_KEY);
+	}
+	
 	updateUser(override = {}, opts = {}) {
 		this.user = {
 			...this.user,

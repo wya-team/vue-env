@@ -9,6 +9,7 @@ import Top from '@components/layout/top';
  * 用于排序
  */
 import { getChunks } from '@components/layout/menu/chunks';
+import { Global } from './_global';
 
 class RoutesManager {
 	constructor(basicRoutes, dynamicRoutes) {
@@ -24,19 +25,12 @@ class RoutesManager {
 	}
 
 	/**
-	 * 后端给的字段为power
-	 */
-	_isLoggedIn() {
-		return Storage.get(TOKEN_KEY);
-	}
-
-	/**
 	 * 初始化路由，如果已经登录过，则生成有权限的路由配置文件，给Router
 	 */
 	_init() {
 		let routes = cloneDeep(this.basicRoutes);
 
-		if (this._isLoggedIn()) {
+		if (Global.isLoggedIn()) {
 			let children = this.getRoutes();
 			let redirect = (children[0] || {}).path || '/404';
 
@@ -79,7 +73,7 @@ class RoutesManager {
 		}, []);
 
 
-		let auth = this._isLoggedIn();
+		let auth = Global.isLoggedIn();
 
 		// 筛选出有权限的路由
 		let authRoutes = allRoutes.filter((route) => {
