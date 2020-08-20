@@ -24,7 +24,7 @@
 import { mapState } from 'vuex';
 import { Message } from '@wya/vc';
 import { Storage } from '@utils/utils';
-import { createLoginAuth } from '@routers/hooks';
+import { Global } from '@routers/_global';
 
 export default {
 	name: 'login',
@@ -68,7 +68,7 @@ export default {
 				}).then((res) => {
 					Message.success(`登录成功 - userName: ${this.loginMain.user}`);
 
-					createLoginAuth(res.data);
+					Global.createLoginAuth(res.data);
 				}).catch((res) => {
 					console.log(res);
 				});

@@ -17,6 +17,7 @@ class ScrollManager {
 		if (!IN_BROWSER) return;
 		this._init();
 
+		/* global __DEV__ */
 		__DEV__ && (window.HISTORY = this.history);
 	}
 

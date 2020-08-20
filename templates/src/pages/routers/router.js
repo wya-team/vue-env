@@ -22,33 +22,19 @@ import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
 import scrollBehavior from './scroll-behavior';
 
-import { beforeEach, afterEach, clearLocalStorage } from './hooks';
-
 /**
  * Vuex Config
  */
 import { storeConfig } from '../stores/root';
 
+import HooksManager from './hooks';
 import RoutesManager from './routes.dynamic';
 
 export const createApp = () => {
-	/**
-	 * vue-router Config
-	 */
-	let dynamicRoutes;
-	if (process.env.NODE_ENV !== "production") {
-		dynamicRoutes = require('./routes.dev').dynamicRoutes;
-	} else {
-		dynamicRoutes = require('./routes.dist').dynamicRoutes;
-	}
-	let basicRoutes;
-	if (process.env.NODE_ENV !== "production") {
-		basicRoutes = require('./routes.dev').basicRoutes;
-	} else {
-		basicRoutes = require('./routes.dist').basicRoutes;
-	}
+	const routesManager = new RoutesManager();
+	const hooksManager = new HooksManager();
 
-	let routesManager = new RoutesManager(basicRoutes, dynamicRoutes);
+	const { beforeEach, afterEach } = hooksManager;
 
 	Vue.config.productionTip = false;
 	Vue.config.devtools = Global.debug;

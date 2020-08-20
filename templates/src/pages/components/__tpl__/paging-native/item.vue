@@ -49,9 +49,6 @@
 
 export default {
 	name: 'vc-fragment-item',
-	components: {
-		'vc-fragment': Fragment
-	},
 	props: {
 		dataSource: {
 			type: Array,
