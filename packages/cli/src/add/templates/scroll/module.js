@@ -59,7 +59,7 @@ exports.module = (content, opts = {}) => {
 		}
 		contents += `		};\n`;
 		contents += `	},\n`;
-		contents += `	${pagingType}_GET_REFRESH(state, { type, page }) {\n`;
+		contents += `	${pagingType}_GET_REFRESH(state, { data, param: { type, page } }) {\n`;
 		contents += `		state.listInfo = {\n`;
 		contents += `			...initialState.listInfo,\n`;
 		switch (type) {
