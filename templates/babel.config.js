@@ -13,7 +13,8 @@ module.exports = (api) => {
 				{
 					useBuiltIns: "usage",
 					corejs: { 
-						version: 3
+						version: 3,
+						proposals: true
 					}
 				}
 			]
