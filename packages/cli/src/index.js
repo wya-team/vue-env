@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const program = require('cac')();
 const { resolve } = require('path');
-const { Run, Add, Init } = require('./commands');
+const { Run, Add, Init, SFC } = require('./commands');
 
 const { log } = console;
 program
@@ -62,6 +62,17 @@ program
 	.command('delete [sourceDir]', 'delete templates')
 	.action((sourceDir = '.', commandOptions) => {
 		// TODO
+	});
+
+// Run sfc
+program
+	.command('sfc [sourceDir]', 'sfc')
+	.action((sourceDir = '.', commandOptions) => {
+		let app = new SFC({
+			sourceDir: resolve(sourceDir),
+			...commandOptions
+		});
+		app.dev();
 	});
 
 // Run update|upgrade
