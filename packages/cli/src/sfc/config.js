@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { resolve } = path;
 const cwd = process.cwd();

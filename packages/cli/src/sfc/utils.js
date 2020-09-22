@@ -81,14 +81,14 @@ const getHTMLConfig = () => {
 	let openPage = {};
 	Object.keys(entry).forEach((key) => {
 		let fullpath = entry[key];
-		openPage[key] = `/demo/${key}`.replace(/\.js/, '.html');
+		openPage[key] = `/demo/${key}`.replace(/\.(js|vue)/, '.html');
 		htmls.push(
 			new HtmlWebpackPlugin({
 				__DEV__: true, 
 				template: path.resolve(__dirname, 'templates/tpl.ejs'),
 				chunks: [key],
 				inject: 'body',
-				filename: `demo/${key.replace(/\.js/, '.html')}`
+				filename: `demo/${key.replace(/\.(js|vue)/, '.html')}`
 			})
 		);
 	});
