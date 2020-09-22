@@ -67,6 +67,7 @@ program
 // Run sfc
 program
 	.command('sfc [sourceDir]', 'sfc')
+	.option('--pattern <pattern>', 'pattern mode, "**/examples"')
 	.action((sourceDir = '.', commandOptions) => {
 		let app = new SFC({
 			sourceDir: resolve(sourceDir),
