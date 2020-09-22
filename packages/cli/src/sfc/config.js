@@ -48,7 +48,7 @@ class Config {
 	 * 针对@wya/vc有做特殊处理
 	 */
 	generateDefault() {
-		const { webpackAssist, tempDir } = this.$parent.$parent;
+		const { webpackAssist, tempDir, sourceDir } = this.$parent.$parent;
 		const { port, host } = this.$parent;
 		const { entry, htmls, openPage } = webpackAssist;
 
@@ -137,7 +137,7 @@ class Config {
 					{
 						test: /\.(scss|css)$/,
 						use: [
-							resolvePackage('vue-style-loader'),
+							resolvePackage('vue-style-loader'), // TODO, 没有作用
 							resolvePackage('css-loader'),
 							resolvePackage('sass-loader'),
 							{
@@ -153,6 +153,10 @@ class Config {
 					{
 						test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 						loader: resolvePackage('url-loader')
+					},
+					{
+						test: /\.html$/i,
+						use: resolvePackage('html-loader')
 					}
 				]
 			},
