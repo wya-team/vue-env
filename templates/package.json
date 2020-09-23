@@ -1,6 +1,6 @@
 {
   "name": "@wya/vue-scaffold",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "description": "basic env for vue",
   "main": "index.js",
@@ -60,7 +60,7 @@
     "@babel/plugin-transform-block-scoping": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@wya/vc-loader": "^0.3.5",
-    "@wya/vue-cli": "^1.0.7",
+    "@wya/vue-cli": "^1.0.8",
     "assets-webpack-plugin": "^5.0.3",
     "autoprefixer": "^9.8.5",
     "babel-eslint": "^10.1.0",
