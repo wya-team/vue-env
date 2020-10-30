@@ -5,6 +5,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 import { Vc } from '@wya/vc';
+import AssistVc from '@wya/assist-vc';
 import { sync } from 'vuex-router-sync';
 
 /**
@@ -43,6 +44,9 @@ export const createApp = () => {
 	Vue.component(SetTitle.name, SetTitle);
 	Vue.component(Loading.name, Loading);
 
+	// 辅助组件
+	Vue.use(AssistVc);
+	
 	// - 全局mixins
 	Vue.mixin(emitter);
 
