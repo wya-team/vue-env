@@ -199,7 +199,7 @@
 				</div>
 			</div>
 		</div>
-		<tpl-footer 
+		<vca-footer
 			@cancel="$router.back()"
 			@ok="handleSubmit" 
 		/>
@@ -207,12 +207,12 @@
 </template>
 
 <script>
-import Footer from '@common/footer/footer';
+import { Footer } from '@wya/assist-vc';
 
 export default {
 	name: 'v-tpl-form',
 	components: {
-		'tpl-footer': Footer
+		'vca-footer': Footer
 	},
 	data() {
 		return {

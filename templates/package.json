@@ -30,7 +30,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
-    "@wya/assist-vc": "^1.1.10",
+    "@wya/assist-vc": "^1.1.13",
     "@wya/assist-vm": "^1.0.4",
     "@wya/http": "^1.4.5",
     "@wya/ps": "^1.0.2",

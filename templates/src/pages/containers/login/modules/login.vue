@@ -11,16 +11,7 @@ export default {
 	name: 'login',
 	components: {
 		'tpl-content': Content
-	},
-	data() {
-		return {
-		};
-	},
-	created() {
-		console.log('?');
-	},
-	methods: {
-	},
+	}
 };
 </script>
 

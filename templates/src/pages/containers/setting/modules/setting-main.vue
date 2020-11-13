@@ -11,16 +11,7 @@ export default {
 	name: 'setting-main',
 	components: {
 		'tpl-content': Content
-	},
-	data() {
-		return {
-			
-		};
-	},
-	created() {
-	},
-	methods: {
-	},
+	}
 };
 </script>
 

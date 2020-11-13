@@ -16,8 +16,7 @@ import globalHook, { Global, setApp } from './_global'; // eslint-disable-line
 /**
  * 配置
  */
-import SetTitle from '@common/set-title/set-title';
-import Loading from '@common/loading/loading';
+import { Loading } from '@common';
 import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
 import scrollBehavior from './scroll-behavior';
@@ -40,7 +39,6 @@ export const createApp = () => {
 	Vue.config.devtools = Global.debug;
 
 	// - 全局组件
-	Vue.component(SetTitle.name, SetTitle);
 	Vue.component(Loading.name, Loading);
 
 	// 辅助组件
@@ -88,7 +86,7 @@ export const createApp = () => {
 		render(h) {
 			return (
 				<div id="pages">
-					<router-view></router-view>
+					<router-view />
 				</div>
 			);
 		}
