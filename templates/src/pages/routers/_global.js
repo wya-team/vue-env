@@ -4,7 +4,7 @@
 import Vue from 'vue';
 import { Device, Storage, Cookie } from '@wya/utils';
 import { Vc } from '@wya/vc';
-import { serviceManager } from '@stores/services/utils';
+import { Service } from '@wya/assist-vc';
 import { DEBUG, TOKEN_KEY, IN_BROWSER, PRE_ROUTER_URL } from '../constants/constants';
 
 /* eslint-disable import/no-mutable-exports */
@@ -91,7 +91,7 @@ class GlobalManager {
 	clearLoginAuth(opts = {}) {
 		this.clearUser();
 		Vc.instance.clearAll();
-		serviceManager.clear();
+		Service.clear();
 
 		// 重置页面
 		this.landingPage = `/`;

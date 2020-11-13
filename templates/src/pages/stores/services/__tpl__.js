@@ -4,14 +4,16 @@
  */
 import net from '@utils/net';
 import { initTreeData } from '@utils/utils';
-import { createService, serviceObj, serviceCompare, createSocket } from './utils';
+import { Store } from '@wya/assist-vc';
+
+const { Service } = Store;
 
 export const services = {
-	...createService({
+	...Service.createStore({
 		key: "xxx", 
 		url: 'XXXX'
 	}),
-	...createService({
+	...Service.createStore({
 		key: "xxx",
 		url: "XXXXX",
 	}),
@@ -40,9 +42,11 @@ export const services = {
 };
 
 export const sockets = {
-	...createSocket({
+	...Service.createSocket({
 		key: "xxx",
-		param: { bind_type: 1 },
-		bindUrl: 'xxx'
+		url: 'xxx',
+		onConnect(data, ctx) {
+			
+		}
 	})
 };

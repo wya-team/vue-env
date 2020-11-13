@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 import { Vc } from '@wya/vc';
-import AssistVc from '@wya/assist-vc';
+import AssistVc, { Extends } from '@wya/assist-vc';
 import { sync } from 'vuex-router-sync';
 
 /**
@@ -18,7 +18,6 @@ import globalHook, { Global, setApp } from './_global'; // eslint-disable-line
  */
 import SetTitle from '@common/set-title/set-title';
 import Loading from '@common/loading/loading';
-import emitter from '@extends/mixins/emitter';
 import request from '@extends/plugins/request';
 import VcConfig from './vc.config';
 import scrollBehavior from './scroll-behavior';
@@ -48,7 +47,7 @@ export const createApp = () => {
 	Vue.use(AssistVc);
 	
 	// - 全局mixins
-	Vue.mixin(emitter);
+	Vue.mixin(Extends.mixins(['emitter']));
 
 	// - 全局plugins
 	Vue.use(request);
