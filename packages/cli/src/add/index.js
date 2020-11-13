@@ -73,6 +73,13 @@ module.exports = class AddManager {
 				default: 'table'
 			},
 			{
+				type: 'confirm',
+				name: 'store',
+				message: 'use store(vuex):',
+				when: (answers) => !(/(paging|scroll)/.test(answers.template)),
+				default: false
+			},
+			{
 				type: 'input',
 				name: 'path',
 				message: 'RoutePath is required:',

@@ -21,11 +21,13 @@ module.exports = (opts = {}) => {
 		template,
 		pagingMode,
 		pagingType,
+		store = false,
 		extra = '',
 		title = '',
 		components,
 		force
 	} = opts;
+	const hasStore = /(paging|scroll)/.test(template) || store;
 	let pathArr = path.replace(/\({0,}\//g, '-')
 		.replace(/([a-z\dA-Z])([A-Z])/g, '$1-$2')
 		.toLowerCase()
@@ -59,22 +61,22 @@ module.exports = (opts = {}) => {
 		component: {
 			path: upath.normalize(`${dir}components/${pathArr[0]}/${module}/content.vue`)
 		},
-		/**
-		 * strore
-		 */
-		// mutation: {
-		// 	path: upath.normalize(`${dir}stores/mutations/${mutation}.js`)
-		// },
 		api: {
 			path: upath.normalize(`${dir}stores/apis/${mutation}.js`)
 		},
-		module: {
-			path: upath.normalize(`${dir}stores/modules/${mutation}/${module}.js`)
-		},
-		rootModule: {
-			path: upath.normalize(`${dir}stores/modules/${mutation}/root.js`)
-		}
 	};
+
+	if (hasStore) {
+		basicConfig = {
+			...basicConfig,
+			module: {
+				path: upath.normalize(`${dir}stores/modules/${mutation}/${module}.js`)
+			},
+			rootModule: {
+				path: upath.normalize(`${dir}stores/modules/${mutation}/root.js`)
+			}
+		};
+	}
 
 	let rootConfig = {
 		rootApi: {
