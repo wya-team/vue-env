@@ -87,11 +87,17 @@ module.exports = (opts = {}) => {
 		},
 		_rootRoute: {
 			path: upath.normalize(`${dir}routers/routes.dev.js`)
-		},
-		rootModules: {
-			path: upath.normalize(`${dir}stores/modules/root.js`)
 		}
 	};
+
+	if (hasStore) {
+		rootConfig = {
+			...rootConfig,
+			rootModules: {
+				path: upath.normalize(`${dir}stores/modules/root.js`)
+			}
+		};
+	}
 
 	let pagingConfig = {
 		// mutation: basicConfig.mutation,
