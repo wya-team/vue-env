@@ -70,8 +70,8 @@ exports.component = (content, opts = {}) => {
 	contents += `						style="width: 300px"\n`;
 	contents += `					>\n`;
 	contents += `						<vc${m}-option \n`;
-	contents += `							v-for="(item, index) in company" \n`;
-	contents += `							:key="index" \n`;
+	contents += `							v-for="(item, $index) in company" \n`;
+	contents += `							:key="$index" \n`;
 	contents += `							value="item"\n`;
 	contents += `						>\n`;
 	contents += `							{{ item }}\n`;
@@ -87,8 +87,8 @@ exports.component = (content, opts = {}) => {
 	contents += `						style="width: 300px"\n`;
 	contents += `					>\n`;
 	contents += `						<vc${m}-option \n`;
-	contents += `							v-for="(item, index) in company" \n`;
-	contents += `							:key="index" \n`;
+	contents += `							v-for="(item, $index) in company" \n`;
+	contents += `							:key="$index" \n`;
 	contents += `							value="item"\n`;
 	contents += `						>\n`;
 	contents += `							{{ item }}\n`;
@@ -96,13 +96,13 @@ exports.component = (content, opts = {}) => {
 	contents += `					</vc${m}-select>\n`;
 	contents += `				</vc${m}-form-item>\n`;
 	contents += `				<vc${m}-form-item \n`;
-	contents += `					v-for="(item, index) in formValidate.items"\n`;
+	contents += `					v-for="(item, $index) in formValidate.items"\n`;
 	contents += `					:key="item.index"\n`;
-	contents += `					:label="index === 0 ? '缴款方式：' : ''"\n`;
+	contents += `					:label="$index === 0 ? '缴款方式：' : ''"\n`;
 	contents += `				>\n`;
 	contents += `					<div class="g-form-block">\n`;
 	contents += `						<vc${m}-form-item\n`;
-	contents += `							:prop="'items.' + index + '.date'" \n`;
+	contents += `							:prop="'items.' + $index + '.date'" \n`;
 	contents += `							:rules="{required: true, message: '请选择成交时间'}"\n`;
 	contents += `						>\n`;
 	contents += `							<vc${m}-date-picker \n`;
@@ -113,7 +113,7 @@ exports.component = (content, opts = {}) => {
 	contents += `							/>\n`;
 	contents += `						</vc${m}-form-item>\n`;
 	contents += `						<vc${m}-form-item \n`;
-	contents += `							:prop="'items.' + index + '.amount'" \n`;
+	contents += `							:prop="'items.' + $index + '.amount'" \n`;
 	contents += `							:rules="{required: true, message: '请输入付款金额'}"\n`;
 	contents += `						>\n`;
 	contents += `							<vc${m}-input-number\n`;
@@ -125,7 +125,7 @@ exports.component = (content, opts = {}) => {
 	contents += `							/>\n`;
 	contents += `						</vc${m}-form-item>\n`;
 	contents += `						<vc${m}-form-item\n`;
-	contents += `							:prop="'items.' + index + '.imgs'" \n`;
+	contents += `							:prop="'items.' + $index + '.imgs'" \n`;
 	contents += `							:rules="{required: true, message: '请选择图片'}"\n`;
 	contents += `							style="margin-bottom: 0px !important"\n`;
 	contents += `						>\n`;
