@@ -31,7 +31,7 @@ exports.component = (content, opts = {}) => {
 	contents += `					<div class="g-c-999">安徽省电话费</div>\n`;
 	contents += `				</div>\n`;
 	contents += `				<vc${m}-form-item label="商品主图：" prop="original_img" >\n`;
-	contents += `					<vc${m}-imgs-picker class="g-m-t-26" />\n`;
+	contents += `					<vc${m}-upload-picker class="g-m-t-26" />\n`;
 	contents += `				</vc${m}-form-item>\n`;
 	contents += `				<vc${m}-form-item label="商品货号：" prop="product_sn">\n`;
 	contents += `					<vc${m}-input \n`;
@@ -129,7 +129,7 @@ exports.component = (content, opts = {}) => {
 	contents += `							:rules="{required: true, message: '请选择图片'}"\n`;
 	contents += `							style="margin-bottom: 0px !important"\n`;
 	contents += `						>\n`;
-	contents += `							<vc${m}-imgs-picker \n`;
+	contents += `							<vc${m}-upload-picker \n`;
 	contents += `								v-model="item.imgs" \n`;
 	contents += `								style="width: 300px"\n`;
 	contents += `							/>\n`;
