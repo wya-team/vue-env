@@ -81,7 +81,8 @@ class GlobalManager {
 		let path = this.landingRoute.replace(new RegExp(PRE_ROUTER_URL), '/');
 		path = /^\/login/.test(path) ? '/' : path;
 
-		app.$router.replace(path);
+		replace && app.$router.replace(path);
+		return path;
 	}
 
 	/**
