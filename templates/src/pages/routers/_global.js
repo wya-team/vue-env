@@ -7,6 +7,11 @@ import { Vc } from '@wya/vc';
 import { serviceManager } from '@stores/services/utils';
 import { DEBUG, TOKEN_KEY, IN_BROWSER, PRE_ROUTER_URL } from '../constants/constants';
 
+/* eslint-disable import/no-mutable-exports */
+let app = null; 
+let routesManager = null;
+/* eslint-enable */
+
 class GlobalManager {
 	constructor() {
 		// 版本号
@@ -70,13 +75,13 @@ class GlobalManager {
 	createLoginAuth(user, replace = true, opts = {}) {
 		this.updateUser(user);
 
-		window.routesManager && window.routesManager.reset();
+		routesManager.reset();
 
 		// 首页或者一开始记录的页面
 		let path = this.landingRoute.replace(new RegExp(PRE_ROUTER_URL), '/');
 		path = /^\/login/.test(path) ? '/' : path;
 
-		window.app && window.app.$router.replace(path);
+		app.$router.replace(path);
 	}
 
 	/**
@@ -94,7 +99,7 @@ class GlobalManager {
 		/**
 		 * 清理缓存后，跳转至login(即授权或模拟登录)
 		 */
-		window.app && window.app.$router.replace('/login');
+		app.$router.replace('/login');
 	}
 
 	updateUser(override = {}, opts = {}) {
@@ -121,14 +126,28 @@ class GlobalManager {
 
 		Storage.remove(TOKEN_KEY);
 	}
-	
+}
+const Global = new GlobalManager();
+
+if (DEBUG) {
+	window._global = Global;
 }
 
+export const getApp = () => app;
+export const getRoutesManager = () => routesManager;
+export const setApp = (opts) => {
+	const { app: $1, routesManager: $2 } = opts;
 
-export const Global = new GlobalManager();
+	app = $1;
+	routesManager = $2;
 
-IN_BROWSER ? (window._global = Global) : (global._global = Global);
+	if (DEBUG) {
+		window.app = $1;
+		window.routesManager = $2;
+	}
+};
 
+export { Global };
 export default {
 	install($Vue) {
 		$Vue.prototype.$global = Global;

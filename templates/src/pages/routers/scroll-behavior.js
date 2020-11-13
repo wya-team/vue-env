@@ -1,4 +1,5 @@
-const IN_BROWSER = typeof window !== 'undefined';
+import { getApp } from './_global';
+import { IN_BROWSER } from '../constants/constants';
 
 class ScrollManager {
 	constructor() {
@@ -115,8 +116,9 @@ const scrollManager = new ScrollManager();
 
 export default (to, from, pos) => {
 	if (!IN_BROWSER) return;
+	const app = getApp();
 	// - start 容器下滚动
-	window.app && window.app.$vc.off('trigger-scroll');
+	app.$vc.off('trigger-scroll');
 
 	/**
 	 * 容器下同步滚动过
@@ -125,7 +127,7 @@ export default (to, from, pos) => {
 	/**
 	 * 异步滚动
 	 */
-	window.app && window.app.$vc.once('trigger-scroll', (v) => {
+	app.$vc.once('trigger-scroll', (v) => {
 		scrollManager.refresh();
 	});
 

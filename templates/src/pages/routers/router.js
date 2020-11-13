@@ -11,7 +11,7 @@ import { sync } from 'vuex-router-sync';
 /**
  * 全局变量 _global, 不要动
  */
-import globalHook, { Global } from './_global'; // eslint-disable-line
+import globalHook, { Global, setApp } from './_global'; // eslint-disable-line
 
 /**
  * 配置
@@ -94,10 +94,13 @@ export const createApp = () => {
 			);
 		}
 	});
-	return {
+
+	const result = {
 		app,
 		router,
 		store,
 		routesManager,
 	};
+	setApp(result);
+	return result;
 };

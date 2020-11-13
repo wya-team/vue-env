@@ -13,6 +13,3 @@ router.onReady(() => {
 	app.$mount('#pages');
 });
 
-window.app = app;
-window.routesManager = routesManager;
-
