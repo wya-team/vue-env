@@ -33,6 +33,10 @@ class APIManager {
 		DEBUG && (window.apis = this);
 	}
 
+
+	/**
+	 * 用于异步的apis注入或者子包apis的注入
+	 */
 	inject(target) {
 		for (let i in target) {
 			if (process.env.NODE_ENV === 'development') {
