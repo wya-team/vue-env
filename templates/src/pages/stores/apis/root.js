@@ -1,5 +1,5 @@
-import { RegEx } from '@utils/utils';
-import { DEV_WITH_SERVER } from '../../constants/constants';
+import { RegEx } from '@wya/utils';
+import { DEBUG } from '../../constants/constants';
 import __tpl__ from './__tpl__';
 import _common from './_common';
 import login from './login';
@@ -12,25 +12,40 @@ const API = {
 	...home
 };
 
-let baseUrl;
+class APIManager {
+	constructor() {
+		const baseUrl = process.env.NODE_ENV === 'development' 
+			? 'https://apis.development.com'
+			: 'https://apis.production.com';
 
-/* global __DEV__ */
-if (__DEV__) {
-	// 开发环境
-	if (!DEV_WITH_SERVER) { // 开发环境-前端自模拟
-		baseUrl = 'http://localhost:3000';
-	} else { // 开发环境-后端数据
-		baseUrl = 'https://gateway.wyawds.com';
+		// this.baseUrl
+		Object.defineProperty(this, 'baseUrl', {
+			value: baseUrl,
+			writable: false
+		});
+
+		// this.inject
+		Object.defineProperty(this, 'inject', {
+			value: this.inject,
+			writable: false
+		});
+
+		DEBUG && (window.apis = this);
 	}
-} else {
-	// 生产环境
-	baseUrl = `${location.origin}`;
-}
-for (let i in API) {
-	if (RegEx.URLScheme.test(API[i])) {
-		// API[i] = API[i];
-	} else {
-		API[i] = baseUrl + API[i];
+
+	inject(target) {
+		for (let i in target) {
+			if (process.env.NODE_ENV === 'development') {
+				this[i] && console.warn(`[@stores/apis]: key重复注入 ${i}`);
+			}
+
+			this[i] = RegEx.URLScheme.test(target[i]) 
+				? target[i]
+				: this.baseUrl + target[i];
+		}
+
+		return this;
 	}
 }
-export default API;
+
+export default new APIManager().inject(API);
