@@ -56,3 +56,15 @@ exports.getNewContent = (opts = {}) => {
 		return content;
 	}
 };
+
+const camelCase = (v) => {
+	v = v instanceof Array ? v : v.split('-');
+	return v.map((item, index) => {
+		if (item && index != 0) {
+			return item.charAt(0).toUpperCase() + item.slice(1);
+		}
+		return item;
+	}).join('');
+};
+
+exports.camelCase = camelCase;

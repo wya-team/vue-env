@@ -1,10 +1,11 @@
-const { getNewContent } = require('../utils/helper');
+const { getNewContent, camelCase } = require('../utils/helper');
 
 exports.rootRoute = (content, opts = {}) => {
 	const { mutation, pathArr, componentArr, obj } = opts;
 	try {
-		let importContent = `import { ${mutation}Config } from '../containers/${mutation}/app';`;
-		let injectContent = `				...${mutation}Config`;
+		let mutationKey = camelCase(mutation);
+		let importContent = `import { ${mutationKey}Config } from '../containers/${mutation}/app';`;
+		let injectContent = `				...${mutationKey}Config`;
 
 		let importSplit = `\nexport default {\n`;
 		let injectSplit = `\n			]\n		},\n`;
