@@ -114,10 +114,13 @@ class RoutesManager {
 		let redirect;
 		switch (pathArr.length) {
 			case 4: // 三级导航
-				redirect = [
-					`/${pathArr[1]}`,
-					`/${pathArr[1]}/${pathArr[2]}`
-				];
+				// 动态路由不做redirect
+				if (!/^:([a-z]|[A-Z])+\?/.test(pathArr[3])) {
+					redirect = [
+						`/${pathArr[1]}`,
+						`/${pathArr[1]}/${pathArr[2]}`
+					];
+				}
 				break;
 			case 3: // 二级导航
 				redirect = [
