@@ -81,6 +81,8 @@
     "mocha": "^7.0.1"
   },
   "bin": {
-    "wya-vue": "bin/cli"
-  }
+    "wya-vue": "bin/cli",
+    "wya-v2": "bin/cli"
+  },
+ "bin-info": "区分基于vue@3.x的@wya/vue的版本，新增wya-v2"
 }
