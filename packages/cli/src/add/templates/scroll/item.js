@@ -28,7 +28,7 @@ exports.item = (content, opts = {}) => {
 		contents += `\n`;
 		contents += `<script>\n`;
 		contents += `export default {\n`;
-		contents += `	name: "${project}-item",\n`;
+		contents += `	name: "${project}-${pathArr.join("-")}-item",\n`;
 		contents += `	props: {\n`;
 		contents += `		it: Object,\n`;
 		contents += `	},\n`;

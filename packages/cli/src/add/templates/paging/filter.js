@@ -37,7 +37,7 @@ exports.filter = (content, opts = {}) => {
 		contents += `				class="g-m-l-24"\n`;
 		contents += `				@click="handleSearch"\n`;
 		contents += `			>\n`;
-		contents += `				搜索\n`;
+		contents += `				查询\n`;
 		contents += `			</vc-button>\n`;
 		contents += `			<span\n`;
 		contents += `				class="g-m-l-12 g-c-black-dark g-fs-12 g-pointer g-no-select"\n`;
@@ -86,7 +86,7 @@ exports.filter = (content, opts = {}) => {
 		contents += `import { debounce } from 'lodash';\n`;
 		contents += `\n`;
 		contents += `export default {\n`;
-		contents += `	name: '${project}-filter',\n`;
+		contents += `	name: '${project}-${pathArr.join('-')}-filter',\n`;
 		contents += `	components: {\n`;
 		contents += `	},\n`;
 		contents += `	data() {\n`;

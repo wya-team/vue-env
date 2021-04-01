@@ -2,6 +2,7 @@ const { getNewContent } = require('../utils/helper');
 
 exports.item = (content, opts = {}) => {
 	const { mutation, pathArr, project, obj, pagingMode: mode } = opts;
+	const name = `${project}-${pathArr.join('-')}-item`;
 	let extra = pathArr.slice(1).map(item => `${item[0].toUpperCase()}${item.slice(1)}`).join('');
 
 	let mutationType = `${pathArr.join('_').toUpperCase()}`;
@@ -39,7 +40,7 @@ exports.item = (content, opts = {}) => {
 				contents += `\n`;
 				contents += `<script>\n`;
 				contents += `export default {\n`;
-				contents += `	name: 'v-tpl-item',\n`;
+				contents += `	name: '${name}',\n`;
 				contents += `	components: {\n`;
 				contents += `\n`;
 				contents += `	},\n`;
@@ -85,7 +86,7 @@ exports.item = (content, opts = {}) => {
 				contents += `\n`;
 				contents += `<script>\n`;
 				contents += `export default {\n`;
-				contents += `	name: "${project}-item",\n`;
+				contents += `	name: '${name}',\n`;
 				contents += `	props: {\n`;
 				contents += `		it: Object\n`;
 				contents += `	},\n`;
@@ -152,7 +153,7 @@ exports.item = (content, opts = {}) => {
 				contents += `import { Fragment } from 'wya-vc';\n`;
 				contents += `\n`;
 				contents += `export default {\n`;
-				contents += `	name: '${project}-item',\n`;
+				contents += `	name: '${name}',\n`;
 				contents += `	components: {\n`;
 				contents += `		'vc-fragment': Fragment\n`;
 				contents += `	},\n`;

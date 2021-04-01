@@ -2,6 +2,7 @@ const { getNewContent } = require('../utils/helper');
 
 exports.list = (content, opts = {}) => {
 	const { mutation, pathArr, project, obj, pagingMode: mode, pagingType: type, route } = opts;
+	const path = pathArr.join('-');
 	let extra = pathArr.slice(1).map(item => `${item[0].toUpperCase()}${item.slice(1)}`).join('');
 
 	let mutationType = `${pathArr.join('_').toUpperCase()}`;
@@ -46,7 +47,7 @@ exports.list = (content, opts = {}) => {
 				contents += `				:current.sync="current[item.value]"\n`;
 				contents += `				:history="true"\n`;
 				contents += `				:load-data="loadData"\n`;
-				contents += `				class="v-${pathArr.join('-')}-list"\n`;	
+				contents += `				class="v-${path}-list"\n`;	
 				contents += `				mode="${mode}"\n`;
 				contents += `				@page-size-change="handleChangePageSize"\n`;
 				contents += `			>\n`;
@@ -96,7 +97,7 @@ exports.list = (content, opts = {}) => {
 				contents += `		:history="true"\n`;
 				contents += `		:load-data="loadData"\n`;
 				contents += `		mode="${mode}"\n`;
-				contents += `		class="g-m-t-20 v-${pathArr.join('-')}-list"\n`;
+				contents += `		class="g-m-t-20 v-${path}-list"\n`;
 				contents += `		@page-size-change="handleChangePageSize"\n`;
 				contents += `	>\n`;
 
@@ -133,7 +134,7 @@ exports.list = (content, opts = {}) => {
 
 		contents += `\n`;
 		contents += `export default {\n`;
-		contents += `	name: '${project}-table',\n`;
+		contents += `	name: '${project}-${path}-table',\n`;
 		contents += `	components: {\n`;
 		contents += `		'${project}-item': Item,\n`;
 		contents += `	},\n`;
@@ -219,7 +220,7 @@ exports.list = (content, opts = {}) => {
 		contents += `<style lang="scss">\n`;
 		switch (mode) {
 			case 'piece':
-				contents += `.v-${pathArr.join('-')}-list {\n`;
+				contents += `.v-${path}-list {\n`;
 				contents += `	display: flex;\n`;
 				contents += `	flex-wrap: wrap;\n`;
 				contents += `	justify-content: space-between;\n`;
@@ -233,7 +234,7 @@ exports.list = (content, opts = {}) => {
 				contents += `}\n`;
 				break;
 			case 'native':
-				contents += `.v-${pathArr.join('-')}-list table {\n`;
+				contents += `.v-${path}-list table {\n`;
 				contents += `	width: 100%;\n`;
 				contents += `	thead {\n`;
 				contents += `		th {\n`;

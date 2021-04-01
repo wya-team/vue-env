@@ -10,7 +10,7 @@ exports.component = (opts = {}) => {
 
 	contents += `<script>\n\n`;
 	contents += `export default {\n`;
-	contents += `	name: '${project}-content',\n`;
+	contents += `	name: '${project}-${pathArr.join('-')}-content',\n`;
 	contents += `	components: {\n`;
 	contents += `	},\n`;
 	contents += `	data() {\n`;

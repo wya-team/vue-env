@@ -73,7 +73,7 @@ exports.list = (content, opts = {}) => {
 
 		contents += `\n`;
 		contents += `export default {\n`;
-		contents += `	name: '${project}-table',\n`;
+		contents += `	name: '${project}-${pathArr.join("-")}-table',\n`;
 		contents += `	components: {\n`;
 		contents += `		'${project}-item': Item,\n`;
 		contents += `	},\n`;

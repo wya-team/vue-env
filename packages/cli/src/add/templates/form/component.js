@@ -184,7 +184,7 @@ exports.component = (content, opts = {}) => {
 	contents += `<script>\n`;
 	contents += `\n`;
 	contents += `export default {\n`;
-	contents += `	name: 'v-tpl-form',\n`;
+	contents += `	name: '${project}-${pathArr.join('-')}-form',\n`;
 	contents += `	components: {\n`;
 	contents += `	},\n`;
 	contents += `	data() {\n`;
