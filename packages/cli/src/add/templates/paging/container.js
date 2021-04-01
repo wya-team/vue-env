@@ -2,7 +2,7 @@ exports.container = (content, opts = {}) => {
 	const { mutation, pathArr, project, obj, pagingType: type, title } = opts;
 	let contents = '';
 	contents += `<template>\n`;
-	contents += `	<set-title title="${title}"  style="padding: 24px">\n`;
+	contents += `	<set-title title="${title}" style="padding: 24px">\n`;
 	contents += `		<${project}-filter />\n`;
 	contents += `		<${project}-${type === 'tabs' ? 'tabs-' : ''}list />\n`;
 	contents += `	</set-title>\n`;

@@ -29,8 +29,8 @@ exports.item = (content, opts = {}) => {
 				contents += `			width="180"\n`;
 				contents += `		>\n`;
 				contents += `			<template #default="{ row }">\n`;
-				contents += `				<div>{{ row.status === 1 ? '开启' : '关闭' }}\n`;
-				contents += `			<template>\n`;
+				contents += `				<div>{{ row.status === 1 ? '开启' : '关闭' }}</div>\n`;
+				contents += `			</template>\n`;
 				contents += `		</vc-table-column>\n`;
 				contents += `		<vc-table-column\n`;
 				contents += `			prop="orders_sn"\n`;
@@ -44,8 +44,12 @@ exports.item = (content, opts = {}) => {
 				contents += `			header-align="right"\n`;
 				contents += `			align="right"\n`;
 				contents += `		>\n`;
-				contents += `			<div @click="handleResetFirst">回到首页刷新</div>\n`;
-				contents += `			<div @click="handleResetCur">当前页刷新</div>\n`;
+				contents += `			<div @click="handleResetFirst">\n`;
+				contents += `				回到首页刷新\n`;
+				contents += `			</div>\n`;
+				contents += `			<div @click="handleResetCur">\n`;
+				contents += `				当前页刷新\n`;
+				contents += `			</div>\n`;
 				contents += `		</vc-table-column>\n`;
 				contents += `	</vc-table-item>\n`;
 				contents += `</template>\n`;
