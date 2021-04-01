@@ -1,7 +1,7 @@
 const { getNewContent } = require('./utils/helper');
 
 exports.router = (opts = {}) => {
-	const { mutation, pathArr, project, obj, title, extra, route, components } = opts;
+	const { mutation, pathArr, project, obj, title, extra, route, components, template } = opts;
 	let contents = '';
 
 	contents += `export const ${mutation}Config = [\n`;
@@ -20,6 +20,11 @@ exports.router = (opts = {}) => {
 		components[1] && (contents += `			"${components[1]}",\n`);
 		components[2] && (contents += `			"${components[2]}"\n`);
 		contents += `		]\n`;
+	} else if (template === 'paging') {
+		injectContent += `		components: [\n`;
+		injectContent += `			() => import('./modules/${pathArr.join('-')}.vue'),\n`;
+		injectContent += `			'left', 'top'\n`;
+		injectContent += `		]\n`;
 	} else {
 		contents += `		component: () => import('./modules/${pathArr.join('-')}.vue')\n`;
 	}
@@ -29,7 +34,7 @@ exports.router = (opts = {}) => {
 };
 
 exports.routerOverride = (content, opts = {}) => {
-	const { mutation, pathArr, project, obj, title, extra, route, components } = opts;
+	const { mutation, pathArr, project, obj, title, extra, route, components, template } = opts;
 	const componentPath = `() => import('./modules/${pathArr.join('-')}.vue')`;
 	try {
 		let importContent;
@@ -43,6 +48,11 @@ exports.routerOverride = (content, opts = {}) => {
 			injectContent += `			() => import('./modules/${pathArr.join('-')}.vue'),\n`;
 			components[1] && (injectContent += `			"${components[1]}",\n`);
 			components[2] && (injectContent += `			"${components[2]}"\n`);
+			injectContent += `		]\n`;
+		} else if (template === 'paging') {
+			injectContent += `		components: [\n`;
+			injectContent += `			() => import('./modules/${pathArr.join('-')}.vue'),\n`;
+			injectContent += `			'left', 'top'\n`;
 			injectContent += `		]\n`;
 		} else {
 			injectContent += `		component: () => import('./modules/${pathArr.join('-')}.vue')\n`;
