@@ -38,8 +38,7 @@ exports.item = (content, opts = {}) => {
 				contents += `			width="180"\n`;
 				contents += `		/>\n`;
 				contents += `		<vc-table-column\n`;
-				contents += `			prop="address"\n`;
-				contents += `			label="地址"\n`;
+				contents += `			label="操作"\n`;
 				contents += `			fixed="right"\n`;
 				contents += `			header-align="right"\n`;
 				contents += `			align="right"\n`;
