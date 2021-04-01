@@ -50,12 +50,11 @@ exports.filter = (content, opts = {}) => {
 		contents += `		<vc-expand v-model="show">\n`;
 		contents += `			<div class="g-pd-t-16">\n`;
 		contents += `				<div\n`;
-		contents += `					class="g-search-form g-lh-50 g-bg-f4"\n`;
-		contents += `					style="padding-top: 5px; padding-bottom: 5px"\n`;
+		contents += `					class="g-search-form g-lh-50 g-bg-f4 g-pd-tb-5"\n`;
 		contents += `				>\n`;
 		contents += `					<div class="g-flex g-fw-w" style="min-width: 720px">\n`;
 		contents += `						<div>\n`;
-		contents += `							<span class="g-c-333 g-w-100">退款方式：</span>\n`;
+		contents += `							<span class="g-c-333 g-filter-label-5">退款方式：</span>\n`;
 		contents += `							<vc-input\n`;
 		contents += `								v-model="keywords.name" \n`;
 		contents += `								style="width: 160px" \n`;
@@ -65,10 +64,10 @@ exports.filter = (content, opts = {}) => {
 		contents += `							/>\n`;
 		contents += `						</div>\n`;
 		contents += `						<div>\n`;
-		contents += `							<span class="g-c-333 g-w-100">退款传方式：</span>\n`;
+		contents += `							<span class="g-c-333 g-filter-label-5">退款传方式：</span>\n`;
 		contents += `							<vc-input\n`;
 		contents += `								v-model="keywords.name" \n`;
-		contents += `								style="width: 220px" \n`;
+		contents += `								style="width: 160px" \n`;
 		contents += `								placeholder="请输入公司名称" \n`;
 		contents += `								@enter="handleSearch"\n`;
 		contents += `								@change="handleInputChange"\n`;
