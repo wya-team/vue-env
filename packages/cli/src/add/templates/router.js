@@ -3,6 +3,7 @@ const { getNewContent } = require('./utils/helper');
 exports.router = (opts = {}) => {
 	const { mutation, pathArr, project, obj, title, extra, route, components, template } = opts;
 	let contents = '';
+	let injectContent = '';
 
 	contents += `export const ${mutation}Config = [\n`;
 	contents += `	{\n`;
