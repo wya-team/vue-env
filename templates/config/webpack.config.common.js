@@ -254,6 +254,7 @@ const defaultConfig = {
 	},
 	node: {
 		global: true,
+		fs: 'empty',
 		crypto: 'empty',
 		__dirname: true,
 		__filename: true,
