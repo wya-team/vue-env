@@ -105,7 +105,7 @@ exports.filter = (content, opts = {}) => {
 		contents += `				...this.keywords,\n`;
 		contents += `			};\n`;
 		contents += `			this.$router.replace(URL.merge({\n`;
-		contents += `				path: '/${pathArr.join('/')}', \n`;
+		contents += `				path: this.$route.path, \n`;
 		contents += `				query\n`;
 		contents += `			}));\n`;
 		contents += `			this.$store.commit('${pagingType}_INIT');\n`;
