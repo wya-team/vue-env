@@ -1,4 +1,8 @@
-import { Global } from './_global';
+/**
+ * window.routesManager -> getRoutesManager()
+ * window.app -> getApp()
+ */
+import { Global, getRoutesManager, getApp } from './_global';
 
 class HooksManager {
 	/**

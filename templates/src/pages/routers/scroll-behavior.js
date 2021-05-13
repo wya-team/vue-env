@@ -24,10 +24,7 @@ class ScrollManager {
 
 	_init() {
 		if (!IN_BROWSER) return;
-		/**
-		 * 事件委托代理，目前仅涉及考虑移动端
-		 */
-		window.addEventListener('touchmove', (e) => {
+		let handleChanged = (e) => {
 			let path = e.path || (e.composedPath && e.composedPath()) || [];
 			// TODO: 可能存在多个，如嵌套关系
 			let $this = path.filter((ele) => /scroll-container/.test(ele.className));
@@ -49,7 +46,16 @@ class ScrollManager {
 				y,
 				wrapper: $this.length > 0
 			};
-		}, true);
+		};
+
+		/**
+		 * touchmove: 无法处理惯性滚动
+		 * touchstart: 避免惯性滚动造成的延迟，此时需要刷新
+		 * touchend: 避免有些事件使用了end，用户一开始没松开
+		 * 事件委托代理，目前仅涉及考虑移动端
+		 */
+		window.addEventListener('touchstart', handleChanged, true);
+		window.addEventListener('touchend', handleChanged, true);
 
 		/**
 		 * go or back
@@ -87,6 +93,7 @@ class ScrollManager {
 
 		if (el && (x || y)) {
 			state = true;
+			// TODO: 还可能存在页面抖动，图片相关资源优先设置宽高
 			el.scrollLeft = x;
 			el.scrollTop = y;
 			/**
