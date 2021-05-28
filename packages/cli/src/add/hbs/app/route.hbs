@@ -1,0 +1,21 @@
+export default {
+	path: '{{path}}',
+	name: '{{pathName}}',
+	title: '{{title}}',
+	{{#if components}}
+	components: [
+		() => import('./modules/{{pathName}}.vue'),
+		{{#each components}}
+		'{{this}}',
+		{{/each}}
+	]
+	{{else if isPaging}}
+	components: [
+		() => import('./modules/{{pathName}}.vue'),
+		'left',
+		'top'
+	]
+	{{else}}
+	component: () => import('./modules/{{pathName}}.vue'),
+	{{/if}}
+}

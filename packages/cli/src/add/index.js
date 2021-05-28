@@ -2,7 +2,9 @@ const { prompt, Separator } = require('inquirer');
 const fs = require('fs-extra');
 const path = require('path');
 const upath = require('upath');
+const Handlebars = require('handlebars');
 const createProcess = require('./add');
+const generatorProcess = require('./generator/route');
 
 const { resolve } = path;
 module.exports = class AddManager {
@@ -20,6 +22,10 @@ module.exports = class AddManager {
 		}
 	}
 
+	// TODO:可以通过命令配置对question筛选下
+	/**
+	 * 1. 手机端不涉及导航页面
+	 */
 	_getQuesion() {
 		return [
 			{
@@ -33,6 +39,18 @@ module.exports = class AddManager {
 						return true;
 					}
 				}
+			},
+			{
+				type: 'confirm',
+				name: 'mobile',
+				message: 'is mobile:',
+				default: false
+			},
+			{
+				type: 'confirm',
+				name: 'navigation',
+				message: 'is navigation route:',
+				default: false
 			},
 			{
 				type: 'list',
@@ -134,14 +152,24 @@ module.exports = class AddManager {
 	}
 
 	/**
+	 * Handlebars 注册可以被当前环境中任意模版访问的助手代码。
+	 */
+	_registerHelper() {
+		Handlebars.registerHelper({
+			'support-block-helper': (options) => options.fn()
+		});
+	}
+
+	/**
 	 * 用于准备当前应用程序上下文的异步方法
 	 * 其中包含加载页面和插件、应用插件等。
 	 */
 	async process() {
+		this._registerHelper();
 		// TODO: 检查是否存在stages和未unstages的文件
 		this.options.config
 			? this._loopMake()
-			: prompt(this._getQuesion()).then(createProcess);
+			: prompt(this._getQuesion()).then(generatorProcess);
 	}
 };
 
