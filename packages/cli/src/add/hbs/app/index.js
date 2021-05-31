@@ -6,18 +6,14 @@ const routeHBS = require('./route.hbs');
 const appAppend = require('../../actions/app-append');
 
 module.exports = (opts) => {
-	const { dir, project, template, path, title, pathArr, vcPrefix, isNav } = opts || {};
+	const { dir, template, path, title, pathArr, isNav } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const pathName = `${pathArr.join('-')}`;
-	const childName = childPathArr.join('-');
 	const outputPath = upath.normalize(`${dir}containers/${moduleName}/app.js`);
 	
 	const isFileExist = pathExistsSync(outputPath);
 
-	let appContent = appHBS({ title, moduleName });
-	if (isFileExist) {
-		appContent = readFileSync(outputPath, 'utf8');	
-	}
+	let appContent = isFileExist ? readFileSync(outputPath, 'utf8') : appHBS({ title, moduleName });
 	routeContent = routeHBS({ 
 		path, 
 		title,
@@ -31,6 +27,6 @@ module.exports = (opts) => {
 		pathArr
 	});
 
-	console.log(chalk`{green app.js}: {rgb(255,131,0) created}`);
+	console.log(chalk`{green app.js}: {rgb(255,131,0) ${isFileExist ? 'modified' : 'created'}}`);
 	outputFileSync(outputPath, content);
 };
