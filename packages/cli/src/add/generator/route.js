@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 const basicHbs = require('../hbs/basic/index'); 
 const formHbs = require('../hbs/form/index'); 
 const appHbs = require('../hbs/app/index'); 
+const apiHbs = require('../hbs/api/index'); 
 
 /**
  * TODO:
@@ -68,6 +69,7 @@ module.exports = (opts) => {
 		}
 		
 		appHbs({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
+		apiHbs({ dir, template, pathArr });
 
 		// TODO: 
 		if (isNav) {

@@ -2,7 +2,6 @@
 const recast = require("recast");
 const recastParser = require('@babel/parser');
 const { 
-	createStringProp,
 	createArrayProp,
 	createRouteExpression,
 	getPropValue,
@@ -52,7 +51,7 @@ module.exports = (source, fragment, opts) => {
 			const node = path.node;
 			if (!isNav && node.id.name === normalVarName) {
 				node.init.elements.push(fragmentObjExpression);
-				return false; // 停止遍历
+				return this.abort(); // 停止遍历
 			} else if (isNav && node.id.name === navVarName) {
 				const routePath = fragmentObjExpression.properties.find((it) => it.key.name === 'path').value.value;
 				let navLevel = routePath.split('/').length - 1;
@@ -72,7 +71,7 @@ module.exports = (source, fragment, opts) => {
 						thirdChildren.push(fragmentObjExpression);
 					}
 				}
-				return false;
+				return this.abort();
 			}
 			this.traverse(path); // 继续遍历
 		}
