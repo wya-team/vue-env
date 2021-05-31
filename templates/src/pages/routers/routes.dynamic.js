@@ -98,6 +98,22 @@ class RoutesManager {
 							path,
 							redirect: route.path
 						});
+
+						// 重定向的路由从头部开始插入
+						// let index = 0;
+						// if (pre[0] && pre[0].redirect) {
+						// 	for (let i = 0; i <= pre.length - 1; i++) {
+						// 		if (!pre[i].redirect) {
+						// 			index = i;
+						// 			break;
+						// 		}
+						// 	}
+						// }
+						
+						// pre.splice(index, 0, {
+						// 	path,
+						// 	redirect: route.path
+						// });
 					}
 				});
 			}
