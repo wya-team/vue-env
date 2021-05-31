@@ -5,6 +5,7 @@ const { prompt } = require('inquirer');
 const upath = require('upath');
 const chalk = require('chalk');
 const fs = require('fs-extra');
+const basicHbs = require('../hbs/basic/index'); 
 const formHbs = require('../hbs/form/index'); 
 const appHbs = require('../hbs/app/index'); 
 
@@ -56,16 +57,23 @@ module.exports = (opts) => {
 	const vcPrefix = isMobile ? 'vcm' : 'vc';
 
 	generator = () => {
-		// if (template === 'form') {
-		formHbs({ dir, project, title, pathArr, vcPrefix });
+		if (template === 'basic') {
+			basicHbs({ dir, project, title, pathArr });
+		} else if (template === 'form') {
+			formHbs({ dir, project, title, pathArr, vcPrefix });
+		} else if (template === 'paging') {
+			// 
+		} else if (template === 'scroll') {
+			// 
+		}
+		
 		appHbs({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
-		// }
 
 		// TODO: 
-		if (hasStore) {
-			console.log('waiting');
-		}
 		if (isNav) {
+			console.log('waiting'); // PC 端需要插入到layout的nav-config
+		}
+		if (hasStore) {
 			console.log('waiting');
 		}
 	};

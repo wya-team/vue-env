@@ -3,7 +3,7 @@ const chalk = require('chalk');
 const { pathExistsSync, outputFileSync, readFileSync } = require('fs-extra');
 const appHBS = require('./app.hbs');
 const routeHBS = require('./route.hbs');
-const appendCode = require('../../actions/app-append');
+const appAppend = require('../../actions/app-append');
 
 module.exports = (opts) => {
 	const { dir, project, template, path, title, pathArr, vcPrefix, isNav } = opts || {};
@@ -25,7 +25,7 @@ module.exports = (opts) => {
 		isPaging: template === 'paging' 
 	});
 
-	const content = appendCode(appContent, routeContent, { 
+	const content = appAppend(appContent, routeContent, { 
 		isNav,
 		moduleName,
 		pathArr

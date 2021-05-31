@@ -1,0 +1,16 @@
+<template>
+	<set-title title="{{title}}">
+		<{{project}}-content />
+	</set-title>
+</template>
+
+<script>
+import Content from '@components/{{moduleName}}/{{childName}}/content';
+
+export default {
+	name: '{{componentName}}',
+	components: {
+		"{{project}}-content": Content,
+	},
+};
+</script>
