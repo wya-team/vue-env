@@ -4,6 +4,7 @@ const { pathExistsSync, outputFileSync, readFileSync } = require('fs-extra');
 const moduleHBS = require('./module.hbs');
 const moduleRootHBS = require('./module-root.hbs');
 const moduleRootAppend = require('../../actions/module-root-append'); 
+const storeRootAppend = require('../../actions/store-root-append'); 
 
 const createModuleRoot = (opts) => {
 	const { dir, moduleName, stateName } = opts;
@@ -14,12 +15,24 @@ const createModuleRoot = (opts) => {
 	outputFileSync(outputPath, content);	
 };
 
+const createStoreRoot = (opts) => {
+	const { dir, moduleName, stateName } = opts;
+	const outputPath = upath.normalize(`${dir}stores/modules/root.js`);
+	if (!pathExistsSync(outputPath)) {
+		console.log(chalk`{red store root 文件不存在}`);
+		return;
+	}
+	const rootContent = readFileSync(outputPath, 'utf8');
+	const content = storeRootAppend(rootContent, { moduleName, stateName });
+	console.log(chalk`{green modules/root.js}: {rgb(255,131,0) modified}`);
+	outputFileSync(outputPath, content);	
+};
+
 module.exports = (opts) => {
 	const { dir, template, pathArr } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const childName = childPathArr.join('-');
 	const outputPath = upath.normalize(`${dir}stores/modules/${moduleName}/${childName}.js`);
-	const rootPath = upath.normalize(`${dir}stores/modules/root.js`);
 	
 	// 创建module
 	const mutationPrefix = `${pathArr.join('_')}`;
@@ -36,4 +49,5 @@ module.exports = (opts) => {
 	// 修改module root
 	createModuleRoot({ dir, moduleName, stateName });
 	// 修改root
+	createStoreRoot({ dir, moduleName, stateName });
 };

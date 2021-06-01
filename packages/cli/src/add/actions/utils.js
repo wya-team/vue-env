@@ -37,8 +37,9 @@ const createSpreadElement = ({ name }) => {
 	return builders.spreadElement(builders.identifier(name));
 };
 
-const createImportDeclaration = ({ name, variableName, isDefault = true }) => {
+const createImportDeclaration = ({ name, variableName, importPath, isDefault = true }) => {
 	let importSpecifier;
+	importPath = importPath || `./${name}`;
 	if (isDefault) {
 		importSpecifier = [builders.importDefaultSpecifier(builders.identifier(name))];
 	} else {
@@ -46,7 +47,7 @@ const createImportDeclaration = ({ name, variableName, isDefault = true }) => {
 	}
 	return builders.importDeclaration(
 		importSpecifier,
-		builders.stringLiteral(`./${name}`)
+		builders.stringLiteral(importPath)
 	);
 };
 
