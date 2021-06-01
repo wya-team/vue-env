@@ -173,9 +173,9 @@ module.exports = class AddManager {
 			// : prompt(this._getQuesion()).then((res) => {
 				project: 'chyy',
 				mobile: false,
-				navigation: false,
+				navigation: true,
 				template: 'basic',
-				store: true,
+				store: false,
 				path: '/home',
 				dir: '/Users/dongjiang/Documents/workspace/gitClone/work/wya-admin-pro/src/pages/'
 				  });

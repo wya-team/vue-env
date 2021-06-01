@@ -10,6 +10,7 @@ const createForm = require('../hbs/form/index');
 const createApp = require('../hbs/app/index'); 
 const createApi = require('../hbs/api/index'); 
 const createStore = require('../hbs/store/index'); 
+const createLayout = require('../hbs/layout/index'); 
 
 /**
  * TODO:
@@ -73,9 +74,9 @@ module.exports = (opts) => {
 		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
 		createApi({ dir, template, pathArr });
 
-		// TODO: 
-		if (isNav) {
-			console.log('waiting'); // PC 端需要插入到layout的nav-config
+		// PC 端需要插入到layout的nav-config
+		if (isNav && !isMobile) {
+			createLayout({ dir, template, pathArr });
 		}
 		if (hasStore) {
 			createStore({ dir, template, pathArr });

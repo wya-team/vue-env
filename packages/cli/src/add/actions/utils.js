@@ -51,6 +51,10 @@ const createImportDeclaration = ({ name, variableName, importPath, isDefault = t
 	);
 };
 
+const createIdentifier = ({ name }) => {
+	return builders.identifier(name);
+};
+
 // 查找对象中某个属性的值, 返回的是node对象
 const getPropValue = (properties, keyName) => properties.find((it) => it.key.name === keyName);
 /**
@@ -69,6 +73,7 @@ module.exports = {
 	createRouteExpression,
 	createSpreadElement,
 	createImportDeclaration,
+	createIdentifier,
 	getPropValue,
 	getSpreadElement
 };
