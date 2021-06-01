@@ -1,0 +1,14 @@
+const initialState = {
+	data: ''
+};
+const mutations = {
+	{{mutationPrefix}}_GET_SUCCESS(state, { data, param }) {
+		state.data = {
+			...data
+		};
+	}
+};
+export const {{stateName}} = {
+	state: { ...initialState },
+	mutations,
+};

@@ -15,6 +15,14 @@ const createStringProp = (keyName, value) => {
 	);
 };
 
+// 创建单个名称的属性，key和value一样，{ name }
+const createIdentifierProp = (keyName) => {
+	return builders.objectProperty(
+		builders.identifier(keyName),
+		builders.identifier(keyName)
+	);
+};
+
 // 创建路由表达表达式
 const createRouteExpression = ({ path }) => {
 	return builders.objectExpression([
@@ -29,9 +37,15 @@ const createSpreadElement = ({ name }) => {
 	return builders.spreadElement(builders.identifier(name));
 };
 
-const createImportDeclaration = ({ name }) => {
+const createImportDeclaration = ({ name, variableName, isDefault = true }) => {
+	let importSpecifier;
+	if (isDefault) {
+		importSpecifier = [builders.importDefaultSpecifier(builders.identifier(name))];
+	} else {
+		importSpecifier = [builders.importSpecifier(builders.identifier(variableName))];
+	}
 	return builders.importDeclaration(
-		[builders.importDefaultSpecifier(builders.identifier(name))],
+		importSpecifier,
 		builders.stringLiteral(`./${name}`)
 	);
 };
@@ -49,6 +63,7 @@ const getSpreadElement = (properties, keyName) => properties.find((it) => it.arg
 
 module.exports = {
 	createStringProp,
+	createIdentifierProp,
 	createArrayProp,
 	createRouteExpression,
 	createSpreadElement,

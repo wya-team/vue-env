@@ -5,10 +5,11 @@ const { prompt } = require('inquirer');
 const upath = require('upath');
 const chalk = require('chalk');
 const fs = require('fs-extra');
-const basicHbs = require('../hbs/basic/index'); 
-const formHbs = require('../hbs/form/index'); 
-const appHbs = require('../hbs/app/index'); 
-const apiHbs = require('../hbs/api/index'); 
+const createBasic = require('../hbs/basic/index'); 
+const createForm = require('../hbs/form/index'); 
+const createApp = require('../hbs/app/index'); 
+const createApi = require('../hbs/api/index'); 
+const createStore = require('../hbs/store/index'); 
 
 /**
  * TODO:
@@ -16,6 +17,7 @@ const apiHbs = require('../hbs/api/index');
  * 2. Paging是否为展开
  * 3. Paging是否为多选
  * 4. 单个文件的模板
+ * 5. 通过ast插入的代码 tab和换行等存在问题
  * @param {*} opts 
  */
 
@@ -59,24 +61,24 @@ module.exports = (opts) => {
 
 	generator = () => {
 		if (template === 'basic') {
-			basicHbs({ dir, project, title, pathArr });
+			createBasic({ dir, project, title, pathArr });
 		} else if (template === 'form') {
-			formHbs({ dir, project, title, pathArr, vcPrefix });
+			createForm({ dir, project, title, pathArr, vcPrefix });
 		} else if (template === 'paging') {
 			// 
 		} else if (template === 'scroll') {
 			// 
 		}
 		
-		appHbs({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
-		apiHbs({ dir, template, pathArr });
+		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
+		createApi({ dir, template, pathArr });
 
 		// TODO: 
 		if (isNav) {
 			console.log('waiting'); // PC 端需要插入到layout的nav-config
 		}
 		if (hasStore) {
-			console.log('waiting');
+			createStore({ dir, template, pathArr });
 		}
 	};
 

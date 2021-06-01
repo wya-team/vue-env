@@ -169,7 +169,17 @@ module.exports = class AddManager {
 		// TODO: 检查是否存在stages和未unstages的文件
 		this.options.config
 			? this._loopMake()
-			: prompt(this._getQuesion()).then(generatorProcess);
+			: generatorProcess({
+			// : prompt(this._getQuesion()).then((res) => {
+				project: 'chyy',
+				mobile: false,
+				navigation: false,
+				template: 'basic',
+				store: true,
+				path: '/home',
+				dir: '/Users/dongjiang/Documents/workspace/gitClone/work/wya-admin-pro/src/pages/'
+				  });
+		// });
 	}
 };
 

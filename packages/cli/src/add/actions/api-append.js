@@ -4,7 +4,7 @@ const recastParser = require('@babel/parser');
 const { createStringProp } = require('./utils');
 
 /**
- * app.js 文件插入代码片段
+ * api.js 文件插入代码片段
  * @param {*} source 原文件内容
  */
 module.exports = (source, opts) => {
