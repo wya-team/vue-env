@@ -46,7 +46,6 @@ module.exports = (source, fragment, opts) => {
 	const navVarName = `${moduleName}NavConfig`;
 	const fragmentObjExpression = fragmentAST.program.body[0].declaration;
 	recast.visit(sourceAST, {
-		// TODO: tab会变成空格，换行符
 		visitVariableDeclarator(path) {
 			const node = path.node;
 			if (!isNav && node.id.name === normalVarName) {

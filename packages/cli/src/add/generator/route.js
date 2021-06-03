@@ -21,9 +21,6 @@ const createLayout = require('../hbs/layout/index');
  * 5. 通过ast插入的代码 tab和换行等存在问题
  * @param {*} opts 
  */
-
-
-
 module.exports = (opts) => {
 	let {
 		path,

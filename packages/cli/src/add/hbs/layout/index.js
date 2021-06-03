@@ -7,7 +7,6 @@ const navConfigAppend = require('../../actions/nav-config-append');
 module.exports = (opts) => {
 	const { dir, template, pathArr } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
-	const childName = childPathArr.join('-');
 	const outputPath = upath.normalize(`${dir}components/layout/nav-config.js`);
 
 	const isFileExist = pathExistsSync(outputPath);
