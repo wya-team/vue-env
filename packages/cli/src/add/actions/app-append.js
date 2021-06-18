@@ -1,6 +1,6 @@
 
 const recast = require("recast");
-const recastParser = require('@babel/parser');
+const { parserConfig } = require('./config');
 const { 
 	createArrayProp,
 	createRouteExpression,
@@ -39,7 +39,6 @@ const getSecondNav = (children, route) => {
  */
 module.exports = (source, fragment, opts) => {
 	const { isNav, moduleName } = opts || {};
-	const parserConfig = { parser: recastParser }; // recast内置Esprima，但不支持import语法
 	const sourceAST = recast.parse(source, parserConfig);
 	const fragmentAST = recast.parse(fragment, parserConfig);
 	const normalVarName = `${moduleName}Config`;

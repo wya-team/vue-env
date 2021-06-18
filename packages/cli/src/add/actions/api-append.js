@@ -1,6 +1,6 @@
 
 const recast = require("recast");
-const recastParser = require('@babel/parser');
+const { parserConfig } = require('./config');
 const { createStringProp } = require('./utils');
 
 /**
@@ -9,9 +9,18 @@ const { createStringProp } = require('./utils');
  */
 module.exports = (source, opts) => {
 	const { template, APIName } = opts || {};
-	const parserConfig = { parser: recastParser }; // recast内置Esprima，但不支持import语法
 	const sourceAST = recast.parse(source, parserConfig);
 	
+	const API_KEY_ARRAY = [];
+	// visit是按顺序执行的
+	recast.visit(sourceAST, {
+		visitIdentifier(path) {
+			const node = path.node;
+			node.name !== 'api' && API_KEY_ARRAY.push(node.name);
+			this.traverse(path); // 继续遍历
+		}
+	});
+
 	recast.visit(sourceAST, {
 		visitVariableDeclarator(path) {
 			const node = path.node;
@@ -22,6 +31,7 @@ module.exports = (source, opts) => {
 					key = `${APIName.toUpperCase()}_LIST_GET`;
 					value = '/test';
 				}
+				if (API_KEY_ARRAY.includes(key)) return this.abort(); // 终止遍历
 				const APIObjectProperty = createStringProp(key, value);
 				node.init.properties.push(APIObjectProperty);
 				return this.abort(); // 终止遍历

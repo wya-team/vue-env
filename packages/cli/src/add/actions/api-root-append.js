@@ -1,7 +1,7 @@
 
 const recast = require("recast");
-const recastParser = require('@babel/parser');
 const { namedTypes } = require('ast-types');
+const { parserConfig } = require('./config');
 const { createSpreadElement, createImportDeclaration, getSpreadElement } = require('./utils');
 
 /**
@@ -10,7 +10,6 @@ const { createSpreadElement, createImportDeclaration, getSpreadElement } = requi
  */
 module.exports = (source, opts) => {
 	const { moduleName } = opts || {};
-	const parserConfig = { parser: recastParser }; // recast内置Esprima，但不支持import语法
 	const sourceAST = recast.parse(source, parserConfig);
 	
 	recast.visit(sourceAST, {
