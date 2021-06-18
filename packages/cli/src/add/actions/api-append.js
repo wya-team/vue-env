@@ -12,16 +12,12 @@ module.exports = (source, opts) => {
 	const sourceAST = recast.parse(source, parserConfig);
 	
 	const API_KEY_ARRAY = [];
-	// visit是按顺序执行的
 	recast.visit(sourceAST, {
 		visitIdentifier(path) {
 			const node = path.node;
 			node.name !== 'api' && API_KEY_ARRAY.push(node.name);
 			this.traverse(path); // 继续遍历
-		}
-	});
-
-	recast.visit(sourceAST, {
+		},
 		visitVariableDeclarator(path) {
 			const node = path.node;
 			if (node.id.name === 'api') {

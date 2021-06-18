@@ -36,8 +36,6 @@ module.exports = (source, opts) => {
 			
 			this.abort(); // 终止遍历
 		},
-	});
-	recast.visit(sourceAST, {
 		visitCallExpression(path) {
 			const node = path.node;
 			const parentNode = path.parent.node;

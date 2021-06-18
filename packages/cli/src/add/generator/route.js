@@ -11,6 +11,7 @@ const createApp = require('../hbs/app/index');
 const createApi = require('../hbs/api/index'); 
 const createStore = require('../hbs/store/index'); 
 const createLayout = require('../hbs/layout/index'); 
+const createPaging = require('../hbs/paging/index'); 
 
 /**
  * TODO:
@@ -63,7 +64,7 @@ module.exports = (opts) => {
 		} else if (template === 'form') {
 			createForm({ dir, project, title, pathArr, vcPrefix });
 		} else if (template === 'paging') {
-			// 
+			createPaging({ dir, project, title, pathArr, pagingType, pagingMode });
 		} else if (template === 'scroll') {
 			// 
 		}

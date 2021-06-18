@@ -1,0 +1,76 @@
+<template>
+	<vc-table-item>
+		<vc-table-column
+			prop="orders_id"
+			label="ID"
+			width="180"
+		/>
+		<vc-table-column
+			prop="status"
+			label="状态"
+			width="180"
+		>
+			<template #default="{ row }">
+				<div>
+					{{{{support-block-helper}}}}
+					{{ row.status === 1 ? '开启' : '关闭' }}
+					{{{{/support-block-helper}}}}
+				</div>
+			</template>
+		</vc-table-column>
+		<vc-table-column
+			prop="orders_sn"
+			label="信息"
+			width="180"
+		/>
+		<vc-table-column
+			label="操作"
+			fixed="right"
+			header-align="right"
+			align="right"
+		>
+			<div @click="handleResetFirst">
+				回到首页刷新
+			</div>
+			<div @click="handleResetCur">
+				当前页刷新
+			</div>
+		</vc-table-column>
+	</vc-table-item>
+</template>
+
+<script>
+export default {
+	name: '${name}',
+	components: {
+
+	},
+	props: {
+
+	},
+	data() {
+		return {
+		};
+	},
+	computed: {
+
+	},
+	watch: {
+		
+	},
+	created() {
+		
+	},
+	methods: {
+		handleResetFirst() {
+			this.$store.commit('${pagingType}_INIT');
+		},
+		handleResetCur() {
+			this.$store.commit('${pagingType}_RESET', { type: this.type });
+		},
+	},
+};
+</script>
+
+<style lang="scss">
+</style>

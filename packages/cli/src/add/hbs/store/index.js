@@ -35,7 +35,7 @@ module.exports = (opts) => {
 	const outputPath = upath.normalize(`${dir}stores/modules/${moduleName}/${childName}.js`);
 	
 	// 创建module
-	const mutationPrefix = `${pathArr.join('_')}`;
+	const mutationPrefix = `${pathArr.join('_')}`.toUpperCase();
 	const extra = childPathArr.map(item => `${item[0].toUpperCase()}${item.slice(1)}`).join('');
 	const stateName = `${moduleName}${extra}`;
 	const moduleContent = moduleHBS({

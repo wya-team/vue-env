@@ -175,8 +175,10 @@ module.exports = class AddManager {
 				mobile: false,
 				navigation: true,
 				template: 'basic',
-				store: false,
-				path: '/home',
+				pagingType: 'basic',
+				pagingMode: 'table',
+				store: true,
+				path: '/home/main',
 				dir: '/Users/dongjiang/Documents/workspace/gitClone/work/wya-admin-pro/src/pages/'
 				  });
 		// });
