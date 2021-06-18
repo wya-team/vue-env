@@ -11,34 +11,42 @@ const { createSpreadElement, createImportDeclaration, getSpreadElement } = requi
 module.exports = (source, opts) => {
 	const { moduleName, stateName } = opts || {};
 	const sourceAST = recast.parse(source, parserConfig);
-	const regex = new RegExp(`${moduleName}$`);
+	const regex = new RegExp(`${moduleName}/root$`);
+	
+	let isImported = false;
+	let lastImportPath = null; // 最后一个引入的语句
+	recast.visit(sourceAST, {
+		visitImportDeclaration(path) {
+			const node = path.node;
+			if (isImported) return this.abort(); // 终止遍历
+			if (namedTypes.ImportDeclaration.check(node)) {
+				lastImportPath = path;
+				isImported = regex.test(node.source.value);
+			}
+			this.traverse(path); // 继续遍历
+		},
+	});
 	
 	recast.visit(sourceAST, {
 		visitExportDefaultDeclaration(path) {
-			const body = path.parent.node.body;
 			const objectExpression = path.node.declaration;
 			const properties = objectExpression.properties || [];
-			let spreadElement = getSpreadElement(properties, stateName);
-			const isImported = body.some((it) => {
-				return namedTypes.ImportDeclaration.check(it) && regex.test(it.source.value);
-			});
-			if (spreadElement && isImported) return this.abort(); // 终止遍历
+			
+			if (isImported) return this.abort(); // 终止遍历
 
-			// 插入import
-			const insertIndex = body.reduce((pre, cur, index) => {
-				if (namedTypes.ImportDeclaration.check(cur)) pre = index + 1;
-				return pre;
-			}, 0);
 			const importDeclaration = createImportDeclaration({ 
 				name: moduleName, 
 				importPath: `./${moduleName}/root`
 			});
-			body.splice(insertIndex, 0, importDeclaration);
-			
-			// 插入default
-			spreadElement = createSpreadElement({ name: moduleName });
-			properties.push(spreadElement);
-
+			if (!isImported) {
+				spreadElement = createSpreadElement({ name: moduleName });
+				properties.push(spreadElement);
+				if (lastImportPath) {
+					lastImportPath.insertAfter(importDeclaration);
+				} else {
+					path.insertBefore(importDeclaration);
+				}
+			}
 			this.abort(); // 终止遍历
 		},
 	});

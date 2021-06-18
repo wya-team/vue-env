@@ -17,10 +17,11 @@ const createStringProp = (keyName, value) => {
 
 // 创建单个名称的属性，key和value一样，{ name }
 const createIdentifierProp = (keyName) => {
-	return builders.objectProperty(
-		builders.identifier(keyName),
-		builders.identifier(keyName)
-	);
+	return builders.objectProperty.from({ 
+		shorthand: true,
+		key: builders.identifier(keyName),
+		value: builders.identifier(keyName),
+	});
 };
 
 // 创建路由表达表达式

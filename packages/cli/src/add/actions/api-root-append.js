@@ -28,6 +28,8 @@ module.exports = (source, opts) => {
 			}
 			this.traverse(path); // 继续遍历
 		},
+	});
+	recast.visit(sourceAST, {
 		visitVariableDeclarator(path) {
 			const node = path.node;
 			if (node.id.name === 'API') {
