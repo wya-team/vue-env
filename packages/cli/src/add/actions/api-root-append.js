@@ -10,35 +10,34 @@ const { createSpreadElement, createImportDeclaration, getSpreadElement } = requi
  */
 module.exports = (source, opts) => {
 	const { moduleName } = opts || {};
-	const sourceAST = recast.parse(source, parserConfig);
+	const sourceAST = recast.parse(source, {
+		...parserConfig,
+		sourceFileName: 'source.js'
+	});
 	
+	let isImported = false;
+	let lastImportPath = null; // 最后一个引入的语句
 	recast.visit(sourceAST, {
 		visitImportDeclaration(path) {
-			const body = path.parent.node.body;
+			const node = path.node;
 			const regex = new RegExp(`${moduleName}$`);
-			const isImported = body.some((it) => {
-				return namedTypes.ImportDeclaration.check(it) && regex.test(it.source.value);
-			});
-			if (isImported) return this.abort();
-			
-			const insertIndex = body.reduce((pre, cur, index) => {
-				if (namedTypes.ImportDeclaration.check(cur)) pre = index + 1;
-				return pre;
-			}, 0);
-			const importDeclaration = createImportDeclaration({ name: moduleName });
-			body.splice(insertIndex, 0, importDeclaration);
-			
-			this.abort(); // 终止遍历
+			if (isImported) return this.abort(); // 终止遍历
+			if (namedTypes.ImportDeclaration.check(node)) {
+				lastImportPath = path;
+				isImported = regex.test(node.source.value);
+			}
+			this.traverse(path); // 继续遍历
 		},
 	});
 	recast.visit(sourceAST, {
 		visitVariableDeclarator(path) {
 			const node = path.node;
 			if (node.id.name === 'API') {
-				const isImported = getSpreadElement(node.init.properties, moduleName);
 				if (!isImported) {
+					const importDeclaration = createImportDeclaration({ name: moduleName });
 					const APISpreadElement = createSpreadElement({ name: moduleName });
 					node.init.properties.push(APISpreadElement);
+					lastImportPath && lastImportPath.insertAfter(importDeclaration);
 				}
 				this.abort(); // 终止遍历
 			}
