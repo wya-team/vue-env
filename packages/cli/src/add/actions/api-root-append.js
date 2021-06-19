@@ -10,10 +10,7 @@ const { createSpreadElement, createImportDeclaration, getSpreadElement } = requi
  */
 module.exports = (source, opts) => {
 	const { moduleName } = opts || {};
-	const sourceAST = recast.parse(source, {
-		...parserConfig,
-		sourceFileName: 'source.js'
-	});
+	const sourceAST = recast.parse(source, parserConfig);
 	
 	let isImported = false;
 	let lastImportPath = null; // 最后一个引入的语句
