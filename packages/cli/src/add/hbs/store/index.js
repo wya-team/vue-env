@@ -7,10 +7,10 @@ const moduleRootAppend = require('../../actions/module-root-append');
 const storeRootAppend = require('../../actions/store-root-append'); 
 
 const createModuleRoot = (opts) => {
-	const { dir, moduleName, stateName } = opts;
+	const { dir, moduleName, childName, stateName } = opts;
 	const outputPath = upath.normalize(`${dir}stores/modules/${moduleName}/root.js`);
 	const moduleContent = pathExistsSync(outputPath) ? readFileSync(outputPath, 'utf8') : moduleRootHBS();
-	const content = moduleRootAppend(moduleContent, { moduleName, stateName });
+	const content = moduleRootAppend(moduleContent, { childName, stateName });
 	console.log(chalk`{green modules/${moduleName}/root.js}: {rgb(255,131,0) modified}`);
 	outputFileSync(outputPath, content);	
 };
@@ -47,7 +47,7 @@ module.exports = (opts) => {
 	outputFileSync(outputPath, moduleContent);
 
 	// 修改module root
-	createModuleRoot({ dir, moduleName, stateName });
+	createModuleRoot({ dir, moduleName, childName, stateName });
 	// 修改root
 	createStoreRoot({ dir, moduleName, stateName });
 };

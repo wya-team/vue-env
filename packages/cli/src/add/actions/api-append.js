@@ -39,5 +39,6 @@ module.exports = (source, opts) => {
 		}
 	});
 	
-	return recast.print(sourceAST).code;
+	// prettyPrint会将源文件格式转换掉，这里可以使用，其他不建议使用
+	return recast.prettyPrint(sourceAST, { useTabs: true, tabWidth: 4 }).code.replace(/\s{5}/g, "\n\t");
 };

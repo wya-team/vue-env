@@ -9,9 +9,9 @@ const { createIdentifierProp, createImportDeclaration, getPropValue } = require(
  * @param {*} source 原文件内容
  */
 module.exports = (source, opts) => {
-	const { moduleName, stateName } = opts || {};
+	const { childName, stateName } = opts || {};
 	const sourceAST = recast.parse(source, parserConfig);
-	const regex = new RegExp(`${moduleName}$`);
+	const regex = new RegExp(`${childName}$`);
 	
 	let isImported = false;
 	let lastImportPath = null; // 最后一个引入的语句
@@ -35,7 +35,7 @@ module.exports = (source, opts) => {
 			if (isImported) return this.abort(); // 终止遍历
 		
 			const importDeclaration = createImportDeclaration({ 
-				name: moduleName, 
+				name: childName, 
 				variableName: stateName,
 				isDefault: false, 
 			});
@@ -52,5 +52,6 @@ module.exports = (source, opts) => {
 		},
 	});
 	
-	return recast.print(sourceAST).code;
+	// prettyPrint会将源文件格式转换掉，这里可以使用，其他不建议使用
+	return recast.prettyPrint(sourceAST, { useTabs: true, tabWidth: 4 }).code.replace(/\s{5}/g, "\n\t");
 };
