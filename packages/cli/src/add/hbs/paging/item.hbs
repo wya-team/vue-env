@@ -1,4 +1,5 @@
 <template>
+	{{#if isTableMode}}
 	<vc-table-item>
 		<vc-table-column
 			prop="orders_id"
@@ -37,40 +38,100 @@
 			</div>
 		</vc-table-column>
 	</vc-table-item>
+	{{else if isPieceMode}}
+	<div :key="it.id" class="{{className}}">
+		<div>{{{{support-block-helper}}}}{{ it.title }}{{{{/support-block-helper}}}}</div>
+		<div @click="handleResetFirst">回到首页刷新</div>
+		<div @click="handleResetCur">当前页刷新</div>
+	</div>
+	{{else if isNativeMode}}
+	<tbody>
+		<template v-for="item in dataSource">
+			<vc-fragment :key="item.id">
+				<tr>
+					<td colspan="4">
+						{{{{support-block-helper}}}}
+						{{ item.name }}
+						{{{{/support-block-helper}}}}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="_table-cell">
+							111
+						</div>
+					</td>
+					<td rowspan="2">
+						<div class="_table-cell">
+							222
+						</div>
+					</td>
+					<td>
+						<div class="_table-cell">
+							333
+						</div>
+					</td>
+					<td rowspan="2">
+						<div class="_table-cell">
+							444
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="_table-cell" @click="handleResetFirst">
+							回到首页刷新
+						</div>
+					</td>
+					<td>
+						<div class="_table-cell" @click="handleResetCur">
+							当前页刷新
+						</div>
+					</td>
+				</tr>
+			</vc-fragment>
+		</template>
+	</tbody>
+	{{/if}}
 </template>
 
 <script>
-export default {
-	name: '${name}',
-	components: {
+{{#if isNativeMode}}
+import { Fragment } from 'wya-vc';
 
+{{/if}}
+export default {
+	name: '{{componentName}}',
+	components: {
+		{{#if isNativeMode}}
+		'vc-fragment': Fragment
+		{{/if}}
 	},
 	props: {
-
+		{{#if isNativeMode}}
+		dataSource: {
+			type: Array,
+			default: () => ([])
+		},
+		{{/if}}
 	},
 	data() {
 		return {
 		};
 	},
-	computed: {
-
-	},
-	watch: {
-		
-	},
-	created() {
-		
-	},
 	methods: {
 		handleResetFirst() {
-			this.$store.commit('${pagingType}_INIT');
+			this.$store.commit('{{mutationPrefix}}_INIT');
 		},
 		handleResetCur() {
-			this.$store.commit('${pagingType}_RESET', { type: this.type });
+			this.$store.commit('{{mutationPrefix}}_RESET', { type: this.type });
 		},
 	},
 };
 </script>
 
 <style lang="scss">
+.{{className}} {
+
+}
 </style>

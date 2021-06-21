@@ -64,21 +64,21 @@ module.exports = (opts) => {
 		} else if (template === 'form') {
 			createForm({ dir, project, title, pathArr, vcPrefix });
 		} else if (template === 'paging') {
-			createPaging({ dir, project, title, pathArr, pagingType, pagingMode });
+			createPaging({ dir, project, title, route, pathArr, pagingType, pagingMode });
 		} else if (template === 'scroll') {
 			// 
 		}
 		
-		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
-		createApi({ dir, template, pathArr });
+		// createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
+		// createApi({ dir, template, pathArr });
 
-		// PC 端需要插入到layout的nav-config
-		if (isNav && !isMobile) {
-			createLayout({ dir, template, pathArr });
-		}
-		if (hasStore) {
-			createStore({ dir, template, pathArr });
-		}
+		// // PC 端需要插入到layout的nav-config
+		// if (isNav && !isMobile) {
+		// 	createLayout({ dir, template, pathArr });
+		// }
+		// if (hasStore) {
+		// 	createStore({ dir, template, pathArr });
+		// }
 	};
 
 	const question = {

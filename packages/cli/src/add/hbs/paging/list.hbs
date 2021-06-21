@@ -1,0 +1,201 @@
+<template>
+	{{#if isBasic}}
+	<vc-paging
+		ref="tableTarget"
+		{{#if isNativeMode}}
+		:columns="columns"
+		{{/if}}
+		:data-source="listInfo.data" 
+		:total="listInfo.total"
+		:count="listInfo.count"
+		:reset="listInfo.reset"
+		:history="true"
+		:load-data="loadData"
+		mode="{{pagingMode}}"
+		class="g-m-t-20 {{className}}"
+		@page-size-change="handleChangePageSize"
+	>
+		{{#if isTableMode}}
+		<template #default="{ dataSource }">
+			<{{project}}-item :data-source="dataSource" />
+		</template>
+		{{else if isPieceMode}}
+		<template #default="{ it }">
+			<{{project}}-item
+				:it="it"
+				class="_item"
+			/>
+		</template>
+		{{else if isNativeMode}}
+		<template #default="{ it }">
+			<{{project}}-item :it="it" />
+		</template>
+		{{/if}}
+	</vc-paging>
+	{{else}}
+	<vc-tabs 
+		:value="type" 
+		:animated="false"
+		type="card" 
+		style="margin-top: 20px"
+		@click="handleChange"
+	>
+		<vc-tabs-pane 
+			v-for="(item) in tabs"
+			:key="item.value"
+			:label="item.label" 
+			:name="item.value"
+		>
+			<vc-paging
+				{{#if isNativeMode}}
+				:columns="columns"
+				{{/if}}
+				:show="item.value == type" 
+				:type="item.value"
+				:data-source="listInfo[item.value].data"
+				:total="listInfo[item.value].total"
+				:count="listInfo[item.value].count"
+				:reset="listInfo[item.value].reset"
+				:current.sync="current[item.value]"
+				:history="true"
+				:load-data="loadData"
+				class="{{className}}"
+				mode="{{pagingMode}}"
+				@page-size-change="handleChangePageSize"
+			>
+				{{#if isTableMode}}
+				<template #default="{ dataSource }">
+					<{{project}}-item :data-source="dataSource" />
+				</template>
+				{{else if isPieceMode}}
+				<template #default="{ it }">
+					<{{project}}-item
+						:it="it"
+						class="_item"
+					/>
+				</template>
+				{{else if isNativeMode}}
+				<template #default="{ it }">
+					<{{project}}-item :it="it" />
+				</template>
+				{{/if}}
+			</vc-paging>
+		</vc-tabs-pane>
+	</vc-tabs>
+	{{/if}}
+</template>
+
+<script>
+import { URL } from '@utils/utils';
+import Item from './item';
+
+export default {
+	name: '{{componentName}}',
+	components: {
+		'{{project}}-item': Item,
+	},
+	data() {
+		const { query } = this.$route;
+		return {
+			{{#unless isBasic}}
+			type: String(query.type || "1"), // 同tabs下的value
+			current: {},
+			tabs: [
+				{ label: '标签一', value: '1' }, 
+				{ label: '标签二', value: '2' }, 
+				{ label: '标签三', value: '3' }
+			],
+			{{/unless}}
+			{{#if isNativeMode}}
+			columns: ['Header - 1', 'Header - 2', 'Header - 3', 'Header - 4'],
+			{{/if}}
+		};
+	},
+	computed: {
+		listInfo() {
+			return this.$store.state.{{stateName}}.listInfo;
+		}
+	},
+	methods: {
+		loadData(page, pageSize) {
+			let { query = {} } = URL.parse();
+			return this.request({
+				url: '{{mutationPrefix}}_GET',
+				type: 'GET',
+				param: {
+					...query,
+					{{#unless isBasic}}
+					type: this.type,
+					{{/unless}}
+					page,
+					pageSize
+				},
+			}).then((res) => {
+				console.log(res, 'res');
+			}).catch((error) => {
+				console.log(error, 'error');
+			});
+		},
+		{{#unless isBasic}}
+		handleChange(type) {
+			this.type = type;
+		
+			let { query = {} } = URL.parse(); // this.$route需要设置paging.sync
+			query = {
+				...query,
+				type,
+				page: this.current[type]
+			};
+			this.$router.replace(URL.merge({ path: '{{route}}', query }));
+		},
+		{{/unless}}
+		handleChangePageSize() {
+			this.$store.commit('{{mutationPrefix}}_INIT');
+		}
+	}
+};
+</script>
+
+<style lang="scss">
+{{#if isPieceMode}}
+.{{className}} {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 20px 0;
+	._item {
+		border: 1px solid #d4d4d4;
+		padding: 20px;
+		margin-bottom: 20px;
+		width: calc(50% - 10px);
+	}
+}
+{{else if isNativeMode}}
+.{{className}} table {
+	width: 100%;
+	thead {
+		th {
+			text-align: left;
+			height: 40px;
+			white-space: nowrap;
+			overflow: hidden;
+			background-color: #f8f8f9;
+
+		}
+	}
+	tbody {
+		background-color: #ffffff;
+		td {
+			text-align: left;
+			height: 40px;
+			white-space: nowrap;
+			overflow: hidden;
+			border: 1px solid #ccc!important
+		}
+		tr {
+			border: 1px solid red!important
+		}
+	}
+}
+{{/if}}
+</style>

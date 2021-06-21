@@ -4,7 +4,7 @@
 		{{#if isBasic}}
 		<{{project}}-list />
 		{{else}}
-		<{{project}}-tabs />
+		<{{project}}-tabs-list />
 		{{/if}}
 	</set-title>
 </template>
@@ -14,7 +14,7 @@ import Filter from '@components/{{moduleName}}/{{childName}}/filter';
 {{#if isBasic}}
 import List from '@components/{{moduleName}}/{{childName}}/list';
 {{else}}
-import Tabs from '@components/{{moduleName}}/{{childName}}/tabs';
+import TabsList from '@components/{{moduleName}}/{{childName}}/tabs-list';
 {{/if}}
 import navigator from '@extends/mixins/navigator';
 
@@ -25,7 +25,7 @@ export default {
 		{{#if isBasic}}
 		"{{project}}-list": List,
 		{{else}}
-		"{{project}}-tabs": Tabs,
+		"{{project}}-tabs-list": TabsList,
 		{{/if}}
 	},
 	mixins: [navigator('{{mutationPrefix}}')]
