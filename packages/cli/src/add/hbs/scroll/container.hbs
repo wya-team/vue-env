@@ -1,0 +1,30 @@
+<template>
+	<set-title title="{{title}}">
+		{{#if isBasic}}
+		<{{project}}-list />
+		{{else}}
+		<{{project}}-tabs-list />
+		{{/if}}
+	</set-title>
+</template>
+
+<script>
+{{#if isBasic}}
+import List from '@components/{{moduleName}}/{{childName}}/list';
+{{else}}
+import TabsList from '@components/{{moduleName}}/{{childName}}/tabs-list';
+{{/if}}
+import navigator from '@extends/mixins/navigator';
+
+export default {
+	name: '{{componentName}}',
+	components: {
+		{{#if isBasic}}
+		"{{project}}-list": List,
+		{{else}}
+		"{{project}}-tabs-list": TabsList,
+		{{/if}}
+	},
+	mixins: [navigator('{{mutationPrefix}}')]
+};
+</script>

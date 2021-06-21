@@ -2,6 +2,8 @@ const upath = require('upath');
 const chalk = require('chalk');
 const { pathExistsSync, outputFileSync, readFileSync } = require('fs-extra');
 const moduleHBS = require('./module.hbs');
+const scrollModuleHBS = require('./scroll-module.hbs');
+const pagingModuleHBS = require('./paging-module.hbs');
 const moduleRootHBS = require('./module-root.hbs');
 const moduleRootAppend = require('../../actions/module-root-append'); 
 const storeRootAppend = require('../../actions/store-root-append'); 
@@ -40,12 +42,27 @@ module.exports = (opts) => {
 	const mutationPrefix = `${pathArr.join('_')}`.toUpperCase();
 	const extra = childPathArr.map(item => `${item[0].toUpperCase()}${item.slice(1)}`).join('');
 	const stateName = `${moduleName}${extra}`;
-	const moduleContent = moduleHBS({
-		mutationPrefix,
-		stateName,
-		isBaisc: !['scroll', 'paging'].includes(template),
-		isPagingBasic
-	});
+
+	console.log(chalk`{green modules}: {rgb(255,131,0) created}`);
+	let moduleContent = '';
+	if (template === 'scroll') {
+		moduleContent = scrollModuleHBS({
+			mutationPrefix,
+			stateName,
+			isPagingBasic
+		});
+	} else if (template === 'paging') {
+		moduleContent = pagingModuleHBS({
+			mutationPrefix,
+			stateName,
+			isPagingBasic
+		});
+	} else {
+		moduleContent = moduleHBS({
+			mutationPrefix,
+			stateName,
+		});
+	}
 
 	console.log(chalk`{green ${childName}.js}: {rgb(255,131,0) created}`);
 	outputFileSync(outputPath, moduleContent);

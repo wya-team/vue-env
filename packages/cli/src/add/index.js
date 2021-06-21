@@ -174,9 +174,8 @@ module.exports = class AddManager {
 				project: 'chyy',
 				mobile: false,
 				navigation: true,
-				template: 'paging',
+				template: 'scroll',
 				pagingType: 'tabs',
-				pagingMode: 'native',
 				store: true,
 				path: '/home/main',
 				dir: '/Users/dongjiang/Documents/workspace/gitClone/work/wya-admin-pro/src/pages/'

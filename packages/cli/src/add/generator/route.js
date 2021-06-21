@@ -12,6 +12,7 @@ const createApi = require('../hbs/api/index');
 const createStore = require('../hbs/store/index'); 
 const createLayout = require('../hbs/layout/index'); 
 const createPaging = require('../hbs/paging/index'); 
+const createScroll = require('../hbs/scroll/index'); 
 
 /**
  * TODO:
@@ -66,7 +67,7 @@ module.exports = (opts) => {
 		} else if (template === 'paging') {
 			createPaging({ dir, project, title, route, pathArr, pagingType, pagingMode });
 		} else if (template === 'scroll') {
-			// 
+			createScroll({ dir, project, title, route, pathArr, pagingType });
 		}
 		
 		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
