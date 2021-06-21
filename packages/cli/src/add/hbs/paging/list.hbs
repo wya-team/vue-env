@@ -19,14 +19,16 @@
 		<template #default="{ dataSource }">
 			<{{project}}-item :data-source="dataSource" />
 		</template>
-		{{else if isPieceMode}}
+		{{/if}}
+		{{#if isPieceMode}}
 		<template #default="{ it }">
 			<{{project}}-item
 				:it="it"
 				class="_item"
 			/>
 		</template>
-		{{else if isNativeMode}}
+		{{/if}}
+		{{#if isNativeMode}}
 		<template #default="{ it }">
 			<{{project}}-item :it="it" />
 		</template>
@@ -67,14 +69,16 @@
 				<template #default="{ dataSource }">
 					<{{project}}-item :data-source="dataSource" />
 				</template>
-				{{else if isPieceMode}}
+				{{/if}}
+				{{#if isPieceMode}}
 				<template #default="{ it }">
 					<{{project}}-item
 						:it="it"
 						class="_item"
 					/>
 				</template>
-				{{else if isNativeMode}}
+				{{/if}}
+				{{#if isNativeMode}}
 				<template #default="{ it }">
 					<{{project}}-item :it="it" />
 				</template>

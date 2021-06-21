@@ -69,16 +69,16 @@ module.exports = (opts) => {
 			// 
 		}
 		
-		// createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
-		// createApi({ dir, template, pathArr });
+		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
+		createApi({ dir, template, pathArr });
 
-		// // PC 端需要插入到layout的nav-config
-		// if (isNav && !isMobile) {
-		// 	createLayout({ dir, template, pathArr });
-		// }
-		// if (hasStore) {
-		// 	createStore({ dir, template, pathArr });
-		// }
+		// PC 端需要插入到layout的nav-config
+		if (isNav && !isMobile) {
+			createLayout({ dir, template, pathArr });
+		}
+		if (hasStore) {
+			createStore({ dir, template, pathArr, pagingType });
+		}
 	};
 
 	const question = {

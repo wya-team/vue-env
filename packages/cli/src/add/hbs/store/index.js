@@ -29,18 +29,22 @@ const createStoreRoot = (opts) => {
 };
 
 module.exports = (opts) => {
-	const { dir, template, pathArr } = opts || {};
+	const { dir, template, pathArr, pagingType } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const childName = childPathArr.join('-');
 	const outputPath = upath.normalize(`${dir}stores/modules/${moduleName}/${childName}.js`);
 	
+	const isPagingBasic = pagingType === 'basic';
+
 	// 创建module
 	const mutationPrefix = `${pathArr.join('_')}`.toUpperCase();
 	const extra = childPathArr.map(item => `${item[0].toUpperCase()}${item.slice(1)}`).join('');
 	const stateName = `${moduleName}${extra}`;
 	const moduleContent = moduleHBS({
 		mutationPrefix,
-		stateName
+		stateName,
+		isBaisc: !['scroll', 'paging'].includes(template),
+		isPagingBasic
 	});
 
 	console.log(chalk`{green ${childName}.js}: {rgb(255,131,0) created}`);

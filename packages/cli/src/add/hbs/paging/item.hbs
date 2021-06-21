@@ -38,13 +38,15 @@
 			</div>
 		</vc-table-column>
 	</vc-table-item>
-	{{else if isPieceMode}}
+	{{/if}}
+	{{#if isPieceMode}}
 	<div :key="it.id" class="{{className}}">
 		<div>{{{{support-block-helper}}}}{{ it.title }}{{{{/support-block-helper}}}}</div>
 		<div @click="handleResetFirst">回到首页刷新</div>
 		<div @click="handleResetCur">当前页刷新</div>
 	</div>
-	{{else if isNativeMode}}
+	{{/if}}
+	{{#if isNativeMode}}
 	<tbody>
 		<template v-for="item in dataSource">
 			<vc-fragment :key="item.id">
