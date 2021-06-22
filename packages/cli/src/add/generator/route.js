@@ -16,7 +16,7 @@ const createScroll = require('../hbs/scroll/index');
 
 /**
  * TODO:
- * 1. 该路由是否为导航路由
+ * ✅ 1. 该路由是否为导航路由
  * 2. Paging是否为展开
  * 3. Paging是否为多选
  * 4. 单个文件的模板
@@ -59,16 +59,24 @@ module.exports = (opts) => {
 	const isMobile = mobile || template === 'scroll';
 	const vcPrefix = isMobile ? 'vcm' : 'vc';
 
+	const createTemplate = {
+		basic: createBasic,
+		form: createForm,
+		paging: createPaging,
+		scroll: createScroll,
+	};
+
 	generator = () => {
-		if (template === 'basic') {
-			createBasic({ dir, project, title, pathArr });
-		} else if (template === 'form') {
-			createForm({ dir, project, title, pathArr, vcPrefix });
-		} else if (template === 'paging') {
-			createPaging({ dir, project, title, route, pathArr, pagingType, pagingMode });
-		} else if (template === 'scroll') {
-			createScroll({ dir, project, title, route, pathArr, pagingType });
-		}
+		createTemplate[template]({ 
+			dir,
+			project,
+			title,
+			route,
+			pathArr, 
+			vcPrefix,
+			pagingType,
+			pagingMode 
+		});
 		
 		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
 		createApi({ dir, template, pathArr });
