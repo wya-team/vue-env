@@ -14,6 +14,13 @@ const createStore = require('./hbs/store/index');
 const createLayout = require('./hbs/layout/index'); 
 const createPaging = require('./hbs/paging/index'); 
 const createScroll = require('./hbs/scroll/index'); 
+
+/**
+ * Handlebars 注册可以被当前环境中任意模版访问的助手代码。
+ */
+Handlebars.registerHelper({
+	'support-block-helper': (options) => options.fn()
+});
  
 /**
   * TODO:
@@ -88,17 +95,6 @@ module.exports = (opts) => {
 			createStore({ dir, template, pathArr, pagingType });
 		}
 	};
-
-	/**
-	 * Handlebars 注册可以被当前环境中任意模版访问的助手代码。
-	 */
-	const _registerHelper = () => {
-		Handlebars.registerHelper({
-			'support-block-helper': (options) => options.fn()
-		});
-	};
-
-	_registerHelper();
 
 	const question = {
 		type: 'confirm',
