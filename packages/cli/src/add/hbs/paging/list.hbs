@@ -1,39 +1,6 @@
 <template>
 	{{#if isBasic}}
-	<vc-paging
-		ref="tableTarget"
-		{{#if isNativeMode}}
-		:columns="columns"
-		{{/if}}
-		:data-source="listInfo.data" 
-		:total="listInfo.total"
-		:count="listInfo.count"
-		:reset="listInfo.reset"
-		:history="true"
-		:load-data="loadData"
-		mode="{{pagingMode}}"
-		class="g-m-t-20 {{className}}"
-		@page-size-change="handleChangePageSize"
-	>
-		{{#if isTableMode}}
-		<template #default="{ dataSource }">
-			<{{project}}-item :data-source="dataSource" />
-		</template>
-		{{/if}}
-		{{#if isPieceMode}}
-		<template #default="{ it }">
-			<{{project}}-item
-				:it="it"
-				class="_item"
-			/>
-		</template>
-		{{/if}}
-		{{#if isNativeMode}}
-		<template #default="{ it }">
-			<{{project}}-item :it="it" />
-		</template>
-		{{/if}}
-	</vc-paging>
+	{{> paging}}
 	{{else}}
 	<vc-tabs 
 		:value="type" 
@@ -48,42 +15,7 @@
 			:label="item.label" 
 			:name="item.value"
 		>
-			<vc-paging
-				{{#if isNativeMode}}
-				:columns="columns"
-				{{/if}}
-				:show="item.value == type" 
-				:type="item.value"
-				:data-source="listInfo[item.value].data"
-				:total="listInfo[item.value].total"
-				:count="listInfo[item.value].count"
-				:reset="listInfo[item.value].reset"
-				:current.sync="current[item.value]"
-				:history="true"
-				:load-data="loadData"
-				class="{{className}}"
-				mode="{{pagingMode}}"
-				@page-size-change="handleChangePageSize"
-			>
-				{{#if isTableMode}}
-				<template #default="{ dataSource }">
-					<{{project}}-item :data-source="dataSource" />
-				</template>
-				{{/if}}
-				{{#if isPieceMode}}
-				<template #default="{ it }">
-					<{{project}}-item
-						:it="it"
-						class="_item"
-					/>
-				</template>
-				{{/if}}
-				{{#if isNativeMode}}
-				<template #default="{ it }">
-					<{{project}}-item :it="it" />
-				</template>
-				{{/if}}
-			</vc-paging>
+			{{> paging}}
 		</vc-tabs-pane>
 	</vc-tabs>
 	{{/if}}
@@ -113,12 +45,42 @@ export default {
 			{{#if isNativeMode}}
 			columns: ['Header - 1', 'Header - 2', 'Header - 3', 'Header - 4'],
 			{{/if}}
+			{{#if isExpand}}
+			tableOptions: {
+				lazy: true,
+				indent: 20,
+				expandSelectable: false,
+				rowKey: 'uid',
+				loadExpand: this.loadExpand
+			},
+			{{/if}}
+			{{#if isMultiple}}
+			selection: []
+			{{/if}}
 		};
 	},
 	computed: {
 		listInfo() {
 			return this.$store.state.{{stateName}}.listInfo;
-		}
+		},
+		{{#if isMultiple}}
+		// 1 全选 2 半选 3 未选
+		checkedStatus() {
+			{{#if isBasic}}
+			const pagingData = this.listInfo;
+			{{else}}
+			const pagingData = this.listInfo[this.type];
+			{{/if}}
+			const data = pagingData.data[this.$route.query.page || 1];
+			if (!data) return 3;
+			const temp = data.filter(row => {
+				return this.selection.findIndex(it => it.id === row.id) > -1;
+			});
+			return temp.length
+				? (temp.length === data.length ? 1 : 2)
+				: 3;
+		},
+		{{/if}}
 	},
 	methods: {
 		loadData(page, pageSize) {
@@ -141,6 +103,23 @@ export default {
 			});
 		},
 		{{#unless isBasic}}
+		{{#if isExpand}}
+		loadExpand(tree) {
+			return new Promise((resolve, reject) => {
+				this.$request({
+					url: '_{{mutationPrefix}}_CHILDREN_GET',
+					type: 'GET',
+					param: {},
+					loading: false
+				}).then(({ data }) => {
+					resolve(data);
+				}).catch((error) => {
+					reject();
+					console.log(error, 'error');
+				});
+			});
+		},
+		{{/if}}
 		handleChange(type) {
 			this.type = type;
 		
@@ -155,7 +134,20 @@ export default {
 		{{/unless}}
 		handleChangePageSize() {
 			this.$store.commit('{{mutationPrefix}}_INIT');
-		}
+		},
+		{{#if isMultiple}}
+		handleSelectionChange(selection) {
+			this.selection = selection;
+		},
+		handleCheckAll() {
+			{{#if isBasic}}
+			const tableRef = this.$refs.tableTarget;
+			{{else}}
+			const tableRef = this.$refs.tableTarget[0];
+			{{/if}}
+			this.checkedStatus === 1 ? tableRef.clearSelection() : tableRef.toggleAllSelection();
+		},
+		{{/if}}
 	}
 };
 </script>

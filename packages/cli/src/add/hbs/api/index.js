@@ -19,7 +19,7 @@ const createAPIRoot = (opts) => {
 };
 
 module.exports = (opts) => {
-	const { dir, template, pathArr } = opts || {};
+	const { dir, template, pagingFeature, pathArr } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const outputPath = upath.normalize(`${dir}stores/apis/${moduleName}.js`);
 	const APIName = `${pathArr.join('_')}`;
@@ -28,6 +28,7 @@ module.exports = (opts) => {
 	let apiContent = isFileExist ? readFileSync(outputPath, 'utf8') : apiHBS();	
 	const content = apiAppend(apiContent, { 
 		template,
+		pagingFeature,
 		APIName
 	});
 

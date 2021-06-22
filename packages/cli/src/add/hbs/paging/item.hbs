@@ -1,6 +1,9 @@
 <template>
 	{{#if isTableMode}}
 	<vc-table-item>
+		{{#if isMultiple}}
+		<vc-table-column type="selection" width="64" />
+		{{/if}}
 		<vc-table-column
 			prop="orders_id"
 			label="ID"

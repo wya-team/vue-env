@@ -1,13 +1,19 @@
 const upath = require('upath');
 const chalk = require('chalk');
 const fs = require('fs-extra');
+const Handlebars = require('handlebars');
+const pagingHBS = require('./paging.hbs');
 const containerHBS = require('./container.hbs');
 const filterHBS = require('./filter.hbs');
 const itemHBS = require('./item.hbs');
 const listHBS = require('./list.hbs');
 
+Handlebars.registerPartial({
+	'paging': pagingHBS
+});
+
 module.exports = (opts) => {
-	const { dir, project, title, route, pathArr, pagingType, pagingMode } = opts || {};
+	const { dir, project, title, route, pathArr, pagingType, pagingMode, pagingFeature } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const pathName = `${pathArr.join('-')}`;
 	const childName = childPathArr.join('-');
@@ -17,6 +23,9 @@ module.exports = (opts) => {
 	const isTableMode = pagingMode === 'table';
 	const isPieceMode = pagingMode === 'piece';
 	const isNativeMode = pagingMode === 'native';
+
+	const isMultiple = pagingFeature.includes('multiple');
+	const isExpand = pagingFeature.includes('expand');
 
 	const outputItemPath = upath.normalize(`${dir}components/${moduleName}/${childName}/item.vue`);
 	const outputListPath = upath.normalize(`${dir}components/${moduleName}/${childName}/${isBasic ? 'list' : 'tabs-list'}.vue`);
@@ -67,6 +76,7 @@ module.exports = (opts) => {
 			isTableMode,
 			isPieceMode,
 			isNativeMode,
+			isMultiple,
 		})
 	);
 	console.log(chalk`{green paging list}: {rgb(255,131,0) created}`);
@@ -81,12 +91,14 @@ module.exports = (opts) => {
 			componentName: `${project}-${pathName}-table`,
 			mutationPrefix,
 			stateName,
-			className: `v-${pathName}-list`,
+			className: `${isBasic ? 'g-m-t-20 ' : ''}v-${pathName}-list`,
 			pagingMode,
 			isBasic,
 			isTableMode,
 			isPieceMode,
 			isNativeMode,
+			isMultiple,
+			isExpand
 		})
 	);
 };

@@ -1,0 +1,64 @@
+<vc-paging
+	ref="tableTarget"
+	{{#if isNativeMode}}
+	:columns="columns"
+	{{/if}}
+	{{#if isBasic}}
+	:data-source="listInfo.data" 
+	:total="listInfo.total"
+	:count="listInfo.count"
+	:reset="listInfo.reset"
+	{{else}}
+	:show="item.value == type" 
+	:type="item.value"
+	:data-source="listInfo[item.value].data"
+	:total="listInfo[item.value].total"
+	:count="listInfo[item.value].count"
+	:reset="listInfo[item.value].reset"
+	:current.sync="current[item.value]"
+	{{/if}}
+	:history="true"
+	:load-data="loadData"
+	{{#if isExpand}}
+	:table-opts="tableOptions"
+	{{/if}}
+	mode="{{pagingMode}}"
+	class="{{className}}"
+	@page-size-change="handleChangePageSize"
+	{{#if isMultiple}}
+	@selection-change="handleSelectionChange"
+	{{/if}}
+>
+	{{#if isTableMode}}
+	<template #default="{ dataSource }">
+		<{{project}}-item :data-source="dataSource" />
+	</template>
+	{{/if}}
+	{{#if isPieceMode}}
+	<template #default="{ it }">
+		<{{project}}-item
+			:it="it"
+			class="_item"
+		/>
+	</template>
+	{{/if}}
+	{{#if isNativeMode}}
+	<template #default="{ it }">
+		<{{project}}-item :it="it" />
+	</template>
+	{{/if}}
+	{{#if isMultiple}}
+	<template #extra>
+		<vc-checkbox
+			:indeterminate="checkedStatus === 2"
+			:value="checkedStatus === 1"
+			@change="handleCheckAll"
+		>
+			全选
+		</vc-checkbox>
+		<vc-button type="default">
+			批量
+		</vc-button>
+	</template>
+	{{/if}}
+</vc-paging>

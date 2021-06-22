@@ -2,9 +2,7 @@ const { prompt, Separator } = require('inquirer');
 const fs = require('fs-extra');
 const path = require('path');
 const upath = require('upath');
-const Handlebars = require('handlebars');
 const createProcess = require('./add');
-const generatorProcess = require('./generator/route');
 
 const { resolve } = path;
 module.exports = class AddManager {
@@ -91,6 +89,17 @@ module.exports = class AddManager {
 				default: 'table'
 			},
 			{
+				type: 'checkbox',
+				name: 'pagingFeature',
+				message: 'Select feature:',
+				when: (answers) => /(table)/.test(answers.pagingMode),
+				choices: [
+					new Separator(' = For template = '),
+					'expand',
+					'multiple'
+				],
+			},
+			{
 				type: 'confirm',
 				name: 'store',
 				message: 'use store(vuex):',
@@ -134,6 +143,7 @@ module.exports = class AddManager {
 			template: ['form', 'basic', 'paging', 'scroll'].includes(arr[0]) ? arr[0] : undefined,
 			pagingType: ['tabs', 'basic'].includes(arr[1]) ? arr[1] : undefined,
 			pagingMode: ['native', 'piece', 'table'].includes(arr[2]) ? arr[2] : undefined,
+			pagingFeature: arr[3] && arr[3].length > 0 ? arr[3] : undefined
 		};
 		return result;
 	}
@@ -152,30 +162,23 @@ module.exports = class AddManager {
 	}
 
 	/**
-	 * Handlebars 注册可以被当前环境中任意模版访问的助手代码。
-	 */
-	_registerHelper() {
-		Handlebars.registerHelper({
-			'support-block-helper': (options) => options.fn()
-		});
-	}
-
-	/**
 	 * 用于准备当前应用程序上下文的异步方法
 	 * 其中包含加载页面和插件、应用插件等。
 	 */
 	async process() {
-		this._registerHelper();
+		
 		// TODO: 检查是否存在stages和未unstages的文件
 		this.options.config
 			? this._loopMake()
-			: generatorProcess({
+			: createProcess({
 			// : prompt(this._getQuesion()).then((res) => {
 				project: 'chyy',
 				mobile: false,
 				navigation: true,
-				template: 'scroll',
+				template: 'paging',
 				pagingType: 'tabs',
+				pagingMode: 'table',
+				pagingFeature: ['expand', 'multiple'],
 				store: true,
 				path: '/home/main',
 				dir: '/Users/dongjiang/Documents/workspace/gitClone/work/wya-admin-pro/src/pages/'

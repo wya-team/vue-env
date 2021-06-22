@@ -8,7 +8,7 @@ const { createStringProp } = require('./utils');
  * @param {*} source 原文件内容
  */
 module.exports = (source, opts) => {
-	const { template, APIName } = opts || {};
+	const { template, pagingFeature, APIName } = opts || {};
 	const sourceAST = recast.parse(source, parserConfig);
 	
 	const API_KEY_ARRAY = [];
@@ -28,6 +28,10 @@ module.exports = (source, opts) => {
 				let value = '';
 				if (['paging', 'scroll'].includes(template)) {
 					key = `${APIName.toUpperCase()}_LIST_GET`;
+					value = '/test';
+				}
+				if (template === 'paging' && pagingFeature.includes('expand')) {
+					key = `_${APIName.toUpperCase()}_CHILDREN_GET`;
 					value = '/test';
 				}
 				if (API_KEY_ARRAY.includes(key)) return this.abort(); // 终止遍历
