@@ -2,7 +2,7 @@
 const recast = require("recast");
 const { namedTypes } = require('ast-types');
 const { parserConfig } = require('./config');
-const { createSpreadElement, createImportDeclaration, getSpreadElement } = require('./utils');
+const { createSpreadElement, createImportDeclaration } = require('./utils');
 
 /**
  * app.js 文件插入代码片段
