@@ -95,7 +95,7 @@ export default {
 				path: this.$route.path, 
 				query
 			}));
-			this.$store.commit('{{mutationPrefix}}_INIT');
+			this.$store.commit('{{mutationPrefix}}_LIST_INIT');
 		}, 300),
 		handleToggle() {
 			this.show = !this.show;

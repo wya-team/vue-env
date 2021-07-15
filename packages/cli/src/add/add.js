@@ -35,7 +35,7 @@ module.exports = (opts) => {
 		template,
 		pagingMode,
 		pagingType,
-		pagingFeature, // paging的特征【多选，展开】
+		pagingFeature = [], // paging的特征【多选，展开】
 		store = false,
 		extra = '',
 		title = '',
@@ -84,7 +84,7 @@ module.exports = (opts) => {
 			pagingFeature
 		});
 		
-		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix });
+		createApp({ dir, project, path, template, title, pathArr, isNav, vcPrefix, components });
 		createApi({ dir, template, pathArr, pagingFeature });
 
 		// PC 端需要插入到layout的nav-config

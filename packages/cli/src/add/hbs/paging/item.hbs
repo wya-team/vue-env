@@ -17,7 +17,7 @@
 			<template #default="{ row }">
 				<div>
 					{{{{support-block-helper}}}}
-					{{ row.status === 1 ? '开启' : '关闭' }}
+					{{ row.status === 1 ? '开启1' : '关闭' }}
 					{{{{/support-block-helper}}}}
 				</div>
 			</template>
@@ -33,12 +33,8 @@
 			header-align="right"
 			align="right"
 		>
-			<div @click="handleResetFirst">
-				回到首页刷新
-			</div>
-			<div @click="handleResetCur">
-				当前页刷新
-			</div>
+			<div @click="handleResetFirst">回到首页刷新</div>
+			<div @click="handleResetCur">当前页刷新</div>
 		</vc-table-column>
 	</vc-table-item>
 	{{/if}}
@@ -126,10 +122,10 @@ export default {
 	},
 	methods: {
 		handleResetFirst() {
-			this.$store.commit('{{mutationPrefix}}_INIT');
+			this.$store.commit('{{mutationPrefix}}_LIST_INIT');
 		},
 		handleResetCur() {
-			this.$store.commit('{{mutationPrefix}}_RESET', { type: this.type });
+			this.$store.commit('{{mutationPrefix}}_LIST_RESET', { type: this.type });
 		},
 	},
 };

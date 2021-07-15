@@ -9,7 +9,7 @@ export default {
 		'{{this}}',
 		{{/each}}
 	]
-	{{else if isPaging}}
+	{{else if isNav}}
 	components: [
 		() => import('./modules/{{pathName}}.vue'),
 		'left',

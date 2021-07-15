@@ -6,7 +6,7 @@ const routeHBS = require('./route.hbs');
 const appAppend = require('../../actions/app-append');
 
 module.exports = (opts) => {
-	const { dir, template, path, title, pathArr, isNav } = opts || {};
+	const { dir, template, path, title, pathArr, isNav, components } = opts || {};
 	const [moduleName, ...childPathArr] = pathArr || [];
 	const pathName = `${pathArr.join('-')}`;
 	const outputPath = upath.normalize(`${dir}containers/${moduleName}/app.js`);
@@ -18,7 +18,8 @@ module.exports = (opts) => {
 		path, 
 		title,
 		pathName,
-		isPaging: template === 'paging' 
+		components,
+		isNav,
 	});
 
 	const content = appAppend(appContent, routeContent, { 
