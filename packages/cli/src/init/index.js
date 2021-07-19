@@ -3,11 +3,15 @@ const fs = require('fs-extra');
 const path = require('path');
 const upath = require('upath');
 const chalk = require('chalk');
+const download = require('download-git-repo');
+const ora = require('ora');
 
 const { downloadFromGithub } = require('@wya/toolkit-utils');
 
 const { resolve } = path;
 const { log } = console;
+
+const ADMIN_PRO_GIT_PATH = 'direct:https://github.com/wya-team/vue-admin/archive/refs/heads';
 
 module.exports = class InitManager {
 	constructor(options = {}) {
@@ -49,7 +53,8 @@ module.exports = class InitManager {
 				message: 'Select branch:',
 				// 可提供分支
 				choices: [
-					'master' 
+					'main',
+					'master'
 				],
 				validate(val) {
 					if (val !== '') {
@@ -78,8 +83,20 @@ module.exports = class InitManager {
 					path: 'templates',
 					dest: `${place}/${project}`
 				};
-				log(chalk`{yellow ${JSON.stringify(options, null, '\t')}}`);
-				downloadFromGithub(options);
+				// log(chalk`{yellow ${JSON.stringify(options, null, '\t')}}`);
+				// downloadFromGithub(options);
+				const repository = `${ADMIN_PRO_GIT_PATH}/${options.ref}.zip`;
+				log(chalk`{yellow 模板仓库地址：${repository}}`);
+				// 显示下载进度.
+				const process = ora(`代码下载中...`).start();
+				download(repository, options.dest, function (err) {
+					if (err) {
+						console.log('err', err);
+						process.fail(chalk`{red 项目创建失败!}`); 
+					} else {
+						process.succeed(chalk`{green 项目创建成功!}`);
+					}
+				});
 			})
 			.catch(e => {
 				log(chalk`{red ${e}}`);
