@@ -83,8 +83,7 @@ module.exports = class InitManager {
 					path: 'templates',
 					dest: `${place}/${project}`
 				};
-				// log(chalk`{yellow ${JSON.stringify(options, null, '\t')}}`);
-				// downloadFromGithub(options);
+				
 				const repository = `${ADMIN_PRO_GIT_PATH}/${options.ref}.zip`;
 				log(chalk`{yellow 模板仓库地址：${repository}}`);
 				// 显示下载进度.
