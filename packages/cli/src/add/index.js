@@ -143,7 +143,6 @@ module.exports = class AddManager {
 			template: ['form', 'basic', 'paging', 'scroll'].includes(arr[0]) ? arr[0] : undefined,
 			pagingType: ['tabs', 'basic'].includes(arr[1]) ? arr[1] : undefined,
 			pagingMode: ['native', 'piece', 'table'].includes(arr[2]) ? arr[2] : undefined,
-			pagingFeature: arr[3] && arr[3].length > 0 ? arr[3] : undefined
 		};
 		return result;
 	}
