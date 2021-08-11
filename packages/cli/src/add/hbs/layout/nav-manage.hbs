@@ -1,0 +1,32 @@
+import { Global } from '../../routers/_global';
+
+class NavManage {
+	constructor() {
+		// 变量名由模板内部生成，不要随意改动
+		this.INITIAL_NAV_DATA = [
+		];
+		this.NAV_DATA = [];
+		this.update();
+	}
+
+	update() {
+		this.NAV_DATA = this.filterNavData(this.INITIAL_NAV_DATA);
+	}
+
+	filterNavData = (data) => {
+		return data.reduce((pre, cur) => {
+			const { auth, children, ...rest } = cur;
+			const hasChildren = children && children.length > 0;
+			const show = true; // TODO: 根据auth判断是否显示导航
+			if (!show) return pre;
+			let obj = { ...rest };
+			if (hasChildren) {
+				obj.children = this.filterNavData(children);
+			}
+			pre.push(obj);
+			return pre;
+		}, []);
+	};
+}
+
+export default new NavManage();

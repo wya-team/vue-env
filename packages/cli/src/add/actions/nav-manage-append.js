@@ -38,11 +38,11 @@ module.exports = (source, opts) => {
 		},
 	});
 	recast.visit(sourceAST, {
-		visitCallExpression(path) {
+		visitArrayExpression(path) {
 			const node = path.node;
 			const parentNode = path.parent.node;
-			if (namedTypes.VariableDeclarator.check(parentNode) && parentNode.id.name === 'NAV_DATA') {
-				const navArray = node.arguments[0].elements || [];
+			if (namedTypes.AssignmentExpression.check(parentNode) && parentNode.left.property.name === 'INITIAL_NAV_DATA') {
+				const navArray = node.elements || [];
 				const isExist = navArray.some((it) => it.name === navConfigName);
 				if (!isExist) {
 					const identifier = createIdentifier({ name: navConfigName });
