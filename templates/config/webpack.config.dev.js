@@ -10,20 +10,10 @@ const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.config
 
 const webpackConfig = {
 	mode: 'development',
-	// module: {
-	// 	rules: [
-	// 		{
-	// 			test: /\.(js|vue)$/,
-	// 			loader: 'eslint-loader',
-	// 			enforce: 'pre',
-	// 			include: [path.resolve('src')],
-	// 			options: {
-	// 				// formatter: require('eslint-friendly-formatter'),
-	// 				emitWarning: false
-	// 			}
-	// 		}
-	// 	]
-	// },
+	devtool: 'eval-cheap-module-source-map', // eval-cheap-module-source-map 原始源码（仅限行）
+	optimization: {
+		minimize: false
+	},
 	plugins: [
 		/**
 		 * 输出html

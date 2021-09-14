@@ -8,8 +8,8 @@ const fs = require('fs-extra');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 
+const postcssOptions = require('./postcss.config.js');
 const userConfig = fs.existsSync(path.resolve(__dirname, './user.config.js')) 
 	? require('./user.config.js')
 	: {};
@@ -37,9 +37,7 @@ const localIp = (() => {
 const postcssLoader = {
 	loader: 'postcss-loader',
 	options: {
-		config: {
-			path: path.resolve(APP_ROOT, 'config/postcss.config.js')
-		}
+		postcssOptions
 	}
 };
 const loaderPath = [
@@ -53,6 +51,10 @@ const webpackConfig = {
 		mainFiles: ['index'],
 		modules: [path.resolve(APP_ROOT, 'src'), 'node_modules'],
 		extensions: ['.js', '.vue', '.json', '.scss', '.css'],
+		// 原：v4 node.fs: 'empty'
+		fallback: {
+			fs: false
+		},
 		// 依赖-正则
 		alias: {
 			/**
@@ -84,9 +86,11 @@ const webpackConfig = {
 	},
 	output: {
 		path: path.resolve(APP_ROOT, 'dist'),
-		filename: 'js/[name].[hash:8].bundle.js', // 每个页面对应的主js的生成配置
-		chunkFilename: 'js/[name].[hash:8].chunk.js', // chunk生成的配置
-		sourceMapFilename: 'js/[name].[hash:8].bundle.map',
+		filename: 'js/[name].[contenthash].bundle.js', // 每个页面对应的主js的生成配置
+		chunkFilename: 'js/[name].[contenthash].chunk.js', // chunk生成的配置
+		sourceMapFilename: 'js/[name].[contenthash].bundle.map',
+		pathinfo: false, // 输出结果不携带路径信息
+		clean: true, // 构建前清理输出的目录
 		/**
 		 * html引用路径
 		 * publicPath: ENV_IS_DEV ? './' : 'https://cdn.example.com/'
@@ -124,7 +128,7 @@ const webpackConfig = {
 			{
 				test: /\.(css|scss)$/,
 				use: [
-					'vue-style-loader', 
+					'vue-style-loader', // 已经支持 HMR，不用在加style-reload
 					'css-loader', 
 					postcssLoader, 
 					'sass-loader',
@@ -148,7 +152,7 @@ const webpackConfig = {
 			{
 				test: /\.(css|scss)$/,
 				use: [
-					MiniCssExtractPlugin.loader,
+					ENV_IS_DEV ? 'style-loader' : MiniCssExtractPlugin.loader, // 开发环境不用抽离，让他支持HMR
 					'css-loader',
 					postcssLoader,
 					'sass-loader'
@@ -160,10 +164,15 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
-				loader: 'url-loader',
-				options: {
-					limit: 10000
+				type: 'asset', // 原: url-loader
+				generator: {
+					filename: `assets/[name].[contenthash][ext][query]`,
 				}
+				// options: {
+				// 	limit: 10000,
+				// 	name: `assets/[name].[ext]`,
+				// 	esModule: false
+				// }
 			},
 			{
 				test: /\.html$/i,
@@ -172,26 +181,14 @@ const webpackConfig = {
 		]
 	},
 	optimization: {
-		// 默认关闭压缩
-		minimize: ENV_IS_DEV ? false : JSON.parse(process.env.UGLIFY_JS),
-		minimizer: [
-			new TerserPlugin({
-				terserOptions: {
-					mangle: {
-						safari10: true
-					}
-				},
-			})
-		],
-		// 原：NamedModulesPlugin()
-		namedModules: true,
-		// 原：NoEmitOnErrorsPlugin() - 异常继续执行
-		noEmitOnErrors: true,
+		moduleIds: 'deterministic', // 有益于长期缓存
+		runtimeChunk: 'single', // 将 runtime 代码拆分为一个单独的 chunk
+		// 原：NoEmitOnErrorsPlugin() - 异常继续执行, v4: noEmitOnErrors: true,
+		emitOnErrors: false,
 		// 原：ModuleConcatenationPlugin() - 模块串联 - dev模式下回影响antd（比如：Pagination, 和语言有关）
 		concatenateModules: !ENV_IS_DEV,
 		// 原：CommonsChunkPlugin()
 		splitChunks: {
-			name: true,
 			cacheGroups: {
 				commons: {
 					test: (chunk) => {
@@ -201,7 +198,8 @@ const webpackConfig = {
 							'vue-router',
 							'vuex',
 							'core-js',
-							'lodash' // 这个用的地方偏多
+							'lodash', // 这个用的地方偏多
+							'@wya/assist-vc'
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
 						const isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
@@ -217,30 +215,29 @@ const webpackConfig = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: 'css/initial.[name].[hash:8].css'
+			filename: 'css/initial.[name].[contenthash].css'
 		}),
 		new VueLoaderPlugin()
 	]
 };
 const defaultConfig = {
-	// cheap-module-eval-source-map 原始源码（仅限行）
-	// cheap-eval-source-map 转换过的代码（仅限行）// 重构建比较好
-	devtool: ENV_IS_DEV ? 'cheap-module-eval-source-map' : undefined,
 	resolve: {
 		extensions: ['.jsx', '.js']
 	},
 	devServer: {
 		host: localIp,
-		contentBase: "/",
 		port: localPort,
-		inline: true,
+		static: path.resolve(APP_ROOT, 'dist'),
 		// compress: true, // gzip
-		stats: 'errors-only',
 		historyApiFallback: true,
-		watchOptions: {
-			aggregateTimeout: 100,
-			poll: 500,
-			ignored: /node_modules/
+		watchFiles: {
+			paths: ['src/**/*'],
+			options: {
+				ignored: /node_modules/,
+				awaitWriteFinish: {
+					pollInterval: 1000
+				}
+			}
 		},
 		// proxy: {
 		// 	"/api": {
@@ -250,17 +247,13 @@ const defaultConfig = {
 		// 		pathRewrite: {"^/api" : ""}
 		// 	}
 		// },
+		liveReload: false,
 		hot: true, // 同--hot
 	},
 	node: {
 		global: true,
-		fs: 'empty',
-		crypto: 'empty',
 		__dirname: true,
 		__filename: true,
-		Buffer: true,
-		clearImmediate: false,
-		setImmediate: false
 	},
 	// 启用编译缓存
 	cache: true,

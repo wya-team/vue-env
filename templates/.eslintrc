@@ -50,6 +50,8 @@
 		}],
 		"vue/require-default-prop": 0, // 可以不传递props
 		"vue/name-property-casing": ["warn", "kebab-case"],
+		"vue/component-definition-name-casing": ["warn", "kebab-case"],
+		"vue/singleline-html-element-content-newline": 0,
 		// airbnb 
 		"comma-dangle": ["warn", {
 			"arrays": "never",

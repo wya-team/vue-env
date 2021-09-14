@@ -6,23 +6,34 @@ const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const { APP_ROOT, commonConfig } = require('./webpack.config.common');
 
 const webpackConfig = {
 	mode: "production",
+	optimization: {
+		minimize: JSON.parse(process.env.UGLIFY_JS),
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					mangle: {
+						safari10: true
+					}
+				},
+			})
+		],
+	},
 	plugins: [
 		/**
-		 * 这里不用dev模式下的输出html，改用js输出是为了版本控制；index.html会造成缓存，导致即使js带hash无效（微信端是这样）
-		 * 需要屏蔽HtmlWebpackPlugin功能，即注释
+		 * 输出html
 		 */
-		new AssetsPlugin({
-			path: path.resolve(APP_ROOT, 'dist/js/'),
-			filename: 'webpack-assets.js',
-			processOutput: assets => {
-				delete assets[''];
-				return `window.WEBPACK_ASSETS=${JSON.stringify(assets)}`;
-			}
+		 new HtmlWebpackPlugin({
+			template: path.resolve(APP_ROOT, 'src/static/index.tpl.html'),
+			chunks: ['common', 'main'], // 当前路由所包含的模块，注意common引入方式
+			inject: 'body',
+			filename: './index.html'
 		}),
 		/**
 		 * 压缩同时转移静态文件

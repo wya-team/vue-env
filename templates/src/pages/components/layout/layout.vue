@@ -29,16 +29,6 @@ export default {
 	name: 'xls-layout',
 	components: {
 	},
-	data() {
-		return {
-			paddingTop: 0,
-			paddingLeft: 0,
-			minHeight: '',
-			minWidth: 1024,
-		};
-	},
-	computed: {
-	},
 	beforeRouteEnter(to, from, next) {
 		next();
 	},
@@ -48,6 +38,16 @@ export default {
 	},
 	beforeRouteLeave(to, from, next) {
 		next();
+	},
+	data() {
+		return {
+			paddingTop: 0,
+			paddingLeft: 0,
+			minHeight: '',
+			minWidth: 1024,
+		};
+	},
+	computed: {
 	},
 	created() {
 		this.$vc.on('layout-top-menu', this.setContentPaddingTop);
