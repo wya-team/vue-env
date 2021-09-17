@@ -1,7 +1,11 @@
 console.log(`NODE_ENV : ${process.env.NODE_ENV}`);
 const APP_ROOT = process.cwd();
 const ENV_IS_DEV = process.env.NODE_ENV === 'development';
-const DIR_PATH = ENV_IS_DEV ? '' : `static`;
+
+const TIMESTAMP = new Date().getTime();
+// 运维会动态操作以下地址，请勿随意操作
+const DIR_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}`;
+const DIR_URL_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}`;
 
 const path = require('path');
 const fs = require('fs-extra');
@@ -89,9 +93,9 @@ const webpackConfig = {
 	},
 	output: {
 		path: path.resolve(APP_ROOT, 'dist'),
-		filename: `${DIR_PATH}/js/[name].[contenthash].bundle.js`, // 每个页面对应的主js的生成配置
-		chunkFilename: `${DIR_PATH}/js/[name].[contenthash].chunk.js`, // chunk生成的配置
-		sourceMapFilename: `${DIR_PATH}/js/[name].[contenthash].bundle.map`,
+		filename: `${DIR_PATH}/js/[name].bundle.js`, // 每个页面对应的主js的生成配置
+		chunkFilename: `${DIR_PATH}/js/[name].chunk.js`, // chunk生成的配置
+		sourceMapFilename: `${DIR_PATH}/js/[name].bundle.map`,
 		pathinfo: false, // 输出结果不携带路径信息
 		clean: true, // 构建前清理输出的目录
 		/**
@@ -168,13 +172,9 @@ const webpackConfig = {
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 				type: 'asset', // 原: url-loader
 				generator: {
-					filename: `${DIR_PATH}/assets/[name].[contenthash][ext][query]`,
+					// contenthash 要求加上
+					filename: `${DIR_URL_PATH}/assets/[name].[contenthash][ext][query]`,
 				}
-				// options: {
-				// 	limit: 10000,
-				// 	name: `assets/[name].[ext]`,
-				// 	esModule: false
-				// }
 			},
 			{
 				test: /\.html$/i,
@@ -216,7 +216,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: `${DIR_PATH}/css/initial.[name].[contenthash].css`
+			filename: `${DIR_PATH}/css/initial.[name].css`
 		}),
 		new VueLoaderPlugin()
 	]
