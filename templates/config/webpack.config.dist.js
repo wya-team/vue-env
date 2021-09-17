@@ -5,11 +5,10 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-const { APP_ROOT, commonConfig } = require('./webpack.config.common');
+const { APP_ROOT, commonConfig, DIR_PATH } = require('./webpack.config.common');
 
 const webpackConfig = {
 	mode: "production",
@@ -33,10 +32,7 @@ const webpackConfig = {
 		],
 	},
 	plugins: [
-		/**
-		 * 输出html
-		 */
-		 new HtmlWebpackPlugin({
+		new HtmlWebpackPlugin({
 			template: path.resolve(APP_ROOT, 'src/static/index.tpl.html'),
 			chunks: ['common', 'main'], // 当前路由所包含的模块，注意common引入方式
 			inject: 'body',
@@ -65,7 +61,7 @@ const webpackConfig = {
 			analyzerMode: 'static', // static 生成html文件 | server 一直监听 | disabled 生成json文件
 			// analyzerHost: localIp,
 			// analyzerPort: bundleAnalyzerPort,
-			reportFilename: 'report.html',
+			reportFilename: `${DIR_PATH}/report.html`,
 			defaultSizes: 'gzip',
 			openAnalyzer: false,
 			generateStatsFile: false,

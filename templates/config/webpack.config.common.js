@@ -66,6 +66,7 @@ const webpackConfig = {
 			 * 而如果要使用 template 这个属性的话就一定要用 compiler.js，那么，引入 vue.js 是最恰当的
 			 */
 			'vue$': 'vue/dist/vue.esm.js',
+			'@assets': path.resolve(APP_ROOT, './src/assets'),
 			'@components': path.resolve(APP_ROOT, './src/pages/components'),
 			'@constants': path.resolve(APP_ROOT, './src/pages/constants'),
 			'@extends': path.resolve(APP_ROOT, './src/pages/extends'),
@@ -76,6 +77,7 @@ const webpackConfig = {
 			'@mutations': path.resolve(APP_ROOT, './src/pages/stores/mutations'),
 			'@common': path.resolve(APP_ROOT, './src/pages/components/_common'),
 			'node_modules/echarts': path.resolve(APP_ROOT, './node_modules/echarts'),
+			'node_modules/quill': path.resolve(APP_ROOT, './node_modules/quill'),
 			// 强制使用babel7
 			'babel-runtime': '@babel/runtime',
 			'babel-core': '@babel/core'
@@ -106,7 +108,6 @@ const webpackConfig = {
 				use: [
 					{
 						loader: 'babel-loader',
-
 						// node_modules/.cache/babel-loader 编译缓存，独立于babel.config.js
 						options: {
 							cacheDirectory: true
@@ -199,8 +200,7 @@ const webpackConfig = {
 							'vue-router',
 							'vuex',
 							'core-js',
-							'lodash', // 这个用的地方偏多
-							'@wya/assist-vc'
+							'lodash' // 这个用的地方偏多
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
 						const isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
@@ -262,6 +262,7 @@ const defaultConfig = {
 
 module.exports = {
 	APP_ROOT,
+	DIR_PATH,
 	localIp,
 	localPort,
 	commonConfig: merge(
