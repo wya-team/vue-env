@@ -1,6 +1,7 @@
 console.log(`NODE_ENV : ${process.env.NODE_ENV}`);
 const APP_ROOT = process.cwd();
 const ENV_IS_DEV = process.env.NODE_ENV === 'development';
+const DIR_PATH = ENV_IS_DEV ? '' : `static`;
 
 const path = require('path');
 const fs = require('fs-extra');
@@ -86,9 +87,9 @@ const webpackConfig = {
 	},
 	output: {
 		path: path.resolve(APP_ROOT, 'dist'),
-		filename: 'js/[name].[contenthash].bundle.js', // 每个页面对应的主js的生成配置
-		chunkFilename: 'js/[name].[contenthash].chunk.js', // chunk生成的配置
-		sourceMapFilename: 'js/[name].[contenthash].bundle.map',
+		filename: `${DIR_PATH}/js/[name].[contenthash].bundle.js`, // 每个页面对应的主js的生成配置
+		chunkFilename: `${DIR_PATH}/js/[name].[contenthash].chunk.js`, // chunk生成的配置
+		sourceMapFilename: `${DIR_PATH}/js/[name].[contenthash].bundle.map`,
 		pathinfo: false, // 输出结果不携带路径信息
 		clean: true, // 构建前清理输出的目录
 		/**
@@ -166,7 +167,7 @@ const webpackConfig = {
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 				type: 'asset', // 原: url-loader
 				generator: {
-					filename: `assets/[name].[contenthash][ext][query]`,
+					filename: `${DIR_PATH}/assets/[name].[contenthash][ext][query]`,
 				}
 				// options: {
 				// 	limit: 10000,
@@ -215,7 +216,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: 'css/initial.[name].[contenthash].css'
+			filename: `${DIR_PATH}/css/initial.[name].[contenthash].css`
 		}),
 		new VueLoaderPlugin()
 	]
