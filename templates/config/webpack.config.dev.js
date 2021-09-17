@@ -11,6 +11,8 @@ const { APP_ROOT, commonConfig, localIp, localPort } = require('./webpack.config
 const webpackConfig = {
 	mode: 'development',
 	devtool: 'eval-cheap-module-source-map', // eval-cheap-module-source-map 原始源码（仅限行）
+	// 开发环境在控制台只输出错误和警告
+	stats: 'errors-warnings',
 	optimization: {
 		minimize: false
 	},

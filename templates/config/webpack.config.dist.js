@@ -13,15 +13,22 @@ const { APP_ROOT, commonConfig } = require('./webpack.config.common');
 
 const webpackConfig = {
 	mode: "production",
+	// 生成环境在控制台输出内容的控制
+	stats: {
+		modules: false, // 不添加关于构建模块的信息, 例：图片base64不会被打印出来
+		chunksSort: 'id',
+		entrypoints: false,
+	},
 	optimization: {
 		minimize: JSON.parse(process.env.UGLIFY_JS),
 		minimizer: [
 			new TerserPlugin({
 				terserOptions: {
-					mangle: {
-						safari10: true
-					}
+					mangle: { safari10: true },
+					// 和下面extractComments同时设置：删除注释,不要将注释导出成license.txt文件
+					format: { comments: false },
 				},
+				extractComments: false,
 			})
 		],
 	},
