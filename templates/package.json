@@ -38,7 +38,7 @@
     "@wya/sass": "^1.2.0",
     "@wya/socket": "^1.1.0",
     "@wya/utils": "^1.6.3",
-    "@wya/vc": "^2.0.23",
+    "@wya/vc": "^2.1.0-alpha.1",
     "@wya/vm": "^2.0.0",
     "core-js": "^3.6.5",
     "fast-xml-parser": "^3.17.4",

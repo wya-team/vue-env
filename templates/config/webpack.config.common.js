@@ -210,6 +210,21 @@ const webpackConfig = {
 					},
 					name: 'common',
 					chunks: 'all',
+				},
+				assist: {
+					test: (chunk) => {
+						const modules = [
+							'@wya/assist-vc', // 这个用的地方偏多
+							'@wya/vm', // 这个用的地方偏多
+						];
+						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
+						const isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
+						return chunk.resource
+							&& /\.js$/.test(chunk.resource)
+							&& isInModules;
+					},
+					name: 'assist',
+					chunks: 'all',
 				}
 			}
 		},
@@ -262,7 +277,6 @@ const defaultConfig = {
 
 module.exports = {
 	APP_ROOT,
-	DIR_PATH,
 	localIp,
 	localPort,
 	commonConfig: merge(

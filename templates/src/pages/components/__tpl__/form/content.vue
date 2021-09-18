@@ -207,12 +207,9 @@
 </template>
 
 <script>
-import { Footer } from '@wya/assist-vc';
-
 export default {
 	name: 'v-tpl-form',
 	components: {
-		'vca-footer': Footer
 	},
 	data() {
 		return {
