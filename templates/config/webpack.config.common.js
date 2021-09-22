@@ -171,7 +171,7 @@ const webpackConfig = {
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 				type: 'asset', // 原: url-loader
 				generator: {
-					filename: `${DIR_URL_PATH}assets/[name][ext]`,
+					filename: `${DIR_URL_PATH}assets/[name].[contenthash][ext][query]`,
 				}
 			},
 			{
