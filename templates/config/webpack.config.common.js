@@ -4,8 +4,8 @@ const ENV_IS_DEV = process.env.NODE_ENV === 'development';
 
 const TIMESTAMP = new Date().getTime();
 // 运维会动态操作以下地址，请勿随意操作
-const DIR_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}`;
-const DIR_URL_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}`;
+const DIR_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}/`;
+const DIR_URL_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}/`;
 
 const path = require('path');
 const fs = require('fs-extra');
@@ -93,9 +93,9 @@ const webpackConfig = {
 	},
 	output: {
 		path: path.resolve(APP_ROOT, 'dist'),
-		filename: `${DIR_PATH}/js/[name].bundle.js`, // 每个页面对应的主js的生成配置
-		chunkFilename: `${DIR_PATH}/js/[name].chunk.js`, // chunk生成的配置
-		sourceMapFilename: `${DIR_PATH}/js/[name].bundle.map`,
+		filename: `${DIR_PATH}js/[name].bundle.js`, // 每个页面对应的主js的生成配置
+		chunkFilename: `${DIR_PATH}js/[name].chunk.js`, // chunk生成的配置
+		sourceMapFilename: `${DIR_PATH}js/[name].bundle.map`,
 		pathinfo: false, // 输出结果不携带路径信息
 		clean: true, // 构建前清理输出的目录
 		/**
@@ -172,8 +172,7 @@ const webpackConfig = {
 				test: /\.(png|jpg|gif|eot|ttf|woff|woff2|svg)$/,
 				type: 'asset', // 原: url-loader
 				generator: {
-					// contenthash 要求加上
-					filename: `${DIR_URL_PATH}/assets/[name].[contenthash][ext][query]`,
+					filename: `${DIR_URL_PATH}assets/[name][ext]`,
 				}
 			},
 			{
@@ -215,7 +214,7 @@ const webpackConfig = {
 					test: (chunk) => {
 						const modules = [
 							'@wya/assist-vc', // 这个用的地方偏多
-							'@wya/vm', // 这个用的地方偏多
+							'@wya/vm' // 这个用的地方偏多
 						];
 						// new RegExp(`([\\\\/]+)node_modules([\\\\/]+)`) -> /([\\\/]+)node_modules([\\\/]+)/
 						const isInModules = modules.some(i => (new RegExp(`([\\\\/]+)node_modules([\\\\/_]+)${i}`)).test(chunk.resource));
@@ -231,7 +230,7 @@ const webpackConfig = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: `${DIR_PATH}/css/initial.[name].css`
+			filename: `${DIR_PATH}css/initial.[name].css`
 		}),
 		new VueLoaderPlugin()
 	]
@@ -271,8 +270,7 @@ const defaultConfig = {
 		__dirname: true,
 		__filename: true,
 	},
-	// 启用编译缓存
-	cache: true,
+	cache: true
 };
 
 module.exports = {
