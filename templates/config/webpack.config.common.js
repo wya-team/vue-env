@@ -2,10 +2,9 @@ console.log(`NODE_ENV : ${process.env.NODE_ENV}`);
 const APP_ROOT = process.cwd();
 const ENV_IS_DEV = process.env.NODE_ENV === 'development';
 
-const TIMESTAMP = new Date().getTime();
 // 运维会动态操作以下地址，请勿随意操作
-const DIR_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}/`;
-const DIR_URL_PATH = ENV_IS_DEV ? '' : `static.${TIMESTAMP}/`;
+const DIR_PATH = ENV_IS_DEV ? '' : `static/`;
+const DIR_URL_PATH = ENV_IS_DEV ? '' : `static/`;
 
 const path = require('path');
 const fs = require('fs-extra');
@@ -270,7 +269,9 @@ const defaultConfig = {
 		__dirname: true,
 		__filename: true,
 	},
-	cache: true
+	cache: {
+		type: 'filesystem'
+	},
 };
 
 module.exports = {
