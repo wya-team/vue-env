@@ -28,6 +28,7 @@ const webpackConfig = {
 					format: { comments: false },
 				},
 				extractComments: false,
+				parallel: true,
 			})
 		],
 	},
